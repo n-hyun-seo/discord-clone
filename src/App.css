@@ -28,7 +28,25 @@
   background-color: #292b2f;
   height: 100vh;
   border-top-left-radius: 10px;
-  width: var(--content-left-size)
+  width: var(--content-left-size);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(15, 1fr);
+  grid-template-areas: "sic"
+                       "fc"
+                       "bc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "dmc"
+                       "uic";
 }
 
 .right {
@@ -36,4 +54,22 @@
   height: 100vh;
 }
 
+.search-input-container {
+  grid-area: sic;
+}
 
+.friends-container {
+  grid-area: fc;
+}
+
+.birthday-container {
+  grid-area: bc;
+}
+
+.direct-messages-container {
+  grid-area: dmc;
+}
+
+.user-info-container {
+  grid-area: uic;
+}
