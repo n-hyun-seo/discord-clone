@@ -125,22 +125,34 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.334);
 }
 
-.logo {
+.logo-unhovered {
   width: 69.5%;
   margin-top: 5px;
   filter: brightness(85%);
+  animation-name: logo-brightness-exit;
+  animation-duration: 0.3s;
 }
 
-.logo-button {
-  background-color: #313338;
-  width: 66.5%;
-  border: none;
-  height: 68%;
-  border-radius: 50%;
+.logo-hovered {
+  width: 69.5%;
+  margin-top: 5px;
+  filter: brightness(100%);
+  animation-name: logo-brightness-enter;
+  animation-duration: 0.3s;
 }
 
-.logo-button-highlighted {
-  background-color: #738adb;
+.logo-highlighted {
+  width: 69.5%;
+  margin-top: 5px;
+  filter: brightness(100%);
+}
+
+.logo-container button:active {
+  margin-top: 2px;
+}
+
+.logo-button-hovered {
+  background-color: #5865f2;
   border-radius: 35%;
   width: 66.5%;
   border: none;
@@ -149,7 +161,7 @@
   animation-duration: 0.3s;
 }
 
-.logo-button-unhighlighted {
+.logo-button-unhovered {
   background-color: #313338;
   width: 66.5%;
   border: none;
@@ -159,13 +171,76 @@
   animation-duration: 0.3s;
 }
 
-.white-blob {
+.logo-button-highlighted {
+  background-color: #5865f2;
+  border-radius: 35%;
+  width: 66.5%;
+  border: none;
+  height: 68%;
+}
+
+.white-blob-hovered {
   position: fixed;
   width: 18px;
   height: 20px;
   background-color: white;
   left: -14px;
   border-radius: 5px;
+  animation-name: white-blob-enter;
+  animation-duration: 0.3s;
+}
+
+.white-blob-unhovered {
+  position: fixed;
+  width: 0px;
+  height: 0px;
+  left: -14px;
+  background-color: white;
+  border-radius: 5px;
+  animation-name: white-blob-exit;
+  animation-duration: 0.3s;
+}
+
+.white-blob-highlighted {
+  position: fixed;
+  width: 18px;
+  height: 40px;
+  background-color: white;
+  left: -14px;
+  border-radius: 5px;
+  animation-name: white-blob-clicked;
+  animation-duration: 0.3s;
+}
+
+@keyframes white-blob-enter {
+  from {
+    height: 0;
+    width: 0;
+  }
+  to {
+    width: 18px;
+    height: 20px;
+  }
+}
+
+@keyframes white-blob-exit {
+  from {
+    width: 18px;
+    height: 20px;
+  }
+  to {
+    height: 0;
+    width: 0;
+  }
+}
+
+@keyframes white-blob-clicked {
+  from {
+    height: 20px;
+  }
+  to {
+    height: 40px;
+  }
 }
 
 @keyframes logo-button-transition-enter {
@@ -177,24 +252,36 @@
     border-radius: 50%;
   }
   to {
-    background-color: #738adb;
+    background-color: #5865f2;
     border-radius: 35%;
   }
 }
 
 @keyframes logo-button-transition-exit {
   from {
-    background-color: #738adb;
+    background-color: #5865f2;
     border-radius: 35%;
-    width: 66.5%;
-    border: none;
-    height: 68%;
   }
   to {
     background-color: #313338;
-    width: 66.5%;
-    border: none;
-    height: 68%;
     border-radius: 50%;
+  }
+}
+
+@keyframes logo-brightness-enter {
+  from {
+    filter: brightness(85%);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+
+@keyframes logo-brightness-exit {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(85%);
   }
 }
