@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  --servers-section-size: 73px;
+  --content-left-size: 240px;
+}
+
+.App {
+  display: flex;
+  background-color: #202225;
+}
+
+.servers {
+  background-color: #202225;
+  height: 100vh;
+  width: var(--servers-section-size);
+}
+
+.content {
+  background-color: #2f3136;
+  height: 100vh;
+  flex-basis: calc(100% - var(--servers-section-size));
+  border-top-left-radius: 10px;
+  display: flex;
+}
+
+.left {
+  background-color: #292b2f;
+  height: 100vh;
+  border-top-left-radius: 10px;
+  width: var(--content-left-size)
+}
+
+.right {
+  flex-basis: calc(100% - var(--content-left-size));
+  height: 100vh;
+}
+
+
