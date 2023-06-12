@@ -1,12 +1,12 @@
 import Button from "./Button";
-import SearchInput from "./SearchInput";
+import SearchButton from "./SearchButton";
 import DirectMessages from "./DirectMessages";
 import UserInfo from "./UserInfo";
 
 export default function Left() {
   return (
     <div className="left">
-      <SearchInput classNaming="conversation-search" />
+      <SearchButton classNaming="conversation-search" />
       <Button
         buttonClass="friends"
         containerClass="friends-container"

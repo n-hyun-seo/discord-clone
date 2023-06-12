@@ -1,18 +1,24 @@
+@font-face {
+  font-family: "ggsans";
+  src: url(ggsansRegular.woff);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   --servers-section-size: 73px;
   --content-left-size: 240px;
   --section-divider-color: #0f101149;
+  font-family: ggsans;
 }
 
 .App {
   display: flex;
-  background-color: #202225;
+  background-color: #1c1d1e;
 }
 
 .servers {
-  background-color: #202225;
+  background-color: #1c1d1e;
   height: 100vh;
   width: var(--servers-section-size);
 }
@@ -33,21 +39,22 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(15, 1fr);
-  grid-template-areas: "sic"
-                       "fc"
-                       "bc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "dmc"
-                       "uic";
+  grid-template-areas:
+    "sbc"
+    "fc"
+    "bc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "dmc"
+    "uic";
 }
 
 .right {
@@ -55,8 +62,8 @@
   height: 100vh;
 }
 
-.search-input-container {
-  grid-area: sic;
+.search-button-container {
+  grid-area: sbc;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,10 +72,16 @@
 
 .friends-container {
   grid-area: fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .birthday-container {
   grid-area: bc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .direct-messages-container {
@@ -77,17 +90,18 @@
 
 .user-info-container {
   grid-area: uic;
+  background-color: #232428;
 }
 
 .conversation-search {
   background-color: #16181a;
-  flex-basis: 90%;
-  height: 50%;
-  border-radius: 5px;
+  flex-basis: 92%;
+  height: 55%;
+  border-radius: 4px;
   border: none;
-  padding-left: 8px;
-}
-
-.conversation-search::placeholder {
-  color: rgba(255, 255, 255, 0.505);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  color: #949ba4;
+  line-height: 24px;
 }
