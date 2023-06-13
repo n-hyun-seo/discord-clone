@@ -9,6 +9,7 @@
   --servers-section-size: 73px;
   --content-left-size: 240px;
   --section-divider-color: #0f101149;
+  --font-color: #949ba4;
   font-family: ggsans;
 }
 
@@ -103,7 +104,7 @@
   text-align: left;
   font-size: 14px;
   font-weight: 500;
-  color: #949ba4;
+  color: var(--font-color);
   line-height: 24px;
 }
 
@@ -246,7 +247,7 @@
   display: flex;
   background-color: #292b2f;
   border: none;
-  color: #949ba4;
+  color: var(--font-color);
   font-size: 16px;
   flex-basis: 95%;
   height: 95%;
@@ -256,6 +257,35 @@
 
 .left-button-container button:hover {
   background-color: #34373a;
+  color: white;
+}
+
+.direct-messages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dm-header {
+  color: var(--font-color);
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  width: 85%;
+}
+
+.dm-header p {
+  padding-top: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.dm-header .add-sign {
+  font-size: 25px;
+  padding-top: 7px;
+}
+
+.dm-header .hovered {
   color: white;
 }
 
