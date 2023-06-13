@@ -11,11 +11,13 @@ export default function Left() {
         buttonClass="friends"
         containerClass="friends-container"
         text="Friends"
+        source="https://www.nicepng.com/png/full/332-3327400_gillespie-fuels-propane-friend-icon-png-white.png"
       />
       <Button
         buttonClass="discord-birthday"
         containerClass="birthday-container"
         text="Discord's Birthday"
+        source="https://cdn3.emoji.gg/emojis/1567-birthday-discord-dark-theme.png"
       />
       <DirectMessages />
       <UserInfo />

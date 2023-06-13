@@ -38,11 +38,12 @@
   width: var(--content-left-size);
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(15, 1fr);
+  grid-template-rows: repeat(16, 1fr);
   grid-template-areas:
     "sbc"
     "fc"
     "bc"
+    "dmc"
     "dmc"
     "dmc"
     "dmc"
@@ -94,7 +95,7 @@
 }
 
 .conversation-search {
-  background-color: #16181a;
+  background-color: #1b1d20;
   flex-basis: 92%;
   height: 55%;
   border-radius: 4px;
@@ -210,6 +211,52 @@
   border-radius: 5px;
   animation-name: white-blob-clicked;
   animation-duration: 0.3s;
+}
+
+.left-button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.friends img {
+  width: 42%;
+  margin-right: 5px;
+  filter: brightness(85%);
+}
+
+.discord-birthday img {
+  width: 45%;
+  margin-right: 5px;
+}
+
+.left-button-container p {
+  flex-basis: 85%;
+  text-align: left;
+}
+
+.button-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 25%;
+}
+
+.left-button-container button {
+  display: flex;
+  background-color: #292b2f;
+  border: none;
+  color: #949ba4;
+  font-size: 16px;
+  flex-basis: 95%;
+  height: 95%;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.left-button-container button:hover {
+  background-color: #34373a;
+  color: white;
 }
 
 @keyframes white-blob-enter {
