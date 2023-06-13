@@ -351,10 +351,11 @@
 .user-status-dm {
   font-size: 13px;
   margin-top: -4px;
+  height: 10px;
 }
 
 .dm-delete-button {
-  flex-basis: 10%;
+  flex-basis: 15%;
   border: none;
   background-color: transparent;
   color: var(--font-color);
@@ -363,6 +364,10 @@
 
 .dm-delete-button:hover {
   color: white;
+}
+
+.dm-delete-button p {
+  margin-right: -25px;
 }
 
 .online-status {
@@ -396,6 +401,10 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(22, 22, 22, 0.642);
   border-radius: 10px;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 @keyframes white-blob-enter {
