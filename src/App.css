@@ -10,6 +10,8 @@
   --content-left-size: 240px;
   --section-divider-color: #0f101149;
   --font-color: #949ba4;
+  --status-online: rgb(64, 179, 64);
+  --button-hover-color: #34373a;
   font-family: ggsans;
 }
 
@@ -39,11 +41,12 @@
   width: var(--content-left-size);
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(16, 1fr);
+  grid-template-rows: repeat(17, 1fr);
   grid-template-areas:
     "sbc"
     "fc"
     "bc"
+    "dmc"
     "dmc"
     "dmc"
     "dmc"
@@ -256,7 +259,7 @@
 }
 
 .left-button-container button:hover {
-  background-color: #34373a;
+  background-color: var(--button-hover-color);
   color: white;
 }
 
@@ -287,6 +290,112 @@
 
 .dm-header .hovered {
   color: white;
+}
+
+.dm-messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+
+.dm-messages:hover {
+  overflow-y: auto;
+}
+
+.personal-dm {
+  height: 50px;
+  width: 95%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #292b2f;
+  border: none;
+  border-radius: 5px;
+}
+
+.personal-dm:hover {
+  background-color: #34373a;
+}
+
+.pfp-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 15px;
+  background-position: center;
+  background-size: cover;
+}
+
+.pfp-container {
+  flex-basis: 20%;
+}
+
+.user-info-dm {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--font-color);
+  justify-content: center;
+}
+
+.user-name-dm {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.user-status-dm {
+  font-size: 13px;
+  margin-top: -4px;
+}
+
+.dm-delete-button {
+  flex-basis: 10%;
+  border: none;
+  background-color: transparent;
+  color: var(--font-color);
+  font-size: 25px;
+}
+
+.dm-delete-button:hover {
+  color: white;
+}
+
+.online-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--status-online);
+  position: relative;
+  z-index: 2;
+}
+
+.online-status-outer {
+  width: 18px;
+  height: 16px;
+  border-radius: 8px;
+  position: relative;
+  left: 18px;
+  top: 18px;
+  background-color: #292b2f;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(22, 22, 22, 0.642);
+  border-radius: 10px;
 }
 
 @keyframes white-blob-enter {
