@@ -173,8 +173,13 @@
   filter: brightness(100%);
 }
 
-.logo-container button:active {
+.logo-container a:active {
   margin-top: 2px;
+}
+
+.logo-container img {
+  width: 25px;
+  padding-bottom: 3px;
 }
 
 .logo-button-hovered {
@@ -183,6 +188,9 @@
   width: 66.5%;
   border: none;
   height: 68%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation-name: logo-button-transition-enter;
   animation-duration: 0.3s;
 }
@@ -203,6 +211,9 @@
   border: none;
   height: 68%;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation-name: logo-button-transition-exit;
   animation-duration: 0.3s;
 }
@@ -224,6 +235,9 @@
   width: 66.5%;
   border: none;
   height: 68%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-button-highlighted-2 {

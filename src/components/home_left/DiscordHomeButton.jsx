@@ -59,7 +59,7 @@ export default function DiscordHomeButton() {
     <div className="logo-container">
       <div className={changeBlobClass()} ref={blob}></div>
 
-      <button
+      <Link to="/"
         className={changeButtonClass()}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}
@@ -67,14 +67,14 @@ export default function DiscordHomeButton() {
           setCurrentPage("home");
         }}
       >
-        <Link to="/">
+        
           <img
             src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"
             className={changeLogoClass()}
             alt="discord logo"
           ></img>
-        </Link>
-      </button>
+       
+      </Link>
       <div className={changeHoverTextClass()}>Direct Messages</div>
     </div>
   );
