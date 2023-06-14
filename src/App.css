@@ -138,6 +138,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: -10px;
 }
 
 .logo-container:before {
@@ -187,7 +188,6 @@
 }
 
 .logo-button-hovered-2 {
-  background-image: url("https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0");
   background-size: cover;
   border-radius: 35%;
   width: 66.5%;
@@ -208,7 +208,7 @@
 }
 
 .logo-button-unhovered-2 {
-  background-image: url("https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0");
+
   background-size: cover;
   width: 66.5%;
   border: none;
@@ -227,7 +227,7 @@
 }
 
 .logo-button-highlighted-2 {
-  background-image: url("https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0");
+ 
   background-size: cover;
   border-radius: 35%;
   width: 66.5%;
