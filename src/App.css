@@ -62,7 +62,19 @@
     "uic";
 }
 
+.left-test-server {
+  background-color: #292b2f;
+  height: 100vh;
+  border-top-left-radius: 10px;
+  width: var(--content-left-size);
+}
+
 .right {
+  flex-basis: calc(100% - var(--content-left-size));
+  height: 100vh;
+}
+
+.right-test-server {
   flex-basis: calc(100% - var(--content-left-size));
   height: 100vh;
 }

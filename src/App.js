@@ -1,28 +1,35 @@
 import "./App.css";
-import { Route, Routes, BrowserRouter as Router } from "react-router";
-import Left from "./components/left/Left";
-import Right from "./components/right/Right";
-import DiscordHomeButton from "./components/home_and_servers/DiscordHomeButton";
+import { Route, Routes } from "react-router";
+import DiscordHomeButton from "./components/home_left/DiscordHomeButton";
 import { useState, createContext, useEffect } from "react";
+import Home from "./components/home_left/Home";
+import RandomServer from "./components/a_random_server/RandomServer";
+import { Link } from "react-router-dom";
+
+const CurrentPageContext = createContext();
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const PageContext = createContext();
 
   return (
     <div className="App">
-      <PageContext.Provider value={currentPage}>
-        <div className="servers">
-          <DiscordHomeButton
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </div>
-      </PageContext.Provider>
-      <div className="content">
-        <Left />
-        <Right />
+      <div className="servers">
+        <DiscordHomeButton
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+
+        <Link to="/test-server">
+          <button>test server</button>
+        </Link>
+
       </div>
+      <CurrentPageContext.Provider value={[currentPage, setCurrentPage]}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/test-server" element={<RandomServer />} />
+      </Routes>
+      </CurrentPageContext.Provider>
     </div>
   );
 }

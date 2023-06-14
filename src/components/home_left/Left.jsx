@@ -1,6 +1,6 @@
 import Button from "./Button";
 import SearchButton from "./SearchButton";
-import DirectMessages from "./DirectMessages";
+import DirectMessages from "./direct_messages/DirectMessages";
 import UserInfo from "./UserInfo";
 
 export default function Left() {
