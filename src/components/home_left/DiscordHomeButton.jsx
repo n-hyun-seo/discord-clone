@@ -51,15 +51,16 @@ export default function DiscordHomeButton() {
   }
 
   function changeHoverTextClass() {
-      if (hoverState) return "hover-text-hovered"
-      if (!hoverState) return "hover-text-unhovered"
+    if (hoverState) return "hover-text-hovered";
+    if (!hoverState) return "hover-text-unhovered";
   }
 
   return (
     <div className="logo-container">
       <div className={changeBlobClass()} ref={blob}></div>
 
-      <Link to="/"
+      <Link
+        to="/"
         className={changeButtonClass()}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}
@@ -67,13 +68,11 @@ export default function DiscordHomeButton() {
           setCurrentPage("home");
         }}
       >
-        
-          <img
-            src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"
-            className={changeLogoClass()}
-            alt="discord logo"
-          ></img>
-       
+        <img
+          src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"
+          className={changeLogoClass()}
+          alt="discord logo"
+        ></img>
       </Link>
       <div className={changeHoverTextClass()}>Direct Messages</div>
     </div>
