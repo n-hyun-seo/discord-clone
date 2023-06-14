@@ -132,6 +132,14 @@
   position: relative;
 }
 
+.logo-container-2 {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo-container:before {
   content: "";
   position: absolute;
@@ -178,6 +186,17 @@
   animation-duration: 0.3s;
 }
 
+.logo-button-hovered-2 {
+  background-image: url("https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0");
+  background-size: cover;
+  border-radius: 35%;
+  width: 66.5%;
+  border: none;
+  height: 68%;
+  animation-name: logo-button-transition-enter-2;
+  animation-duration: 0.3s;
+}
+
 .logo-button-unhovered {
   background-color: #313338;
   width: 66.5%;
@@ -188,8 +207,28 @@
   animation-duration: 0.3s;
 }
 
+.logo-button-unhovered-2 {
+  background-image: url("https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0");
+  background-size: cover;
+  width: 66.5%;
+  border: none;
+  height: 68%;
+  border-radius: 50%;
+  animation-name: logo-button-transition-exit-2;
+  animation-duration: 0.3s;
+}
+
 .logo-button-highlighted {
   background-color: #5865f2;
+  border-radius: 35%;
+  width: 66.5%;
+  border: none;
+  height: 68%;
+}
+
+.logo-button-highlighted-2 {
+  background-image: url("https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0");
+  background-size: cover;
   border-radius: 35%;
   width: 66.5%;
   border: none;
@@ -215,6 +254,17 @@
   background-color: white;
   border-radius: 5px;
   animation-name: white-blob-exit;
+  animation-duration: 0.3s;
+}
+
+.white-blob-unhovered-2 {
+  position: fixed;
+  width: 0px;
+  height: 0px;
+  left: -14px;
+  background-color: white;
+  border-radius: 5px;
+  animation-name: white-blob-unclick;
   animation-duration: 0.3s;
 }
 
@@ -298,6 +348,10 @@
 .dm-header .add-sign {
   font-size: 25px;
   padding-top: 7px;
+}
+
+.add-sign:hover {
+  color: white;
 }
 
 .dm-header .hovered {
@@ -442,6 +496,17 @@
   }
 }
 
+@keyframes white-blob-unclick {
+  from {
+    height: 40px;
+    width: 18px;
+  }
+  to {
+    height: 0px;
+    width: 0px;
+  }
+}
+
 @keyframes white-blob-clicked {
   from {
     height: 20px;
@@ -462,6 +527,24 @@
   to {
     background-color: #5865f2;
     border-radius: 35%;
+  }
+}
+
+@keyframes logo-button-transition-enter-2 {
+  from {
+    border-radius: 50%;
+  }
+  to {
+    border-radius: 35%;
+  }
+}
+
+@keyframes logo-button-transition-exit-2 {
+  from {
+    border-radius: 35%;
+  }
+  to {
+    border-radius: 50%;
   }
 }
 

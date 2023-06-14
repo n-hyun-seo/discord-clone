@@ -1,52 +1,60 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext, useRef } from "react";
+import { CurrentPageContext } from "../context/CurrentPageContext";
 
-export default function DiscordHomeButton(props) {
+export default function DiscordHomeButton() {
   const [hoverState, setHoverState] = useState(false);
 
-  const currentPage = props.currentPage;
-  const setCurrentPage = props.setCurrentPage;
+  const [currentPage, setCurrentPage] = useContext(CurrentPageContext);
+
+  const blob = useRef();
 
   function checkCurrentPageOnLeave() {
-    if (currentPage === "home") return;
     setHoverState(false);
   }
 
   function checkCurrentPageOnEnter() {
-    if (currentPage === "home") return;
     setHoverState(true);
   }
 
   function changeBlobClass() {
     if (currentPage === "home") return "white-blob-highlighted";
-    if (currentPage !== "home") return "white-blob-unhovered";
-    if (hoverState) return "white-blob-hovered";
-    if (!hoverState) return "white-blob-unhovered";
+    if (currentPage !== "home") {
+      if (blob.current.classList.contains("white-blob-highlighted"))
+        return "white-blob-unhovered-2";
+      if (hoverState) return "white-blob-hovered";
+      if (!hoverState) return "white-blob-unhovered";
+    }
   }
 
   function changeButtonClass() {
     if (currentPage === "home") return "logo-button-highlighted";
-    if (currentPage !== "home") return "logo-button-unhovered";
-    if (hoverState) return "logo-button-hovered";
-    if (!hoverState) return "logo-button-unhovered";
+    if (currentPage !== "home") {
+      if (hoverState) return "logo-button-hovered";
+      if (!hoverState) return "logo-button-unhovered";
+    }
   }
 
   function changeLogoClass() {
     if (currentPage === "home") return "logo-highlighted";
-    if (currentPage !== "home") return "logo-unhovered";
-    if (hoverState) return "logo-hovered";
-    if (!hoverState) return "logo-unhovered";
+    if (currentPage !== "home") {
+      if (hoverState) return "logo-hovered";
+      if (!hoverState) return "logo-unhovered";
+    }
   }
 
   return (
     <div className="logo-container">
-      <div className={changeBlobClass()}></div>
+      <div className={changeBlobClass()} ref={blob}></div>
 
       <button
         className={changeButtonClass()}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}
-        onClick={() => setCurrentPage("home")}
+        onClick={() => {
+          setCurrentPage("home");
+        }}
       >
         <Link to="/">
           <img
