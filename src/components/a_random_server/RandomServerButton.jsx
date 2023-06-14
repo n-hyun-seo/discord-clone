@@ -19,6 +19,12 @@ export default function RandomServerButton(props) {
 
   function changeBlobClass() {
     if (currentPage === props.serverName) return "white-blob-highlighted";
+    if (
+      !hoverState &&
+      (blob2?.current?.classList?.contains("white-blob-unhovered-2") ||
+        blob2?.current?.classList?.contains("white-blob-gone"))
+    )
+      return "white-blob-gone";
     if (currentPage !== props.serverName) {
       if (blob2?.current?.classList?.contains("white-blob-highlighted"))
         return "white-blob-unhovered-2";
@@ -35,13 +41,14 @@ export default function RandomServerButton(props) {
     }
   }
 
+  function changeHoverTextClass() {
+    if (hoverState) return "hover-text-hovered"
+    if (!hoverState) return "hover-text-unhovered"
+}
+
   return (
     <div className="logo-container-2">
-      <div
-        className={changeBlobClass()}
-        ref={blob2}
-       
-      ></div>
+      <div className={changeBlobClass()} ref={blob2}></div>
 
       <Link
         to={`/${props.serverName}`}
@@ -52,9 +59,10 @@ export default function RandomServerButton(props) {
           setCurrentPage(props.serverName);
         }}
         style={{
-          backgroundImage: `url(${props.ImgUrl})`
+          backgroundImage: `url(${props.ImgUrl})`,
         }}
       ></Link>
+      <div className={changeHoverTextClass()}>{props.serverTitle}</div>
     </div>
   );
 }

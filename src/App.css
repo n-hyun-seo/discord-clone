@@ -279,6 +279,54 @@
   animation-duration: 0.3s;
 }
 
+
+.white-blob-gone {
+  width: 0px;
+  height: 0px;
+  background-color: white;
+  left: -14px;
+  border-radius: 5px;
+  position: fixed;
+}
+
+.hover-text-hovered {
+  height: 35px;
+  position: fixed;
+  left: 85px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(17, 17, 17);
+  color: #bbc2cb;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-hovered-text;
+  animation-duration: 0.2s;
+}
+
+.hover-text-unhovered {
+  height: 35px;
+  position: fixed;
+  left: 85px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(17, 17, 17);
+  color: #bbc2cb;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-unhovered-text;
+  animation-duration: 0.1s;
+  opacity: 0;
+}
+
+
 .left-button-container {
   display: flex;
   justify-content: space-around;
@@ -472,6 +520,22 @@
 
 .hidden {
   visibility: hidden;
+}
+
+@keyframes discord-button-hovered-text {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 100;
+  }
+}
+
+@keyframes discord-button-unhovered-text {
+  from {
+    opacity: 100;
+  } to {
+    opacity: 0;
+  }
 }
 
 @keyframes white-blob-enter {

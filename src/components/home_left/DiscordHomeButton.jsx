@@ -20,6 +20,12 @@ export default function DiscordHomeButton() {
 
   function changeBlobClass() {
     if (currentPage === "home") return "white-blob-highlighted";
+    if (
+      !hoverState &&
+      (blob.current.classList.contains("white-blob-unhovered-2") ||
+        blob.current.classList.contains("white-blob-gone"))
+    )
+      return "white-blob-gone";
     if (currentPage !== "home") {
       if (blob.current.classList.contains("white-blob-highlighted"))
         return "white-blob-unhovered-2";
@@ -44,6 +50,11 @@ export default function DiscordHomeButton() {
     }
   }
 
+  function changeHoverTextClass() {
+      if (hoverState) return "hover-text-hovered"
+      if (!hoverState) return "hover-text-unhovered"
+  }
+
   return (
     <div className="logo-container">
       <div className={changeBlobClass()} ref={blob}></div>
@@ -64,6 +75,7 @@ export default function DiscordHomeButton() {
           ></img>
         </Link>
       </button>
+      <div className={changeHoverTextClass()}>Direct Messages</div>
     </div>
   );
 }
