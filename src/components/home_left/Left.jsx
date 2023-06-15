@@ -23,7 +23,7 @@ export default function Left() {
         source="https://cdn3.emoji.gg/emojis/1567-birthday-discord-dark-theme.png"
       />
       <DirectMessages />
-      <UserInfo />
+      <UserInfo ImgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9O7zceDn3TKJA6lgUpjbb32m23z9P7gwCGw&usqp=CAU" />
     </div>
   );
 }
