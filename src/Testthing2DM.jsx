@@ -1,7 +1,7 @@
 export default function DMtest() {
     return (
         <div>
-            <p>DMS SHOULE BE GOING HERE</p>
+            <p class="testtext">DMS SHOULD BE GOING HERE</p>
         </div>
     )
 }

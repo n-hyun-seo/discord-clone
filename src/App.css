@@ -80,27 +80,28 @@ a {
   display: grid;
   grid-template-rows: repeat(17, 1fr);
   grid-template-columns: 1fr;
-  grid-template-areas: "fn"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc"
-  "fc";
+  grid-template-areas:
+    "fn"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc"
+    "fc";
 }
 
 .friends-nav {
   width: 100%;
-  height: 46px;
+
   border-bottom: 2px solid var(--section-divider-color);
   grid-area: fn;
   display: flex;
@@ -108,7 +109,6 @@ a {
   align-items: center;
   flex-shrink: 0;
 }
-
 
 .friends-page-indicator {
   width: 120px;
@@ -162,8 +162,8 @@ a {
   border-radius: 3px;
 }
 
-.friends-nav-button.add-friend a{
-  color: #2bb501
+.friends-nav-button.add-friend a {
+  color: #2bb501;
 }
 
 .friends-content {
@@ -171,7 +171,6 @@ a {
   height: calc(100% - 46px);
   grid-area: fc;
 }
-
 
 .search-button-container {
   grid-area: sbc;
@@ -208,7 +207,7 @@ a {
 .conversation-search {
   background-color: #1b1d20;
   flex-basis: 92%;
-  height: 55%;
+  height: 25px;
   border-radius: 4px;
   border: none;
   text-align: left;
@@ -216,7 +215,6 @@ a {
   font-weight: 500;
   color: var(--font-color);
   line-height: 24px;
-  
 }
 
 .linkToFriends {
@@ -288,7 +286,7 @@ a {
 .logo-button-hovered {
   background-color: #5865f2;
   border-radius: 35%;
-  width: 66.5%;
+  width: 50px;
   border: none;
   height: 68%;
   display: flex;
@@ -301,7 +299,7 @@ a {
 .logo-button-hovered-2 {
   background-size: cover;
   border-radius: 35%;
-  width: 66.5%;
+  width: 50px;
   border: none;
   height: 68%;
   animation-name: logo-button-transition-enter-2;
@@ -310,7 +308,7 @@ a {
 
 .logo-button-unhovered {
   background-color: #313338;
-  width: 66.5%;
+  width: 50px;
   border: none;
   height: 68%;
   border-radius: 50%;
@@ -322,9 +320,8 @@ a {
 }
 
 .logo-button-unhovered-2 {
-
   background-size: cover;
-  width: 66.5%;
+  width: 50px;
   border: none;
   height: 68%;
   border-radius: 50%;
@@ -335,7 +332,7 @@ a {
 .logo-button-highlighted {
   background-color: #5865f2;
   border-radius: 35%;
-  width: 66.5%;
+  width: 50px;
   border: none;
   height: 68%;
   display: flex;
@@ -344,10 +341,10 @@ a {
 }
 
 .logo-button-highlighted-2 {
- 
   background-size: cover;
   border-radius: 35%;
-  width: 66.5%;
+  width: 50px;
+
   border: none;
   height: 68%;
 }
@@ -395,7 +392,6 @@ a {
   animation-name: white-blob-clicked;
   animation-duration: 0.3s;
 }
-
 
 .white-blob-gone {
   width: 0px;
@@ -447,7 +443,6 @@ a {
   z-index: 100;
 }
 
-
 .left-button-container {
   display: flex;
   justify-content: space-around;
@@ -485,7 +480,6 @@ a {
   flex-basis: 25%;
 }
 
-
 .left-button-container button {
   display: flex;
   background-color: #292b2f;
@@ -505,8 +499,8 @@ a {
 }
 
 .left-button-container button:active {
- color: white;
- background-color: #424446;
+  color: white;
+  background-color: #424446;
 }
 
 .direct-messages-container {
@@ -570,8 +564,6 @@ a {
   padding-left: 6px;
 }
 
-
-
 .personal-dm:hover {
   background-color: #34373a;
   color: var(--text-hover-color);
@@ -614,7 +606,6 @@ a {
   color: var(--font-color);
 }
 
-
 .user-status-dm {
   font-size: 13px;
   margin-top: -4px;
@@ -632,7 +623,6 @@ a {
 .dm-delete-button:hover {
   color: white;
 }
-
 
 .x-button {
   margin-left: 17px;
@@ -678,7 +668,8 @@ a {
 @keyframes discord-button-hovered-text {
   from {
     opacity: 0;
-  } to {
+  }
+  to {
     opacity: 100;
   }
 }
@@ -686,7 +677,8 @@ a {
 @keyframes discord-button-unhovered-text {
   from {
     opacity: 100;
-  } to {
+  }
+  to {
     opacity: 0;
   }
 }
@@ -792,4 +784,9 @@ a {
   to {
     filter: brightness(85%);
   }
+}
+
+.testtext {
+  color: white;
+  font-size: 30px;
 }
