@@ -3,6 +3,8 @@
   src: url(ggsansRegular.woff);
 }
 
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -105,6 +107,7 @@
   flex-shrink: 0;
 }
 
+
 .friends-page-indicator {
   width: 120px;
   display: flex;
@@ -123,8 +126,6 @@
   background-color: rgba(128, 128, 128, 0.234);
 }
 
-
-
 .friends-page-indicator p {
   padding-left: 6px;
 }
@@ -133,6 +134,34 @@
   width: 15%;
   filter: brightness(60%);
   margin-right: 5px;
+}
+
+.friends-nav-button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 23%;
+}
+.friends-nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+}
+
+.friends-nav-button a {
+  text-decoration: none;
+  color: var(--text-hover-color);
+  letter-spacing: 0.5px;
+  font-size: 15px;
+  font-weight: 600;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 3px;
+}
+
+.friends-nav-button.add-friend a{
+  color: #2bb501
 }
 
 .friends-content {
