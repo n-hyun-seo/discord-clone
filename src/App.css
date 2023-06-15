@@ -39,6 +39,31 @@ a {
   display: flex;
 }
 
+.left-server {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(15, 1fr);
+  grid-template-areas: "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "c"
+  "uic";
+}
+
+.channels {
+  grid-area: c;
+}
+
 .left {
   background-color: #292b2f;
   height: 100vh;
