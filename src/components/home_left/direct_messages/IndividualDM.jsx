@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+
 
 export default function IndividualDM(props) {
   const [hasStatus, setHasStatus] = useState(false);
@@ -12,7 +14,7 @@ export default function IndividualDM(props) {
 
   const delete_button = useRef();
   return (
-    <button
+    <Link to="/dm"
       className="personal-dm"
       onMouseEnter={() => {
         delete_button.current.classList.remove("hidden");
@@ -42,9 +44,9 @@ export default function IndividualDM(props) {
         <p className="user-status-dm">{props.status ? props.status : ""}</p>
       </div>
       <div ref={delete_button} className="dm-delete-button hidden">
-        <p>×</p>
+        <p className="x-button">×</p>
       </div>
-    </button>
+    </Link>
   );
 }
 

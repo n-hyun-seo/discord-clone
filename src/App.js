@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DiscordHomeButton from "./components/home_left/DiscordHomeButton";
 import Home from "./components/home_left/Home";
 import RandomServer from "./components/a_random_server/RandomServer";
@@ -30,7 +30,8 @@ function App() {
         </div>
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Home />} />
+
           <Route
             path="/cats-server"
             element={<RandomServer serverName="cats-server" />}
