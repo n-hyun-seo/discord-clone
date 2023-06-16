@@ -11,7 +11,6 @@ import { CurrentDMIdContext } from "./components/context/CurrentDMIdContext";
 import RandomServerButton from "./components/a_random_server/RandomServerButton";
 import { serversList } from "./components/a_random_server/randomServersList";
 
-
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [currentSectionLeft, setCurrentSectionLeft] = useState("friends");

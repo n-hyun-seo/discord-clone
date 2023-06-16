@@ -229,6 +229,14 @@ a {
 .friends-nav .friends-nav-button:last-child {
   background-color: #1d8554;
 }
+
+.friends-nav .friends-nav-button:last-child.pressed-add-friend {
+  background-color:#2f3136;
+}
+
+.friends-nav .friends-nav-button:last-child.pressed-add-friend a {
+  color:#1ac155
+}
 .friends-nav-button {
   display: flex;
   justify-content: center;
@@ -237,8 +245,26 @@ a {
   border-radius: 3px;
 }
 
+
+
+.friends-nav-button.pressed {
+  background-color: var(--friends-nav-active-color);
+}
+
+.friends-nav-button.pressed a {
+  color: white;
+}
 .friends-nav-button:hover {
   background-color: var(--button-hover-color);
+}
+
+.friends-nav-button:active {
+  background-color: var(--friends-nav-active-color);
+
+}
+
+.friends-nav-button:active a {
+  color: white;
 }
 
 .friends-nav-button a {
@@ -673,7 +699,7 @@ a {
 
 .left-button-container button.friends-clicked.friends {
   color: white;
-  background-color: var(--button-hover-color)
+  background-color: var(--button-hover-color);
 }
 
 .direct-messages-container {
