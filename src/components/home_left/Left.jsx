@@ -1,7 +1,7 @@
 import Button from "./Button";
 import SearchButton from "./SearchButton";
 import DirectMessages from "./direct_messages/DirectMessages";
-import UserInfo from "./UserInfo";
+import UserInfo from "./user-info/UserInfo";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
