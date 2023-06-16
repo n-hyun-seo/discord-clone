@@ -879,6 +879,13 @@ a {
   background-color: #424446;
 }
 
+.personal-dm.pressed {
+  background-color: #424446;
+}
+
+.personal-dm.pressed .user-info-dm p {
+  color: white;
+}
 .pfp-circle {
   width: 32px;
   height: 32px;

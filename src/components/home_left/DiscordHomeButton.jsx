@@ -4,6 +4,7 @@ import { useContext, useRef } from "react";
 import { CurrentPageContext } from "../context/CurrentPageContext";
 import { CurrentSectionContext } from "../context/CurrentSectionContext";
 import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
+import { CurrentDMIdContext } from "../context/CurrentDMIdContext";
 
 export default function DiscordHomeButton() {
   const [hoverState, setHoverState] = useState(false);
@@ -13,6 +14,7 @@ export default function DiscordHomeButton() {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
+  const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
 
   const blob = useRef();
 
@@ -67,7 +69,7 @@ export default function DiscordHomeButton() {
 
       <Link
         to={`${currentSectionLeft}/${
-          currentSectionLeft === "dm" ? "" : currentSection
+          currentSectionLeft === "dm" ? currentDMId : currentSection
         }`}
         className={changeButtonClass()}
         onMouseEnter={checkCurrentPageOnEnter}

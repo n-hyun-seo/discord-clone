@@ -18,11 +18,16 @@ export default function IndividualDM(props) {
     if (!hoverState) return "user-name-dm-unhovered";
   }
 
+  function changeButtonClass() {
+    if (currentDMId === props.id_number) return "personal-dm pressed";
+    return "personal-dm";
+  }
+
   const delete_button = useRef();
   return (
     <Link
       to={`/dm/${props.id_number}`}
-      className="personal-dm"
+      className={changeButtonClass()}
       onMouseEnter={() => {
         delete_button.current.classList.remove("hidden");
         setHoverState(true);
