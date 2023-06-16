@@ -298,7 +298,6 @@ a {
 
 .hover-text-friends-nav {
   position: absolute;
-
   height: 35px;
   background-color: rgb(17, 17, 17);
   padding-left: 10px;
@@ -420,9 +419,58 @@ a {
 .icon-container:hover {
   background-color: #424446;
 }
+
+.icon-container:active {
+  background-color: var(--friends-nav-active-color);
+}
+
+.hover-icon-text {
+  position: absolute;
+  bottom: 47px;
+  height: 35px;
+  background-color: rgb(17, 17, 17);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: #bbc2cb;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-hovered-text;
+  animation-duration: 0.2s;
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unhover-icon-text {
+  position: absolute;
+  bottom: 47px;
+  height: 35px;
+  background-color: rgb(17, 17, 17);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: #bbc2cb;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-unhovered-text;
+  animation-duration: 0.1s;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .mic {
   width: 57%;
   filter: brightness(250%);
+}
+
+.mic-hovered {
+  width: 57%;
+  filter: brightness(300%);
 }
 
 .mic-container {
@@ -434,6 +482,11 @@ a {
   filter: brightness(150%);
 }
 
+.headphones-hovered {
+  width: 62%;
+  filter: brightness(200%);
+}
+
 .headphones-container {
   margin-right: -5px;
 }
@@ -441,6 +494,11 @@ a {
 .settings {
   width: 56%;
   filter: brightness(500%);
+}
+
+.settings-hovered {
+  width: 56%;
+  filter: brightness(700%);
 }
 
 .settings-container {

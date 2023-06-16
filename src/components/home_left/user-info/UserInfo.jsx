@@ -23,19 +23,19 @@ export default function UserInfo(props) {
       <UserInfoButton
         containerClassName="mic-container"
         ImgClassName="mic"
-        alt="mic"
+        alt="Microphone"
         ImgUrl="https://www.freeiconspng.com/thumbs/microphone-icon/microphone-1-icon--windows-8-metro-invert-icons--softicons-com-4.png"
       />
       <UserInfoButton
         containerClassName="headphones-container"
         ImgClassName="headphones"
-        alt="headphones"
+        alt="Headphones"
         ImgUrl="https://cdn4.iconfinder.com/data/icons/means-of-communication/512/Headset-512.png"
       />
       <UserInfoButton
         containerClassName="settings-container"
         ImgClassName="settings"
-        alt="settings"
+        alt="Settings"
         ImgUrl="https://static-00.iconduck.com/assets.00/settings-icon-1964x2048-8nigtrtt.png"
       />
     </div>

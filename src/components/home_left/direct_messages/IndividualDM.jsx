@@ -1,6 +1,7 @@
 import { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
+import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 
 export default function IndividualDM(props) {
   const [hasStatus, setHasStatus] = useState(false);
@@ -10,6 +11,8 @@ export default function IndividualDM(props) {
     CurrentSectionLeftContext
   );
 
+  const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered";
     if (!hoverState) return "user-name-dm-unhovered";
@@ -18,7 +21,7 @@ export default function IndividualDM(props) {
   const delete_button = useRef();
   return (
     <Link
-      to="/dm"
+      to={`/dm/${props.id_number}`}
       className="personal-dm"
       onMouseEnter={() => {
         delete_button.current.classList.remove("hidden");
@@ -28,7 +31,10 @@ export default function IndividualDM(props) {
         delete_button.current.classList.add("hidden");
         setHoverState(false);
       }}
-      onClick={() => setCurrentSectionLeft("dm")}
+      onClick={() => {
+        setCurrentSectionLeft("dm");
+        setCurrentDMId(props.id_number);
+      }}
     >
       <div className="pfp-container">
         <div
