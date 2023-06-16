@@ -153,6 +153,10 @@ a {
   width: 45%;
 }
 
+.chatroom:hover {
+  filter: brightness(290%);
+}
+
 .inbox-container {
   height: 100%;
   width: 50px;
@@ -165,6 +169,10 @@ a {
 .inbox {
   width: 55%;
   filter: brightness(155%);
+}
+
+.inbox:hover {
+  filter: brightness(755%);
 }
 
 .help-container {
@@ -180,6 +188,10 @@ a {
 .help {
   width: 45%;
   filter: brightness(400%);
+}
+
+.help:hover {
+  filter: brightness(465%);
 }
 
 .friends-page-indicator {
@@ -231,11 +243,11 @@ a {
 }
 
 .friends-nav .friends-nav-button:last-child.pressed-add-friend {
-  background-color:#2f3136;
+  background-color: #2f3136;
 }
 
 .friends-nav .friends-nav-button:last-child.pressed-add-friend a {
-  color:#1ac155
+  color: #1ac155;
 }
 .friends-nav-button {
   display: flex;
@@ -244,8 +256,6 @@ a {
   padding: 2px 2px;
   border-radius: 3px;
 }
-
-
 
 .friends-nav-button.pressed {
   background-color: var(--friends-nav-active-color);
@@ -260,7 +270,6 @@ a {
 
 .friends-nav-button:active {
   background-color: var(--friends-nav-active-color);
-
 }
 
 .friends-nav-button:active a {
@@ -285,6 +294,46 @@ a {
   width: 100%;
   height: calc(100% - 46px);
   grid-area: fc;
+}
+
+.hover-text-friends-nav {
+  position: absolute;
+
+  height: 35px;
+  background-color: rgb(17, 17, 17);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: #bbc2cb;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-hovered-text;
+  animation-duration: 0.2s;
+  pointer-events: none;
+  z-index: 100;
+  top: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unhover-text-friends-nav {
+  position: absolute;
+  height: 35px;
+  background-color: rgb(17, 17, 17);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: #bbc2cb;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-unhovered-text;
+  animation-duration: 0.1s;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  top: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-button-container {

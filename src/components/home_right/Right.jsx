@@ -30,20 +30,20 @@ export default function Right() {
             containerClass="chatroom-container"
             childClass="chatroom"
             ImgUrl="https://icon-library.com/images/speech-bubble-icon-png/speech-bubble-icon-png-15.jpg"
-            alt="chatroom-icon"
+            alt="New Group DM"
           />
           <div className="friends-divider"></div>
           <FriendsNavRightButton
             containerClass="inbox-container"
             childClass="inbox"
             ImgUrl="https://icons-for-free.com/download-icon-inbox+icon-1320183613807333914_512.png"
-            alt="inbox-icon"
+            alt="Inbox"
           />
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="help"
             ImgUrl="https://www.freeiconspng.com/thumbs/help-icon/help-icon-12.png"
-            alt="help-icon"
+            alt="Help"
           />
         </div>
       </div>
