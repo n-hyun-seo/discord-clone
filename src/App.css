@@ -147,7 +147,7 @@ a {
   margin-right: 5px;
 }
 .chatroom {
-  filter: brightness(240%);
+  filter: brightness(250%);
   width: 45%;
 }
 
@@ -162,7 +162,7 @@ a {
 
 .inbox {
   width: 55%;
-  filter: brightness(130%);
+  filter: brightness(135%);
 }
 
 .help-container {
@@ -177,7 +177,7 @@ a {
 
 .help {
   width: 45%;
-  filter: brightness(350%);
+  filter: brightness(380%);
 }
 
 .friends-page-indicator {
