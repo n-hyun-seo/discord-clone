@@ -1,7 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
-import RandomServerButton from "../a_random_server/RandomServerButton";
 import TestComp from "../../Testthing";
 import FriendsNavButton from "./friends-nav/FriendsNavButton";
+import FriendsNavRightButton from "./friends-nav/FriendsNavRightButton";
 
 export default function Right() {
   return (
@@ -25,28 +25,25 @@ export default function Right() {
           </div>
         </div>
         <div className="friends-right-side">
-          <div className="chatroom-container">
-            <img
-              className="chatroom"
-              src="https://icon-library.com/images/speech-bubble-icon-png/speech-bubble-icon-png-15.jpg"
-              alt="add"
-            ></img>
-          </div>
+          <FriendsNavRightButton
+            containerClass="chatroom-container"
+            childClass="chatroom"
+            ImgUrl="https://icon-library.com/images/speech-bubble-icon-png/speech-bubble-icon-png-15.jpg"
+            alt="chatroom-icon"
+          />
           <div className="friends-divider"></div>
-          <div className="inbox-container">
-            <img
-              className="inbox"
-              src="https://icons-for-free.com/download-icon-inbox+icon-1320183613807333914_512.png"
-              alt="inbox"
-            ></img>
-          </div>
-          <div className="help-container">
-            <img
-              className="help"
-              src="https://www.freeiconspng.com/thumbs/help-icon/help-icon-12.png"
-              alt="inbox"
-            ></img>
-          </div>
+          <FriendsNavRightButton
+            containerClass="inbox-container"
+            childClass="inbox"
+            ImgUrl="https://icons-for-free.com/download-icon-inbox+icon-1320183613807333914_512.png"
+            alt="inbox-icon"
+          />
+          <FriendsNavRightButton
+            containerClass="help-container"
+            childClass="help"
+            ImgUrl="https://www.freeiconspng.com/thumbs/help-icon/help-icon-12.png"
+            alt="help-icon"
+          />
         </div>
       </div>
       <div className="friends-content">
