@@ -16,12 +16,13 @@ export default function Right() {
             <p>Friends</p>
           </div>
           <div className="friends-divider"></div>
+
           <div className="friends-nav-button-container">
             <FriendsNavButton to="/friends/online" text="Online" />
             <FriendsNavButton to="/friends/all" text="All" />
             <FriendsNavButton to="/friends/pending" text="Pending" />
             <FriendsNavButton to="/friends/blocked" text="Blocked" />
-            <FriendsNavButton to="/friends/add-friend" text="Add Friend" />
+            <FriendsNavButton to="/friends/addfriend" text="Add Friend" />
           </div>
         </div>
         <div className="friends-right-side">
@@ -52,7 +53,7 @@ export default function Right() {
           <Route path="/friends/all" element={<TestComp />} />
           <Route path="/friends/pending" element={<TestComp />} />
           <Route path="/friends/blocked" element={<TestComp />} />
-          <Route path="/friends/add-friend" element={<TestComp />} />
+          <Route path="/friends/addfriend" element={<TestComp />} />
         </Routes>
       </div>
     </div>

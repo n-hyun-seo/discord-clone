@@ -2,11 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useContext, useRef } from "react";
 import { CurrentPageContext } from "../context/CurrentPageContext";
+import { CurrentSectionContext } from "../context/CurrentSectionContext";
+import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
 
 export default function DiscordHomeButton() {
   const [hoverState, setHoverState] = useState(false);
 
   const [currentPage, setCurrentPage] = useContext(CurrentPageContext);
+  const [currentSection, setCurrentSection] = useContext(CurrentSectionContext);
+  const [currentSectionLeft, setCurrentSectionLeft] = useContext(
+    CurrentSectionLeftContext
+  );
 
   const blob = useRef();
 
@@ -60,7 +66,9 @@ export default function DiscordHomeButton() {
       <div className={changeBlobClass()} ref={blob}></div>
 
       <Link
-        to="/"
+        to={`${currentSectionLeft}/${
+          currentSectionLeft === "dm" ? "" : currentSection
+        }`}
         className={changeButtonClass()}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}

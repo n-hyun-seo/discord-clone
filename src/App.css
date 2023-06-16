@@ -138,6 +138,7 @@ a {
   align-items: center;
   justify-content: flex-end;
 }
+
 .chatroom-container {
   height: 100%;
   width: 50px;
@@ -146,8 +147,9 @@ a {
   align-items: center;
   margin-right: 5px;
 }
+
 .chatroom {
-  filter: brightness(250%);
+  filter: brightness(260%);
   width: 45%;
 }
 
@@ -157,12 +159,12 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left:5px;
+  margin-left: 5px;
 }
 
 .inbox {
   width: 55%;
-  filter: brightness(135%);
+  filter: brightness(155%);
 }
 
 .help-container {
@@ -177,7 +179,7 @@ a {
 
 .help {
   width: 45%;
-  filter: brightness(380%);
+  filter: brightness(400%);
 }
 
 .friends-page-indicator {
@@ -667,6 +669,11 @@ a {
 .left-button-container button:active {
   color: white;
   background-color: #424446;
+}
+
+.left-button-container button.friends-clicked.friends {
+  color: white;
+  background-color: var(--button-hover-color)
 }
 
 .direct-messages-container {

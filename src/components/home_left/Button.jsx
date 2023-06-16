@@ -1,15 +1,29 @@
-
+import { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
 
 export default function Button(props) {
   const [hoverState, setHoverState] = useState(false);
   const [clickState, setClickState] = useState(false);
 
+  const [currentSectionLeft, setCurrentSectionLeft] = useContext(
+    CurrentSectionLeftContext
+  );
+
   function changeImageClass() {
-    if (clickState) return "friends-image-clicked";
+    if (currentSectionLeft === "friends" || clickState)
+      return "friends-image-clicked";
     if (hoverState) return "friends-image-hover";
     if (!hoverState) return "";
+  }
+
+  function changeButtonClass() {
+    if (
+      currentSectionLeft === "friends" &&
+      props.containerClass === "friends-container"
+    )
+      return "friends friends-clicked";
+    return props.buttonClass;
   }
 
   return (
@@ -20,7 +34,7 @@ export default function Button(props) {
       onMouseDown={() => setClickState(true)}
       onMouseUp={() => setClickState(false)}
     >
-      <button className={props.buttonClass}>
+      <button className={changeButtonClass()}>
         <div className="button-img-container">
           <img
             src={props.source}
