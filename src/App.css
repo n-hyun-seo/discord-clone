@@ -15,8 +15,9 @@ a {
   --section-divider-color: #0f101149;
   --font-color: #949ba4;
   --status-online: rgb(64, 179, 64);
-  --button-hover-color: #34373a;
+  --button-hover-color: #383c3e;
   --text-hover-color: rgb(203, 202, 202);
+  --friends-nav-active-color: #4e505899;
   font-family: ggsans;
 }
 
@@ -220,12 +221,22 @@ a {
 }
 
 .friends-nav .friends-nav-button:last-child a {
-  color: #34c707;
+  color: white;
+}
+
+.friends-nav .friends-nav-button:last-child {
+  background-color: #1d8554;
 }
 .friends-nav-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2px 3px;
+  border-radius: 3px;
+}
+
+.friends-nav-button:hover {
+  background-color: var(--button-hover-color);
 }
 
 .friends-nav-button a {
