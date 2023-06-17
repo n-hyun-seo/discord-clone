@@ -2,6 +2,10 @@ import { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
+import Online from "./status_icons/Online";
+import Offline from "./status_icons/Offline";
+import Moon from "./status_icons/Moon";
+import Dnd from "./status_icons/Dnd";
 
 export default function IndividualDM(props) {
   const [hoverState, setHoverState] = useState(false);
@@ -66,7 +70,10 @@ export default function IndividualDM(props) {
           }}
         >
           <div className="online-status-outer">
-            <div className="online-status"></div>
+            {props.online_status === "online" && <Online />}
+            {props.online_status === "offline" && <Offline />}
+            {props.online_status === "moon" && <Moon />}
+            {props.online_status === "dnd" && <Dnd />}
           </div>
         </div>
       </div>

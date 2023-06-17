@@ -21,6 +21,9 @@ export default function RandomServerButton(props) {
   }
 
   function changeBlobClass() {
+    // if (currentPage === "home") {
+    //   return "white-blob-gone";
+    // }
     if (currentPage === props.serverName) return "white-blob-highlighted";
     if (
       !hoverState &&
@@ -37,6 +40,7 @@ export default function RandomServerButton(props) {
   }
 
   function changeButtonClass() {
+    // if (currentPage === "home") return "logo-button-unhovered-3";
     if (currentPage === props.serverName) return "logo-button-highlighted-2";
     if (currentPage !== props.serverName) {
       if (hoverState) return "logo-button-hovered-2";

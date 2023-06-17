@@ -602,6 +602,17 @@ a {
   animation-duration: 0.3s;
 }
 
+.logo-button-unhovered-3 {
+  background-color: #313338;
+  width: 50px;
+  border: none;
+  height: 68%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo-button-highlighted {
   background-color: #5865f2;
   border-radius: 35%;
@@ -990,6 +1001,65 @@ a {
   background-color: var(--status-online);
   position: relative;
   z-index: 2;
+}
+
+.offline-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--font-color);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.offline-status-circle {
+  width: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  background-color: #292b2f;
+}
+
+.moon-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: yellow;
+  position: relative;
+  z-index: 2;
+}
+
+.moon-status-circle {
+  background-color: #292b2f;
+  width: 7px;
+  height: 7px;
+  border-radius: 3.5px;
+  position: absolute;
+  left: -1px;
+  top: -1px;
+}
+
+.dont-disturb {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(186, 19, 19);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.dont-disturb-white-rectangle {
+  background-color: #292b2f;
+  flex-basis: 70%;
+  margin-left: 1px;
+  height: 25%;
+  z-index: 3;
 }
 
 .online-status-outer {

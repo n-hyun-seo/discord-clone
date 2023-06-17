@@ -26,6 +26,7 @@ export default function DirectMessages(props) {
               status={user.status}
               ImgUrl={user.ImgUrl}
               id_number={user.id_number}
+              online_status={user.online_status}
             />
           );
         })}
