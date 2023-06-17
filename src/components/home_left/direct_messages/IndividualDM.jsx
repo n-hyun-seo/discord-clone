@@ -19,6 +19,7 @@ export default function IndividualDM(props) {
   }
 
   function changeButtonClass() {
+    if (currentSectionLeft !== "dm") return "personal-dm";
     if (currentDMId === props.id_number) return "personal-dm pressed";
     return "personal-dm";
   }
