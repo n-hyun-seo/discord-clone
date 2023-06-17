@@ -11,13 +11,13 @@ function addUserToList(username, status, ImgUrl, id_number) {
 
 addUserToList(
   "Real Kanye",
-  "",
+  "I Am Real 🙏",
   "https://videos1.memedroid.com/videos/UPLOADED903/63dbdd24235ed.webp",
   1
 );
 addUserToList(
   "anna",
-  "",
+  "🌸Hello!🌸",
   "https://qph.cf2.quoracdn.net/main-qimg-89380dcfb5e239d42d8ee3475bedcd36-lq",
   2
 );
@@ -28,26 +28,26 @@ addUserToList(
   3
 );
 addUserToList(
-  "! porodoro",
-  "",
+  "Alongnamethatwontfit",
+  "wont fit so it will ...",
   "https://archive.org/download/discordprofilepictures/discordblue.png",
   4
 );
 addUserToList(
   "ChavChavChav",
-  "",
+  "Don't DM me.",
   "https://xsgames.co/randomusers/assets/avatars/male/8.jpg",
   5
 );
 addUserToList(
   "IGN: Ashess",
-  "",
+  "LF duo iron",
   "https://cdnstorage.sendbig.com/unreal/female.webp",
   6
 );
 addUserToList(
   "Wilted_Chicken",
-  "",
+  "Playing Diablo VI",
   "https://preview.redd.it/3z11zoc0rhv51.jpg?width=474&format=pjpg&auto=webp&s=7c317ebaa78a0ed72273220c3113bcf2a3666ec6",
   7
 );
@@ -59,13 +59,13 @@ addUserToList(
 );
 addUserToList(
   "camcamm",
-  "",
+  "Croissant 🥐",
   "https://www.asiamediajournal.com/wp-content/uploads/2022/10/Cool-PFP-download.jpg",
   9
 );
 addUserToList(
   "colejetto",
-  "",
+  "@c0le_jett0",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMnq9Mhgpm3ETi9Bc262c480GEprcI7aAlSA&usqp=CAU",
   10
 );
@@ -77,7 +77,7 @@ addUserToList(
 );
 addUserToList(
   "Sydney(She/Her)",
-  "",
+  "🏳️‍🌈🏳️‍🌈🏳️‍🌈",
   "https://images.theconversation.com/files/438138/original/file-20211216-25-1hu3e65.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
   12
 );

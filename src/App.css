@@ -909,20 +909,65 @@ a {
 
 .user-name-dm-hovered {
   font-size: 16px;
+  width: 130px;
   letter-spacing: 0.5px;
   color: var(--text-hover-color);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .user-name-dm-unhovered {
   font-size: 16px;
+  width: 130px;
   letter-spacing: 0.5px;
   color: var(--font-color);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.user-status-dm {
+.has-user-status-dm {
   font-size: 13px;
+  max-width: 130px;
+  margin-top: -4px;
+  height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.has-user-status-dm.status-hovered {
+  color: var(--text-hover-color);
+}
+
+.no-user-status-dm {
+  font-size: 13px;
+  width: 130px;
   margin-top: -4px;
   height: 5px;
+}
+
+.status-message-icon-unhovered {
+  width: 13px;
+  height: 13px;
+  filter: brightness(160%);
+  margin-left: 5px;
+}
+
+.status-message-icon-hovered {
+  width: 13px;
+  height: 13px;
+  filter: brightness(210%);
+  margin-left: 5px;
+}
+
+.no-status-icon {
+  display: none;
+}
+
+.user-status-dm-container {
+  display: flex;
 }
 
 .dm-delete-button {

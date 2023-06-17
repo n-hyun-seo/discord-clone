@@ -10,7 +10,7 @@ function addToServerList(serverName, ImgUrl, serverTitle) {
 
 addToServerList(
   "cats-server",
-  "https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0",
+  "https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8",
   "Cute Cats"
 );
 addToServerList(
