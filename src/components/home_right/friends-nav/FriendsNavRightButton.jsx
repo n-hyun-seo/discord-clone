@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function FriendsNavRightButton(props) {
   const [hoverState, setHoverState] = useState(false);
 
-  function changeHovertextClass() {
-    if (hoverState) return "hover-text-friends-nav";
-    if (!hoverState) return "unhover-text-friends-nav";
+  const serverHoverText = useRef();
+
+  function checkCurrentPageOnLeave() {
+    setHoverState(false);
+    serverHoverText.current.classList.remove("hovered");
+  }
+
+  function checkCurrentPageOnEnter() {
+    setHoverState(true);
+    serverHoverText.current.classList.add("hovered");
   }
 
   return (
@@ -14,10 +21,10 @@ export default function FriendsNavRightButton(props) {
         className={props.childClass}
         src={props.ImgUrl}
         alt={props.alt}
-        onMouseEnter={() => setHoverState(true)}
-        onMouseLeave={() => setHoverState(false)}
+        onMouseEnter={checkCurrentPageOnEnter}
+        onMouseLeave={checkCurrentPageOnLeave}
       ></img>
-      <div className={changeHovertextClass()}>
+      <div ref={serverHoverText} className="hover-text-friends-nav">
         <p>{props.alt}</p>
       </div>
     </div>

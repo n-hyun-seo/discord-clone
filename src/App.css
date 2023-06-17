@@ -305,34 +305,21 @@ a {
   border-radius: 5px;
   color: #bbc2cb;
   letter-spacing: 0.5px;
+  pointer-events: none;
+  z-index: 100;
+  top: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.hover-text-friends-nav.hovered {
   animation-name: discord-button-hovered-text;
   animation-duration: 0.2s;
   pointer-events: none;
   z-index: 100;
-  top: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.unhover-text-friends-nav {
-  position: absolute;
-  height: 35px;
-  background-color: rgb(17, 17, 17);
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  color: #bbc2cb;
-  letter-spacing: 0.5px;
-  animation-name: discord-button-unhovered-text;
-  animation-duration: 0.1s;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 100;
-  top: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  visibility: visible;
 }
 
 .search-button-container {
@@ -434,8 +421,7 @@ a {
   border-radius: 5px;
   color: #bbc2cb;
   letter-spacing: 0.5px;
-  animation-name: discord-button-hovered-text;
-  animation-duration: 0.2s;
+  visibility: hidden;
   pointer-events: none;
   z-index: 100;
   display: flex;
@@ -443,24 +429,10 @@ a {
   align-items: center;
 }
 
-.unhover-icon-text {
-  position: absolute;
-  bottom: 47px;
-  height: 35px;
-  background-color: rgb(17, 17, 17);
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  color: #bbc2cb;
-  letter-spacing: 0.5px;
-  animation-name: discord-button-unhovered-text;
-  animation-duration: 0.1s;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.hover-icon-text.hovered {
+  animation-name: discord-button-hovered-text;
+  animation-duration: 0.2s;
+  visibility: visible;
 }
 
 .mic {
@@ -703,7 +675,7 @@ a {
   position: fixed;
 }
 
-.hover-text-hovered {
+.hover-text {
   height: 35px;
   position: fixed;
   left: 85px;
@@ -717,10 +689,15 @@ a {
   color: #bbc2cb;
   font-weight: bold;
   letter-spacing: 0.5px;
+  visibility: hidden;
+}
+
+.hover-text.hovered {
   animation-name: discord-button-hovered-text;
   animation-duration: 0.2s;
   pointer-events: none;
   z-index: 100;
+  visibility: visible;
 }
 
 .hover-text-unhovered {
@@ -743,6 +720,26 @@ a {
   pointer-events: none;
   z-index: 100;
 }
+
+/* .hover-text-hovered {
+  height: 35px;
+  position: fixed;
+  left: 85px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(17, 17, 17);
+  color: #bbc2cb;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  animation-name: discord-button-hovered-text;
+  animation-duration: 0.2s;
+  pointer-events: none;
+  z-index: 100;
+} */
 
 .left-button-container {
   display: flex;

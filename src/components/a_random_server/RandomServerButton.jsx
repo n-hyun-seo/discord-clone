@@ -8,13 +8,16 @@ export default function RandomServerButton(props) {
   const [hoverState, setHoverState] = useState(false);
 
   const blob2 = useRef();
+  const serverHoverText = useRef();
 
   function checkCurrentPageOnLeave() {
     setHoverState(false);
+    serverHoverText.current.classList.remove("hovered");
   }
 
   function checkCurrentPageOnEnter() {
     setHoverState(true);
+    serverHoverText.current.classList.add("hovered");
   }
 
   function changeBlobClass() {
@@ -41,11 +44,6 @@ export default function RandomServerButton(props) {
     }
   }
 
-  function changeHoverTextClass() {
-    if (hoverState) return "hover-text-hovered"
-    if (!hoverState) return "hover-text-unhovered"
-}
-
   return (
     <div className="logo-container-2">
       <div className={changeBlobClass()} ref={blob2}></div>
@@ -62,7 +60,9 @@ export default function RandomServerButton(props) {
           backgroundImage: `url(${props.ImgUrl})`,
         }}
       ></Link>
-      <div className={changeHoverTextClass()}>{props.serverTitle}</div>
+      <div ref={serverHoverText} className="hover-text">
+        {props.serverTitle}
+      </div>
     </div>
   );
 }

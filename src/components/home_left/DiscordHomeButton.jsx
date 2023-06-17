@@ -17,13 +17,16 @@ export default function DiscordHomeButton() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
 
   const blob = useRef();
+  const serverHoverText = useRef()
 
   function checkCurrentPageOnLeave() {
     setHoverState(false);
+    serverHoverText.current.classList.remove("hovered");
   }
 
   function checkCurrentPageOnEnter() {
     setHoverState(true);
+    serverHoverText.current.classList.add("hovered");
   }
 
   function changeBlobClass() {
@@ -84,7 +87,7 @@ export default function DiscordHomeButton() {
           alt="discord logo"
         ></img>
       </Link>
-      <div className={changeHoverTextClass()}>Direct Messages</div>
+      <div ref={serverHoverText}className="hover-text">Direct Messages</div>
     </div>
   );
 }

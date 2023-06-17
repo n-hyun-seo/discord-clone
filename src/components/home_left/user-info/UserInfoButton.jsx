@@ -1,12 +1,17 @@
-import { hover } from "@testing-library/user-event/dist/hover";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function UserInfoButton(props) {
   const [hoverState, setHoverState] = useState(false);
 
-  function changeHoverTextClass() {
-    if (hoverState) return "hover-icon-text";
-    if (!hoverState) return "unhover-icon-text";
+  const serverHoverText = useRef();
+  function checkCurrentPageOnLeave() {
+    setHoverState(false);
+    serverHoverText.current.classList.remove("hovered");
+  }
+
+  function checkCurrentPageOnEnter() {
+    setHoverState(true);
+    serverHoverText.current.classList.add("hovered");
   }
 
   function changeImageClass() {
@@ -26,15 +31,15 @@ export default function UserInfoButton(props) {
   return (
     <div
       className={`icon-container ${props.containerClassName}`}
-      onMouseEnter={() => setHoverState(true)}
-      onMouseLeave={() => setHoverState(false)}
+      onMouseEnter={checkCurrentPageOnEnter}
+      onMouseLeave={checkCurrentPageOnLeave}
     >
       <img
         className={changeImageClass()}
         src={props.ImgUrl}
         alt={props.alt}
       ></img>
-      <div className={changeHoverTextClass()}>
+      <div ref={serverHoverText} className="hover-icon-text">
         <p>{props.alt}</p>
       </div>
     </div>
