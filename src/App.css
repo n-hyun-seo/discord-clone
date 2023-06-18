@@ -515,6 +515,19 @@ a {
   margin-bottom: -10px;
 }
 
+.add-a-server a {
+  background-color: #2f3136;
+  color: var(--status-online);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+}
+
+.add-a-server p {
+  padding-bottom: 5px;
+}
+
 .logo-container:before {
   content: "";
   position: absolute;
@@ -577,6 +590,30 @@ a {
   height: 68%;
   animation-name: logo-button-transition-enter-2;
   animation-duration: 0.3s;
+}
+
+.logo-container-2.add-a-server .logo-button-hovered-aas {
+  background-size: cover;
+  border-radius: 35%;
+  background-color: var(--status-online);
+  color: white;
+  width: 50px;
+  border: none;
+  height: 68%;
+  animation-name: logo-button-transition-enter-aas;
+  animation-duration: 0.2s;
+}
+
+.logo-container-2.add-a-server .logo-button-unhovered-aas {
+  background-size: cover;
+  border-radius: 50%;
+  background-color: #2f3136;
+  color: var(--status-online);
+  width: 50px;
+  border: none;
+  height: 68%;
+  animation-name: logo-button-transition-exit-aas;
+  animation-duration: 0.2s;
 }
 
 .logo-button-unhovered {
@@ -1208,6 +1245,30 @@ a {
   }
   to {
     filter: brightness(85%);
+  }
+}
+
+@keyframes logo-button-transition-enter-aas {
+  from {
+    border-radius: 50%;
+    color: var(--status-online);
+  }
+  to {
+    border-radius: 35%;
+    background-color: var(--status-online);
+    color: white;
+  }
+}
+
+@keyframes logo-button-transition-exit-aas {
+  from {
+    border-radius: 35%;
+    color: white;
+  }
+  to {
+    border-radius: 50%;
+    background-color: #2f3136;
+    color: var(--status-online);
   }
 }
 

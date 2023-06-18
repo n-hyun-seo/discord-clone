@@ -15,7 +15,7 @@ addToServerList(
 );
 addToServerList(
   "dogs-server",
-  "https://m.media-amazon.com/images/I/81LyLwhZeBL.png",
+  "https://a-z-animals.com/media/2022/07/Meet-Top-9-Prettiest-Cutest-Dog-Breeds-Poster-Image-640x853.jpg",
   "Daring Dogs"
 );
 addToServerList(
@@ -33,3 +33,4 @@ addToServerList(
   "https://global.discourse-cdn.com/business4/uploads/ine/original/1X/b469f602101c113a109a0afe7d11470c1cd042a0.jpeg",
   "Rabellious Raccoons"
 );
+

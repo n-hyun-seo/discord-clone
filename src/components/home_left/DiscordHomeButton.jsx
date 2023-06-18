@@ -17,7 +17,7 @@ export default function DiscordHomeButton() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
 
   const blob = useRef();
-  const serverHoverText = useRef()
+  const serverHoverText = useRef();
 
   function checkCurrentPageOnLeave() {
     setHoverState(false);
@@ -61,11 +61,6 @@ export default function DiscordHomeButton() {
     }
   }
 
-  function changeHoverTextClass() {
-    if (hoverState) return "hover-text-hovered";
-    if (!hoverState) return "hover-text-unhovered";
-  }
-
   return (
     <div className="logo-container">
       <div className={changeBlobClass()} ref={blob}></div>
@@ -87,7 +82,9 @@ export default function DiscordHomeButton() {
           alt="discord logo"
         ></img>
       </Link>
-      <div ref={serverHoverText}className="hover-text">Direct Messages</div>
+      <div ref={serverHoverText} className="hover-text">
+        Direct Messages
+      </div>
     </div>
   );
 }

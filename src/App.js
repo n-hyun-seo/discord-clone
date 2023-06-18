@@ -10,6 +10,7 @@ import { CurrentSectionLeftContext } from "./components/context/CurrentSectionLe
 import { CurrentDMIdContext } from "./components/context/CurrentDMIdContext";
 import RandomServerButton from "./components/a_random_server/RandomServerButton";
 import { serversList } from "./components/a_random_server/randomServersList";
+import AddServerButton from "./components/a_random_server/AddServerButton";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -39,6 +40,7 @@ function App() {
                       />
                     );
                   })}
+                  <AddServerButton serverName="addaserver" serverTitle="Add A Server" />
                 </div>
               </div>
 

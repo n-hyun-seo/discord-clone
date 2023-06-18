@@ -11,8 +11,8 @@ function addUserToList(username, status, ImgUrl, id_number, online_status) {
 }
 
 addUserToList(
-  "Real Kanye",
-  "I Am Real 🙏",
+  "Kanye West",
+  "🙏",
   "https://videos1.memedroid.com/videos/UPLOADED903/63dbdd24235ed.webp",
   1,
   "online"
