@@ -313,8 +313,12 @@ a {
 }
 
 .friends-active-now {
-  width: 420px;
+  width: 390px;
   border-left: 1px solid rgba(128, 128, 128, 0.234);
+}
+
+.friends-list-section {
+  width: calc(100% - 390px);
 }
 
 .hover-text-friends-nav {
@@ -855,7 +859,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-basis: 25%;
-  margin-left: -3px;
+  margin-left: -4px;
 }
 
 .left-button-container button {
@@ -864,10 +868,10 @@ a {
   border: none;
   color: var(--font-color);
   font-size: 16px;
-  flex-basis: 95%;
+  flex-basis: 93.5%;
   height: 87%;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 4px;
   flex-shrink: 0;
 }
 
