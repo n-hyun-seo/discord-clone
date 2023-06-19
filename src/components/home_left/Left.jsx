@@ -40,7 +40,7 @@ export default function Left() {
 
       <DirectMessages />
 
-      <UserInfo ImgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9O7zceDn3TKJA6lgUpjbb32m23z9P7gwCGw&usqp=CAU" />
+      <UserInfo ImgUrl="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kindred_0.jpg" />
     </div>
   );
 }

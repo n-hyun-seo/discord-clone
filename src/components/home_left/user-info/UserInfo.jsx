@@ -16,8 +16,8 @@ export default function UserInfo(props) {
           </div>
         </div>
         <div className="self-info-container-small">
-          <div className="self-name">boogie mang</div>
-          <div className="self-tag">boogie mang#2578</div>
+          <div className="self-name">n.hyun.s</div>
+          <div className="self-tag">nhyuns#2578</div>
         </div>
       </div>
       <UserInfoButton

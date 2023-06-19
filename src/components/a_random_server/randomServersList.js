@@ -10,7 +10,7 @@ function addToServerList(serverName, ImgUrl, serverTitle) {
 
 addToServerList(
   "cats-server",
-  "https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8",
+  "https://e0.pxfuel.com/wallpapers/61/978/desktop-wallpaper-cute-baby-cat-cute-cat-kitten-thumbnail.jpg",
   "Cute Cats"
 );
 addToServerList(
@@ -31,6 +31,5 @@ addToServerList(
 addToServerList(
   "raccoons-server",
   "https://global.discourse-cdn.com/business4/uploads/ine/original/1X/b469f602101c113a109a0afe7d11470c1cd042a0.jpeg",
-  "Rabellious Raccoons"
+  "Rebellious Raccoons"
 );
-

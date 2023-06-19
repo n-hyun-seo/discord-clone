@@ -48,13 +48,18 @@ export default function Right() {
         </div>
       </div>
       <div className="friends-content">
-        <Routes>
-          <Route path="/friends/online" element={<TestComp />} />
-          <Route path="/friends/all" element={<TestComp />} />
-          <Route path="/friends/pending" element={<TestComp />} />
-          <Route path="/friends/blocked" element={<TestComp />} />
-          <Route path="/friends/addfriend" element={<TestComp />} />
-        </Routes>
+        <div className="friends-list-bottom-container">
+          <div className="friends-list-section">
+            <Routes>
+              <Route path="/friends/online" element={<TestComp />} />
+              <Route path="/friends/all" element={<TestComp />} />
+              <Route path="/friends/pending" element={<TestComp />} />
+              <Route path="/friends/blocked" element={<TestComp />} />
+              <Route path="/friends/addfriend" element={<TestComp />} />
+            </Routes>
+          </div>
+          <div className="friends-active-now"></div>
+        </div>
       </div>
     </div>
   );
