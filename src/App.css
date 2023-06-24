@@ -886,7 +886,7 @@ a {
 }
 
 .left-button-container button:hover {
-  background-color: #34373a;
+  background-color: #36373b;
   color: var(--text-hover-color);
 }
 
@@ -962,7 +962,7 @@ a {
 }
 
 .personal-dm:hover {
-  background-color: #34373a;
+  background-color: #36373b;
   color: var(--text-hover-color);
 }
 
