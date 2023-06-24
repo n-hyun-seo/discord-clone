@@ -11,9 +11,9 @@ function addUserToList(username, status, ImgUrl, id_number, online_status) {
 }
 
 addUserToList(
-  "Kanye West",
+  "the jokah",
   "🙏",
-  "https://videos1.memedroid.com/videos/UPLOADED903/63dbdd24235ed.webp",
+  "https://wallpapers-clan.com/wp-content/uploads/2023/01/anime-aesthetic-boy-pfp-1.jpg",
   1,
   "online"
 );

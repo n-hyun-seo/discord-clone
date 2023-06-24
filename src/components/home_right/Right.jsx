@@ -2,6 +2,11 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import FriendsNavButton from "./friends-nav/FriendsNavButton";
 import FriendsNavRightButton from "./friends-nav/FriendsNavRightButton";
+import OnlinePage from "./friends-pages/OnlinePage";
+import AllPage from "./friends-pages/AllPage";
+import PendingPage from "./friends-pages/PendingPage";
+import BlockedPage from "./friends-pages/BlockedPage";
+import AddFriendPage from "./friends-pages/AddFriendPage";
 
 export default function Right() {
   return (
@@ -51,11 +56,11 @@ export default function Right() {
         <div className="friends-list-bottom-container">
           <div className="friends-list-section">
             <Routes>
-              {/* <Route path="/friends/online" element={<TestComp />} />
-              <Route path="/friends/all" element={<TestComp />} />
-              <Route path="/friends/pending" element={<TestComp />} />
-              <Route path="/friends/blocked" element={<TestComp />} />
-              <Route path="/friends/addfriend" element={<TestComp />} /> */}
+              <Route path="/friends/online" element={<OnlinePage />} />
+              <Route path="/friends/all" element={<AllPage />} />
+              <Route path="/friends/pending" element={<PendingPage />} />
+              <Route path="/friends/blocked" element={<BlockedPage />} />
+              <Route path="/friends/addfriend" element={<AddFriendPage />} />
             </Routes>
           </div>
           <div className="friends-active-now">
