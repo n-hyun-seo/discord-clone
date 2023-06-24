@@ -886,13 +886,13 @@ a {
 }
 
 .left-button-container button:hover {
-  background-color: var(--button-hover-color);
+  background-color: #34373a;
   color: var(--text-hover-color);
 }
 
 .left-button-container button:active {
   color: white;
-  background-color: #424446;
+  background-color: var(--button-hover-color);
 }
 
 .left-button-container button.friends-clicked.friends {
@@ -967,11 +967,11 @@ a {
 }
 
 .personal-dm:active {
-  background-color: #424446;
+  background-color: var(--button-hover-color);
 }
 
 .personal-dm.pressed {
-  background-color: #424446;
+  background-color: var(--button-hover-color);
 }
 
 .personal-dm.pressed .user-info-dm p {
