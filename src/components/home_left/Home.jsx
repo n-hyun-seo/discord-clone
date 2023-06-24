@@ -1,7 +1,7 @@
 import Left from "./Left";
 import Right from "../home_right/Right";
 import { Routes, Route } from "react-router-dom";
-import DMtest from "../../Testthing2DM";
+
 
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
 
       <Routes>
         <Route path="*" element={<Right />} />
-        <Route path="/dm/*" element={<DMtest />} />
+        {/* <Route path="/dm/*" element={<DMtest />} /> */}
        
       </Routes>
     </div>

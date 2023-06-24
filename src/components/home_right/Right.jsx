@@ -1,5 +1,5 @@
 import { Link, Route, Routes } from "react-router-dom";
-import TestComp from "../../Testthing";
+
 import FriendsNavButton from "./friends-nav/FriendsNavButton";
 import FriendsNavRightButton from "./friends-nav/FriendsNavRightButton";
 
@@ -51,14 +51,16 @@ export default function Right() {
         <div className="friends-list-bottom-container">
           <div className="friends-list-section">
             <Routes>
-              <Route path="/friends/online" element={<TestComp />} />
+              {/* <Route path="/friends/online" element={<TestComp />} />
               <Route path="/friends/all" element={<TestComp />} />
               <Route path="/friends/pending" element={<TestComp />} />
               <Route path="/friends/blocked" element={<TestComp />} />
-              <Route path="/friends/addfriend" element={<TestComp />} />
+              <Route path="/friends/addfriend" element={<TestComp />} /> */}
             </Routes>
           </div>
-          <div className="friends-active-now"></div>
+          <div className="friends-active-now">
+            <p className="friends-active-now-header">Active Now</p>
+          </div>
         </div>
       </div>
     </div>
