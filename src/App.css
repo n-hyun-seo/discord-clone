@@ -283,7 +283,7 @@ a {
   color: white;
 }
 .friends-nav-button:hover {
-  background-color: var(--button-hover-color);
+  background-color: #36373b;
 }
 
 .friends-nav-button:active {
