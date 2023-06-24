@@ -59,9 +59,9 @@ export default function Right() {
             </Routes>
           </div>
           <div className="friends-active-now">
-            <p className="friends-active-now header1">Active Now</p>
+            <p className="friends-active-now-header1">Active Now</p>
             <div className="friends-active-now-container">
-              <p className="friends-active-now header2">
+              <p className="friends-active-now-header2">
                 It's quiet for now...
               </p>
               <p className="friends-active-now-header3">

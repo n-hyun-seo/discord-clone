@@ -1162,7 +1162,7 @@ a {
   align-items: center;
 }
 
-.friends-active-now.header1 {
+.friends-active-now-header1 {
   color: rgb(222, 221, 221);
   font-family: ggsansB;
   font-size: 19px;
@@ -1170,7 +1170,7 @@ a {
   margin-top: 20px;
 }
 
-.friends-active-now.header2 {
+.friends-active-now-header2 {
   color: rgb(222, 221, 221);
   font-family: ggsansSB;
   font-size: 16px;
