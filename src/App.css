@@ -1152,12 +1152,13 @@ a {
   align-items: center;
 }
 
-.friends-active-now-header {
+.friends-active-now.header1 {
   color: white;
   font-family: ggsansM;
   font-weight: bold;
   font-size: 19px;
 }
+
 
 ::-webkit-scrollbar {
   width: 4px;
