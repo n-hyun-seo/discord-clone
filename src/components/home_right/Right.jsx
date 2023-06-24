@@ -60,8 +60,15 @@ export default function Right() {
           </div>
           <div className="friends-active-now">
             <p className="friends-active-now header1">Active Now</p>
-            <p className="friends-active-now header2">It's quiet for now...</p>
-            <p className="friends-active-now header3">When a friend starts an activity—like playing a game or hanging out on voice—we'll show it here!</p>
+            <div className="friends-active-now-container">
+              <p className="friends-active-now header2">
+                It's quiet for now...
+              </p>
+              <p className="friends-active-now-header3">
+                When a friend starts an activity—like playing a game or hanging
+                out on voice—we'll show it here!
+              </p>
+            </div>
           </div>
         </div>
       </div>

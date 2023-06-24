@@ -8,6 +8,16 @@
   src: url(ggsansMedium.woff);
 }
 
+@font-face {
+  font-family: "ggsansB";
+  src: url(ggsansBold.woff);
+}
+
+@font-face {
+  font-family: "ggsansSB";
+  src: url(ggsansSemibold.woff);
+}
+
 a {
   text-decoration: none;
 }
@@ -1153,12 +1163,35 @@ a {
 }
 
 .friends-active-now.header1 {
-  color: white;
-  font-family: ggsansM;
-  font-weight: bold;
+  color: rgb(222, 221, 221);
+  font-family: ggsansB;
   font-size: 19px;
+  padding-left: 16px;
+  margin-top: 20px;
 }
 
+.friends-active-now.header2 {
+  color: rgb(222, 221, 221);
+  font-family: ggsansSB;
+  font-size: 16px;
+  text-align: center;
+}
+
+.friends-active-now-header3 {
+  color: #a2a8b0;
+  font-size: 14px;
+  text-align: center;
+  width: 300px;
+}
+
+.friends-active-now-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  margin-top: 20px;
+}
 
 ::-webkit-scrollbar {
   width: 4px;
