@@ -5,7 +5,25 @@ export default function OnlinePage(props) {
         <p>{props.header} — 6</p>
       </div>
       <div className="friends-type-list">
-
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+      <div className="test-test">test</div>
+   
       </div>
     </div>
   );

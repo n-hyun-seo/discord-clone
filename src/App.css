@@ -1260,14 +1260,28 @@ a {
   font-family: ggsansSB;
 }
 
+.test-test {
+  height: 50px;
+  flex-shrink: 0;
+}
+
 .friends-type-list {
   grid-area: ftl;
   width: 100%;
-  overflow: hidden;
-  height: 100%;
+  overflow-y: scroll;
   scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.friends-type-list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.friends-type-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #2b2d31;
 }
 
 .friends-type-container {
@@ -1290,7 +1304,8 @@ a {
     "ftl"
     "ftl"
     "ftl"
-    "ftl";
+    "ftl"
+;
 }
 
 ::-webkit-scrollbar {
