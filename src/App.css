@@ -329,6 +329,26 @@ a {
 
 .friends-list-section {
   width: calc(100% - 390px);
+  display: grid;
+  grid-template-rows: repeat(16, 1fr);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "fsc"
+    "fth"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl";
 }
 
 .hover-text-friends-nav {
@@ -1196,6 +1216,7 @@ a {
   justify-content: center;
   align-items: center;
   height: 50px;
+  grid-area: fsc;
 }
 
 .friends-search-input-container {
@@ -1221,6 +1242,17 @@ a {
 
 .friends-search-input::placeholder {
   color: var(--font-color);
+}
+
+.friends-type-header {
+  color: #b2b1b1;
+  font-family: ggsansSB;
+  font-size: 12px;
+  grid-area: fth;
+}
+
+.friends-type-list {
+  grid-area: ftl;
 }
 
 ::-webkit-scrollbar {
