@@ -1,5 +1,4 @@
 import { Link, Route, Routes } from "react-router-dom";
-
 import FriendsNavButton from "./friends-nav/FriendsNavButton";
 import FriendsNavRightButton from "./friends-nav/FriendsNavRightButton";
 import OnlinePage from "./friends-pages/OnlinePage";
@@ -64,10 +63,22 @@ export default function Right() {
               </div>
             </div>
             <Routes>
-              <Route path="/friends/online" element={<OnlinePage />} />
-              <Route path="/friends/all" element={<AllPage />} />
-              <Route path="/friends/pending" element={<PendingPage />} />
-              <Route path="/friends/blocked" element={<BlockedPage />} />
+              <Route
+                path="/friends/online"
+                element={<OnlinePage header="ONLINE" />}
+              />
+              <Route
+                path="/friends/all"
+                element={<AllPage header="ALL FRIENDS" />}
+              />
+              <Route
+                path="/friends/pending"
+                element={<PendingPage header="PENDING" />}
+              />
+              <Route
+                path="/friends/blocked"
+                element={<BlockedPage header="BLOCKED" />}
+              />
               <Route path="/friends/addfriend" element={<AddFriendPage />} />
             </Routes>
           </div>
