@@ -1198,6 +1198,14 @@ a {
   height: 50px;
 }
 
+.friends-search-input-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
 .friends-search-input {
   width: 95%;
   background-color: #1b1d20;
@@ -1206,7 +1214,7 @@ a {
   border-radius: 3px;
   padding-left: 12px;
   padding-top: 5px;
-  padding-bottom:5px;
+  padding-bottom: 5px;
   outline: none;
   color: white;
 }
