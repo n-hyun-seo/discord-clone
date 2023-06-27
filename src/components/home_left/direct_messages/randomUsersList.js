@@ -47,7 +47,7 @@ addUserToList(
 );
 addUserToList(
   "IGN: Ashess",
-  "LF duo iron",
+  "",
   "https://cdnstorage.sendbig.com/unreal/female.webp",
   6,
   "online"

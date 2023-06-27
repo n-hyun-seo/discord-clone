@@ -55,6 +55,14 @@ export default function Right() {
       <div className="friends-content">
         <div className="friends-list-bottom-container">
           <div className="friends-list-section">
+            <div className="friends-search-container">
+              <div className="friends-search-input-container">
+                <input
+                  className="friends-search-input"
+                  placeholder="Search"
+                ></input>
+              </div>
+            </div>
             <Routes>
               <Route path="/friends/online" element={<OnlinePage />} />
               <Route path="/friends/all" element={<AllPage />} />
