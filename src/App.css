@@ -1263,6 +1263,8 @@ a {
 .test-test {
   height: 50px;
   flex-shrink: 0;
+  border: 1px rgba(128, 128, 128, 0.123) solid;
+  color: white;
 }
 
 .friends-type-list {
