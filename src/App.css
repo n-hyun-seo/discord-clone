@@ -28,7 +28,7 @@ a {
   --servers-section-size: 73px;
   --content-left-size: 240px;
   --section-divider-color: #0f101149;
-  --font-color: #848a92;
+  --font-color: #959ca6;
   --status-online: rgb(60, 166, 60);
   --button-hover-color: #404147fe;
   --text-hover-color: rgb(203, 202, 202);
@@ -1001,21 +1001,21 @@ a {
 .user-name-dm-hovered {
   font-size: 16px;
   width: 130px;
-  letter-spacing: 0.5px;
   color: var(--text-hover-color);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-family: ggsansM;
 }
 
 .user-name-dm-unhovered {
   font-size: 16px;
   width: 130px;
-  letter-spacing: 0.5px;
   color: var(--font-color);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-family: ggsansM;
 }
 
 .has-user-status-dm {
