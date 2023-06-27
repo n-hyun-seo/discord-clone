@@ -334,21 +334,21 @@ a {
   grid-template-columns: 1fr;
   grid-template-areas:
     "fsc"
-    "fth"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl"
-    "ftl";
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc"
+    "ftc";
 }
 
 .hover-text-friends-nav {
@@ -1223,19 +1223,19 @@ a {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   height: 50px;
 }
 
 .friends-search-input {
-  width: 96%;
+  width: 93%;
   background-color: #1b1d20;
   border: none;
   font-size: 16px;
   border-radius: 3px;
   padding-left: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   outline: none;
   color: white;
 }
@@ -1246,13 +1246,51 @@ a {
 
 .friends-type-header {
   color: #b2b1b1;
-  font-family: ggsansSB;
   font-size: 12px;
   grid-area: fth;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+}
+
+.friends-type-header p {
+  padding-bottom: 10px;
+  width: 93%;
+  font-family: ggsansSB;
 }
 
 .friends-type-list {
   grid-area: ftl;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  scrollbar-gutter: stable;
+  display: flex;
+  flex-direction: column;
+}
+
+.friends-type-container {
+  grid-area: ftc;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(15, 1fr);
+  grid-template-areas:
+    "fth"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl"
+    "ftl";
 }
 
 ::-webkit-scrollbar {
