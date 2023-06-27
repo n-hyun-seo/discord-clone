@@ -28,7 +28,7 @@ a {
   --servers-section-size: 73px;
   --content-left-size: 240px;
   --section-divider-color: #0f101149;
-  --font-color: #949ba4;
+  --font-color: #848a92;
   --status-online: rgb(60, 166, 60);
   --button-hover-color: #404147fe;
   --text-hover-color: rgb(203, 202, 202);
@@ -998,7 +998,6 @@ a {
   justify-content: center;
 }
 
-
 .user-name-dm-hovered {
   font-size: 16px;
   width: 130px;
@@ -1189,6 +1188,27 @@ a {
   justify-content: center;
   gap: 3px;
   margin-top: 20px;
+}
+
+.friends-search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.friends-search-input {
+  width: 95%;
+  background-color: #1b1d20;
+  border: none;
+  font-size: 16px;
+  border-radius: 3px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom:5px;
+  outline: none;
+  color: white;
 }
 
 ::-webkit-scrollbar {
