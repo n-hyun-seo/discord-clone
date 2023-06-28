@@ -7,7 +7,7 @@ import Offline from "./status_icons/Offline";
 import Moon from "./status_icons/Moon";
 import Dnd from "./status_icons/Dnd";
 
-export default function IndividualDM(props) {
+export function IndividualDM(props) {
   const [hoverState, setHoverState] = useState(false);
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
@@ -44,6 +44,7 @@ export default function IndividualDM(props) {
     if (currentSectionLeft !== "dm") return "personal-dm";
     if (currentDMId === props.id_number) {
       dm_button?.current?.focus();
+      console.log(dm_button.current);
       return "personal-dm pressed";
     }
     return "personal-dm";

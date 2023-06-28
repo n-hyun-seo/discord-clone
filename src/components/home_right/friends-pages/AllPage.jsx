@@ -29,8 +29,6 @@ export default function AllPage(props) {
               to={`/dm/${user.id_number}`}
               className="test-test"
               onClick={() => {
-                setCurrentSectionLeft("dm");
-                setCurrentDMId(user.id_number);
                 for (let i in randomUsersList) {
                   setListOfDMIds(
                     listOfDMIds.push(randomUsersList[i].id_number)
@@ -45,6 +43,8 @@ export default function AllPage(props) {
                     user.online_status
                   );
                 }
+                setCurrentSectionLeft("dm");
+                setCurrentDMId(user.id_number);
               }}
             >
               <p>{user.username}</p>

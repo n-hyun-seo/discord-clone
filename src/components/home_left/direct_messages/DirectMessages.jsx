@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import IndividualDM from "./IndividualDM";
+import { IndividualDM } from "./IndividualDM";
 import { randomUsersList } from "./randomUsersList";
 export default function DirectMessages(props) {
   const dm_text = useRef();
