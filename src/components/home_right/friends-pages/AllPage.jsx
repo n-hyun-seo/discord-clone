@@ -44,7 +44,7 @@ export default function AllPage(props) {
                     user.id_number,
                     user.online_status
                   );
-                  dmButtonRef.current.focus();
+                  dmButtonRef?.current?.focus();
                 }
                 setCurrentSectionLeft("dm");
                 setCurrentDMId(user.id_number);

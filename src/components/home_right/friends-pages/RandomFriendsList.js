@@ -117,3 +117,10 @@ addUserToList(
   7,
   "moon"
 );
+addUserToList(
+  "the thingy",
+  "Playing Only Up!",
+  "https://preview.redd.it/3z11zoc0rhv51.jpg?width=474&format=pjpg&auto=webp&s=7c317ebaa78a0ed72273220c3113bcf2a3666ec6",
+  25,
+  "moon"
+);
