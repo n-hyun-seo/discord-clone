@@ -47,7 +47,6 @@ export function IndividualDM(props) {
     if (currentDMId === props.id_number) {
       setDmButtonRef(dm_button);
       dm_button?.current?.focus();
-      console.log(dm_button.current);
       return "personal-dm pressed";
     }
     return "personal-dm";
