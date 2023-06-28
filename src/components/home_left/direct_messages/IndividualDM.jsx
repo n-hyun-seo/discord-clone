@@ -13,6 +13,8 @@ export default function IndividualDM(props) {
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const delete_button = useRef();
+  const dm_button = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered";
@@ -40,15 +42,19 @@ export default function IndividualDM(props) {
 
   function changeButtonClass() {
     if (currentSectionLeft !== "dm") return "personal-dm";
-    if (currentDMId === props.id_number) return "personal-dm pressed";
+    if (currentDMId === props.id_number) {
+      dm_button.current.focus();
+      return "personal-dm pressed";
+    }
     return "personal-dm";
   }
 
-  const delete_button = useRef();
   return (
     <Link
       to={`/dm/${props.id_number}`}
       className={changeButtonClass()}
+      ref={dm_button}
+      key={props.id_number}
       onMouseEnter={() => {
         delete_button.current.classList.remove("hidden");
         setHoverState(true);

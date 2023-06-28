@@ -22,7 +22,16 @@ export default function OnlinePage(props) {
       <div className="friends-type-list">
         {onlineFriendsList.map((user) => {
           return (
-            <Link to={`/dm/${user.id_number}`} className="test-test">
+            <Link
+              to={`/dm/${user.id_number}`}
+              href={`a[key="${user.id_number}"]`}
+              className="test-test"
+              onClick={() => {
+                setCurrentSectionLeft("dm");
+                setCurrentDMId(user.id_number);
+                console.log(currentDMId, currentSectionLeft);
+              }}
+            >
               <p>{user.username}</p>
             </Link>
           );
