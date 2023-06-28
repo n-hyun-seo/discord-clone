@@ -1261,9 +1261,9 @@ a {
 }
 
 .test-test {
-  height: 50px;
+  height: 53px;
   flex-shrink: 0;
-  border: 1px rgba(128, 128, 128, 0.123) solid;
+  border-top: 1px rgba(128, 128, 128, 0.123) solid;
   color: white;
   width: 93%;
 }
