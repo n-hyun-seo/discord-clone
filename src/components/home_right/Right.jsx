@@ -63,6 +63,10 @@ export default function Right() {
               </div>
             </div>
             <Routes>
+            <Route
+                path="/"
+                element={<OnlinePage header="ONLINE" />}
+              />
               <Route
                 path="/friends/online"
                 element={<OnlinePage header="ONLINE" />}
