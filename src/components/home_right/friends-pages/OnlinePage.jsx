@@ -4,7 +4,7 @@ import {
   addUserToList,
 } from "../../home_left/direct_messages/randomUsersList";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 
@@ -13,6 +13,8 @@ export default function OnlinePage(props) {
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+
+  const [listOfDMIds, setListOfDMIds] = useState([]);
 
   const onlineFriendsList = randomFriendsList.filter(
     (user) => user.online_status !== "offline"
@@ -35,15 +37,18 @@ export default function OnlinePage(props) {
                 setCurrentSectionLeft("dm");
                 setCurrentDMId(user.id_number);
                 for (let i in randomUsersList) {
-                  if (randomUsersList[i].id_number !== user.id_number) {
-                    addUserToList(
-                      user.username,
-                      user.status,
-                      user.ImgUrl,
-                      user.id_number,
-                      user.online_status
-                    );
-                  }
+                  setListOfDMIds(
+                    listOfDMIds.push(randomUsersList[i].id_number)
+                  );
+                }
+                if (!listOfDMIds.includes(user.id_number)) {
+                  addUserToList(
+                    user.username,
+                    user.status,
+                    user.ImgUrl,
+                    user.id_number,
+                    user.online_status
+                  );
                 }
               }}
             >

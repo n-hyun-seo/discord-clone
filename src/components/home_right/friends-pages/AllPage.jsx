@@ -4,7 +4,7 @@ import {
   addUserToList,
 } from "../../home_left/direct_messages/randomUsersList";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 
@@ -13,6 +13,7 @@ export default function AllPage(props) {
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const [listOfDMIds, setListOfDMIds] = useState([]);
 
   return (
     <div className="friends-type-container">
@@ -31,16 +32,18 @@ export default function AllPage(props) {
                 setCurrentSectionLeft("dm");
                 setCurrentDMId(user.id_number);
                 for (let i in randomUsersList) {
-                  if (randomUsersList[i].id_number !== user.id_number) {
-                    addUserToList(
-                      user.username,
-                      user.status,
-                      user.ImgUrl,
-                      user.id_number,
-                      user.online_status
-                    );
-                    return;
-                  }
+                  setListOfDMIds(
+                    listOfDMIds.push(randomUsersList[i].id_number)
+                  );
+                }
+                if (!listOfDMIds.includes(user.id_number)) {
+                  addUserToList(
+                    user.username,
+                    user.status,
+                    user.ImgUrl,
+                    user.id_number,
+                    user.online_status
+                  );
                 }
               }}
             >
