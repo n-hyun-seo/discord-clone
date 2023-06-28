@@ -1265,6 +1265,7 @@ a {
   flex-shrink: 0;
   border: 1px rgba(128, 128, 128, 0.123) solid;
   color: white;
+  width: 93%;
 }
 
 .friends-type-list {
@@ -1274,6 +1275,7 @@ a {
   scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
 }
 

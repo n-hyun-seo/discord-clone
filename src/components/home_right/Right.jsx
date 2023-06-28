@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import FriendsNavButton from "./friends-nav/FriendsNavButton";
 import FriendsNavRightButton from "./friends-nav/FriendsNavRightButton";
 import OnlinePage from "./friends-pages/OnlinePage";
