@@ -43,7 +43,7 @@ export default function IndividualDM(props) {
   function changeButtonClass() {
     if (currentSectionLeft !== "dm") return "personal-dm";
     if (currentDMId === props.id_number) {
-      dm_button.current.focus();
+      dm_button?.current?.focus();
       return "personal-dm pressed";
     }
     return "personal-dm";

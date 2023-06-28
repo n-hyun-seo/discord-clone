@@ -1,6 +1,6 @@
 export const randomUsersList = [];
 
-function addUserToList(username, status, ImgUrl, id_number, online_status) {
+export function addUserToList(username, status, ImgUrl, id_number, online_status) {
   return randomUsersList.push({
     username: username,
     status: status,
