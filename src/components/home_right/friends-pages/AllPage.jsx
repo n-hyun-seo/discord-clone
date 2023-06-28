@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
+import { DmButtonRefContext } from "../../context/DmButtonRef";
 
 export default function AllPage(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [listOfDMIds, setListOfDMIds] = useState([]);
 
   return (
@@ -42,6 +44,7 @@ export default function AllPage(props) {
                     user.id_number,
                     user.online_status
                   );
+                  dmButtonRef.current.focus();
                 }
                 setCurrentSectionLeft("dm");
                 setCurrentDMId(user.id_number);

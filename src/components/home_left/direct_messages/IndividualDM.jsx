@@ -2,6 +2,7 @@ import { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
+import { DmButtonRefContext } from "../../context/DmButtonRef";
 import Online from "./status_icons/Online";
 import Offline from "./status_icons/Offline";
 import Moon from "./status_icons/Moon";
@@ -13,6 +14,7 @@ export function IndividualDM(props) {
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const delete_button = useRef();
   const dm_button = useRef();
 
@@ -43,6 +45,7 @@ export function IndividualDM(props) {
   function changeButtonClass() {
     if (currentSectionLeft !== "dm") return "personal-dm";
     if (currentDMId === props.id_number) {
+      setDmButtonRef(dm_button);
       dm_button?.current?.focus();
       console.log(dm_button.current);
       return "personal-dm pressed";
