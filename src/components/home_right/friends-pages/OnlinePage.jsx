@@ -24,7 +24,6 @@ export default function OnlinePage(props) {
           return (
             <Link
               to={`/dm/${user.id_number}`}
-              href={`a[key="${user.id_number}"]`}
               className="test-test"
               onClick={() => {
                 setCurrentSectionLeft("dm");
