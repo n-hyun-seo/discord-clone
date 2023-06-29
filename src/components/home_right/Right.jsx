@@ -8,10 +8,14 @@ import BlockedPage from "./friends-pages/BlockedPage";
 import AddFriendPage from "./friends-pages/AddFriendPage";
 import { useState } from "react";
 import { randomFriendsList } from "./friends-pages/friends-list/RandomFriendsList";
+import { pendingFriendsList } from "./friends-pages/friends-list/PendingFriendsList";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
   let filteredFriendsList = randomFriendsList.filter((user) =>
+    user.username.toLowerCase().includes(inputValue.toLowerCase())
+  );
+  let filteredPendingList = pendingFriendsList.filter((user) =>
     user.username.toLowerCase().includes(inputValue.toLowerCase())
   );
 
@@ -110,7 +114,7 @@ export default function Right() {
                   <PendingPage
                     header="PENDING"
                     inputValue={inputValue}
-                    filteredList={filteredFriendsList}
+                    filteredList={filteredPendingList}
                   />
                 }
               />
