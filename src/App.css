@@ -1271,7 +1271,7 @@ a {
 .friends-type-list {
   grid-area: ftl;
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
