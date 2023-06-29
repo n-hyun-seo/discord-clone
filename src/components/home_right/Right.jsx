@@ -6,8 +6,15 @@ import AllPage from "./friends-pages/AllPage";
 import PendingPage from "./friends-pages/PendingPage";
 import BlockedPage from "./friends-pages/BlockedPage";
 import AddFriendPage from "./friends-pages/AddFriendPage";
+import { useState } from "react";
+import { randomFriendsList } from "./friends-pages/RandomFriendsList";
 
 export default function Right() {
+  const [inputValue, setInputValue] = useState("");
+  let filteredFriendsList = randomFriendsList.filter((user) =>
+    user.username.toLowerCase().includes(inputValue.toLowerCase())
+  );
+
   return (
     <div className="right">
       <div className="friends-nav">
@@ -51,42 +58,52 @@ export default function Right() {
           />
         </div>
       </div>
-      <div className="friends-content">
+      <section className="friends-content">
         <div className="friends-list-bottom-container">
-          <div className="friends-list-section">
+          <section className="friends-list-section">
             <div className="friends-search-container">
               <div className="friends-search-input-container">
                 <input
                   className="friends-search-input"
                   placeholder="Search"
+                  onChange={(e) => {
+                    setInputValue(e.target.value);
+                    console.log(filteredFriendsList);
+                  }}
                 ></input>
               </div>
             </div>
             <Routes>
-            <Route
+              <Route
                 path="/"
-                element={<OnlinePage header="ONLINE" />}
+                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
               />
               <Route
                 path="/friends/online"
-                element={<OnlinePage header="ONLINE" />}
+                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
               />
               <Route
                 path="/friends/all"
-                element={<AllPage header="ALL FRIENDS" />}
+                element={
+                  <AllPage header="ALL FRIENDS" inputValue={inputValue} />
+                }
               />
               <Route
                 path="/friends/pending"
-                element={<PendingPage header="PENDING" />}
+                element={
+                  <PendingPage header="PENDING" inputValue={inputValue} />
+                }
               />
               <Route
                 path="/friends/blocked"
-                element={<BlockedPage header="BLOCKED" />}
+                element={
+                  <BlockedPage header="BLOCKED" inputValue={inputValue} />
+                }
               />
               <Route path="/friends/addfriend" element={<AddFriendPage />} />
             </Routes>
-          </div>
-          <div className="friends-active-now">
+          </section>
+          <section className="friends-active-now">
             <p className="friends-active-now-header1">Active Now</p>
             <div className="friends-active-now-container">
               <p className="friends-active-now-header2">
@@ -97,9 +114,9 @@ export default function Right() {
                 out on voice—we'll show it here!
               </p>
             </div>
-          </div>
+          </section>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
