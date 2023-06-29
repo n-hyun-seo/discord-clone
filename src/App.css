@@ -1312,6 +1312,19 @@ a {
 ;
 }
 
+.no-friends-found {
+  color: var(--font-color);
+  margin-top: 150px;
+  padding-top: 300px;
+  width:90%;
+  text-align: center;
+  background-image: url(wumpus.JPG);
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

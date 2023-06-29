@@ -37,7 +37,7 @@ export default function OnlinePage(props) {
         </p>
       </div>
       <section className="friends-type-list">
-        {listToUse.map((user) => {
+        {listToUse.length !== 0 ? listToUse.map((user) => {
           return (
             <Link
               to={`/dm/${user.id_number}`}
@@ -65,7 +65,7 @@ export default function OnlinePage(props) {
               <p>{user.username}</p>
             </Link>
           );
-        })}
+        }) : <p className="no-friends-found">Wumpus looked, but couldn't find anyone with that name.</p> }
       </section>
     </section>
   );
