@@ -37,35 +37,41 @@ export default function OnlinePage(props) {
         </p>
       </div>
       <section className="friends-type-list">
-        {listToUse.length !== 0 ? listToUse.map((user) => {
-          return (
-            <Link
-              to={`/dm/${user.id_number}`}
-              className="test-test"
-              onClick={() => {
-                for (let i in randomUsersList) {
-                  setListOfDMIds(
-                    listOfDMIds.push(randomUsersList[i].id_number)
-                  );
-                }
-                if (!listOfDMIds.includes(user.id_number)) {
-                  addUserToList(
-                    user.username,
-                    user.status,
-                    user.ImgUrl,
-                    user.id_number,
-                    user.online_status
-                  );
-                  dmButtonRef?.current?.focus();
-                }
-                setCurrentSectionLeft("dm");
-                setCurrentDMId(user.id_number);
-              }}
-            >
-              <p>{user.username}</p>
-            </Link>
-          );
-        }) : <p className="no-friends-found">Wumpus looked, but couldn't find anyone with that name.</p> }
+        {listToUse.length !== 0 ? (
+          listToUse.map((user) => {
+            return (
+              <Link
+                to={`/dm/${user.id_number}`}
+                className="test-test"
+                onClick={() => {
+                  for (let i in randomUsersList) {
+                    setListOfDMIds(
+                      listOfDMIds.push(randomUsersList[i].id_number)
+                    );
+                  }
+                  if (!listOfDMIds.includes(user.id_number)) {
+                    addUserToList(
+                      user.username,
+                      user.status,
+                      user.ImgUrl,
+                      user.id_number,
+                      user.online_status
+                    );
+                    dmButtonRef?.current?.focus();
+                  }
+                  setCurrentSectionLeft("dm");
+                  setCurrentDMId(user.id_number);
+                }}
+              >
+                <p>{user.username}</p>
+              </Link>
+            );
+          })
+        ) : (
+          <p className="no-friends-found">
+            Wumpus looked, but couldn't find anyone with that name.
+          </p>
+        )}
       </section>
     </section>
   );
