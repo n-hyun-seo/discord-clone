@@ -76,22 +76,42 @@ export default function Right() {
             <Routes>
               <Route
                 path="/"
-                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
+                element={
+                  <OnlinePage
+                    header="ONLINE"
+                    inputValue={inputValue}
+                    filteredList={filteredFriendsList}
+                  />
+                }
               />
               <Route
                 path="/friends/online"
-                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
+                element={
+                  <OnlinePage
+                    header="ONLINE"
+                    inputValue={inputValue}
+                    filteredList={filteredFriendsList}
+                  />
+                }
               />
               <Route
                 path="/friends/all"
                 element={
-                  <AllPage header="ALL FRIENDS" inputValue={inputValue} />
+                  <AllPage
+                    header="ALL FRIENDS"
+                    inputValue={inputValue}
+                    filteredList={filteredFriendsList}
+                  />
                 }
               />
               <Route
                 path="/friends/pending"
                 element={
-                  <PendingPage header="PENDING" inputValue={inputValue} />
+                  <PendingPage
+                    header="PENDING"
+                    inputValue={inputValue}
+                    filteredList={filteredFriendsList}
+                  />
                 }
               />
               <Route

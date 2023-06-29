@@ -16,16 +16,20 @@ export default function AllPage(props) {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [listOfDMIds, setListOfDMIds] = useState([]);
+  let listToUse;
+  props.inputValue
+    ? (listToUse = props.filteredList)
+    : (listToUse = randomFriendsList);
 
   return (
     <section className="friends-type-container">
       <div className="friends-type-header">
         <p>
-          {props.header} — {randomFriendsList.length}
+          {props.header} — {listToUse?.length}
         </p>
       </div>
       <div className="friends-type-list">
-        {randomFriendsList.map((user) => {
+        {listToUse?.map((user) => {
           return (
             <Link
               to={`/dm/${user.id_number}`}
