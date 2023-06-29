@@ -21,15 +21,23 @@ export default function OnlinePage(props) {
     (user) => user.online_status !== "offline"
   );
 
+  let listToUse;
+
+  props.inputValue
+    ? (listToUse = props.filteredList.filter(
+        (user) => user.online_status !== "offline"
+      ))
+    : (listToUse = onlineFriendsList);
+
   return (
     <section className="friends-type-container">
       <div className="friends-type-header">
         <p>
-          {props.header} — {onlineFriendsList.length}
+          {props.header} — {listToUse.length}
         </p>
       </div>
       <section className="friends-type-list">
-        {onlineFriendsList.map((user) => {
+        {listToUse.map((user) => {
           return (
             <Link
               to={`/dm/${user.id_number}`}
