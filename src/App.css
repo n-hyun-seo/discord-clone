@@ -1322,7 +1322,7 @@ a {
   height: 300px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60%;
+  background-size: 500px;
 }
 
 ::-webkit-scrollbar {
