@@ -22,13 +22,13 @@ export default function OnlinePage(props) {
   );
 
   return (
-    <div className="friends-type-container">
+    <section className="friends-type-container">
       <div className="friends-type-header">
         <p>
           {props.header} — {onlineFriendsList.length}
         </p>
       </div>
-      <div className="friends-type-list">
+      <section className="friends-type-list">
         {onlineFriendsList.map((user) => {
           return (
             <Link
@@ -58,7 +58,7 @@ export default function OnlinePage(props) {
             </Link>
           );
         })}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }

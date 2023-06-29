@@ -5,7 +5,7 @@ export default function DirectMessages(props) {
   const dm_text = useRef();
 
   return (
-    <div className="direct-messages-container">
+    <section className="direct-messages-container">
       <div
         className="dm-header"
         onMouseEnter={() => {
@@ -18,7 +18,7 @@ export default function DirectMessages(props) {
         <p ref={dm_text}>DIRECT MESSAGES</p>
         <div className="add-sign">+</div>
       </div>
-      <div className="dm-messages">
+      <aside className="dm-messages">
         {randomUsersList.map((user) => {
           return (
             <IndividualDM
@@ -30,7 +30,7 @@ export default function DirectMessages(props) {
             />
           );
         })}
-      </div>
-    </div>
+      </aside>
+    </section>
   );
 }

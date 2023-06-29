@@ -21,13 +21,13 @@ export default function Right() {
           </div>
           <div className="friends-divider"></div>
 
-          <div className="friends-nav-button-container">
+          <nav className="friends-nav-button-container">
             <FriendsNavButton to="/friends/online" text="Online" />
             <FriendsNavButton to="/friends/all" text="All" />
             <FriendsNavButton to="/friends/pending" text="Pending" />
             <FriendsNavButton to="/friends/blocked" text="Blocked" />
             <FriendsNavButton to="/friends/addfriend" text="Add Friend" />
-          </div>
+          </nav>
         </div>
         <div className="friends-right-side">
           <FriendsNavRightButton

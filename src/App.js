@@ -33,7 +33,7 @@ function App() {
               <CurrentDMIdContext.Provider
                 value={[currentDMId, setCurrentDMId]}
               >
-                <div className="servers">
+                <nav className="servers">
                   <DiscordHomeButton />
                   <div className="other-servers">
                     {serversList.map((server) => {
@@ -50,7 +50,7 @@ function App() {
                       serverTitle="Add A Server"
                     />
                   </div>
-                </div>
+                </nav>
 
                 <Routes>
                   <Route path="*" element={<Home />} />

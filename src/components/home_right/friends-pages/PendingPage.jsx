@@ -1,6 +1,6 @@
 export default function PendingPage(props) {
   return (
-    <div className="friends-type-container">
+    <section className="friends-type-container">
       <div className="friends-type-header">
         <p>{props.header} — 4</p>
       </div>
@@ -24,6 +24,6 @@ export default function PendingPage(props) {
         <div className="test-test">test</div>
         <div className="test-test">test</div>
       </div>
-    </div>
+    </section>
   );
 }

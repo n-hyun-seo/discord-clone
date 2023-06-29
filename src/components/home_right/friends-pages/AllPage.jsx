@@ -18,7 +18,7 @@ export default function AllPage(props) {
   const [listOfDMIds, setListOfDMIds] = useState([]);
 
   return (
-    <div className="friends-type-container">
+    <section className="friends-type-container">
       <div className="friends-type-header">
         <p>
           {props.header} — {randomFriendsList.length}
@@ -55,6 +55,6 @@ export default function AllPage(props) {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

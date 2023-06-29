@@ -15,7 +15,7 @@ export default function Left() {
   const [currentSection, setCurrentSection] = useContext(CurrentSectionContext);
 
   return (
-    <div className="left">
+    <section className="left">
       <SearchButton classNaming="conversation-search" />
       <Link
         to={`/friends/${currentSection}`}
@@ -41,6 +41,6 @@ export default function Left() {
       <DirectMessages />
 
       <UserInfo ImgUrl="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kindred_0.jpg" />
-    </div>
+    </section>
   );
 }

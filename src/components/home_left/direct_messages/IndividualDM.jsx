@@ -86,7 +86,7 @@ export function IndividualDM(props) {
           </div>
         </div>
       </div>
-      <div className="user-info-dm">
+      <section className="user-info-dm">
         <p className={changeNameClass()}>
           {props.username ? props.username : "randomName123"}
         </p>
@@ -100,7 +100,7 @@ export function IndividualDM(props) {
             className={changeDMStatusIconClass()}
           />
         </div>
-      </div>
+      </section>
       <div ref={delete_button} className="dm-delete-button hidden">
         <p className="x-button">×</p>
       </div>
