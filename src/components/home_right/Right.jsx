@@ -7,7 +7,7 @@ import PendingPage from "./friends-pages/PendingPage";
 import BlockedPage from "./friends-pages/BlockedPage";
 import AddFriendPage from "./friends-pages/AddFriendPage";
 import { useState } from "react";
-import { randomFriendsList } from "./friends-pages/RandomFriendsList";
+import { randomFriendsList } from "./friends-pages/friends-list/RandomFriendsList";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");

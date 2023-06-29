@@ -1,4 +1,4 @@
-import { randomFriendsList } from "./RandomFriendsList";
+import { randomFriendsList } from "./friends-list/RandomFriendsList";
 import {
   randomUsersList,
   addUserToList,
