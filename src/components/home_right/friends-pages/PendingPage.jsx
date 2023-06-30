@@ -43,13 +43,7 @@ export default function PendingPage(props) {
               if (!hoverState) return "user-name-dm-unhovered";
             }
 
-            function changeDMStatusClass() {
-              if (user.status !== "") {
-                return "has-user-status-dm";
-              } else if (user.status === "") {
-                return "status-user-status-dm";
-              }
-            }
+    
 
             function changeDMStatusIconClass() {
               if (user.status === "") return "no-status-icon";
@@ -106,18 +100,8 @@ export default function PendingPage(props) {
                     {user.username ? user.username : "error"}
                   </p>
                   <div className="user-status-dm-container">
-                    <p className={changeDMStatusClass()}>
-                      {user.status
-                        ? user.status
-                        : user.online_status === "dnd"
-                        ? "Do Not Disturb"
-                        : user.online_status === "online"
-                        ? "Online"
-                        : user.online_status === "moon"
-                        ? "Away"
-                        : user.online_status === "offline"
-                        ? "Offline"
-                        : "none"}
+                    <p className={"has-user-status-dm friend-request"}>
+                     Outgoing Friend Request
                     </p>
                     <img
                       src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"

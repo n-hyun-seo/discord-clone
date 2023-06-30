@@ -1075,6 +1075,10 @@ a {
   font-size: 12px;
 }
 
+.has-user-status-dm.friend-request {
+  font-size: 12px;
+}
+
 .has-user-status-dm.status-hovered {
   color: var(--text-hover-color);
 }
