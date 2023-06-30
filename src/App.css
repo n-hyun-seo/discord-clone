@@ -498,12 +498,12 @@ a {
 
 .mic {
   width: 57%;
-  filter: brightness(250%);
+  filter: brightness(275%);
 }
 
 .mic-hovered {
   width: 57%;
-  filter: brightness(300%);
+  filter: brightness(320%);
 }
 
 .mic-container {
@@ -512,12 +512,12 @@ a {
 
 .headphones {
   width: 62%;
-  filter: brightness(150%);
+  filter: brightness(180%);
 }
 
 .headphones-hovered {
   width: 62%;
-  filter: brightness(200%);
+  filter: brightness(230%);
 }
 
 .headphones-container {
@@ -526,12 +526,12 @@ a {
 
 .settings {
   width: 56%;
-  filter: brightness(500%);
+  filter: brightness(600%);
 }
 
 .settings-hovered {
   width: 56%;
-  filter: brightness(700%);
+  filter: brightness(720%);
 }
 
 .settings-container {
