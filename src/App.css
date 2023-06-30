@@ -1067,6 +1067,7 @@ a {
   white-space: nowrap;
   overflow: hidden;
   font-family: ggsansSB;
+  color: rgb(177, 174, 174);
 }
 
 .has-user-status-dm.status-hovered {
@@ -1312,7 +1313,7 @@ a {
 
 .test-test .user-info-dm .user-name-dm-hovered,
 .test-test .user-info-dm .user-name-dm-unhovered {
-  color: rgb(226, 224, 224);
+  color: rgb(231, 228, 228);
 }
 
 .friends-type-list {
