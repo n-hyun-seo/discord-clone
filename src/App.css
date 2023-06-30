@@ -1266,6 +1266,13 @@ a {
   border-top: 1px rgba(128, 128, 128, 0.123) solid;
   color: white;
   width: 93%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.test-test div.pfp-container { 
+  flex-basis: 10%;
 }
 
 .friends-type-list {

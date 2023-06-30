@@ -54,7 +54,7 @@ export default function BlockedPage(props) {
                   setCurrentSectionLeft("dm");
                   setCurrentDMId(user.id_number);
                 }}
-              >
+              > 
                 <p>{user.username}</p>
               </Link>
             );
