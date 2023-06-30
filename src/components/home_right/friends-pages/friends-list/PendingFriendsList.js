@@ -11,9 +11,9 @@ function addUserToList(username, status, ImgUrl, id_number, online_status) {
 }
 
 addUserToList(
-  "the faker",
+  "police",
   "",
-  "https://randomwordgenerator.com/img/picture-generator/52e9d5444351ab14f1dc8460962e33791c3ad6e04e50744172277fd0944ccd_640.jpg",
+  "https://sticker-collection.com/stickers/plain/AnimeRandom_achub/512/f2c13580-856e-4cbe-b471-d78916c5450efile_2940600.webp",
   26,
   "online"
 );
