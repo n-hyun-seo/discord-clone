@@ -1050,8 +1050,9 @@ a {
 
 .test-test .has-user-status-dm {
   font-size: 14px;
-  font-family: ggsansSB;
+  font-family: ggsansM;
   margin-top: -1.5px;
+  color: rgb(206, 206, 206);
 }
 
 .test-test .status-message-icon-unhovered {
@@ -1066,8 +1067,8 @@ a {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-family: ggsansSB;
-  color: rgb(177, 174, 174);
+  font-family: ggsansM;
+  color: rgb(206, 206, 206);
 }
 
 .has-user-status-dm.status-hovered {
