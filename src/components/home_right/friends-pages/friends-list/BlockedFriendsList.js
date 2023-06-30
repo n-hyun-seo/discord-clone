@@ -121,3 +121,6 @@ addUserToList(
   42,
   "offline"
 );
+
+
+blockedFriendsList.sort((a,b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1);

@@ -79,6 +79,12 @@ export default function AllPage(props) {
                   setCurrentSectionLeft("dm");
                   setCurrentDMId(user.id_number);
                 }}
+                onMouseEnter={() => {
+                  setHoverState(true);
+                }}
+                onMouseLeave={() => {
+                  setHoverState(false);
+                }}
               >
                 <div className="pfp-container">
                   <div

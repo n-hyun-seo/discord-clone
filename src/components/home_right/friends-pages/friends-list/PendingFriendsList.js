@@ -33,3 +33,5 @@ addUserToList(
   28,
   "online"
 );
+
+pendingFriendsList.sort((a,b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1);

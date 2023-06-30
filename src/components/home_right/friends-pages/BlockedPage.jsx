@@ -26,12 +26,13 @@ export default function BlockedPage(props) {
   return (
     <section className="friends-type-container">
       <div className="friends-type-header">
-        <p>{props.header} — {listToUse.length}</p>
+        <p>
+          {props.header} — {listToUse.length}
+        </p>
       </div>
       <section className="friends-type-list">
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
-            
             return (
               <Link
                 to={`/dm/${user.id_number}`}
@@ -55,7 +56,7 @@ export default function BlockedPage(props) {
                   setCurrentSectionLeft("dm");
                   setCurrentDMId(user.id_number);
                 }}
-              > 
+              >
                 <p>{user.username}</p>
               </Link>
             );

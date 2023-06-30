@@ -124,3 +124,5 @@ addUserToList(
   25,
   "moon"
 );
+
+randomFriendsList.sort((a,b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1);

@@ -8,6 +8,10 @@ import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { DmButtonRefContext } from "../../context/DmButtonRef";
 import { pendingFriendsList } from "./friends-list/PendingFriendsList";
+import Online from "../../home_left/direct_messages/status_icons/Online";
+import Offline from "../../home_left/direct_messages/status_icons/Offline";
+import Moon from "../../home_left/direct_messages/status_icons/Moon";
+import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
 
 export default function PendingPage(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -16,6 +20,7 @@ export default function PendingPage(props) {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [listOfDMIds, setListOfDMIds] = useState([]);
+  const [hoverState, setHoverState] = useState(false);
 
   let listToUse;
 
@@ -33,6 +38,24 @@ export default function PendingPage(props) {
       <section className="friends-type-list">
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
+            function changeNameClass() {
+              if (hoverState) return "user-name-dm-hovered";
+              if (!hoverState) return "user-name-dm-unhovered";
+            }
+
+            function changeDMStatusClass() {
+              if (user.status !== "") {
+                return "has-user-status-dm";
+              } else if (user.status === "") {
+                return "status-user-status-dm";
+              }
+            }
+
+            function changeDMStatusIconClass() {
+              if (user.status === "") return "no-status-icon";
+              return "status-message-icon-unhovered";
+            }
+
             return (
               <Link
                 to={`/dm/${user.id_number}`}
@@ -56,8 +79,53 @@ export default function PendingPage(props) {
                   setCurrentSectionLeft("dm");
                   setCurrentDMId(user.id_number);
                 }}
+                onMouseEnter={() => {
+                  setHoverState(true);
+                }}
+                onMouseLeave={() => {
+                  setHoverState(false);
+                }}
               >
-                <p>{user.username}</p>
+                <div className="pfp-container">
+                  <div
+                    className="pfp-circle"
+                    style={{
+                      backgroundImage: `url("${user.ImgUrl}")`,
+                    }}
+                  >
+                    <div className="online-status-outer">
+                      {user.online_status === "online" && <Online />}
+                      {user.online_status === "offline" && <Offline />}
+                      {user.online_status === "moon" && <Moon />}
+                      {user.online_status === "dnd" && <Dnd />}
+                    </div>
+                  </div>
+                </div>
+                <section className="user-info-dm">
+                  <p className={changeNameClass()}>
+                    {user.username ? user.username : "error"}
+                  </p>
+                  <div className="user-status-dm-container">
+                    <p className={changeDMStatusClass()}>
+                      {user.status
+                        ? user.status
+                        : user.online_status === "dnd"
+                        ? "Do Not Disturb"
+                        : user.online_status === "online"
+                        ? "Online"
+                        : user.online_status === "moon"
+                        ? "Away"
+                        : user.online_status === "offline"
+                        ? "Offline"
+                        : "none"}
+                    </p>
+                    <img
+                      src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
+                      alt="status message"
+                      className={changeDMStatusIconClass()}
+                    />
+                  </div>
+                </section>
               </Link>
             );
           })
