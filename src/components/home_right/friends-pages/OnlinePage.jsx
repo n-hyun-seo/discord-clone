@@ -51,11 +51,7 @@ export default function OnlinePage(props) {
 
             function changeDMStatusClass() {
               if (user.status !== "") {
-                if (hoverState) {
-                  return "has-user-status-dm status-hovered";
-                } else if (!hoverState) {
-                  return "has-user-status-dm";
-                }
+                return "has-user-status-dm";
               } else if (user.status === "") {
                 return "no-user-status-dm";
               }
@@ -63,9 +59,7 @@ export default function OnlinePage(props) {
 
             function changeDMStatusIconClass() {
               if (user.status === "") return "no-status-icon";
-              if (hoverState || currentDMId === props.id_number)
-                return "status-message-icon-hovered";
-              if (!hoverState) return "status-message-icon-unhovered";
+              return "status-message-icon-unhovered";
             }
 
             return (
@@ -90,6 +84,12 @@ export default function OnlinePage(props) {
                   }
                   setCurrentSectionLeft("dm");
                   setCurrentDMId(user.id_number);
+                }}
+                onMouseEnter={() => {
+                  setHoverState(true);
+                }}
+                onMouseLeave={() => {
+                  setHoverState(false);
                 }}
               >
                 <div className="pfp-container">
