@@ -1041,11 +1041,32 @@ a {
 .has-user-status-dm {
   font-size: 13px;
   max-width: 130px;
-  margin-top: -4px;
+  margin-top: -3px;
   height: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.test-test .has-user-status-dm {
+  font-size: 14px;
+  font-family: ggsansSB;
+  margin-top: -1.5px;
+}
+
+.test-test .status-message-icon-unhovered {
+  margin-top: 3px;
+}
+
+.status-user-status-dm {
+  font-size: 14px;
+  max-width: 130px;
+  margin-top: -1.5px;
+  height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: ggsansSB;
 }
 
 .has-user-status-dm.status-hovered {
@@ -1276,7 +1297,7 @@ a {
   background-color: #3c3d41;
 }
 
-.test-test div.pfp-container { 
+.test-test div.pfp-container {
   flex-basis: 0;
   margin-left: 12px;
   display: flex;
@@ -1285,12 +1306,13 @@ a {
 }
 
 .test-test .user-info-dm {
- flex-basis: 0;
- margin-left: 13px;
+  flex-basis: 0;
+  margin-left: 13px;
 }
 
-.test-test .user-info-dm .user-name-dm-hovered, .test-test .user-info-dm .user-name-dm-unhovered {
-  color: white;
+.test-test .user-info-dm .user-name-dm-hovered,
+.test-test .user-info-dm .user-name-dm-unhovered {
+  color: rgb(226, 224, 224);
 }
 
 .friends-type-list {
@@ -1333,15 +1355,14 @@ a {
     "ftl"
     "ftl"
     "ftl"
-    "ftl"
-;
+    "ftl";
 }
 
 .no-friends-found {
   color: var(--font-color);
   margin-top: 150px;
   padding-top: 300px;
-  width:90%;
+  width: 90%;
   text-align: center;
   background-image: url(wumpus.JPG);
   height: 300px;
