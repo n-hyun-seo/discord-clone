@@ -1265,14 +1265,27 @@ a {
   flex-shrink: 0;
   border-top: 1px rgba(128, 128, 128, 0.123) solid;
   color: white;
-  width: 93%;
+  width: 96%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
 .test-test div.pfp-container { 
-  flex-basis: 5.5%;
+  flex-basis: 0;
+  margin-left: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.test-test .user-info-dm {
+ flex-basis: 0;
+ margin-left: 10px;
+}
+
+.test-test .user-info-dm .user-name-dm-hovered, .test-test .user-info-dm .user-name-dm-unhovered {
+  color: white;
 }
 
 .friends-type-list {
