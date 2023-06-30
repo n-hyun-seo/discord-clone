@@ -40,7 +40,7 @@ addUserToList(
   "dnd"
 );
 addUserToList(
-  "your 2d gf",
+  "BoringPerson",
   "",
   "https://upload.wikimedia.org/wikipedia/en/4/48/Suzumiya_Haruhi.jpg",
   16,
@@ -90,7 +90,7 @@ addUserToList(
   "offline"
 );
 addUserToList(
-  "hello",
+  "Hello!",
   "",
   "https://img.wattpad.com/cover/89571494-256-k960879.jpg",
   22,
@@ -104,7 +104,7 @@ addUserToList(
   "offline"
 );
 addUserToList(
-  "uhhhWhat",
+  "! uhhhWhat",
   "",
   "https://i.pinimg.com/originals/cb/91/2a/cb912a946f898a78797fb3d9e3a0154f.png",
   24,
@@ -118,7 +118,7 @@ addUserToList(
   "moon"
 );
 addUserToList(
-  "the thingy",
+  "Eve",
   "Playing Only Up!",
   "https://s3.getstickerpack.com/storage/uploads/sticker-pack/random-anime-pack-1/tray_large.png?dd132e2029c18e12716f225f865f4958",
   25,

@@ -11,7 +11,7 @@ function addUserToList(username, status, ImgUrl, id_number, online_status) {
 }
 
 addUserToList(
-  "police",
+  "Police",
   "",
   "https://sticker-collection.com/stickers/plain/AnimeRandom_achub/512/f2c13580-856e-4cbe-b471-d78916c5450efile_2940600.webp",
   26,

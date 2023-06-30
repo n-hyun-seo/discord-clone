@@ -116,7 +116,7 @@ addUserToList(
   "dnd"
 );
 addUserToList(
-  "your 2d gf",
+  "BoringPerson",
   "",
   "https://upload.wikimedia.org/wikipedia/en/4/48/Suzumiya_Haruhi.jpg",
   16,
