@@ -16,6 +16,7 @@ export default function BlockedPage(props) {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [listOfDMIds, setListOfDMIds] = useState([]);
+  const [hoverState, setHoverState] = useState(false);
 
   let listToUse;
 
@@ -33,6 +34,15 @@ export default function BlockedPage(props) {
       <section className="friends-type-list">
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
+            function changeNameClass() {
+              if (hoverState) return "user-name-dm-hovered";
+              if (!hoverState) return "user-name-dm-unhovered";
+            }
+
+            function changeDMStatusIconClass() {
+              if (user.status === "") return "no-status-icon";
+              return "status-message-icon-unhovered";
+            }
             return (
               <Link
                 to={`/dm/${user.id_number}`}
@@ -57,7 +67,27 @@ export default function BlockedPage(props) {
                   setCurrentDMId(user.id_number);
                 }}
               >
-                <p>{user.username}</p>
+                <div className="pfp-container">
+                  <div
+                    className="pfp-circle"
+                    style={{
+                      backgroundImage: `url("${user.ImgUrl}")`,
+                    }}
+                  ></div>
+                </div>
+                <section className="user-info-dm">
+                  <p className={changeNameClass()}>
+                    {user.username ? user.username : "error"}
+                  </p>
+                  <div className="user-status-dm-container">
+                    <p className={"has-user-status-dm blocked"}>Blocked</p>
+                    <img
+                      src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
+                      alt="status message"
+                      className={changeDMStatusIconClass()}
+                    />
+                  </div>
+                </section>
               </Link>
             );
           })
