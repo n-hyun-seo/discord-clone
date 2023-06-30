@@ -120,7 +120,7 @@ addUserToList(
 addUserToList(
   "the thingy",
   "Playing Only Up!",
-  "https://preview.redd.it/3z11zoc0rhv51.jpg?width=474&format=pjpg&auto=webp&s=7c317ebaa78a0ed72273220c3113bcf2a3666ec6",
+  "https://s3.getstickerpack.com/storage/uploads/sticker-pack/random-anime-pack-1/tray_large.png?dd132e2029c18e12716f225f865f4958",
   25,
   "moon"
 );
