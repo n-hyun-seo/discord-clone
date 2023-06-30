@@ -1271,6 +1271,10 @@ a {
   justify-content: flex-start;
 }
 
+.test-test:hover {
+  background-color: #3c3d41;
+}
+
 .test-test div.pfp-container { 
   flex-basis: 0;
   margin-left: 7px;

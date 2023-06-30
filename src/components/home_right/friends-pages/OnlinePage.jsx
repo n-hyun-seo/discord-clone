@@ -62,6 +62,7 @@ export default function OnlinePage(props) {
               return "status-message-icon-unhovered";
             }
 
+
             return (
               <Link
                 to={`/dm/${user.id_number}`}
