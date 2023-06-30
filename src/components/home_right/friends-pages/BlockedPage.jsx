@@ -31,6 +31,7 @@ export default function BlockedPage(props) {
       <section className="friends-type-list">
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
+            
             return (
               <Link
                 to={`/dm/${user.id_number}`}

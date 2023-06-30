@@ -44,6 +44,7 @@ export default function OnlinePage(props) {
       <section className="friends-type-list">
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
+            
             function changeNameClass() {
               if (hoverState) return "user-name-dm-hovered";
               if (!hoverState) return "user-name-dm-unhovered";
