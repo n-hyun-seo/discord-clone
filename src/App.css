@@ -1307,7 +1307,6 @@ a {
   display: flex;
   align-items: flex-end;
   
-  
 }
 
 .friends-type-header p {
@@ -1328,6 +1327,8 @@ a {
   justify-content: flex-start;
   border-radius: 5px;
 }
+
+
 
 .test-test:hover {
   background-color: #3c3d41;

@@ -36,12 +36,12 @@ export default function OnlinePage(props) {
 
   return (
     <section className="friends-type-container">
-      <div className="friends-type-header">
-        <p>
-          {props.header} — {listToUse.length - 1}
-        </p>
-      </div>
       <section className="friends-type-list">
+        <div className="friends-type-header">
+          <p>
+            {props.header} — {listToUse.length - 1}
+          </p>
+        </div>
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
             function changeNameClass() {

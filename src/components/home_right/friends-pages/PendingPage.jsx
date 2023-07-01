@@ -30,20 +30,18 @@ export default function PendingPage(props) {
 
   return (
     <section className="friends-type-container">
-      <div className="friends-type-header">
-        <p>
-          {props.header} — {listToUse.length}
-        </p>
-      </div>
       <section className="friends-type-list">
+        <div className="friends-type-header">
+          <p>
+            {props.header} — {listToUse.length - 1}
+          </p>
+        </div>
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
             function changeNameClass() {
               if (hoverState) return "user-name-dm-hovered";
               if (!hoverState) return "user-name-dm-unhovered";
             }
-
-    
 
             function changeDMStatusIconClass() {
               if (user.status === "") return "no-status-icon";
@@ -101,7 +99,7 @@ export default function PendingPage(props) {
                   </p>
                   <div className="user-status-dm-container">
                     <p className={"has-user-status-dm friend-request"}>
-                     Outgoing Friend Request
+                      Outgoing Friend Request
                     </p>
                     <img
                       src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
