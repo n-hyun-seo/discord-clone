@@ -369,6 +369,26 @@ a {
   visibility: hidden;
 }
 
+.more-hover-box {
+  position: absolute;
+  height: 35px;
+  background-color: rgb(17, 17, 17);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: #bbc2cb;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  bottom: 35px;
+  overflow: visible;
+  z-index: 101;
+  right: -11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* visibility: hidden; */
+}
+
 .hover-text-friends-nav.hovered {
   animation-name: discord-button-hovered-text;
   animation-duration: 0.2s;
@@ -1408,6 +1428,7 @@ a {
   flex-basis: 100%;
   gap: 10px;
   margin-right: 10px;
+  position: relative;
 }
 
 ::-webkit-scrollbar {

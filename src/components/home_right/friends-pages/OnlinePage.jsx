@@ -140,6 +140,7 @@ export default function OnlinePage(props) {
                       className="text-box-dm"
                     />
                   </div>
+                  <div className="hover-text-friends-nav">Message</div>
                   <div className="pfp-circle text-box">
                     <img
                       src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
@@ -147,6 +148,7 @@ export default function OnlinePage(props) {
                       className="more-box-dm"
                     />
                   </div>
+                  <div className="more-hover-box">More</div>
                 </div>
               </Link>
             );
