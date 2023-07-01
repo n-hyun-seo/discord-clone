@@ -380,13 +380,13 @@ a {
   letter-spacing: 0.5px;
   pointer-events: none;
   bottom: 35px;
-  overflow: visible;
   z-index: 101;
   right: -11px;
   display: flex;
   justify-content: center;
   align-items: center;
   /* visibility: hidden; */
+
 }
 
 .hover-text-friends-nav.hovered {
@@ -1321,6 +1321,7 @@ a {
   align-items: center;
   justify-content: flex-start;
   border-radius: 5px;
+  z-index: 1;
 }
 
 .test-test:hover {
@@ -1348,12 +1349,15 @@ a {
 .friends-type-list {
   grid-area: ftl;
   width: 100%;
-  overflow-y: auto;
   scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
+  z-index: 0;
+  overflow-y: auto;
+  
+
 }
 
 .friends-type-list::-webkit-scrollbar {
@@ -1428,7 +1432,8 @@ a {
   flex-basis: 100%;
   gap: 10px;
   margin-right: 10px;
-  position: relative;
+  position: absolute;
+  right: 432px;
 }
 
 ::-webkit-scrollbar {
