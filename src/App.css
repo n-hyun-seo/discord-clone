@@ -386,7 +386,7 @@ a {
   align-items: center;
   z-index: 6;
 
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .hover-text-friends-nav.hovered {

@@ -133,8 +133,6 @@ addUserToList(
   "online"
 );
 
-
-
-
-
-randomFriendsList.sort((a,b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1);
+randomFriendsList.sort((a, b) =>
+  a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+);
