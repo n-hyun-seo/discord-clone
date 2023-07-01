@@ -125,4 +125,16 @@ addUserToList(
   "moon"
 );
 
+addUserToList(
+  "! placeholder",
+  "",
+  "https://i.pinimg.com/originals/cb/91/2a/cb912a946f898a78797fb3d9e3a0154f.png",
+  9999999,
+  "online"
+);
+
+
+
+
+
 randomFriendsList.sort((a,b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1);

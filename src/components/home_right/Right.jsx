@@ -125,7 +125,11 @@ export default function Right() {
               <Route
                 path="/friends/blocked"
                 element={
-                  <BlockedPage header="BLOCKED" inputValue={inputValue}  filteredList={filteredBlockedList}/>
+                  <BlockedPage
+                    header="BLOCKED"
+                    inputValue={inputValue}
+                    filteredList={filteredBlockedList}
+                  />
                 }
               />
               <Route path="/friends/addfriend" element={<AddFriendPage />} />

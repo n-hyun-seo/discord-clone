@@ -380,13 +380,13 @@ a {
   letter-spacing: 0.5px;
   pointer-events: none;
   bottom: 35px;
-  z-index: 101;
   right: -11px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* visibility: hidden; */
+  z-index: 6;
 
+  visibility: hidden;
 }
 
 .hover-text-friends-nav.hovered {
@@ -1299,16 +1299,22 @@ a {
   color: #b2b1b1;
   font-size: 12px;
   grid-area: fth;
+  height: 60px;
+  width: 96%;
+  background-color: rgb(49 51 56);
+  position: absolute;
+  z-index: 2;
   display: flex;
   align-items: flex-end;
-  justify-content: center;
-  height: 100%;
+  
+  
 }
 
 .friends-type-header p {
-  padding-bottom: 10px;
-  width: 93%;
+  width: 100%;
   font-family: ggsansSB;
+  padding-left: 10px;
+  padding-bottom: 15px;
 }
 
 .test-test {
@@ -1321,7 +1327,6 @@ a {
   align-items: center;
   justify-content: flex-start;
   border-radius: 5px;
-  z-index: 1;
 }
 
 .test-test:hover {
@@ -1353,31 +1358,33 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  z-index: 0;
   overflow-y: auto;
-  
+  height: 100%;
+}
 
+.space {
+  height: 60px;
+  width: 100%;
 }
 
 .friends-type-list::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 .friends-type-list::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: #2b2d31;
+  margin-top: 60px;
+
 }
 
 .friends-type-container {
   grid-area: ftc;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(15, 1fr);
+  grid-template-rows: repeat(12, 1fr);
   grid-template-areas:
-    "fth"
-    "ftl"
-    "ftl"
+  
     "ftl"
     "ftl"
     "ftl"
@@ -1390,6 +1397,8 @@ a {
     "ftl"
     "ftl"
     "ftl";
+    width: 100%;
+    position: relative;
 }
 
 .no-friends-found {

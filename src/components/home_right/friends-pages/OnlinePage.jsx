@@ -38,7 +38,7 @@ export default function OnlinePage(props) {
     <section className="friends-type-container">
       <div className="friends-type-header">
         <p>
-          {props.header} — {listToUse.length}
+          {props.header} — {listToUse.length - 1}
         </p>
       </div>
       <section className="friends-type-list">
