@@ -44,7 +44,6 @@ export default function OnlinePage(props) {
       <section className="friends-type-list">
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
-            
             function changeNameClass() {
               if (hoverState) return "user-name-dm-hovered";
               if (!hoverState) return "user-name-dm-unhovered";
@@ -114,7 +113,17 @@ export default function OnlinePage(props) {
                   </p>
                   <div className="user-status-dm-container">
                     <p className={changeDMStatusClass()}>
-                      {user.status ? user.status : user.online_status === "dnd" ? "Do Not Disturb" : user.online_status === "online" ? "Online" : user.online_status === "moon" ? "Away" : user.online_status === "offline" ? "Offline" : "none"}
+                      {user.status
+                        ? user.status
+                        : user.online_status === "dnd"
+                        ? "Do Not Disturb"
+                        : user.online_status === "online"
+                        ? "Online"
+                        : user.online_status === "moon"
+                        ? "Away"
+                        : user.online_status === "offline"
+                        ? "Offline"
+                        : "none"}
                     </p>
                     <img
                       src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
@@ -123,6 +132,22 @@ export default function OnlinePage(props) {
                     />
                   </div>
                 </section>
+                <div className="text-more-box-container">
+                  <div className="pfp-circle text-box">
+                    <img
+                      src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
+                      alt="chat"
+                      className="text-box-dm"
+                    />
+                  </div>
+                  <div className="pfp-circle text-box">
+                    <img
+                      src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
+                      alt="chat"
+                      className="more-box-dm"
+                    />
+                  </div>
+                </div>
               </Link>
             );
           })
