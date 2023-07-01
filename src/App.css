@@ -1432,8 +1432,7 @@ a {
   flex-basis: 100%;
   gap: 10px;
   margin-right: 10px;
-  position: absolute;
-  right: 432px;
+  position: relative;
 }
 
 ::-webkit-scrollbar {

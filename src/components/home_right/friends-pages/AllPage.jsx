@@ -126,6 +126,24 @@ export default function AllPage(props) {
                     />
                   </div>
                 </section>
+                <div className="text-more-box-container">
+                  <div className="pfp-circle text-box">
+                    <img
+                      src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
+                      alt="chat"
+                      className="text-box-dm"
+                    />
+                  </div>
+                  <div className="hover-text-friends-nav">Message</div>
+                  <div className="pfp-circle text-box">
+                    <img
+                      src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
+                      alt="chat"
+                      className="more-box-dm"
+                    />
+                  </div>
+                  <div className="more-hover-box">More</div>
+                </div>
               </Link>
             );
           })
