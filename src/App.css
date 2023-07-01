@@ -1403,8 +1403,10 @@ a {
 
 .text-more-box-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
+  flex-basis: 100%;
+  gap: 10px;
 }
 
 ::-webkit-scrollbar {
