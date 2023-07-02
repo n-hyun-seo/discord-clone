@@ -5,6 +5,7 @@ import { CurrentPageContext } from "../context/CurrentPageContext";
 import { CurrentSectionContext } from "../context/CurrentSectionContext";
 import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
 import { CurrentDMIdContext } from "../context/CurrentDMIdContext";
+import { CurrentIncomingFRContext } from "../context/CurrentIncomingFRContext";
 
 export default function DiscordHomeButton() {
   const [hoverState, setHoverState] = useState(false);
@@ -15,6 +16,9 @@ export default function DiscordHomeButton() {
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
+  );
 
   const blob = useRef();
   const serverHoverText = useRef();
@@ -81,6 +85,13 @@ export default function DiscordHomeButton() {
           className={changeLogoClass()}
           alt="discord logo"
         ></img>
+        {currentIncomingFR > 0 && (
+          <div className="incoming-FR-home-circle">
+            <div className="incoming-FR-home">
+              <p>{currentIncomingFR}</p>
+            </div>
+          </div>
+        )}
       </Link>
       <div ref={serverHoverText} className="hover-text">
         Direct Messages

@@ -25,6 +25,7 @@ export default function PendingPage(props) {
               ImgUrl={user.ImgUrl}
               id_number={user.id_number}
               online_status={user.online_status}
+              isIncoming={user.isIncoming}
             />
           ))
         ) : (

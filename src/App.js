@@ -9,6 +9,7 @@ import { CurrentSectionContext } from "./components/context/CurrentSectionContex
 import { CurrentSectionLeftContext } from "./components/context/CurrentSectionLeftContext";
 import { CurrentDMIdContext } from "./components/context/CurrentDMIdContext";
 import { DmButtonRefContext } from "./components/context/DmButtonRef";
+import { CurrentIncomingFRContext } from "./components/context/CurrentIncomingFRContext";
 import RandomServerButton from "./components/a_random_server/RandomServerButton";
 import { serversList } from "./components/a_random_server/randomServersList";
 import AddServerButton from "./components/a_random_server/AddServerButton";
@@ -19,68 +20,73 @@ function App() {
   const [currentSection, setCurrentSection] = useState("online");
   const [currentDMId, setCurrentDMId] = useState("");
   const [dmButtonRef, setDmButtonRef] = useState({});
+  const [currentIncomingFR, setCurrentIncomingFR] = useState(1);
 
   return (
     <div className="App">
-      <DmButtonRefContext.Provider value={[dmButtonRef, setDmButtonRef]}>
-        <CurrentPageContext.Provider value={[currentPage, setCurrentPage]}>
-          <CurrentSectionContext.Provider
-            value={[currentSection, setCurrentSection]}
-          >
-            <CurrentSectionLeftContext.Provider
-              value={[currentSectionLeft, setCurrentSectionLeft]}
+      <CurrentIncomingFRContext.Provider
+        value={[currentIncomingFR, setCurrentIncomingFR]}
+      >
+        <DmButtonRefContext.Provider value={[dmButtonRef, setDmButtonRef]}>
+          <CurrentPageContext.Provider value={[currentPage, setCurrentPage]}>
+            <CurrentSectionContext.Provider
+              value={[currentSection, setCurrentSection]}
             >
-              <CurrentDMIdContext.Provider
-                value={[currentDMId, setCurrentDMId]}
+              <CurrentSectionLeftContext.Provider
+                value={[currentSectionLeft, setCurrentSectionLeft]}
               >
-                <nav className="servers">
-                  <DiscordHomeButton />
-                  <div className="other-servers">
-                    {serversList.map((server) => {
-                      return (
-                        <RandomServerButton
-                          serverName={server.serverName}
-                          ImgUrl={server.ImgUrl}
-                          serverTitle={server.serverTitle}
-                        />
-                      );
-                    })}
-                    <AddServerButton
-                      serverName="addaserver"
-                      serverTitle="Add A Server"
+                <CurrentDMIdContext.Provider
+                  value={[currentDMId, setCurrentDMId]}
+                >
+                  <nav className="servers">
+                    <DiscordHomeButton />
+                    <div className="other-servers">
+                      {serversList.map((server) => {
+                        return (
+                          <RandomServerButton
+                            serverName={server.serverName}
+                            ImgUrl={server.ImgUrl}
+                            serverTitle={server.serverTitle}
+                          />
+                        );
+                      })}
+                      <AddServerButton
+                        serverName="addaserver"
+                        serverTitle="Add A Server"
+                      />
+                    </div>
+                  </nav>
+
+                  <Routes>
+                    <Route path="*" element={<Home />} />
+
+                    <Route
+                      path="/cats-server"
+                      element={<RandomServer serverName="cats-server" />}
                     />
-                  </div>
-                </nav>
-
-                <Routes>
-                  <Route path="*" element={<Home />} />
-
-                  <Route
-                    path="/cats-server"
-                    element={<RandomServer serverName="cats-server" />}
-                  />
-                  <Route
-                    path="/dogs-server"
-                    element={<RandomServer serverName="dogs-server" />}
-                  />
-                  <Route
-                    path="/rabbits-server"
-                    element={<RandomServer serverName="rabbits-server" />}
-                  />
-                  <Route
-                    path="/penguins-server"
-                    element={<RandomServer serverName="penguins-server" />}
-                  />
-                  <Route
-                    path="/raccoons-server"
-                    element={<RandomServer serverName="raccoons-server" />}
-                  />
-                </Routes>
-              </CurrentDMIdContext.Provider>
-            </CurrentSectionLeftContext.Provider>
-          </CurrentSectionContext.Provider>
-        </CurrentPageContext.Provider>
-      </DmButtonRefContext.Provider>
+                    <Route
+                      path="/dogs-server"
+                      element={<RandomServer serverName="dogs-server" />}
+                    />
+                    <Route
+                      path="/rabbits-server"
+                      element={<RandomServer serverName="rabbits-server" />}
+                    />
+                    <Route
+                      path="/penguins-server"
+                      element={<RandomServer serverName="penguins-server" />}
+                    />
+                    <Route
+                      path="/raccoons-server"
+                      element={<RandomServer serverName="raccoons-server" />}
+                    />
+                  </Routes>
+                </CurrentDMIdContext.Provider>
+              </CurrentSectionLeftContext.Provider>
+            </CurrentSectionContext.Provider>
+          </CurrentPageContext.Provider>
+        </DmButtonRefContext.Provider>
+      </CurrentIncomingFRContext.Provider>
     </div>
   );
 }

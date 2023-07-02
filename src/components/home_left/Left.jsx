@@ -6,13 +6,16 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
 import { CurrentSectionContext } from "../context/CurrentSectionContext";
+import { CurrentIncomingFRContext } from "../context/CurrentIncomingFRContext";
 
 export default function Left() {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
-
   const [currentSection, setCurrentSection] = useContext(CurrentSectionContext);
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
+  );
 
   return (
     <section className="left">
@@ -30,6 +33,7 @@ export default function Left() {
           text="Friends"
           source="https://www.nicepng.com/png/full/332-3327400_gillespie-fuels-propane-friend-icon-png-white.png"
         />
+
       </Link>
       <Button
         buttonClass="discord-birthday"

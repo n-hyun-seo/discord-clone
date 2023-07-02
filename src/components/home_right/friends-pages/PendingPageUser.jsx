@@ -96,7 +96,7 @@ export default function PendingPageUser(props) {
         </p>
         <div className="user-status-dm-container">
           <p className="has-user-status-dm friend-request">
-            Outgoing Friend Request
+            {props.isIncoming ? "Incoming Friend Request" : "Outgoing Friend Request"}
           </p>
           <img
             src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"

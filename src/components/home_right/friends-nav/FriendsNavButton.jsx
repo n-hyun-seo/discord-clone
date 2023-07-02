@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentSectionContext } from "../../context/CurrentSectionContext";
+import { CurrentIncomingFRContext } from "../../context/CurrentIncomingFRContext";
 
 export default function FriendsNavButton(props) {
   const [currentSection, setCurrentSection] = useContext(CurrentSectionContext);
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
+  );
 
   function changeButtonClass() {
     if (currentSection === "addfriend" && props.text === "Add Friend")
@@ -20,7 +24,14 @@ export default function FriendsNavButton(props) {
         setCurrentSection(props.text.toLowerCase().replace(/\s+/g, ""));
       }}
     >
-      <Link to={props.to}>{props.text}</Link>
+      <Link to={props.to}>
+        {props.text}
+        {props.text === "Pending" && (
+          <div className="incoming-FR-pending">
+            <p>{currentIncomingFR}</p>
+          </div>
+        )}
+      </Link>
     </div>
   );
 }

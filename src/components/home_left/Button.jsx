@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { CurrentSectionLeftContext } from "../context/CurrentSectionLeftContext";
+import { CurrentIncomingFRContext } from "../context/CurrentIncomingFRContext";
 
 export default function Button(props) {
   const [hoverState, setHoverState] = useState(false);
@@ -8,6 +9,9 @@ export default function Button(props) {
 
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
+  );
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
   );
 
   function changeImageClass() {
@@ -43,6 +47,11 @@ export default function Button(props) {
           ></img>
         </div>
         <p>{props.text}</p>
+        {props.text === "Friends" && (
+          <div className="incoming-FR-friends">
+            <p>{currentIncomingFR}</p>
+          </div>
+        )}
       </button>
     </div>
   );
