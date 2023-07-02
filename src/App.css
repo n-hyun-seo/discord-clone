@@ -359,7 +359,6 @@ a {
   padding-right: 10px;
   border-radius: 5px;
   color: #bbc2cb;
-  letter-spacing: 0.5px;
   pointer-events: none;
   z-index: 100;
   top: 45px;
@@ -367,6 +366,7 @@ a {
   justify-content: center;
   align-items: center;
   visibility: hidden;
+  font-family: ggsansM;
 }
 
 .more-hover-box {
@@ -377,7 +377,6 @@ a {
   padding-right: 10px;
   border-radius: 5px;
   color: #bbc2cb;
-  letter-spacing: 0.5px;
   pointer-events: none;
   bottom: 35px;
   right: -11px;
@@ -386,6 +385,7 @@ a {
   align-items: center;
   z-index: 6;
   visibility: hidden;
+  font-family: ggsansM;
 }
 
 .more-hover-box.hovered,
@@ -401,7 +401,6 @@ a {
   padding-right: 10px;
   border-radius: 5px;
   color: #bbc2cb;
-  letter-spacing: 0.5px;
   pointer-events: none;
   bottom: 35px;
   right: 15px;
@@ -410,6 +409,7 @@ a {
   align-items: center;
   z-index: 6;
   visibility: hidden;
+  font-family: ggsansM;
 }
 
 .hover-text-friends-nav.hovered {
