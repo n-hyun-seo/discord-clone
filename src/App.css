@@ -386,7 +386,11 @@ a {
   align-items: center;
   z-index: 6;
 
-  /* visibility: hidden; */
+  visibility: hidden;
+}
+
+.more-hover-box.hovered {
+  visibility: visible;
 }
 
 .hover-text-friends-nav.hovered {
@@ -1306,7 +1310,6 @@ a {
   z-index: 2;
   display: flex;
   align-items: flex-end;
-  
 }
 
 .friends-type-header p {
@@ -1327,8 +1330,6 @@ a {
   justify-content: flex-start;
   border-radius: 5px;
 }
-
-
 
 .test-test:hover {
   background-color: #3c3d41;
@@ -1376,7 +1377,6 @@ a {
   border-radius: 10px;
   background-color: #2b2d31;
   margin-top: 60px;
-
 }
 
 .friends-type-container {
@@ -1385,7 +1385,6 @@ a {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(12, 1fr);
   grid-template-areas:
-  
     "ftl"
     "ftl"
     "ftl"
@@ -1398,8 +1397,8 @@ a {
     "ftl"
     "ftl"
     "ftl";
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 
 .no-friends-found {

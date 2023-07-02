@@ -4,7 +4,7 @@ import {
   addUserToList,
 } from "../../home_left/direct_messages/randomUsersList";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { DmButtonRefContext } from "../../context/DmButtonRef";
@@ -21,6 +21,12 @@ export default function OnlinePage(props) {
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [listOfDMIds, setListOfDMIds] = useState([]);
   const [hoverState, setHoverState] = useState(false);
+  const [moreHoverState, setMoreHoverState] = useState(false);
+
+  const moreHoverBox = useRef();
+  const messageHoverBox = useRef();
+
+
 
   const onlineFriendsList = randomFriendsList.filter(
     (user) => user.online_status !== "offline"
@@ -33,6 +39,8 @@ export default function OnlinePage(props) {
         (user) => user.online_status !== "offline"
       ))
     : (listToUse = onlineFriendsList);
+
+   
 
   return (
     <section className="friends-type-container">
@@ -141,14 +149,24 @@ export default function OnlinePage(props) {
                     />
                   </div>
                   <div className="hover-text-friends-nav">Message</div>
-                  <div className="pfp-circle text-box">
+                  <div
+                    className="pfp-circle text-box"
+                    onMouseEnter={() => {
+                      setMoreHoverState(true);
+                      moreHoverBox.current.classList.add("hovered");
+                    }}
+                    onMouseLeave={() => {
+                      setMoreHoverState(false);
+                      moreHoverBox.current.classList.remove("hovered");
+                    }}
+                  >
                     <img
                       src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
                       alt="chat"
                       className="more-box-dm"
                     />
                   </div>
-                  <div className="more-hover-box">More</div>
+                  <div ref={moreHoverBox} className="more-hover-box">More</div>
                 </div>
               </Link>
             );
