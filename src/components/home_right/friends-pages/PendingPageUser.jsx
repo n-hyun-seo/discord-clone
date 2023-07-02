@@ -109,55 +109,88 @@ export default function PendingPageUser(props) {
           />
         </div>
       </section>
-      <div className="text-more-box-container">
-        <div
-          className="pfp-circle text-box"
-          onMouseEnter={() => {
-            setMessageHoverState(true);
-            messageHoverRef.current.classList.add("hovered");
-            messageImageRef.current.style.filter = "brightness(300%)";
-          }}
-          onMouseLeave={() => {
-            setMessageHoverState(false);
-            messageHoverRef.current.classList.remove("hovered");
-            messageImageRef.current.style.filter = "brightness(250%)";
-          }}
-        >
-          <img
-            src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
-            alt="chat"
-            className="text-box-dm"
-            ref={messageImageRef}
-          />
+      {props.isIncoming ? (
+        <div className="text-more-box-container">
+          <div
+            className="pfp-circle text-box"
+            onMouseEnter={() => {
+              setMessageHoverState(true);
+              messageHoverRef.current.classList.add("hovered");
+              messageImageRef.current.style.filter = "brightness(300%)";
+            }}
+            onMouseLeave={() => {
+              setMessageHoverState(false);
+              messageHoverRef.current.classList.remove("hovered");
+              messageImageRef.current.style.filter = "brightness(250%)";
+            }}
+          >
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
+              alt="chat"
+              className="text-box-dm"
+              ref={messageImageRef}
+            />
+          </div>
+          <div ref={messageHoverRef} className="message-hover-box">
+            Accept
+          </div>
+          <div
+            className="pfp-circle text-box"
+            onMouseEnter={() => {
+              setMoreHoverState(true);
+              moreHoverRef.current.classList.add("hovered");
+              moreImageRef.current.style.filter = "brightness(200%)";
+            }}
+            onMouseLeave={() => {
+              setMoreHoverState(false);
+              moreHoverRef.current.classList.remove("hovered");
+              moreImageRef.current.style.filter = "brightness(150%)";
+            }}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              removeFR(props.username);
+              setCurrentIncomingFR(getIncomingFRLength());
+            }}
+          >
+            <div alt="chat" className="more-box-dm" ref={moreImageRef}>
+              X
+            </div>
+          </div>
+          <div ref={moreHoverRef} className="more-hover-box">
+            Ignore
+          </div>
         </div>
-        <div ref={messageHoverRef} className="message-hover-box">
-          Accept
+      ) : (
+        <div className="text-more-box-container">
+          <div
+            className="pfp-circle text-box"
+            onMouseEnter={() => {
+              setMoreHoverState(true);
+              moreHoverRef.current.classList.add("hovered");
+              moreImageRef.current.style.filter = "brightness(200%)";
+            }}
+            onMouseLeave={() => {
+              setMoreHoverState(false);
+              moreHoverRef.current.classList.remove("hovered");
+              moreImageRef.current.style.filter = "brightness(150%)";
+            }}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              removeFR(props.username);
+              props.setRerenderState(!props.rerenderState);
+            }}
+          >
+            <div alt="chat" className="more-box-dm" ref={moreImageRef}>
+              X
+            </div>
+          </div>
+          <div ref={moreHoverRef} className="more-hover-box">
+            Cancel
+          </div>
         </div>
-        <div
-          className="pfp-circle text-box"
-          onMouseEnter={() => {
-            setMoreHoverState(true);
-            moreHoverRef.current.classList.add("hovered");
-            moreImageRef.current.style.filter = "brightness(200%)";
-          }}
-          onMouseLeave={() => {
-            setMoreHoverState(false);
-            moreHoverRef.current.classList.remove("hovered");
-            moreImageRef.current.style.filter = "brightness(150%)";
-          }}
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            removeFR(props.username);
-            setCurrentIncomingFR(getIncomingFRLength());
-          }}
-        >
-          <div alt="chat" className="more-box-dm" ref={moreImageRef}>X</div>
-        </div>
-        <div ref={moreHoverRef} className="more-hover-box">
-          Ignore
-        </div>
-      </div>
+      )}
     </Link>
   );
 }
