@@ -1,29 +1,8 @@
 import { randomFriendsList } from "./friends-list/RandomFriendsList";
-import {
-  randomUsersList,
-  addUserToList,
-} from "../../home_left/direct_messages/randomUsersList";
-import { Link } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
-import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
-import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
-import { DmButtonRefContext } from "../../context/DmButtonRef";
-import Online from "../../home_left/direct_messages/status_icons/Online";
-import Offline from "../../home_left/direct_messages/status_icons/Offline";
-import Moon from "../../home_left/direct_messages/status_icons/Moon";
-import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
 import OnlinePageUser from "./OnlinePageUser";
 
 export default function OnlinePage(props) {
-  const [currentSectionLeft, setCurrentSectionLeft] = useContext(
-    CurrentSectionLeftContext
-  );
-  const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
-  const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
-  const [listOfDMIds, setListOfDMIds] = useState([]);
-  const [hoverState, setHoverState] = useState(false);
-  const [moreHoverState, setMoreHoverState] = useState(false);
-
+ 
   const onlineFriendsList = randomFriendsList.filter(
     (user) => user.online_status !== "offline"
   );

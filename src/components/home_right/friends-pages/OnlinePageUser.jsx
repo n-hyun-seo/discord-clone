@@ -23,6 +23,7 @@ export default function OnlinePageUser(props) {
   const [hoverState, setHoverState] = useState(false);
   const [moreHoverState, setMoreHoverState] = useState(false);
 
+  const moreHoverRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered";
@@ -123,9 +124,11 @@ export default function OnlinePageUser(props) {
           className="pfp-circle text-box"
           onMouseEnter={() => {
             setMoreHoverState(true);
+            moreHoverRef.current.classList.add("hovered");
           }}
           onMouseLeave={() => {
             setMoreHoverState(false);
+            moreHoverRef.current.classList.remove("hovered");
           }}
         >
           <img
@@ -134,7 +137,9 @@ export default function OnlinePageUser(props) {
             className="more-box-dm"
           />
         </div>
-        <div className="more-hover-box">More {props.username}</div>
+        <div ref={moreHoverRef} className="more-hover-box">
+          More
+        </div>
       </div>
     </Link>
   );
