@@ -124,12 +124,9 @@ export default function PendingPageUser(props) {
               messageImageRef.current.style.filter = "brightness(250%)";
             }}
           >
-            <img
-              src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
-              alt="chat"
-              className="text-box-dm"
-              ref={messageImageRef}
-            />
+            <div alt="chat" className="text-box-dm" ref={messageImageRef}>
+              O
+            </div>
           </div>
           <div ref={messageHoverRef} className="message-hover-box">
             Accept
