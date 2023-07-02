@@ -26,7 +26,7 @@ export default function FriendsNavButton(props) {
     >
       <Link to={props.to}>
         {props.text}
-        {props.text === "Pending" && (
+        {props.text === "Pending" && currentIncomingFR > 0 && (
           <div className="incoming-FR-pending">
             <p>{currentIncomingFR}</p>
           </div>

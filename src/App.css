@@ -253,7 +253,8 @@ body {
 }
 .friends-nav-button-container {
   display: flex;
-  justify-content: space-evenly;
+  margin-left: 20px;
+  gap: 16px;
   align-items: center;
   width: 430px;
 }
@@ -310,7 +311,6 @@ body {
   border-radius: 3px;
   font-family: ggsansM;
   display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 

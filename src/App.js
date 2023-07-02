@@ -20,7 +20,7 @@ function App() {
   const [currentSection, setCurrentSection] = useState("online");
   const [currentDMId, setCurrentDMId] = useState("");
   const [dmButtonRef, setDmButtonRef] = useState({});
-  const [currentIncomingFR, setCurrentIncomingFR] = useState(1);
+  const [currentIncomingFR, setCurrentIncomingFR] = useState(0);
 
   return (
     <div className="App">

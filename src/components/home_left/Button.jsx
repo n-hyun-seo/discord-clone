@@ -47,7 +47,7 @@ export default function Button(props) {
           ></img>
         </div>
         <p>{props.text}</p>
-        {props.text === "Friends" && (
+        {props.text === "Friends" && currentIncomingFR > 0 && (
           <div className="incoming-FR-friends">
             <p>{currentIncomingFR}</p>
           </div>
