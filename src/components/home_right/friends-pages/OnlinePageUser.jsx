@@ -25,7 +25,9 @@ export default function OnlinePageUser(props) {
   const [messageHoverState, setMessageHoverState] = useState(false);
 
   const moreHoverRef = useRef();
+  const moreImageRef = useRef();
   const messageHoverRef = useRef();
+  const messageImageRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered";
@@ -119,17 +121,19 @@ export default function OnlinePageUser(props) {
           onMouseEnter={() => {
             setMessageHoverState(true);
             messageHoverRef.current.classList.add("hovered");
+            messageImageRef.current.style.filter = "brightness(300%)";
           }}
           onMouseLeave={() => {
             setMessageHoverState(false);
             messageHoverRef.current.classList.remove("hovered");
+            messageImageRef.current.style.filter = "brightness(250%)";
           }}
-         
         >
           <img
             src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
             alt="chat"
             className="text-box-dm"
+            ref={messageImageRef}
           />
         </div>
         <div ref={messageHoverRef} className="message-hover-box">
@@ -140,20 +144,24 @@ export default function OnlinePageUser(props) {
           onMouseEnter={() => {
             setMoreHoverState(true);
             moreHoverRef.current.classList.add("hovered");
+            moreImageRef.current.style.filter = "brightness(200%)";
           }}
           onMouseLeave={() => {
             setMoreHoverState(false);
             moreHoverRef.current.classList.remove("hovered");
+            moreImageRef.current.style.filter = "brightness(150%)";
           }}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
+            console.log("works");
           }}
         >
           <img
             src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
             alt="chat"
             className="more-box-dm"
+            ref={moreImageRef}
           />
         </div>
         <div ref={moreHoverRef} className="more-hover-box">
