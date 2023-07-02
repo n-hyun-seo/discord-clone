@@ -1,4 +1,3 @@
-
 import {
   randomUsersList,
   addUserToList,
@@ -13,7 +12,7 @@ import Offline from "../../home_left/direct_messages/status_icons/Offline";
 import Moon from "../../home_left/direct_messages/status_icons/Moon";
 import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
 
-export default function OnlinePageUser(props) {
+export default function PendingPageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
@@ -95,18 +94,8 @@ export default function OnlinePageUser(props) {
           {props.username ? props.username : "error"}
         </p>
         <div className="user-status-dm-container">
-          <p className={changeDMStatusClass()}>
-            {props.status
-              ? props.status
-              : props.online_status === "dnd"
-              ? "Do Not Disturb"
-              : props.online_status === "online"
-              ? "Online"
-              : props.online_status === "moon"
-              ? "Away"
-              : props.online_status === "offline"
-              ? "Offline"
-              : "none"}
+          <p className="has-user-status-dm friend-request">
+            Blocked
           </p>
           <img
             src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
