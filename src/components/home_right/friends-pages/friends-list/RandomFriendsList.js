@@ -136,15 +136,3 @@ addUserToList(
 randomFriendsList.sort((a, b) =>
   a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
 );
-
-const thething = true;
-function checkWinner() {
-  switch (thething) {
-    case true:
-      console.log("worked");
-      break;
-    default:
-      return;
-  }
-}
-checkWinner();

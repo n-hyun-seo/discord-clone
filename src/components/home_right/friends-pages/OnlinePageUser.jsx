@@ -49,7 +49,7 @@ export default function OnlinePageUser(props) {
     <Link
       to={`/dm/${props.id_number}`}
       className="test-test"
-      onClick={() => {
+      onClick={(e) => {
         for (let i in randomUsersList) {
           setListOfDMIds(listOfDMIds.push(randomUsersList[i].id_number));
         }
@@ -124,6 +124,7 @@ export default function OnlinePageUser(props) {
             setMessageHoverState(false);
             messageHoverRef.current.classList.remove("hovered");
           }}
+         
         >
           <img
             src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
@@ -131,7 +132,9 @@ export default function OnlinePageUser(props) {
             className="text-box-dm"
           />
         </div>
-        <div ref={messageHoverRef} className="message-hover-box">Message</div>
+        <div ref={messageHoverRef} className="message-hover-box">
+          Message
+        </div>
         <div
           className="pfp-circle text-box"
           onMouseEnter={() => {
@@ -141,6 +144,10 @@ export default function OnlinePageUser(props) {
           onMouseLeave={() => {
             setMoreHoverState(false);
             moreHoverRef.current.classList.remove("hovered");
+          }}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
           }}
         >
           <img
