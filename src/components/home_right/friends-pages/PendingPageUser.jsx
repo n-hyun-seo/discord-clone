@@ -1,4 +1,3 @@
-
 import {
   randomUsersList,
   addUserToList,
@@ -8,10 +7,17 @@ import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { DmButtonRefContext } from "../../context/DmButtonRef";
+import { CurrentIncomingFRContext } from "../../context/CurrentIncomingFRContext";
 import Online from "../../home_left/direct_messages/status_icons/Online";
 import Offline from "../../home_left/direct_messages/status_icons/Offline";
 import Moon from "../../home_left/direct_messages/status_icons/Moon";
 import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
+import {
+  incomingFRListLength,
+  pendingFriendsList,
+  removeFR,
+  getIncomingFRLength,
+} from "./friends-list/PendingFriendsList";
 
 export default function PendingPageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -19,6 +25,10 @@ export default function PendingPageUser(props) {
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
+  );
+
   const [listOfDMIds, setListOfDMIds] = useState([]);
   const [hoverState, setHoverState] = useState(false);
   const [moreHoverState, setMoreHoverState] = useState(false);
@@ -32,14 +42,6 @@ export default function PendingPageUser(props) {
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered";
     if (!hoverState) return "user-name-dm-unhovered";
-  }
-
-  function changeDMStatusClass() {
-    if (props.status !== "") {
-      return "has-user-status-dm";
-    } else if (props.status === "") {
-      return "status-user-status-dm";
-    }
   }
 
   function changeDMStatusIconClass() {
@@ -96,7 +98,9 @@ export default function PendingPageUser(props) {
         </p>
         <div className="user-status-dm-container">
           <p className="has-user-status-dm friend-request">
-            {props.isIncoming ? "Incoming Friend Request" : "Outgoing Friend Request"}
+            {props.isIncoming
+              ? "Incoming Friend Request"
+              : "Outgoing Friend Request"}
           </p>
           <img
             src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
@@ -127,7 +131,7 @@ export default function PendingPageUser(props) {
           />
         </div>
         <div ref={messageHoverRef} className="message-hover-box">
-          Message
+          Accept
         </div>
         <div
           className="pfp-circle text-box"
@@ -144,18 +148,14 @@ export default function PendingPageUser(props) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log("works");
+            removeFR(props.username);
+            setCurrentIncomingFR(getIncomingFRLength());
           }}
         >
-          <img
-            src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
-            alt="chat"
-            className="more-box-dm"
-            ref={moreImageRef}
-          />
+          <div alt="chat" className="more-box-dm" ref={moreImageRef}>X</div>
         </div>
         <div ref={moreHoverRef} className="more-hover-box">
-          More
+          Ignore
         </div>
       </div>
     </Link>

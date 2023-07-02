@@ -1,9 +1,4 @@
-import { CurrentIncomingFRContext } from "../../../context/CurrentIncomingFRContext";
-import { useContext } from "react";
-
-
-export const pendingFriendsList = [];
-
+export let pendingFriendsList = [];
 
 function addUserToList(
   username,
@@ -33,6 +28,24 @@ addUserToList(
 );
 
 addUserToList(
+  "Police2",
+  "",
+  "https://sticker-collection.com/stickers/plain/AnimeRandom_achub/512/f2c13580-856e-4cbe-b471-d78916c5450efile_2940600.webp",
+  26,
+  "online",
+  true
+);
+
+addUserToList(
+  "Police3",
+  "",
+  "https://sticker-collection.com/stickers/plain/AnimeRandom_achub/512/f2c13580-856e-4cbe-b471-d78916c5450efile_2940600.webp",
+  26,
+  "online",
+  true
+);
+
+addUserToList(
   "crminal Mind",
   "",
   "https://randomwordgenerator.com/img/picture-generator/53e2dc444e57ab14f1dc8460962e33791c3ad6e04e507440772d7cdd934bc2_640.jpg",
@@ -54,4 +67,16 @@ pendingFriendsList.sort((a, b) =>
   a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
 );
 
-export const incomingFRListLength = pendingFriendsList.filter(user => user.isIncoming === true).length; 
+export const incomingFRListLength = pendingFriendsList.filter(
+  (user) => user.isIncoming === true
+).length;
+
+export function removeFR(username) {
+  pendingFriendsList = pendingFriendsList.filter(
+    (user) => user.username !== username
+  );
+}
+
+export function getIncomingFRLength() {
+  return pendingFriendsList.filter((user) => user.isIncoming === true).length;
+}

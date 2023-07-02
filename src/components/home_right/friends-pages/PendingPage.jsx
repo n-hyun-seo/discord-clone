@@ -1,6 +1,7 @@
 import PendingPageUser from "./PendingPageUser";
 import { pendingFriendsList } from "./friends-list/PendingFriendsList";
 
+
 export default function PendingPage(props) {
   let listToUse;
 

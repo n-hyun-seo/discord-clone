@@ -13,6 +13,7 @@ import { CurrentIncomingFRContext } from "./components/context/CurrentIncomingFR
 import RandomServerButton from "./components/a_random_server/RandomServerButton";
 import { serversList } from "./components/a_random_server/randomServersList";
 import AddServerButton from "./components/a_random_server/AddServerButton";
+import { incomingFRListLength } from "./components/home_right/friends-pages/friends-list/PendingFriendsList";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -20,7 +21,8 @@ function App() {
   const [currentSection, setCurrentSection] = useState("online");
   const [currentDMId, setCurrentDMId] = useState("");
   const [dmButtonRef, setDmButtonRef] = useState({});
-  const [currentIncomingFR, setCurrentIncomingFR] = useState(0);
+  const [currentIncomingFR, setCurrentIncomingFR] =
+    useState(incomingFRListLength);
 
   return (
     <div className="App">
