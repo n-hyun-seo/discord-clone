@@ -385,12 +385,31 @@ a {
   justify-content: center;
   align-items: center;
   z-index: 6;
-
   visibility: hidden;
 }
 
-.more-hover-box.hovered {
+.more-hover-box.hovered,
+.message-hover-box.hovered {
   visibility: visible;
+}
+
+.message-hover-box {
+  position: absolute;
+  height: 35px;
+  background-color: rgb(17, 17, 17);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: #bbc2cb;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  bottom: 35px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+  visibility: hidden;
 }
 
 .hover-text-friends-nav.hovered {

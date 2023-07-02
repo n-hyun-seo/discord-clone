@@ -2,7 +2,6 @@ import { randomFriendsList } from "./friends-list/RandomFriendsList";
 import OnlinePageUser from "./OnlinePageUser";
 
 export default function OnlinePage(props) {
- 
   const onlineFriendsList = randomFriendsList.filter(
     (user) => user.online_status !== "offline"
   );

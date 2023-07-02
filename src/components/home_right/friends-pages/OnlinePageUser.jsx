@@ -22,8 +22,10 @@ export default function OnlinePageUser(props) {
   const [listOfDMIds, setListOfDMIds] = useState([]);
   const [hoverState, setHoverState] = useState(false);
   const [moreHoverState, setMoreHoverState] = useState(false);
+  const [messageHoverState, setMessageHoverState] = useState(false);
 
   const moreHoverRef = useRef();
+  const messageHoverRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered";
@@ -112,14 +114,24 @@ export default function OnlinePageUser(props) {
         </div>
       </section>
       <div className="text-more-box-container">
-        <div className="pfp-circle text-box">
+        <div
+          className="pfp-circle text-box"
+          onMouseEnter={() => {
+            setMessageHoverState(true);
+            messageHoverRef.current.classList.add("hovered");
+          }}
+          onMouseLeave={() => {
+            setMessageHoverState(false);
+            messageHoverRef.current.classList.remove("hovered");
+          }}
+        >
           <img
             src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
             alt="chat"
             className="text-box-dm"
           />
         </div>
-        <div className="hover-text-friends-nav">Message</div>
+        <div ref={messageHoverRef} className="message-hover-box">Message</div>
         <div
           className="pfp-circle text-box"
           onMouseEnter={() => {
