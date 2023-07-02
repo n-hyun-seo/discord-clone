@@ -33,9 +33,10 @@ export default function PendingPage(props) {
       <section className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {listToUse.length - 1}
+            {props.header} — {listToUse.length}
           </p>
         </div>
+        <div className="test-test"></div>
         {listToUse.length !== 0 ? (
           listToUse.map((user) => {
             function changeNameClass() {
