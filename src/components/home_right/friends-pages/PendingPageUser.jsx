@@ -116,22 +116,20 @@ export default function PendingPageUser(props) {
             onMouseEnter={() => {
               setMessageHoverState(true);
               messageHoverRef.current.classList.add("hovered");
-              messageImageRef.current.style.filter = "brightness(300%)";
+              messageImageRef.current.style.filter =
+                "grayscale(0%) hue-rotate(90deg) brightness(85%)";
             }}
             onMouseLeave={() => {
               setMessageHoverState(false);
               messageHoverRef.current.classList.remove("hovered");
-              messageImageRef.current.style.filter = "brightness(250%)";
+              messageImageRef.current.style.filter = "grayscale(100%)";
             }}
           >
-            <div
-              alt="chat"
-              className="text-box-dm accept"
-              ref={messageImageRef}
-            >
+            <div alt="chat" className="text-box-dm accept">
               <img
                 src="https://www.clker.com/cliparts/o/G/t/1/j/B/red-check-mark-hi.png"
                 alt="accept"
+                ref={messageImageRef}
               />
             </div>
           </div>
@@ -143,12 +141,12 @@ export default function PendingPageUser(props) {
             onMouseEnter={() => {
               setMoreHoverState(true);
               moreHoverRef.current.classList.add("hovered");
-              moreImageRef.current.style.filter = "brightness(200%)";
+              moreImageRef.current.style.filter = "grayscale(0%)";
             }}
             onMouseLeave={() => {
               setMoreHoverState(false);
               moreHoverRef.current.classList.remove("hovered");
-              moreImageRef.current.style.filter = "brightness(150%)";
+              moreImageRef.current.style.filter = "grayscale(100%)";
             }}
             onClick={(event) => {
               event.preventDefault();
@@ -157,10 +155,11 @@ export default function PendingPageUser(props) {
               setCurrentIncomingFR(getIncomingFRLength());
             }}
           >
-            <div alt="chat" className="more-box-dm ignore" ref={moreImageRef}>
+            <div alt="chat" className="more-box-dm ignore">
               <img
                 src="https://www.pngkit.com/png/full/52-522020_close-button-red-x.png"
                 alt="ignore"
+                ref={moreImageRef}
               />
             </div>
           </div>
@@ -175,12 +174,12 @@ export default function PendingPageUser(props) {
             onMouseEnter={() => {
               setMoreHoverState(true);
               moreHoverRef.current.classList.add("hovered");
-              moreImageRef.current.style.filter = "brightness(200%)";
+              moreImageRef.current.style.filter = "grayscale(0%)";
             }}
             onMouseLeave={() => {
               setMoreHoverState(false);
               moreHoverRef.current.classList.remove("hovered");
-              moreImageRef.current.style.filter = "brightness(150%)";
+              moreImageRef.current.style.filter = "grayscale(100%)";
             }}
             onClick={(event) => {
               event.preventDefault();
@@ -189,10 +188,11 @@ export default function PendingPageUser(props) {
               props.setRerenderState(!props.rerenderState);
             }}
           >
-            <div alt="chat" className="more-box-dm cancel" ref={moreImageRef}>
+            <div alt="chat" className="more-box-dm cancel">
               <img
                 src="https://www.pngkit.com/png/full/52-522020_close-button-red-x.png"
                 alt="cancel"
+                ref={moreImageRef}
               />
             </div>
           </div>

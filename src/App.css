@@ -1477,7 +1477,7 @@ body {
 
 .text-box-dm.accept img {
   width: 60%;
-  filter: brightness(100%) grayscale(100%)
+  filter: brightness(100%) grayscale(100%);
 }
 
 .text-box-dm.accept {
