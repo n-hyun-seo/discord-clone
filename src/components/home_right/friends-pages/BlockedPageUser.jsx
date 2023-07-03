@@ -26,6 +26,7 @@ export default function PendingPageUser(props) {
 
   const moreHoverRef = useRef();
   const moreImageRef = useRef();
+  const moreCircleRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered nolimit";
@@ -68,9 +69,11 @@ export default function PendingPageUser(props) {
       }}
       onMouseEnter={() => {
         setHoverState(true);
+        moreCircleRef.current.style.backgroundColor = "#1b1c1e";
       }}
       onMouseLeave={() => {
         setHoverState(false);
+        moreCircleRef.current.style.backgroundColor = "#2b2d31";
       }}
     >
       <div className="pfp-container">
@@ -104,6 +107,7 @@ export default function PendingPageUser(props) {
       <div className="text-more-box-container">
         <div
           className="pfp-circle text-box"
+          ref={moreCircleRef}
           onMouseEnter={() => {
             setMoreHoverState(true);
             moreHoverRef.current.classList.add("hovered");

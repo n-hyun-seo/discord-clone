@@ -40,8 +40,10 @@ export default function PendingPageUser(props) {
 
   const moreHoverRef = useRef();
   const moreImageRef = useRef();
+  const moreCircleRef = useRef();
   const messageHoverRef = useRef();
   const messageImageRef = useRef();
+  const messageCircleRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered nolimit";
@@ -76,9 +78,21 @@ export default function PendingPageUser(props) {
       }}
       onMouseEnter={() => {
         setHoverState(true);
+        if (props.isIncoming) {
+          moreCircleRef.current.style.backgroundColor = "#1b1c1e";
+          messageCircleRef.current.style.backgroundColor = "#1b1c1e";
+        } else {
+          moreCircleRef.current.style.backgroundColor = "#1b1c1e";
+        }
       }}
       onMouseLeave={() => {
         setHoverState(false);
+        if (props.isIncoming) {
+          moreCircleRef.current.style.backgroundColor = "#2b2d31";
+          messageCircleRef.current.style.backgroundColor = "#2b2d31";
+        } else {
+          moreCircleRef.current.style.backgroundColor = "#2b2d31";
+        }
       }}
     >
       <div className="pfp-container">
@@ -117,6 +131,7 @@ export default function PendingPageUser(props) {
         <div className="text-more-box-container">
           <div
             className="pfp-circle text-box"
+            ref={messageCircleRef}
             onMouseEnter={() => {
               setMessageHoverState(true);
               messageHoverRef.current.classList.add("hovered");
@@ -156,6 +171,7 @@ export default function PendingPageUser(props) {
           </div>
           <div
             className="pfp-circle text-box"
+            ref={moreCircleRef}
             onMouseEnter={() => {
               setMoreHoverState(true);
               moreHoverRef.current.classList.add("hovered");
@@ -189,6 +205,7 @@ export default function PendingPageUser(props) {
         <div className="text-more-box-container">
           <div
             className="pfp-circle text-box"
+            ref={moreCircleRef}
             onMouseEnter={() => {
               setMoreHoverState(true);
               moreHoverRef.current.classList.add("hovered");
