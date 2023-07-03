@@ -1,7 +1,9 @@
 import { blockedFriendsList } from "./friends-list/BlockedFriendsList";
 import BlockedPageUser from "./BlockedPageUser";
+import { useState } from "react";
 
 export default function BlockedPage(props) {
+  const [rerenderState, setRerenderState] = useState(true);
   let listToUse;
 
   props.inputValue
@@ -25,6 +27,8 @@ export default function BlockedPage(props) {
               ImgUrl={user.ImgUrl}
               id_number={user.id_number}
               online_status={user.online_status}
+              rerenderState={rerenderState}
+              setRerenderState={setRerenderState}
             />
           ))
         ) : (

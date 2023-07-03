@@ -263,7 +263,6 @@ body {
   padding: 2px 2px;
 }
 
-
 .friends-nav .friends-nav-button:last-child a {
   color: white;
 }
@@ -404,6 +403,10 @@ body {
   z-index: 6;
   visibility: hidden;
   font-family: ggsansM;
+}
+
+.more-hover-box.unblock {
+  right: -20px;
 }
 
 .more-hover-box.cancel {
@@ -1097,7 +1100,8 @@ body {
   font-family: ggsansM;
 }
 
-.user-name-dm-hovered.nolimit, .user-name-dm-unhovered.nolimit {
+.user-name-dm-hovered.nolimit,
+.user-name-dm-unhovered.nolimit {
   overflow: visible;
   text-overflow: unset;
 }

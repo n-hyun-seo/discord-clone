@@ -11,6 +11,7 @@ import Online from "../../home_left/direct_messages/status_icons/Online";
 import Offline from "../../home_left/direct_messages/status_icons/Offline";
 import Moon from "../../home_left/direct_messages/status_icons/Moon";
 import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
+import { removeBlocked } from "./friends-list/BlockedFriendsList";
 
 export default function PendingPageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -25,8 +26,6 @@ export default function PendingPageUser(props) {
 
   const moreHoverRef = useRef();
   const moreImageRef = useRef();
-  const messageHoverRef = useRef();
-  const messageImageRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered nolimit";
@@ -106,53 +105,32 @@ export default function PendingPageUser(props) {
         <div
           className="pfp-circle text-box"
           onMouseEnter={() => {
-            setMessageHoverState(true);
-            messageHoverRef.current.classList.add("hovered");
-            messageImageRef.current.style.filter = "brightness(300%)";
-          }}
-          onMouseLeave={() => {
-            setMessageHoverState(false);
-            messageHoverRef.current.classList.remove("hovered");
-            messageImageRef.current.style.filter = "brightness(250%)";
-          }}
-        >
-          <img
-            src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
-            alt="chat"
-            className="text-box-dm"
-            ref={messageImageRef}
-          />
-        </div>
-        <div ref={messageHoverRef} className="message-hover-box">
-          Message
-        </div>
-        <div
-          className="pfp-circle text-box"
-          onMouseEnter={() => {
             setMoreHoverState(true);
             moreHoverRef.current.classList.add("hovered");
-            moreImageRef.current.style.filter = "brightness(200%)";
+            moreImageRef.current.style.filter = "grayscale(0%)";
           }}
           onMouseLeave={() => {
             setMoreHoverState(false);
             moreHoverRef.current.classList.remove("hovered");
-            moreImageRef.current.style.filter = "brightness(150%)";
+            moreImageRef.current.style.filter = "grayscale(100%)";
           }}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log("works");
+            removeBlocked(props.username);
+            props.setRerenderState(!props.rerenderState);
           }}
         >
-          <img
-            src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-13-512.png"
-            alt="chat"
-            className="more-box-dm"
-            ref={moreImageRef}
-          />
+          <div alt="chat" className="more-box-dm cancel">
+            <img
+              src="https://www.pngkit.com/png/full/52-522020_close-button-red-x.png"
+              alt="cancel"
+              ref={moreImageRef}
+            />
+          </div>
         </div>
-        <div ref={moreHoverRef} className="more-hover-box">
-          More
+        <div ref={moreHoverRef} className="more-hover-box unblock">
+          Unblock
         </div>
       </div>
     </Link>

@@ -1,4 +1,4 @@
-export const blockedFriendsList = [];
+export let blockedFriendsList = [];
 
 function addUserToList(username, status, ImgUrl, id_number, online_status) {
   return blockedFriendsList.push({
@@ -122,5 +122,12 @@ addUserToList(
   "offline"
 );
 
+blockedFriendsList.sort((a, b) =>
+  a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+);
 
-blockedFriendsList.sort((a,b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1);
+export function removeBlocked(username) {
+  blockedFriendsList = blockedFriendsList.filter(
+    (user) => user.username !== username
+  );
+}
