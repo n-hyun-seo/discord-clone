@@ -29,8 +29,8 @@ export default function PendingPageUser(props) {
   const messageImageRef = useRef();
 
   function changeNameClass() {
-    if (hoverState) return "user-name-dm-hovered";
-    if (!hoverState) return "user-name-dm-unhovered";
+    if (hoverState) return "user-name-dm-hovered nolimit";
+    if (!hoverState) return "user-name-dm-unhovered nolimit";
   }
 
   function changeDMStatusClass() {
@@ -94,9 +94,7 @@ export default function PendingPageUser(props) {
           {props.username ? props.username : "error"}
         </p>
         <div className="user-status-dm-container">
-          <p className="has-user-status-dm friend-request">
-            Blocked
-          </p>
+          <p className="has-user-status-dm friend-request">Blocked</p>
           <img
             src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
             alt="status message"

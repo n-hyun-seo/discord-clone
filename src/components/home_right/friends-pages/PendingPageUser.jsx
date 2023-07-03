@@ -40,8 +40,8 @@ export default function PendingPageUser(props) {
   const messageImageRef = useRef();
 
   function changeNameClass() {
-    if (hoverState) return "user-name-dm-hovered";
-    if (!hoverState) return "user-name-dm-unhovered";
+    if (hoverState) return "user-name-dm-hovered nolimit";
+    if (!hoverState) return "user-name-dm-unhovered nolimit";
   }
 
   function changeDMStatusIconClass() {
