@@ -1,7 +1,13 @@
-export const randomFriendsList = [];
+export let randomFriendsList = [];
 
-function addUserToList(username, status, ImgUrl, id_number, online_status) {
-  return randomFriendsList.push({
+export function addUserToList(
+  username,
+  status,
+  ImgUrl,
+  id_number,
+  online_status
+) {
+  randomFriendsList.push({
     username: username,
     status: status,
     ImgUrl: ImgUrl,

@@ -18,6 +18,10 @@ import {
   removeFR,
   getIncomingFRLength,
 } from "./friends-list/PendingFriendsList";
+import {
+  addUserToList as addUserToFriend,
+  randomFriendsList,
+} from "./friends-list/RandomFriendsList";
 
 export default function PendingPageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -123,6 +127,20 @@ export default function PendingPageUser(props) {
               setMessageHoverState(false);
               messageHoverRef.current.classList.remove("hovered");
               messageImageRef.current.style.filter = "grayscale(100%)";
+            }}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              addUserToFriend(
+                props.username,
+                props.status,
+                props.ImgUrl,
+                props.id_number,
+                props.online_status
+              );
+              removeFR(props.username);
+              props.setRerenderState(!props.rerenderState);
+              setCurrentIncomingFR(getIncomingFRLength());
             }}
           >
             <div alt="chat" className="text-box-dm accept">

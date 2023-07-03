@@ -11,6 +11,7 @@ import Online from "../../home_left/direct_messages/status_icons/Online";
 import Offline from "../../home_left/direct_messages/status_icons/Offline";
 import Moon from "../../home_left/direct_messages/status_icons/Moon";
 import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
+import { randomFriendsList } from "./friends-list/RandomFriendsList";
 
 export default function OnlinePageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -154,6 +155,7 @@ export default function OnlinePageUser(props) {
             event.preventDefault();
             event.stopPropagation();
             console.log("works");
+            console.log(randomFriendsList);
           }}
         >
           <img
