@@ -1,6 +1,12 @@
-export const randomUsersList = [];
+export let randomUsersList = [];
 
-export function addUserToList(username, status, ImgUrl, id_number, online_status) {
+export function addUserToList(
+  username,
+  status,
+  ImgUrl,
+  id_number,
+  online_status
+) {
   return randomUsersList.push({
     username: username,
     status: status,
@@ -129,3 +135,9 @@ addUserToList(
   17,
   "moon"
 );
+
+export function removeDM(username) {
+  randomUsersList = randomUsersList.filter(
+    (user) => user.username !== username
+  );
+}

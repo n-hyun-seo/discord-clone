@@ -7,6 +7,7 @@ import Online from "./status_icons/Online";
 import Offline from "./status_icons/Offline";
 import Moon from "./status_icons/Moon";
 import Dnd from "./status_icons/Dnd";
+import { randomUsersList, removeDM } from "./randomUsersList";
 
 export function IndividualDM(props) {
   const [hoverState, setHoverState] = useState(false);
@@ -102,7 +103,17 @@ export function IndividualDM(props) {
         </div>
       </section>
       <div ref={delete_button} className="dm-delete-button hidden">
-        <p className="x-button">×</p>
+        <p
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            removeDM(props.username);
+            props.setRerenderState(!props.rerenderState);
+          }}
+          className="x-button"
+        >
+          ×
+        </p>
       </div>
     </Link>
   );

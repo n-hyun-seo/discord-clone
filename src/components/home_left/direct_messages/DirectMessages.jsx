@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { IndividualDM } from "./IndividualDM";
 import { randomUsersList } from "./randomUsersList";
 export default function DirectMessages(props) {
+  const [rerenderState, setRerenderState] = useState(false);
   const dm_text = useRef();
 
   return (
@@ -27,6 +28,8 @@ export default function DirectMessages(props) {
               ImgUrl={user.ImgUrl}
               id_number={user.id_number}
               online_status={user.online_status}
+              rerenderState={rerenderState}
+              setRerenderState={setRerenderState}
             />
           );
         })}
