@@ -1453,6 +1453,9 @@ body {
   background-size: contain;
   filter: brightness(150%);
   transform: rotate(90deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pfp-circle.text-box {
@@ -1470,6 +1473,17 @@ body {
   gap: 10px;
   margin-right: 10px;
   position: relative;
+}
+
+.text-box-dm.accept img {
+  width: 60%;
+  filter: brightness(100%) grayscale(100%)
+}
+
+.text-box-dm.accept {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .incoming-FR-home-circle {
@@ -1537,6 +1551,14 @@ body {
   font-size: 13px;
   text-align: unset;
   margin-bottom: 1px;
+}
+
+.cancel img,
+.ignore img {
+  transform: rotate(0);
+  text-align: center;
+  width: 65%;
+  filter: brightness(110%) grayscale(100%);
 }
 
 ::-webkit-scrollbar {

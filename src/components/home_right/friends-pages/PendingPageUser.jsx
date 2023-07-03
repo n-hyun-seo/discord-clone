@@ -124,8 +124,15 @@ export default function PendingPageUser(props) {
               messageImageRef.current.style.filter = "brightness(250%)";
             }}
           >
-            <div alt="chat" className="text-box-dm" ref={messageImageRef}>
-              O
+            <div
+              alt="chat"
+              className="text-box-dm accept"
+              ref={messageImageRef}
+            >
+              <img
+                src="https://www.clker.com/cliparts/o/G/t/1/j/B/red-check-mark-hi.png"
+                alt="accept"
+              />
             </div>
           </div>
           <div ref={messageHoverRef} className="message-hover-box">
@@ -150,8 +157,11 @@ export default function PendingPageUser(props) {
               setCurrentIncomingFR(getIncomingFRLength());
             }}
           >
-            <div alt="chat" className="more-box-dm" ref={moreImageRef}>
-              X
+            <div alt="chat" className="more-box-dm ignore" ref={moreImageRef}>
+              <img
+                src="https://www.pngkit.com/png/full/52-522020_close-button-red-x.png"
+                alt="ignore"
+              />
             </div>
           </div>
           <div ref={moreHoverRef} className="more-hover-box">
@@ -179,8 +189,11 @@ export default function PendingPageUser(props) {
               props.setRerenderState(!props.rerenderState);
             }}
           >
-            <div alt="chat" className="more-box-dm" ref={moreImageRef}>
-              X
+            <div alt="chat" className="more-box-dm cancel" ref={moreImageRef}>
+              <img
+                src="https://www.pngkit.com/png/full/52-522020_close-button-red-x.png"
+                alt="cancel"
+              />
             </div>
           </div>
           <div ref={moreHoverRef} className="more-hover-box">
