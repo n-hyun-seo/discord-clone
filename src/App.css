@@ -339,6 +339,12 @@ body {
   border-left: 1px solid rgba(128, 128, 128, 0.234);
 }
 
+.user-dm-info-section {
+  width: 330px;
+  border-left: 1px solid rgba(128, 128, 128, 0.234);
+  background-color: #282a2d;
+}
+
 .friends-list-section {
   width: calc(100% - 390px);
   display: grid;
@@ -1587,6 +1593,17 @@ body {
   text-align: center;
   width: 65%;
   filter: brightness(110%) grayscale(100%);
+}
+
+.dm-header-user-name {
+  color: white;
+  font-family: ggsansSB;
+  margin-left: 12px;
+}
+
+.pfp-circle.dm-header {
+  scale: 85%;
+  margin-left: 18px;
 }
 
 ::-webkit-scrollbar {

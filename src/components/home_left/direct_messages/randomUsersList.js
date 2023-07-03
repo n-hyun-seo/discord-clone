@@ -16,6 +16,13 @@ export function addUserToList(
   });
 }
 
+export function returnUserInfo(id_number) {
+  let returnedUser = randomUsersList.filter(
+    (user) => user.id_number === id_number
+  );
+  return returnedUser[0];
+}
+
 addUserToList(
   "the jokah",
   "🙏",
