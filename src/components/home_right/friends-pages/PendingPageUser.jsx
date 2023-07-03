@@ -133,7 +133,7 @@ export default function PendingPageUser(props) {
               />
             </div>
           </div>
-          <div ref={messageHoverRef} className="message-hover-box">
+          <div ref={messageHoverRef} className="message-hover-box accept">
             Accept
           </div>
           <div
@@ -163,7 +163,7 @@ export default function PendingPageUser(props) {
               />
             </div>
           </div>
-          <div ref={moreHoverRef} className="more-hover-box">
+          <div ref={moreHoverRef} className="more-hover-box cancel">
             Ignore
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function PendingPageUser(props) {
               />
             </div>
           </div>
-          <div ref={moreHoverRef} className="more-hover-box">
+          <div ref={moreHoverRef} className="more-hover-box cancel">
             Cancel
           </div>
         </div>

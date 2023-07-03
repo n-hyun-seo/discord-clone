@@ -397,6 +397,10 @@ body {
   font-family: ggsansM;
 }
 
+.more-hover-box.cancel {
+  right: -15px;
+}
+
 .more-hover-box.hovered,
 .message-hover-box.hovered {
   visibility: visible;
@@ -419,6 +423,10 @@ body {
   z-index: 6;
   visibility: hidden;
   font-family: ggsansM;
+}
+
+.message-hover-box.accept {
+  right: 25px;
 }
 
 .hover-text-friends-nav.hovered {
