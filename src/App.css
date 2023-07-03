@@ -1598,12 +1598,12 @@ body {
 .dm-header-user-name {
   color: white;
   font-family: ggsansSB;
-  margin-left: 12px;
+  margin-left: 10px;
 }
 
 .pfp-circle.dm-header {
   scale: 85%;
-  margin-left: 18px;
+  margin-left: 15px;
 }
 
 ::-webkit-scrollbar {
