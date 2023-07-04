@@ -8,6 +8,7 @@ import Offline from "./status_icons/Offline";
 import Moon from "./status_icons/Moon";
 import Dnd from "./status_icons/Dnd";
 import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
+import FriendsNavSearchBar from "../../home_right/friends-nav/FriendsNavSearchBar";
 
 export default function UserDM() {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -54,7 +55,7 @@ export default function UserDM() {
             ImgUrl="https://toppng.com/uploads/thumbnail/user-account-management-logo-user-icon-1156286714528pikaoejc.png"
             alt={showProfile ? "Hide User Profile" : "Show User Profile"}
           />
-
+          <FriendsNavSearchBar />
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="inbox"

@@ -157,7 +157,7 @@ body {
 
 .friends-right-side {
   height: 100%;
-  width: 400px;
+  width: 500px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -1355,6 +1355,29 @@ body {
   height: 50px;
 }
 
+.dm-search-input-container {
+  display: flex;
+  /* width: 225px; */
+  width: 130px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 15px;
+  transition: width 0.2s;
+}
+
+.dm-search-input {
+  width: 100%;
+  background-color: #1b1d20;
+  border: none;
+  font-size: 14px;
+  border-radius: 3px;
+  outline: none;
+  color: white;
+  padding-left: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
 .friends-search-input {
   width: 93%;
   background-color: #1b1d20;
@@ -1368,7 +1391,7 @@ body {
   color: white;
 }
 
-.friends-search-input::placeholder {
+.friends-search-input::placeholder, .dm-search-input::placeholder {
   color: var(--font-color);
 }
 
