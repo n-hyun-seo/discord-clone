@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { randomUsersList, returnUserInfo } from "./randomUsersList";
@@ -16,6 +16,8 @@ export default function UserDM() {
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
+
+  const userProfileRef = useRef();
 
   let currentUser = returnUserInfo(currentDMId);
   console.log(currentUser);
@@ -47,13 +49,15 @@ export default function UserDM() {
             childClass="pin"
             ImgUrl="https://images.vexels.com/media/users/3/131686/isolated/preview/95d310073411ab523262be9cb43023fa-paper-pin-icon.png"
             alt="Pinned Messages"
+            reference=""
           />
 
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="add-hide-user"
             ImgUrl="https://toppng.com/uploads/thumbnail/user-account-management-logo-user-icon-1156286714528pikaoejc.png"
-            alt={showProfile ? "Hide User Profile" : "Show User Profile"}
+            alt={showProfile ? "Show User Profile" : "Hide User Profile"}
+            reference={userProfileRef}
           />
           <FriendsNavSearchBar />
           <FriendsNavRightButton
@@ -61,12 +65,14 @@ export default function UserDM() {
             childClass="inbox"
             ImgUrl="https://icons-for-free.com/download-icon-inbox+icon-1320183613807333914_512.png"
             alt="Inbox"
+            reference=""
           />
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="help"
             ImgUrl="https://www.freeiconspng.com/thumbs/help-icon/help-icon-12.png"
             alt="Help"
+            reference=""
           />
         </div>
       </div>
@@ -77,7 +83,7 @@ export default function UserDM() {
               <div className="friends-search-input-container"></div>
             </div>
           </section>
-          {showProfile && <section className="user-dm-info-section"></section>}
+          <section ref={userProfileRef} className="user-dm-info-section"></section>
         </div>
       </section>
     </div>

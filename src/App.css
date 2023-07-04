@@ -216,13 +216,21 @@ body {
 
 .add-hide-user {
   width: 45%;
-  filter: brightness(400%) grayscale(100%);
+  filter: brightness(300%) grayscale(100%);
+}
+
+.add-hide-user:hover {
+  filter: brightness(2000%) grayscale(100%);
 }
 
 .pin {
   width: 47%;
   filter: grayscale(100%) brightness(250%);
   transform: rotate(90deg);
+}
+
+.pin:hover {
+  filter: brightness(320%);
 }
 
 .help:hover {
@@ -354,6 +362,7 @@ body {
   width: 330px;
   border-left: 1px solid rgba(128, 128, 128, 0.234);
   background-color: #282a2d;
+  transition: width 0.2s;
 }
 
 .friends-list-section {
@@ -1391,7 +1400,8 @@ body {
   color: white;
 }
 
-.friends-search-input::placeholder, .dm-search-input::placeholder {
+.friends-search-input::placeholder,
+.dm-search-input::placeholder {
   color: var(--font-color);
 }
 

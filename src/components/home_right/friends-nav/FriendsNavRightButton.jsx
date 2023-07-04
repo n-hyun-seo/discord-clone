@@ -26,7 +26,16 @@ export default function FriendsNavRightButton(props) {
         alt={props.alt}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}
-        onClick={() => setShowProfile(!showProfile)}
+        onClick={() => {
+          setShowProfile(!showProfile);
+          if (props.reference !== "") {
+            if (showProfile) {
+              props.reference.current.style.width = "330px";
+            } else if (!showProfile) {
+              props.reference.current.style.width = "0px";
+            }
+          }
+        }}
       ></img>
       <div ref={serverHoverText} className="hover-text-friends-nav">
         <p>{props.alt}</p>

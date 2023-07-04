@@ -50,6 +50,7 @@ export default function Right() {
             childClass="chatroom"
             ImgUrl="https://icon-library.com/images/speech-bubble-icon-png/speech-bubble-icon-png-15.jpg"
             alt="New Group DM"
+            reference=""
           />
           <div className="friends-divider"></div>
           <FriendsNavRightButton
@@ -57,12 +58,14 @@ export default function Right() {
             childClass="inbox"
             ImgUrl="https://icons-for-free.com/download-icon-inbox+icon-1320183613807333914_512.png"
             alt="Inbox"
+            reference=""
           />
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="help"
             ImgUrl="https://www.freeiconspng.com/thumbs/help-icon/help-icon-12.png"
             alt="Help"
+            reference=""
           />
         </div>
       </div>
