@@ -54,7 +54,9 @@ export default function UserDM() {
 
           <FriendsNavRightButton
             containerClass="help-container"
-            childClass="add-hide-user"
+            childClass={
+              showProfile ? "add-hide-user" : "add-hide-user highlighted"
+            }
             ImgUrl="https://toppng.com/uploads/thumbnail/user-account-management-logo-user-icon-1156286714528pikaoejc.png"
             alt={showProfile ? "Show User Profile" : "Hide User Profile"}
             reference={userProfileRef}
@@ -83,7 +85,10 @@ export default function UserDM() {
               <div className="friends-search-input-container"></div>
             </div>
           </section>
-          <section ref={userProfileRef} className="user-dm-info-section"></section>
+          <section
+            ref={userProfileRef}
+            className="user-dm-info-section"
+          ></section>
         </div>
       </section>
     </div>

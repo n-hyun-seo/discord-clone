@@ -223,6 +223,10 @@ body {
   filter: brightness(2000%) grayscale(100%);
 }
 
+.add-hide-user.highlighted {
+  filter: brightness(5000%) grayscale(100%);
+}
+
 .pin {
   width: 47%;
   filter: grayscale(100%) brightness(250%);
