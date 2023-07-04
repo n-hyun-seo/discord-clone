@@ -33,7 +33,6 @@ export default function PendingPageUser(props) {
     if (!hoverState) return "user-name-dm-unhovered nolimit";
   }
 
-
   function changeDMStatusIconClass() {
     if (props.status === "") return "no-status-icon";
     return "status-message-icon-unhovered";

@@ -1,7 +1,10 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
 
 export default function FriendsNavRightButton(props) {
   const [hoverState, setHoverState] = useState(false);
+
+  const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
 
   const serverHoverText = useRef();
 
@@ -23,6 +26,7 @@ export default function FriendsNavRightButton(props) {
         alt={props.alt}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}
+        onClick={() => setShowProfile(!showProfile)}
       ></img>
       <div ref={serverHoverText} className="hover-text-friends-nav">
         <p>{props.alt}</p>

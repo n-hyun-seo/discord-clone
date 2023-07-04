@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { randomUsersList, returnUserInfo } from "./randomUsersList";
@@ -7,12 +7,14 @@ import Online from "./status_icons/Online";
 import Offline from "./status_icons/Offline";
 import Moon from "./status_icons/Moon";
 import Dnd from "./status_icons/Dnd";
+import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
 
 export default function UserDM() {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
 
   let currentUser = returnUserInfo(currentDMId);
   console.log(currentUser);
@@ -45,12 +47,14 @@ export default function UserDM() {
             ImgUrl="https://images.vexels.com/media/users/3/131686/isolated/preview/95d310073411ab523262be9cb43023fa-paper-pin-icon.png"
             alt="Pinned Messages"
           />
+
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="add-hide-user"
             ImgUrl="https://toppng.com/uploads/thumbnail/user-account-management-logo-user-icon-1156286714528pikaoejc.png"
-            alt="Hide User Profile"
+            alt={showProfile ? "Hide User Profile" : "Show User Profile"}
           />
+
           <FriendsNavRightButton
             containerClass="help-container"
             childClass="inbox"
@@ -72,7 +76,7 @@ export default function UserDM() {
               <div className="friends-search-input-container"></div>
             </div>
           </section>
-          <section className="user-dm-info-section"></section>
+          {showProfile && <section className="user-dm-info-section"></section>}
         </div>
       </section>
     </div>
