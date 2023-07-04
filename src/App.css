@@ -210,8 +210,19 @@ body {
 }
 
 .help {
-  width: 45%;
+  width: 47%;
   filter: brightness(400%);
+}
+
+.add-hide-user {
+  width: 45%;
+  filter: brightness(400%) grayscale(100%);
+}
+
+.pin {
+  width: 47%;
+  filter: grayscale(100%) brightness(250%);
+  transform: rotate(90deg);
 }
 
 .help:hover {

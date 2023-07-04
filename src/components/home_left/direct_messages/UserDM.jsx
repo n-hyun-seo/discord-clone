@@ -40,7 +40,19 @@ export default function UserDM() {
         </div>
         <div className="friends-right-side">
           <FriendsNavRightButton
-            containerClass="inbox-container"
+            containerClass="help-container"
+            childClass="pin"
+            ImgUrl="https://images.vexels.com/media/users/3/131686/isolated/preview/95d310073411ab523262be9cb43023fa-paper-pin-icon.png"
+            alt="Pinned Messages"
+          />
+          <FriendsNavRightButton
+            containerClass="help-container"
+            childClass="add-hide-user"
+            ImgUrl="https://toppng.com/uploads/thumbnail/user-account-management-logo-user-icon-1156286714528pikaoejc.png"
+            alt="Hide User Profile"
+          />
+          <FriendsNavRightButton
+            containerClass="help-container"
             childClass="inbox"
             ImgUrl="https://icons-for-free.com/download-icon-inbox+icon-1320183613807333914_512.png"
             alt="Inbox"
