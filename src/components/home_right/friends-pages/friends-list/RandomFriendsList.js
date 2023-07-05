@@ -14,6 +14,10 @@ export function addUserToList(
     id_number: id_number,
     online_status: online_status,
   });
+
+  randomFriendsList = randomFriendsList.sort((a, b) =>
+    a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+  );
 }
 
 addUserToList(
