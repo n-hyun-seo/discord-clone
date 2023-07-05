@@ -111,7 +111,7 @@ export default function UserDM() {
                 <p className="member-since-header">DISCORD MEMBER SINCE</p>
                 <p className="member-since-text">Jan 06, 2018</p>
                 <p className="note-header">NOTE</p>
-                <textarea className="note-text"></textarea>
+                <div className="note-text" contentEditable></div>
               </div>
             </div>
           </section>
