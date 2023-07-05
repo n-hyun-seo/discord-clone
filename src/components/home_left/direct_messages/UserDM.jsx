@@ -84,11 +84,24 @@ export default function UserDM() {
               <div className="friends-search-input-container"></div>
             </div>
           </section>
-          <section
-            ref={userProfileRef}
-            className="user-dm-info-section"
-          >
-            <div className="right-section-colored"></div>
+          <section ref={userProfileRef} className="user-dm-info-section">
+            <div className="right-section-colored">
+              <div className="pfp-container user-profile-header">
+                <div
+                  className="pfp-circle user-profile-header"
+                  style={{
+                    backgroundImage: `url("${currentUser?.ImgUrl}")`,
+                  }}
+                >
+                  <div className="online-status-outer user-profile-header">
+                    {currentUser?.online_status === "online" && <Online />}
+                    {currentUser?.online_status === "offline" && <Offline />}
+                    {currentUser?.online_status === "moon" && <Moon />}
+                    {currentUser?.online_status === "dnd" && <Dnd />}
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="right-section-uncolored"></div>
           </section>
         </div>

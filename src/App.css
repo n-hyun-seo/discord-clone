@@ -1661,7 +1661,20 @@ body {
 .right-section-colored {
   width: 100%;
   flex-basis: 18%;
-  background-color: var(--font-color);
+  background-color: gray;
+  position: relative;
+}
+
+.pfp-circle.user-profile-header {
+  transform: scale(290%);
+  border: 2px #282a2d solid;
+  position: absolute;
+  left: 50px;
+  top: 100px;
+}
+
+.online-status-outer.user-profile-header {
+  transform: scale(60%);
 }
 
 .right-section-uncolored {
