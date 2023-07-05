@@ -1671,6 +1671,7 @@ body {
   position: absolute;
   left: 50px;
   top: 105px;
+  background-color: #282a2d;
 }
 
 .online-status-outer.user-profile-header {
@@ -1691,6 +1692,7 @@ body {
   background-color: #131314;
   height: 200px;
   margin-top: 60px;
+  color: white;
 }
 
 ::-webkit-scrollbar {
