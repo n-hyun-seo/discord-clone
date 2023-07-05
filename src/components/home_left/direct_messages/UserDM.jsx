@@ -102,7 +102,9 @@ export default function UserDM() {
                 </div>
               </div>
             </div>
-            <div className="right-section-uncolored"></div>
+            <div className="right-section-uncolored">
+              <div className="user-info-box"></div>
+            </div>
           </section>
         </div>
       </section>
