@@ -363,10 +363,14 @@ body {
 }
 
 .user-dm-info-section {
-  width: 330px;
+  width: 355px;
   border-left: 1px solid rgba(128, 128, 128, 0.234);
   background-color: #282a2d;
   transition: width 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .friends-list-section {
@@ -1652,6 +1656,17 @@ body {
 .pfp-circle.dm-header {
   scale: 85%;
   margin-left: 15px;
+}
+
+.right-section-colored {
+  width: 100%;
+  flex-basis: 18%;
+  background-color: var(--font-color);
+}
+
+.right-section-uncolored {
+  width: 100%;
+  flex-basis: 82%;
 }
 
 ::-webkit-scrollbar {

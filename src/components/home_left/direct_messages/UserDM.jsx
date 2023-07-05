@@ -20,7 +20,6 @@ export default function UserDM() {
   const userProfileRef = useRef();
 
   let currentUser = returnUserInfo(currentDMId);
-  console.log(currentUser);
 
   return (
     <div className="right">
