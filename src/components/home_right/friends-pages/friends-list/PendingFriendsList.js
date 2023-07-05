@@ -6,7 +6,11 @@ function addUserToList(
   ImgUrl,
   id_number,
   online_status,
-  isIncoming
+  isIncoming,
+  user_tag = "default#1234",
+  about_me = "",
+  member_since = "Jan 06, 2001",
+  note = ""
 ) {
   return pendingFriendsList.push({
     username: username,
@@ -15,6 +19,10 @@ function addUserToList(
     id_number: id_number,
     online_status: online_status,
     isIncoming: isIncoming,
+    user_tag: user_tag,
+    about_me: about_me,
+    member_since: member_since,
+    note: note,
   });
 }
 

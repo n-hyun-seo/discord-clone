@@ -1,12 +1,26 @@
 export let blockedFriendsList = [];
 
-function addUserToList(username, status, ImgUrl, id_number, online_status) {
+function addUserToList(
+  username,
+  status,
+  ImgUrl,
+  id_number,
+  online_status,
+  user_tag = "default#1234",
+  about_me = "",
+  member_since = "Jan 06, 2001",
+  note = ""
+) {
   return blockedFriendsList.push({
     username: username,
     status: status,
     ImgUrl: ImgUrl,
     id_number: id_number,
     online_status: online_status,
+    user_tag: user_tag,
+    about_me: about_me,
+    member_since: member_since,
+    note: note,
   });
 }
 

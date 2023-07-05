@@ -5,7 +5,11 @@ export function addUserToList(
   status,
   ImgUrl,
   id_number,
-  online_status
+  online_status,
+  user_tag = "default#1234",
+  about_me = "",
+  member_since = "Jan 06, 2001",
+  note = ""
 ) {
   randomFriendsList.push({
     username: username,
@@ -13,6 +17,10 @@ export function addUserToList(
     ImgUrl: ImgUrl,
     id_number: id_number,
     online_status: online_status,
+    user_tag: user_tag,
+    about_me: about_me,
+    member_since: member_since,
+    note: note,
   });
 
   randomFriendsList = randomFriendsList.sort((a, b) =>
