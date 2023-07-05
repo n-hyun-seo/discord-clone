@@ -88,7 +88,10 @@ export default function UserDM() {
           <section
             ref={userProfileRef}
             className="user-dm-info-section"
-          ></section>
+          >
+            <div className="right-section-colored"></div>
+            <div className="right-section-uncolored"></div>
+          </section>
         </div>
       </section>
     </div>
