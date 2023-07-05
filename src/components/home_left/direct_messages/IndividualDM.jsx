@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { DmButtonRefContext } from "../../context/DmButtonRef";
+import { CurrentSectionContext } from "../../context/CurrentSectionContext";
 import Online from "./status_icons/Online";
 import Offline from "./status_icons/Offline";
 import Moon from "./status_icons/Moon";
 import Dnd from "./status_icons/Dnd";
 import { randomUsersList, removeDM } from "./randomUsersList";
+import { useNavigate } from "react-router-dom";
 
 export function IndividualDM(props) {
+  let navigate = useNavigate();
+
   const [hoverState, setHoverState] = useState(false);
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
+  const [currentSection, setCurrentSection] = useContext(CurrentSectionContext);
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const delete_button = useRef();
@@ -109,6 +114,10 @@ export function IndividualDM(props) {
             event.stopPropagation();
             removeDM(props.username);
             props.setRerenderState(!props.rerenderState);
+            if (currentDMId === props.id_number) {
+              setCurrentSectionLeft("friends");
+              navigate(`/friends/${currentSection}`);
+            }
           }}
           className="x-button"
         >
