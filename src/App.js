@@ -24,7 +24,7 @@ function App() {
   const [dmButtonRef, setDmButtonRef] = useState({});
   const [currentIncomingFR, setCurrentIncomingFR] =
     useState(incomingFRListLength);
-  const [showProfile, setShowProfile] = useState(true);
+  const [showProfile, setShowProfile] = useState(false);
 
   return (
     <div className="App">
