@@ -363,7 +363,7 @@ body {
 }
 
 .user-dm-info-section {
-  width: 355px;
+  width: 360px;
   border-left: 1px solid rgba(128, 128, 128, 0.234);
   background-color: #282a2d;
   transition: width 0.2s;
