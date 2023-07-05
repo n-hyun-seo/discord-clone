@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
-import { randomUsersList, returnUserInfo } from "./randomUsersList";
+import { changeNote, randomUsersList, returnUserInfo } from "./randomUsersList";
 import FriendsNavRightButton from "../../home_right/friends-nav/FriendsNavRightButton";
 import Online from "./status_icons/Online";
 import Offline from "./status_icons/Offline";
@@ -11,15 +11,17 @@ import { CurrentShowProfileContext } from "../../context/CurrentShowProfileConte
 import FriendsNavSearchBar from "../../home_right/friends-nav/FriendsNavSearchBar";
 
 export default function UserDM() {
+  const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
+  const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
-  const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
-  const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
 
-  const userProfileRef = useRef();
+  const [currentNote, setCurrentNote] = useState("default");
 
   let currentUser = returnUserInfo(currentDMId);
+
+  const userProfileRef = useRef();
 
   return (
     <div className="right">
@@ -104,14 +106,24 @@ export default function UserDM() {
             </div>
             <div className="right-section-uncolored">
               <div className="user-info-box">
-                <div className="user-info-username">{currentUser?.username}</div>
-                <div className="user-info-tag">discord#1234</div>
-                <p className="about-me-header">ABOUT ME</p>
-                <p className="about-me-text">Something about me.</p>
+                <div className="user-info-username">
+                  {currentUser?.username}
+                </div>
+                <div className="user-info-tag">{currentUser?.user_tag}</div>
+                {currentUser?.about_me !== "" && (
+                  <div>
+                    <p className="about-me-header">ABOUT ME</p>
+                    <p className="about-me-text">{currentUser?.about_me}</p>
+                  </div>
+                )}
                 <p className="member-since-header">DISCORD MEMBER SINCE</p>
-                <p className="member-since-text">Jan 06, 2018</p>
+                <p className="member-since-text">{currentUser?.member_since}</p>
                 <p className="note-header">NOTE</p>
-                <div className="note-text" contentEditable></div>
+                <div
+                  key={`note${currentUser?.id_number}`}
+                  className="note-text"
+                  contentEditable
+                ></div>
               </div>
             </div>
           </section>

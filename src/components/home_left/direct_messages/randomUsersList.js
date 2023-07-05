@@ -31,6 +31,11 @@ export function returnUserInfo(id_number) {
   return returnedUser[0];
 }
 
+export function changeNote(id_number, newNote) {
+  let user = returnUserInfo(id_number);
+  user.note = newNote;
+}
+
 addUserToList(
   "the jokah",
   "🙏",
