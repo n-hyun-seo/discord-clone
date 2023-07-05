@@ -1690,9 +1690,13 @@ body {
   width: 90%;
   border-radius: 10px;
   background-color: #131314;
-  height: 200px;
   margin-top: 60px;
   color: white;
+  padding: 12px 12px;
+}
+
+.user-info-username {
+  font-family: ggsansSB;
 }
 
 ::-webkit-scrollbar {
