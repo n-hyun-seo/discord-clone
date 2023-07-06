@@ -366,11 +366,12 @@ body {
   width: 360px;
   border-left: 1px solid rgba(128, 128, 128, 0.234);
   background-color: #282a2d;
-  transition: width 0.2s;
+  transition: width 0.075s;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .friends-list-section {
@@ -1727,7 +1728,7 @@ body {
   border-bottom: 1px gray solid;
   padding-bottom: 10px;
   color: rgb(209, 205, 205);
-  width: 270px;
+  width: 100%;
   word-break: break-word;
 }
 
@@ -1756,7 +1757,7 @@ body {
   color: rgb(209, 205, 205);
   background-color: #131314;
   border: none;
-  width: 270px;
+  width: 100%;
   word-break: break-all;
 }
 
@@ -1784,7 +1785,7 @@ body {
   padding: 3px 15px;
   border-radius: 2.5px;
   margin-left: 18px;
-  transition: background-color 0.025s;
+
 }
 
 .dm-remove-friend-button {
@@ -1796,7 +1797,7 @@ body {
   padding: 3px 15px;
   border-radius: 2.5px;
   margin-left: 18px;
-  transition: background-color 0.025s;
+ 
 }
 
 .dm-add-friend-button:hover {
@@ -1811,7 +1812,7 @@ body {
   padding: 3px 15px;
   border-radius: 2.5px;
   background-color: rgb(70, 72, 79);
-  transition: background-color 0.025s;
+ 
 }
 
 .dm-FR-sent-button {

@@ -17,8 +17,14 @@ import {
 } from "../../home_right/friends-pages/friends-list/RandomFriendsList";
 import {
   addUserToList,
+  removePending,
   returnPendingInfo,
 } from "../../home_right/friends-pages/friends-list/PendingFriendsList";
+import {
+  returnBlockedInfo,
+  addUserToList as addUserToBlocked,
+  removeBlocked,
+} from "../../home_right/friends-pages/friends-list/BlockedFriendsList";
 
 export default function UserDM() {
   const now = new Date();
@@ -36,6 +42,7 @@ export default function UserDM() {
   let currentUser = returnUserInfo(currentDMId);
   let isFriend = returnFriendInfo(currentUser?.id_number);
   let isPending = returnPendingInfo(currentUser?.id_number);
+  let isBlocked = returnBlockedInfo(currentUser?.id_number);
 
   const userProfileRef = useRef();
 
@@ -118,7 +125,9 @@ export default function UserDM() {
                 {currentUser?.username}.
               </p>
               <div className="dm-friend-button-container">
-                {isFriend ? (
+                {isBlocked ? (
+                  <div></div>
+                ) : isFriend ? (
                   <button
                     className="dm-remove-friend-button"
                     onClick={() => {
@@ -153,7 +162,39 @@ export default function UserDM() {
                     Add Friend
                   </button>
                 )}
-                <button className="dm-block-friend-button">Block</button>
+                {!isBlocked ? (
+                  <button
+                    className="dm-block-friend-button"
+                    onClick={() => {
+                      removeFromFriendsList(currentUser?.id_number);
+                      addUserToBlocked(
+                        currentUser?.username,
+                        currentUser?.status,
+                        currentUser?.ImgUrl,
+                        currentUser?.id_number,
+                        currentUser?.online_status,
+                        currentUser?.user_tag,
+                        currentUser?.about_me,
+                        currentUser?.member_since,
+                        currentUser?.note
+                      );
+                      removePending(currentUser?.username);
+                      setRerender(!rerender);
+                    }}
+                  >
+                    Block
+                  </button>
+                ) : (
+                  <button
+                    className="dm-block-friend-button"
+                    onClick={() => {
+                      removeBlocked(currentUser?.username);
+                      setRerender(!rerender);
+                    }}
+                  >
+                    Unblock
+                  </button>
+                )}
               </div>
               <p className="dm-time">{currentTime}</p>
             </div>

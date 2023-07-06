@@ -41,6 +41,13 @@ export function returnPendingInfo(id_number) {
     return false;
   }
 }
+
+export function removePending(username) {
+  pendingFriendsList = pendingFriendsList.filter(
+    (user) => user.username !== username
+  );
+}
+
 addUserToList(
   "Police",
   "",

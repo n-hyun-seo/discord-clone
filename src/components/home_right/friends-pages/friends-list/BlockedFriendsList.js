@@ -1,6 +1,6 @@
 export let blockedFriendsList = [];
 
-function addUserToList(
+export function addUserToList(
   username,
   status,
   ImgUrl,
@@ -11,7 +11,7 @@ function addUserToList(
   member_since = "Jan 06, 2001",
   note = ""
 ) {
-  return blockedFriendsList.push({
+  blockedFriendsList.push({
     username: username,
     status: status,
     ImgUrl: ImgUrl,
@@ -22,6 +22,26 @@ function addUserToList(
     member_since: member_since,
     note: note,
   });
+  blockedFriendsList.sort((a, b) =>
+    a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+  );
+}
+
+export function returnBlockedInfo(id_number) {
+  let returnedUser = blockedFriendsList.filter(
+    (user) => user.id_number === id_number
+  );
+  if (returnedUser.length !== 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function removeBlocked(username) {
+  blockedFriendsList = blockedFriendsList.filter(
+    (user) => user.username !== username
+  );
 }
 
 addUserToList(
@@ -135,13 +155,3 @@ addUserToList(
   42,
   "offline"
 );
-
-blockedFriendsList.sort((a, b) =>
-  a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-);
-
-export function removeBlocked(username) {
-  blockedFriendsList = blockedFriendsList.filter(
-    (user) => user.username !== username
-  );
-}
