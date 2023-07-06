@@ -1786,6 +1786,10 @@ body {
   margin-left: 18px;
 }
 
+.dm-add-friend-button:hover {
+  background-color: rgb(72, 72, 200);
+}
+
 .dm-block-friend-button {
   color: rgb(232, 231, 231);
   font-family: ggsansM;
@@ -1794,6 +1798,10 @@ body {
   padding: 3px 15px;
   border-radius: 2.5px;
   background-color: rgb(70, 72, 79);
+}
+
+.dm-block-friend-button:hover {
+  background-color: rgb(90, 92, 101);
 }
 
 .user-dm-message-top {
