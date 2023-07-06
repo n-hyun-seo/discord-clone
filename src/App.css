@@ -1483,7 +1483,8 @@ body {
   width: 100%;
 }
 
-.friends-type-list::-webkit-scrollbar {
+.friends-type-list::-webkit-scrollbar,
+.user-dm-message-top::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -1491,6 +1492,11 @@ body {
   border-radius: 10px;
   background-color: #2b2d31;
   margin-top: 60px;
+}
+
+.user-dm-message-top::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #2b2d31;
 }
 
 .friends-type-container {
@@ -1767,10 +1773,79 @@ body {
 .dm-friend-button-container {
   display: flex;
 }
-.dm-add-friend-button, .dm-block-friend-button {
+.dm-add-friend-button,
+.dm-block-friend-button {
   width: 50px;
 }
 
+.user-dm-message-top {
+  flex-basis: 90%;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  color: rgb(232, 231, 231);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.user-dm-message-bottom {
+  flex-basis: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-dm-message-bottom input {
+  width: 75%;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  border: 1px red solid;
+  font-size: 16px;
+  color: rgb(232, 231, 231);
+}
+
+.user-dm-message-bottom input:focus {
+  outline: none;
+}
+
+.user-dm-message-header-username {
+  font-size: 30px;
+  font-family: ggsansB;
+  padding-left: 18px;
+  padding-top: 8px;
+}
+
+.user-dm-message-header-usertag {
+  font-size: 18px;
+  padding-left: 18px;
+  padding-top: 8px;
+}
+
+.begining-of-dm-text {
+  color: #a2a8b0;
+  font-size: 15px;
+  padding-left: 18px;
+  padding-top: 8px;
+}
+
+.dm-time {
+  color: #a2a8b0;
+}
+
+.pfp-circle.user-dm-message-header {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin-left: 18px;
+}
+
+.message-input-container {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(62, 64, 71);
+  height: 40px;
+  border-radius: 5px;
+}
 ::-webkit-scrollbar {
   width: 4px;
 }
