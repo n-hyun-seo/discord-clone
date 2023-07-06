@@ -86,7 +86,7 @@ export default function Right() {
             </div>
             <Routes>
               <Route
-                path=""
+                path="/discord-clone"
                 element={
                   <OnlinePage
                     header="ONLINE"

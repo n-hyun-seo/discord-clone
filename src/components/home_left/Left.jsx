@@ -35,12 +35,7 @@ export default function Left() {
         />
 
       </Link>
-      <Button
-        buttonClass="discord-birthday"
-        containerClass="birthday-container"
-        text="Discord's Birthday"
-        source="https://cdn3.emoji.gg/emojis/1567-birthday-discord-dark-theme.png"
-      />
+      
 
       <DirectMessages />
 
