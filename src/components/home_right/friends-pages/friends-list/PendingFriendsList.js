@@ -1,6 +1,6 @@
 export let pendingFriendsList = [];
 
-function addUserToList(
+export function addUserToList(
   username,
   status,
   ImgUrl,
@@ -12,7 +12,7 @@ function addUserToList(
   member_since = "Jan 06, 2001",
   note = ""
 ) {
-  return pendingFriendsList.push({
+  pendingFriendsList.push({
     username: username,
     status: status,
     ImgUrl: ImgUrl,
@@ -24,8 +24,23 @@ function addUserToList(
     member_since: member_since,
     note: note,
   });
+
+  pendingFriendsList.sort((a, b) =>
+    a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+  );
 }
 
+export function returnPendingInfo(id_number) {
+  let returnedUser = pendingFriendsList.filter(
+    (user) => user.id_number === id_number
+  );
+  console.log(returnedUser);
+  if (returnedUser.length !== 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 addUserToList(
   "Police",
   "",
@@ -69,10 +84,6 @@ addUserToList(
   28,
   "online",
   false
-);
-
-pendingFriendsList.sort((a, b) =>
-  a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
 );
 
 export const incomingFRListLength = pendingFriendsList.filter(

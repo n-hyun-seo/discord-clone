@@ -12,8 +12,13 @@ import FriendsNavSearchBar from "../../home_right/friends-nav/FriendsNavSearchBa
 import date from "date-and-time";
 import {
   randomFriendsList,
+  removeFromFriendsList,
   returnFriendInfo,
 } from "../../home_right/friends-pages/friends-list/RandomFriendsList";
+import {
+  addUserToList,
+  returnPendingInfo,
+} from "../../home_right/friends-pages/friends-list/PendingFriendsList";
 
 export default function UserDM() {
   const now = new Date();
@@ -24,12 +29,13 @@ export default function UserDM() {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
+  const [rerender, setRerender] = useState(false);
 
   const [currentNote, setCurrentNote] = useState("default");
 
   let currentUser = returnUserInfo(currentDMId);
   let isFriend = returnFriendInfo(currentUser?.id_number);
-  console.log(isFriend);
+  let isPending = returnPendingInfo(currentUser?.id_number);
 
   const userProfileRef = useRef();
 
@@ -112,11 +118,38 @@ export default function UserDM() {
                 {currentUser?.username}.
               </p>
               <div className="dm-friend-button-container">
-                {!isFriend ? (
-                  <button className="dm-add-friend-button">Add Friend</button>
-                ) : (
-                  <button className="dm-remove-friend-button">
+                {isFriend ? (
+                  <button
+                    className="dm-remove-friend-button"
+                    onClick={() => {
+                      removeFromFriendsList(currentUser?.id_number);
+                      setRerender(!rerender);
+                    }}
+                  >
                     Remove Friend
+                  </button>
+                ) : isPending ? (
+                  <button>friend request sent</button>
+                ) : (
+                  <button
+                    className="dm-add-friend-button"
+                    onClick={() => {
+                      addUserToList(
+                        currentUser?.username,
+                        currentUser?.status,
+                        currentUser?.ImgUrl,
+                        currentUser?.id_number,
+                        currentUser?.online_status,
+                        currentUser?.user_tag,
+                        currentUser?.about_me,
+                        currentUser?.member_since,
+                        currentUser?.note
+                      );
+                      setRerender(!rerender);
+                      console.log(isFriend);
+                    }}
+                  >
+                    Add Friend
                   </button>
                 )}
                 <button className="dm-block-friend-button">Block</button>
