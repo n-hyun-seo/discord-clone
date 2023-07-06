@@ -1772,10 +1772,28 @@ body {
 
 .dm-friend-button-container {
   display: flex;
+  gap: 12px;
+  margin-top: 10px;
 }
-.dm-add-friend-button,
+.dm-add-friend-button {
+  color: rgb(232, 231, 231);
+  background-color: rgb(88, 88, 239);
+  font-family: ggsansM;
+  border: none;
+  font-size: 14.5px;
+  padding: 3px 15px;
+  border-radius: 2.5px;
+  margin-left: 18px;
+}
+
 .dm-block-friend-button {
-  width: 50px;
+  color: rgb(232, 231, 231);
+  font-family: ggsansM;
+  border: none;
+  font-size: 14.5px;
+  padding: 3px 15px;
+  border-radius: 2.5px;
+  background-color: rgb(70, 72, 79);
 }
 
 .user-dm-message-top {
