@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/discord-clone/static/css/main.227646e4.css",
-    "main.js": "/discord-clone/static/js/main.ad737c56.js",
-    "static/media/ggsansSemibold.woff": "/discord-clone/static/media/ggsansSemibold.69f979b5e93ca9bc47bc.woff",
-    "static/media/ggsansMedium.woff": "/discord-clone/static/media/ggsansMedium.83d13d754b226c8e4a46.woff",
-    "static/media/ggsansBold.woff": "/discord-clone/static/media/ggsansBold.330ecc0e545f4da7362d.woff",
-    "static/media/ggsansRegular.woff": "/discord-clone/static/media/ggsansRegular.c1560687fc8676bab59b.woff",
-    "static/media/wumpus.JPG": "/discord-clone/static/media/wumpus.6d6c99020732f03ff0bb.JPG",
-    "index.html": "/discord-clone/index.html",
-    "main.227646e4.css.map": "/discord-clone/static/css/main.227646e4.css.map",
-    "main.ad737c56.js.map": "/discord-clone/static/js/main.ad737c56.js.map"
+    "main.css": "/fri/static/css/main.fd9edc0b.css",
+    "main.js": "/fri/static/js/main.1be6c3f6.js",
+    "static/media/ggsansSemibold.woff": "/fri/static/media/ggsansSemibold.69f979b5e93ca9bc47bc.woff",
+    "static/media/ggsansMedium.woff": "/fri/static/media/ggsansMedium.83d13d754b226c8e4a46.woff",
+    "static/media/ggsansBold.woff": "/fri/static/media/ggsansBold.330ecc0e545f4da7362d.woff",
+    "static/media/ggsansRegular.woff": "/fri/static/media/ggsansRegular.c1560687fc8676bab59b.woff",
+    "static/media/wumpus.JPG": "/fri/static/media/wumpus.6d6c99020732f03ff0bb.JPG",
+    "index.html": "/fri/index.html",
+    "main.fd9edc0b.css.map": "/fri/static/css/main.fd9edc0b.css.map",
+    "main.1be6c3f6.js.map": "/fri/static/js/main.1be6c3f6.js.map"
   },
   "entrypoints": [
-    "static/css/main.227646e4.css",
-    "static/js/main.ad737c56.js"
+    "static/css/main.fd9edc0b.css",
+    "static/js/main.1be6c3f6.js"
   ]
 }
