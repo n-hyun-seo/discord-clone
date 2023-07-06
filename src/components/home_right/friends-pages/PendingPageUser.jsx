@@ -50,10 +50,7 @@ export default function PendingPageUser(props) {
     if (!hoverState) return "user-name-dm-unhovered nolimit";
   }
 
-  function changeDMStatusIconClass() {
-    if (props.status === "") return "no-status-icon";
-    return "status-message-icon-unhovered";
-  }
+  
 
   return (
     <Link
@@ -123,7 +120,7 @@ export default function PendingPageUser(props) {
           <img
             src="https://icon-library.com/images/texting-icon-png/texting-icon-png-25.jpg"
             alt="status message"
-            className={changeDMStatusIconClass()}
+            className="no-status-icon"
           />
         </div>
       </section>

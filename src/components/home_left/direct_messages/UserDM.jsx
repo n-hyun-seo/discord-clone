@@ -129,7 +129,7 @@ export default function UserDM() {
                     Remove Friend
                   </button>
                 ) : isPending ? (
-                  <button>friend request sent</button>
+                  <div className="dm-FR-sent-button">Friend Request Sent</div>
                 ) : (
                   <button
                     className="dm-add-friend-button"
@@ -140,6 +140,7 @@ export default function UserDM() {
                         currentUser?.ImgUrl,
                         currentUser?.id_number,
                         currentUser?.online_status,
+                        false,
                         currentUser?.user_tag,
                         currentUser?.about_me,
                         currentUser?.member_since,

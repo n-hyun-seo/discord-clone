@@ -1814,6 +1814,18 @@ body {
   transition: background-color 0.025s;
 }
 
+.dm-FR-sent-button {
+  color: rgb(232, 231, 231);
+  background-color: rgb(88, 88, 239);
+  font-family: ggsansM;
+  border: none;
+  font-size: 14.5px;
+  padding: 3px 15px;
+  border-radius: 2.5px;
+  margin-left: 18px;
+ filter: brightness(70%);
+}
+
 .dm-block-friend-button:hover,
 .dm-remove-friend-button:hover {
   background-color: rgb(90, 92, 101);
