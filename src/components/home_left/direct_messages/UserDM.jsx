@@ -9,8 +9,12 @@ import Moon from "./status_icons/Moon";
 import Dnd from "./status_icons/Dnd";
 import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
 import FriendsNavSearchBar from "../../home_right/friends-nav/FriendsNavSearchBar";
+import date from "date-and-time";
 
 export default function UserDM() {
+  const now = new Date();
+  const currentTime = date.format(now, "MMMM DD, YYYY");
+
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -81,10 +85,30 @@ export default function UserDM() {
       </div>
       <section className="friends-content">
         <div className="friends-list-bottom-container">
-          <section className="friends-list-section">
-            <div className="friends-search-container">
-              <div className="friends-search-input-container"></div>
+          <section className="friends-list-section user-dm-message">
+            <div className="pfp-container user-dm-message-header">
+              <div
+                className="pfp-circle user-dm-message-header"
+                style={{
+                  backgroundImage: `url("${currentUser?.ImgUrl}")`,
+                }}
+              ></div>
             </div>
+            <p className="user-dm-message-header-username">
+              {currentUser?.username}
+            </p>
+            <p className="user-dm-message-header-usertag">
+              {currentUser?.user_tag}
+            </p>
+            <p className="begining-of-dm-text">
+              This is the beginning of your direct message history with{" "}
+              {currentUser?.username}
+            </p>
+            <div className="dm-friend-button-container">
+              <button className="dm-add-friend-button">Add Friend</button>
+              <button className="dm-block-friend-button">Block</button>
+            </div>
+            <p className="dm-time">{currentTime}</p>
           </section>
           <section ref={userProfileRef} className="user-dm-info-section">
             <div className="right-section-colored">

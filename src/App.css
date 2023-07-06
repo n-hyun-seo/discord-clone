@@ -1758,6 +1758,19 @@ body {
   outline: none;
 }
 
+.friends-list-section.user-dm-message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dm-friend-button-container {
+  display: flex;
+}
+.dm-add-friend-button, .dm-block-friend-button {
+  width: 50px;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

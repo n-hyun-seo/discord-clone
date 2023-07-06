@@ -54,7 +54,7 @@ addUserToList(
   2,
   "offline",
   "Anna#0001",
-  "Nice to meet you!",
+  '19 "She was like the Spring that came to melt away my hard and cold Winter.” -Fruits Basket',
   "Dec 25, 2013",
   ""
 );
