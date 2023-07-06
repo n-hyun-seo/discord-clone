@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../context/CurrentSectionLeftContext";
-import { changeNote, randomUsersList, returnUserInfo } from "./randomUsersList";
+import { returnUserInfo } from "./randomUsersList";
 import FriendsNavRightButton from "../../home_right/friends-nav/FriendsNavRightButton";
 import Online from "./status_icons/Online";
 import Offline from "./status_icons/Offline";
@@ -10,6 +10,10 @@ import Dnd from "./status_icons/Dnd";
 import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
 import FriendsNavSearchBar from "../../home_right/friends-nav/FriendsNavSearchBar";
 import date from "date-and-time";
+import {
+  randomFriendsList,
+  returnFriendInfo,
+} from "../../home_right/friends-pages/friends-list/RandomFriendsList";
 
 export default function UserDM() {
   const now = new Date();
@@ -24,6 +28,8 @@ export default function UserDM() {
   const [currentNote, setCurrentNote] = useState("default");
 
   let currentUser = returnUserInfo(currentDMId);
+  let isFriend = returnFriendInfo(currentUser?.id_number);
+  console.log(isFriend);
 
   const userProfileRef = useRef();
 
@@ -106,7 +112,13 @@ export default function UserDM() {
                 {currentUser?.username}.
               </p>
               <div className="dm-friend-button-container">
-                <button className="dm-add-friend-button">Add Friend</button>
+                {!isFriend ? (
+                  <button className="dm-add-friend-button">Add Friend</button>
+                ) : (
+                  <button className="dm-remove-friend-button">
+                    Remove Friend
+                  </button>
+                )}
                 <button className="dm-block-friend-button">Block</button>
               </div>
               <p className="dm-time">{currentTime}</p>

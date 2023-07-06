@@ -28,6 +28,18 @@ export function addUserToList(
   );
 }
 
+export function returnFriendInfo(id_number) {
+  let returnedUser = randomFriendsList.filter(
+    (user) => user.id_number === id_number
+  );
+  console.log(returnedUser);
+  if (returnedUser.length !== 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 addUserToList(
   "the jokah",
   "🙏",

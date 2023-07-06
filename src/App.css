@@ -1784,6 +1784,19 @@ body {
   padding: 3px 15px;
   border-radius: 2.5px;
   margin-left: 18px;
+  transition: background-color 0.025s;
+}
+
+.dm-remove-friend-button {
+  color: rgb(232, 231, 231);
+  background-color: rgb(70, 72, 79);
+  font-family: ggsansM;
+  border: none;
+  font-size: 14.5px;
+  padding: 3px 15px;
+  border-radius: 2.5px;
+  margin-left: 18px;
+  transition: background-color 0.025s;
 }
 
 .dm-add-friend-button:hover {
@@ -1798,9 +1811,11 @@ body {
   padding: 3px 15px;
   border-radius: 2.5px;
   background-color: rgb(70, 72, 79);
+  transition: background-color 0.025s;
 }
 
-.dm-block-friend-button:hover {
+.dm-block-friend-button:hover,
+.dm-remove-friend-button:hover {
   background-color: rgb(90, 92, 101);
 }
 
