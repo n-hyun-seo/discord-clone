@@ -196,7 +196,11 @@ export default function UserDM() {
                   </button>
                 )}
               </div>
-              <p className="dm-time">{currentTime}</p>
+              <div className="time-container">
+                <div className="time-divider"></div>
+                <p className="dm-time">{currentTime}</p>
+                <div className="time-divider"></div>
+              </div>
             </div>
             <div className="user-dm-message-bottom">
               <div className="message-input-container">

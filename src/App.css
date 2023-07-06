@@ -1774,7 +1774,7 @@ body {
 .dm-friend-button-container {
   display: flex;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 18px;
 }
 .dm-add-friend-button {
   color: rgb(232, 231, 231);
@@ -1878,11 +1878,15 @@ body {
   color: #a2a8b0;
   font-size: 15px;
   padding-left: 18px;
-  padding-top: 8px;
+  padding-top: 15px;
 }
 
 .dm-time {
   color: #a2a8b0;
+  font-size: 13px;
+  font-family: ggsansM;
+  flex-basis: 8%;
+  text-align: center;
 }
 
 .pfp-circle.user-dm-message-header {
@@ -1899,6 +1903,19 @@ body {
   background-color: rgb(62, 64, 71);
   height: 40px;
   border-radius: 5px;
+}
+
+.time-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.time-divider {
+  flex-basis: 46%;
+  height: 1px;
+  background-color: rgba(128, 128, 128, 0.234);
+  
 }
 ::-webkit-scrollbar {
   width: 4px;
