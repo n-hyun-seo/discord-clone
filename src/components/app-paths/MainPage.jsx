@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import { useState } from "react";
 import DiscordHomeButton from "../home_left/DiscordHomeButton";
 import Home from "../home_left/Home";
@@ -14,6 +14,9 @@ import { serversList } from "../a_random_server/randomServersList";
 import AddServerButton from "../a_random_server/AddServerButton";
 import { incomingFRListLength } from "../home_right/friends-pages/friends-list/PendingFriendsList";
 import { CurrentShowProfileContext } from "../context/CurrentShowProfileContext";
+import { auth } from "../../config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
 
 export default function MainPage() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -24,6 +27,25 @@ export default function MainPage() {
   const [currentIncomingFR, setCurrentIncomingFR] =
     useState(incomingFRListLength);
   const [showProfile, setShowProfile] = useState(false);
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    async function checkLoggedIn() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log("user in logged in, can use discord");
+          console.log(user);
+        } else {
+          console.log(
+            "user is not signed in, will be redirected to log in page"
+          );
+          navigate("/discord-clone");
+        }
+      });
+    }
+    checkLoggedIn();
+  }, []);
 
   return (
     <div className="main-page">
