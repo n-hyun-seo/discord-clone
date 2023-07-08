@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/discord-clone/main/friends/online/static/css/main.4b278555.css",
-    "main.js": "/discord-clone/main/friends/online/static/js/main.05862604.js",
-    "static/media/ggsansSemibold.woff": "/discord-clone/main/friends/online/static/media/ggsansSemibold.69f979b5e93ca9bc47bc.woff",
-    "static/media/ggsansMedium.woff": "/discord-clone/main/friends/online/static/media/ggsansMedium.83d13d754b226c8e4a46.woff",
-    "static/media/ggsansBold.woff": "/discord-clone/main/friends/online/static/media/ggsansBold.330ecc0e545f4da7362d.woff",
-    "static/media/ggsansRegular.woff": "/discord-clone/main/friends/online/static/media/ggsansRegular.c1560687fc8676bab59b.woff",
-    "static/media/wumpus.JPG": "/discord-clone/main/friends/online/static/media/wumpus.6d6c99020732f03ff0bb.JPG",
-    "index.html": "/discord-clone/main/friends/online/index.html",
-    "main.4b278555.css.map": "/discord-clone/main/friends/online/static/css/main.4b278555.css.map",
-    "main.05862604.js.map": "/discord-clone/main/friends/online/static/js/main.05862604.js.map"
+    "main.css": "/discord-clone/static/css/main.460b4207.css",
+    "main.js": "/discord-clone/static/js/main.c58eb265.js",
+    "static/media/ggsansSemibold.woff": "/discord-clone/static/media/ggsansSemibold.69f979b5e93ca9bc47bc.woff",
+    "static/media/ggsansMedium.woff": "/discord-clone/static/media/ggsansMedium.83d13d754b226c8e4a46.woff",
+    "static/media/ggsansBold.woff": "/discord-clone/static/media/ggsansBold.330ecc0e545f4da7362d.woff",
+    "static/media/ggsansRegular.woff": "/discord-clone/static/media/ggsansRegular.c1560687fc8676bab59b.woff",
+    "static/media/wumpus.JPG": "/discord-clone/static/media/wumpus.6d6c99020732f03ff0bb.JPG",
+    "index.html": "/discord-clone/index.html",
+    "main.460b4207.css.map": "/discord-clone/static/css/main.460b4207.css.map",
+    "main.c58eb265.js.map": "/discord-clone/static/js/main.c58eb265.js.map"
   },
   "entrypoints": [
-    "static/css/main.4b278555.css",
-    "static/js/main.05862604.js"
+    "static/css/main.460b4207.css",
+    "static/js/main.c58eb265.js"
   ]
 }
