@@ -50,11 +50,9 @@ export default function PendingPageUser(props) {
     if (!hoverState) return "user-name-dm-unhovered nolimit";
   }
 
-  
-
   return (
     <Link
-      to={`/dm/${props.id_number}`}
+      to={`../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
         for (let i in randomUsersList) {

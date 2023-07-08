@@ -51,7 +51,7 @@ export default function OnlinePageUser(props) {
 
   return (
     <Link
-      to={`/dm/${props.id_number}`}
+      to={`../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
         for (let i in randomUsersList) {

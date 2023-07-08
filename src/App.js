@@ -5,13 +5,13 @@ import LogInPage from "./components/app-paths/LogInPage";
 import MainPage from "./components/app-paths/MainPage";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div className="App">
       <Routes>
-        <Route path="auth" element={<LogInPage />} />
-        <Route path="*" element={<MainPage />} />
+        <Route path="discord-clone/auth/*" element={<LogInPage />} />
+        <Route path="discord-clone/main/*" element={isLoggedIn && <MainPage />} />
       </Routes>
     </div>
   );

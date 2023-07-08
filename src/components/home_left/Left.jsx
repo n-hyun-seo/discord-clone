@@ -21,7 +21,7 @@ export default function Left() {
     <section className="left">
       <SearchButton classNaming="conversation-search" />
       <Link
-        to={`/friends/${currentSection}`}
+        to={`friends/${currentSection}`}
         className="linkToFriends"
         onClick={() => {
           setCurrentSectionLeft("friends");
@@ -33,9 +33,7 @@ export default function Left() {
           text="Friends"
           source="https://www.nicepng.com/png/full/332-3327400_gillespie-fuels-propane-friend-icon-png-white.png"
         />
-
       </Link>
-      
 
       <DirectMessages />
 

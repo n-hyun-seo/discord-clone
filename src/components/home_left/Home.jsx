@@ -9,8 +9,8 @@ export default function Home() {
       <Left />
 
       <Routes>
-        <Route path="*" element={<Right />} />
-        <Route path="/dm/*" element={<UserDM />} />
+        <Route path="friends/*" element={<Right />} />
+        <Route path="dm/*" element={<UserDM />} />
       </Routes>
     </section>
   );

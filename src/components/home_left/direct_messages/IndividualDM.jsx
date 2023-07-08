@@ -60,7 +60,7 @@ export function IndividualDM(props) {
 
   return (
     <Link
-      to={`/dm/${props.id_number}`}
+      to={`/discord-clone/main/dm/${props.id_number}`}
       className={changeButtonClass()}
       ref={dm_button}
       key={props.id_number}

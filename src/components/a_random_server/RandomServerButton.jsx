@@ -53,7 +53,7 @@ export default function RandomServerButton(props) {
       <div className={changeBlobClass()} ref={blob2}></div>
 
       <Link
-        to={`/${props.serverName}`}
+        to={`${props.serverName}`}
         className={changeButtonClass()}
         onMouseEnter={checkCurrentPageOnEnter}
         onMouseLeave={checkCurrentPageOnLeave}

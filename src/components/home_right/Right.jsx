@@ -37,11 +37,11 @@ export default function Right() {
           <div className="friends-divider"></div>
 
           <nav className="friends-nav-button-container">
-            <FriendsNavButton to="/friends/online" text="Online" />
-            <FriendsNavButton to="/friends/all" text="All" />
-            <FriendsNavButton to="/friends/pending" text="Pending" />
-            <FriendsNavButton to="/friends/blocked" text="Blocked" />
-            <FriendsNavButton to="/friends/addfriend" text="Add Friend" />
+            <FriendsNavButton to="online" text="Online" />
+            <FriendsNavButton to="all" text="All" />
+            <FriendsNavButton to="pending" text="Pending" />
+            <FriendsNavButton to="blocked" text="Blocked" />
+            <FriendsNavButton to="addfriend" text="Add Friend" />
           </nav>
         </div>
         <div className="friends-right-side">
@@ -86,7 +86,7 @@ export default function Right() {
             </div>
             <Routes>
               <Route
-                path="/discord-clone"
+                path="*"
                 element={
                   <OnlinePage
                     header="ONLINE"
@@ -96,7 +96,7 @@ export default function Right() {
                 }
               />
               <Route
-                path="/friends/online"
+                path="online"
                 element={
                   <OnlinePage
                     header="ONLINE"
@@ -106,7 +106,7 @@ export default function Right() {
                 }
               />
               <Route
-                path="/friends/all"
+                path="all"
                 element={
                   <AllPage
                     header="ALL FRIENDS"
@@ -116,7 +116,7 @@ export default function Right() {
                 }
               />
               <Route
-                path="/friends/pending"
+                path="pending"
                 element={
                   <PendingPage
                     header="PENDING"
@@ -126,7 +126,7 @@ export default function Right() {
                 }
               />
               <Route
-                path="/friends/blocked"
+                path="blocked"
                 element={
                   <BlockedPage
                     header="BLOCKED"
@@ -135,7 +135,10 @@ export default function Right() {
                   />
                 }
               />
-              <Route path="/friends/addfriend" element={<AddFriendPage />} />
+              <Route
+                path="addfriend"
+                element={<AddFriendPage />}
+              />
             </Routes>
           </section>
           <section className="friends-active-now">

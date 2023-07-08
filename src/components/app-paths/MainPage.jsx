@@ -65,23 +65,23 @@ export default function MainPage() {
                       <Route path="*" element={<Home />} />
 
                       <Route
-                        path="/cats-server"
+                        path="cats-server"
                         element={<RandomServer serverName="cats-server" />}
                       />
                       <Route
-                        path="/dogs-server"
+                        path="dogs-server"
                         element={<RandomServer serverName="dogs-server" />}
                       />
                       <Route
-                        path="/rabbits-server"
+                        path="rabbits-server"
                         element={<RandomServer serverName="rabbits-server" />}
                       />
                       <Route
-                        path="/penguins-server"
+                        path="penguins-server"
                         element={<RandomServer serverName="penguins-server" />}
                       />
                       <Route
-                        path="/raccoons-server"
+                        path="raccoons-server"
                         element={<RandomServer serverName="raccoons-server" />}
                       />
                     </Routes>
