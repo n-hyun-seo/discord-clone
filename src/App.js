@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="" element={<LogInPage />} />
+        <Route path="discord-clone" element={<LogInPage />} />
         <Route path="discord-clone/main/*" element={isLoggedIn && <MainPage />} />
       </Routes>
     </div>
