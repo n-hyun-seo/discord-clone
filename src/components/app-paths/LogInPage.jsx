@@ -12,6 +12,7 @@ export default function LogInPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signInFail, setSignInFail] = useState(true);
 
   async function createAccount() {
     try {
@@ -24,6 +25,7 @@ export default function LogInPage() {
 
   async function signIn() {
     try {
+      if (signInFail) setSignInFail(false);
       const data = await signInWithEmailAndPassword(auth, email, password);
       console.log(data);
     } catch (err) {
@@ -53,20 +55,38 @@ export default function LogInPage() {
         <p>We're so excited to see you again!</p>
         <form className="log-in-form">
           <label for="email" className="email-label">
-            EMAIL <span className="required-star">*</span>
+            EMAIL{" "}
+            {signInFail ? (
+              <span className="invalid-log-in">
+                <i>- Login or password is invalid.</i>
+              </span>
+            ) : (
+              <span className="required-star">*</span>
+            )}
           </label>
           <input
             name="email"
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           ></input>
           <label for="password" className="password-label">
-            PASSWORD <span className="required-star">*</span>
+            PASSWORD{" "}
+            {signInFail ? (
+              <span className="invalid-log-in">
+                <i>- Login or password is invalid.</i>
+              </span>
+            ) : (
+              <span className="required-star">*</span>
+            )}
           </label>
           <input
             name="password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           ></input>
           <button onClick={signIn} className="log-in-button">
             Log In
@@ -75,7 +95,6 @@ export default function LogInPage() {
             Need an account?{" "}
             <button className="register-button">Register</button>
           </div>
-       
         </form>
       </div>
     </div>

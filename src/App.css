@@ -1992,13 +1992,13 @@ body {
 .email-label,
 .password-label {
   font-family: ggsansB;
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 15px;
 }
 
 .required-star {
   color: rgb(252, 67, 67);
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .register-description-text {
@@ -2019,6 +2019,10 @@ body {
 .register-button:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.invalid-log-in {
+  color: rgb(243, 126, 126);
 }
 ::-webkit-scrollbar {
   width: 4px;
