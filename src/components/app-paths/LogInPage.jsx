@@ -70,6 +70,7 @@ export default function LogInPage() {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            required
           ></input>
           <label for="password" className="password-label">
             PASSWORD{" "}
