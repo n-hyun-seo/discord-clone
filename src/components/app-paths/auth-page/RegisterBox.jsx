@@ -11,6 +11,7 @@ export default function RegisterBox(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [signInFail, setSignInFail] = useState(false);
 
   const registerBoxRef = useRef();
@@ -47,7 +48,7 @@ export default function RegisterBox(props) {
         }}
       >
         <label for="email" className="email-label">
-          EMAIL{" "}
+          EMAIL
           {signInFail ? (
             <span className="invalid-log-in">
               <i>- Login or password is invalid.</i>
@@ -64,8 +65,26 @@ export default function RegisterBox(props) {
           }}
           required
         ></input>
+        <label for="username" className="email-label">
+          USERNAME
+          {signInFail ? (
+            <span className="invalid-log-in">
+              <i>- Login or password is invalid.</i>
+            </span>
+          ) : (
+            <span className="required-star">*</span>
+          )}
+        </label>
+        <input
+          name="username"
+          type="text"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          required
+        ></input>
         <label for="password" className="password-label">
-          PASSWORD{" "}
+          PASSWORD
           {signInFail ? (
             <span className="invalid-log-in">
               <i>- Login or password is invalid.</i>
