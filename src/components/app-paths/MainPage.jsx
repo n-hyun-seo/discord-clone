@@ -34,11 +34,8 @@ export default function MainPage() {
     async function checkLoggedIn() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log("user in logged in, can use discord");
+          return;
         } else {
-          console.log(
-            "user is not signed in, will be redirected to log in page"
-          );
           navigate("/discord-clone");
         }
       });

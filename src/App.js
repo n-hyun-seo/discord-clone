@@ -5,7 +5,6 @@ import LogInPage from "./components/app-paths/auth-page/LogInPage";
 import MainPage from "./components/app-paths/MainPage";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div className="App">

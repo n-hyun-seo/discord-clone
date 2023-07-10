@@ -1,5 +1,38 @@
+import { db, auth } from "../../../config/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import UserInfoButton from "./UserInfoButton";
+import { useEffect, useState } from "react";
+
 export default function UserInfo(props) {
+  const [imgUrl, setImgUrl] = useState("");
+  const [username, setUsername] = useState("");
+
+  async function getUserDocument() {
+    const auth = getAuth();
+    if (auth.currentUser) {
+      const docSnapshot = await getDoc(doc(db, "users", auth.currentUser.uid));
+      const data = docSnapshot.data();
+      setImgUrl(data.userInfo.photoURL);
+      setUsername(data.userInfo.username);
+    } else {
+      console.log("couldn't fetch user document");
+    }
+  }
+
+  async function checkLoggedIn() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        getUserDocument();
+      } else {
+      }
+    });
+  }
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
   return (
     <div className="user-info-container">
       <div className="self-info-container">
@@ -7,7 +40,7 @@ export default function UserInfo(props) {
           <div
             className="pfp-circle"
             style={{
-              backgroundImage: `url("${props.ImgUrl}")`,
+              backgroundImage: `url("${imgUrl}")`,
             }}
           >
             <div className="online-status-outer">
@@ -16,8 +49,8 @@ export default function UserInfo(props) {
           </div>
         </div>
         <div className="self-info-container-small">
-          <div className="self-name">n.hyun.s</div>
-          <div className="self-tag">nhyuns#2578</div>
+          <div className="self-name">{username}</div>
+          <div className="self-tag">{username}</div>
         </div>
       </div>
       <UserInfoButton
