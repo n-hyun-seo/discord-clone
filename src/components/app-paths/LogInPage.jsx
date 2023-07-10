@@ -53,7 +53,7 @@ export default function LogInPage() {
       <div className="log-in-box">
         <h2>Welcome back!</h2>
         <p>We're so excited to see you again!</p>
-        <form className="log-in-form">
+        <form className="log-in-form" onSubmit={signIn}>
           <label for="email" className="email-label">
             EMAIL{" "}
             {signInFail ? (
@@ -89,7 +89,7 @@ export default function LogInPage() {
               setPassword(e.target.value);
             }}
           ></input>
-          <button onClick={signIn} className="log-in-button">
+          <button type="submit" className="log-in-button">
             Log In
           </button>
           <div className="register-description-text">
