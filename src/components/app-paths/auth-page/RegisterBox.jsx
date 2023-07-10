@@ -1,6 +1,9 @@
 import { auth } from "../../../config/firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function RegisterBox(props) {
@@ -9,6 +12,10 @@ export default function RegisterBox(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInFail, setSignInFail] = useState(false);
+
+  const registerBoxRef = useRef();
+
+  props.setRegisterRef(registerBoxRef);
 
   async function createAccount(e) {
     e.preventDefault();
@@ -31,12 +38,12 @@ export default function RegisterBox(props) {
   }
 
   return (
-    <div className="register-box">
+    <div className="register-box" ref={registerBoxRef}>
       <h2>Create an account</h2>
       <form
         className="log-in-form"
         onSubmit={(e) => {
-          createAccount(e).then(() => checkLoggedIn())
+          createAccount(e).then(() => checkLoggedIn());
         }}
       >
         <label for="email" className="email-label">
@@ -81,8 +88,12 @@ export default function RegisterBox(props) {
         <div className="register-description-text">
           <button
             className="register-button"
+            type="button"
             onClick={() => {
               props.setOnRegisterPage(false);
+              props.logInRef.current.style.opacity = "100%";
+              props.logInRef.current.style.marginLeft = "800px";
+              registerBoxRef.current.style.opacity = "0%";
             }}
           >
             Already have an account?

@@ -11,7 +11,8 @@ import RegisterBox from "./RegisterBox";
 
 export default function LogInPage() {
   let navigate = useNavigate();
-
+  const [logInRef, setLogInRef] = useState({});
+  const [registerRef, setRegisterRef] = useState({});
   const [onRegisterPage, setOnRegisterPage] = useState(false);
 
   useEffect(() => {
@@ -31,11 +32,16 @@ export default function LogInPage() {
 
   return (
     <div className="log-in-page">
-      {onRegisterPage ? (
-        <RegisterBox setOnRegisterPage={setOnRegisterPage} />
-      ) : (
-        <LogInBox setOnRegisterPage={setOnRegisterPage} />
-      )}
+      <LogInBox
+        setOnRegisterPage={setOnRegisterPage}
+        setLogInRef={setLogInRef}
+        registerRef={registerRef}
+      />
+      <RegisterBox
+        setOnRegisterPage={setOnRegisterPage}
+        setRegisterRef={setRegisterRef}
+        logInRef={logInRef}
+      />
     </div>
   );
 }

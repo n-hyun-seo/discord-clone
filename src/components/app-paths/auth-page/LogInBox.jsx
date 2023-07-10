@@ -1,6 +1,6 @@
 import { auth } from "../../../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 export default function LogInBox(props) {
   let navigate = useNavigate();
@@ -8,6 +8,10 @@ export default function LogInBox(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInFail, setSignInFail] = useState(false);
+
+  const loginBoxRef = useRef();
+
+  props.setLogInRef(loginBoxRef);
 
   async function signIn(e) {
     e.preventDefault();
@@ -31,7 +35,7 @@ export default function LogInBox(props) {
   }
 
   return (
-    <div className="log-in-box">
+    <div className="log-in-box" ref={loginBoxRef}>
       <h2>Welcome back!</h2>
       <p>We're so excited to see you again!</p>
       <form
@@ -82,7 +86,13 @@ export default function LogInBox(props) {
           Need an account?{" "}
           <button
             className="register-button"
-            onClick={() => props.setOnRegisterPage(true)}
+            type="button"
+            onClick={() => {
+              props.setOnRegisterPage(true);
+              props.registerRef.current.style.opacity = "100%";
+              loginBoxRef.current.style.marginLeft = "-700px";
+              loginBoxRef.current.style.opacity = "0%";
+            }}
           >
             Register
           </button>
