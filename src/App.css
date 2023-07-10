@@ -1944,7 +1944,7 @@ body {
   border-radius: 5px;
 }
 
-.log-in-box h2 {
+.log-in-box h2, .register-box h2 {
   color: rgb(235, 235, 235);
 }
 
@@ -2023,6 +2023,19 @@ body {
 
 .invalid-log-in {
   color: rgb(243, 126, 126);
+}
+
+.register-box {
+  display: flex;
+  flex-direction: column;
+  width: 460px;
+  margin-bottom: 130px;
+  background-color: #2f3135;
+  padding: 26px 0px 32px;
+  justify-content: center;
+  align-items: center;
+  color: #aab3c0;
+  border-radius: 5px;
 }
 ::-webkit-scrollbar {
   width: 4px;
