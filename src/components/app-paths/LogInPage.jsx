@@ -47,18 +47,37 @@ export default function LogInPage() {
   }, []);
 
   return (
-    <div>
-      <p>This is the log in page</p>
-      <input
-        placeholder="email"
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <input
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <button onClick={createAccount}>create account</button>
-      <button onClick={signIn}>sign in</button>
+    <div className="log-in-page">
+      <div className="log-in-box">
+        <h2>Welcome back!</h2>
+        <p>We're so excited to see you again!</p>
+        <form className="log-in-form">
+          <label for="email" className="email-label">
+            EMAIL <span className="required-star">*</span>
+          </label>
+          <input
+            name="email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <label for="password" className="password-label">
+            PASSWORD <span className="required-star">*</span>
+          </label>
+          <input
+            name="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <button onClick={signIn} className="log-in-button">
+            Log In
+          </button>
+          <div className="register-description-text">
+            Need an account?{" "}
+            <button className="register-button">Register</button>
+          </div>
+          <button onClick={createAccount}>create account</button>
+        </form>
+      </div>
     </div>
   );
 }
