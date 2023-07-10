@@ -1,10 +1,11 @@
-import { auth } from "../../../config/firebase";
+import { auth, db } from "../../../config/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function RegisterBox(props) {
   let navigate = useNavigate();
@@ -21,7 +22,24 @@ export default function RegisterBox(props) {
   async function createAccount(e) {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const data = await createUserWithEmailAndPassword(auth, email, password);
+      setDoc(doc(db, "users", data.user.uid), {
+        friends: {
+          pending: [],
+          blocked: [],
+          all: [],
+        },
+        directMessages: [],
+        userInfo: {
+          ...data.user.metadata,
+          email: data.user.email,
+          username: username,
+          uid: data.user.uid,
+          photoURL: "",
+          statusMessage: "",
+          onlineStatus: "online",
+        },
+      });
     } catch (err) {
       console.log(err);
     }

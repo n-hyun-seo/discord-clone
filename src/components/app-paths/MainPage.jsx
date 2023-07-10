@@ -35,7 +35,6 @@ export default function MainPage() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           console.log("user in logged in, can use discord");
-          console.log(user);
         } else {
           console.log(
             "user is not signed in, will be redirected to log in page"
