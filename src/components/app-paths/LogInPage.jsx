@@ -75,7 +75,7 @@ export default function LogInPage() {
             Need an account?{" "}
             <button className="register-button">Register</button>
           </div>
-          <button onClick={createAccount}>create account</button>
+       
         </form>
       </div>
     </div>
