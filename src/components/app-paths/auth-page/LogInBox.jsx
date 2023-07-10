@@ -90,7 +90,7 @@ export default function LogInBox(props) {
             onClick={() => {
               props.setOnRegisterPage(true);
               props.registerRef.current.style.opacity = "100%";
-              loginBoxRef.current.style.marginLeft = "-700px";
+              loginBoxRef.current.style.marginLeft = "-430px";
               loginBoxRef.current.style.opacity = "0%";
             }}
           >
