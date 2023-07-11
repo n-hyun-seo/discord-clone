@@ -4,20 +4,17 @@ import { doc, getDoc } from "firebase/firestore";
 import UserInfoButton from "./UserInfoButton";
 import { useEffect, useState } from "react";
 
+
 export default function UserInfo(props) {
   const [imgUrl, setImgUrl] = useState("");
   const [username, setUsername] = useState("");
 
   async function getUserDocument() {
     const auth = getAuth();
-    if (auth.currentUser) {
-      const docSnapshot = await getDoc(doc(db, "users", auth.currentUser.uid));
-      const data = docSnapshot.data();
-      setImgUrl(data.userInfo.photoURL);
-      setUsername(data.userInfo.username);
-    } else {
-      console.log("couldn't fetch user document");
-    }
+    const docSnapshot = await getDoc(doc(db, "users", auth.currentUser.uid));
+    const data = docSnapshot.data();
+    setImgUrl(data.userInfo.photoURL);
+    setUsername(data.userInfo.username);
   }
 
   async function checkLoggedIn() {

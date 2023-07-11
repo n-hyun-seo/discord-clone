@@ -63,7 +63,6 @@ export function IndividualDM(props) {
       to={`/discord-clone/main/dm/${props.id_number}`}
       className={changeButtonClass()}
       ref={dm_button}
-      key={props.id_number}
       onMouseEnter={() => {
         delete_button.current.classList.remove("hidden");
         setHoverState(true);
@@ -81,7 +80,7 @@ export function IndividualDM(props) {
         <div
           className="pfp-circle"
           style={{
-            backgroundImage: `url("${props.ImgUrl}")`,
+            backgroundImage: `url(${props.ImgUrl})`,
           }}
         >
           <div className="online-status-outer">
