@@ -1,4 +1,4 @@
-import { randomFriendsList } from "./friends-list/RandomFriendsList";
+import { allFriendsList } from "./friends-list/FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
 
 export default function AllPage(props) {
@@ -6,7 +6,7 @@ export default function AllPage(props) {
 
   props.inputValue
     ? (listToUse = props.filteredList)
-    : (listToUse = randomFriendsList);
+    : (listToUse = allFriendsList);
 
   return (
     <section className="friends-type-container">
@@ -21,10 +21,10 @@ export default function AllPage(props) {
           listToUse.map((user) => (
             <OnlinePageUser
               username={user.username}
-              status={user.status}
-              ImgUrl={user.ImgUrl}
-              id_number={user.id_number}
-              online_status={user.online_status}
+              status={user.statusMessage}
+              ImgUrl={user.photoURL}
+              id_number={user.uid}
+              online_status={user.onlineStatus}
             />
           ))
         ) : (

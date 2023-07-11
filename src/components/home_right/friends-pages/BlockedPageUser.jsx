@@ -75,12 +75,6 @@ export default function PendingPageUser(props) {
             backgroundImage: `url("${props.ImgUrl}")`,
           }}
         >
-          <div className="online-status-outer">
-            {props.online_status === "online" && <Online />}
-            {props.online_status === "offline" && <Offline />}
-            {props.online_status === "moon" && <Moon />}
-            {props.online_status === "dnd" && <Dnd />}
-          </div>
         </div>
       </div>
       <section className="user-info-dm">

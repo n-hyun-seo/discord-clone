@@ -7,19 +7,25 @@ import PendingPage from "./friends-pages/PendingPage";
 import BlockedPage from "./friends-pages/BlockedPage";
 import AddFriendPage from "./friends-pages/AddFriendPage";
 import { useState } from "react";
-import { randomFriendsList } from "./friends-pages/friends-list/RandomFriendsList";
 import { pendingFriendsList } from "./friends-pages/friends-list/PendingFriendsList";
 import { blockedFriendsList } from "./friends-pages/friends-list/BlockedFriendsList";
+import { allFriendsList } from "./friends-pages/friends-list/FriendsListFromDB";
+import { blockedList } from "./friends-pages/friends-list/BlockedListFromDB";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
-  let filteredFriendsList = randomFriendsList.filter((user) =>
+  let filteredOnlineList = allFriendsList
+    .filter((user) => user.onlineStatus !== "offline")
+    .filter((user) =>
+      user.username.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  let filteredAllList = allFriendsList.filter((user) =>
     user.username.toLowerCase().includes(inputValue.toLowerCase())
   );
   let filteredPendingList = pendingFriendsList.filter((user) =>
     user.username.toLowerCase().includes(inputValue.toLowerCase())
   );
-  let filteredBlockedList = blockedFriendsList.filter((user) =>
+  let filteredBlockedList = blockedList.filter((user) =>
     user.username.toLowerCase().includes(inputValue.toLowerCase())
   );
 
@@ -79,7 +85,6 @@ export default function Right() {
                   placeholder="Search"
                   onChange={(e) => {
                     setInputValue(e.target.value);
-                    console.log(filteredFriendsList);
                   }}
                 ></input>
               </div>
@@ -91,7 +96,7 @@ export default function Right() {
                   <OnlinePage
                     header="ONLINE"
                     inputValue={inputValue}
-                    filteredList={filteredFriendsList}
+                    filteredList={filteredOnlineList}
                   />
                 }
               />
@@ -101,7 +106,7 @@ export default function Right() {
                   <OnlinePage
                     header="ONLINE"
                     inputValue={inputValue}
-                    filteredList={filteredFriendsList}
+                    filteredList={filteredOnlineList}
                   />
                 }
               />
@@ -111,7 +116,7 @@ export default function Right() {
                   <AllPage
                     header="ALL FRIENDS"
                     inputValue={inputValue}
-                    filteredList={filteredFriendsList}
+                    filteredList={filteredAllList}
                   />
                 }
               />
@@ -135,10 +140,7 @@ export default function Right() {
                   />
                 }
               />
-              <Route
-                path="addfriend"
-                element={<AddFriendPage />}
-              />
+              <Route path="addfriend" element={<AddFriendPage />} />
             </Routes>
           </section>
           <section className="friends-active-now">

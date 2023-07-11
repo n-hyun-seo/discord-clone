@@ -1,4 +1,4 @@
-import { blockedFriendsList } from "./friends-list/BlockedFriendsList";
+import { blockedList } from "./friends-list/BlockedListFromDB";
 import BlockedPageUser from "./BlockedPageUser";
 import { useState } from "react";
 
@@ -8,7 +8,7 @@ export default function BlockedPage(props) {
 
   props.inputValue
     ? (listToUse = props.filteredList)
-    : (listToUse = blockedFriendsList);
+    : (listToUse = blockedList);
 
   return (
     <section className="friends-type-container">
@@ -23,10 +23,9 @@ export default function BlockedPage(props) {
           listToUse.map((user) => (
             <BlockedPageUser
               username={user.username}
-              status={user.status}
-              ImgUrl={user.ImgUrl}
-              id_number={user.id_number}
-              online_status={user.online_status}
+              status={user.statusMessage}
+              ImgUrl={user.photoURL}
+              id_number={user.uid}
               rerenderState={rerenderState}
               setRerenderState={setRerenderState}
             />

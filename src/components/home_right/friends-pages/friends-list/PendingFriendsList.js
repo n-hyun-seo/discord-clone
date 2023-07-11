@@ -3,31 +3,6 @@ import { collection, addDoc } from "firebase/firestore";
 
 export let pendingFriendsList = [];
 
-async function addUserToDB(
-  username,
-  status,
-  ImgUrl,
-  id_number,
-  online_status,
-  isIncoming,
-  user_tag = "default#1234",
-  about_me = "",
-  member_since = "Jan 06, 2001",
-  note = ""
-) {
-  await addDoc(collection(db, "pending-users"), {
-    username: username,
-    status: status,
-    ImgUrl: ImgUrl,
-    id_number: id_number,
-    online_status: online_status,
-    isIncoming: isIncoming,
-    user_tag: user_tag,
-    about_me: about_me,
-    member_since: member_since,
-    note: note,
-  });
-}
 
 export function addUserToList(
   username,

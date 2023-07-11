@@ -1,17 +1,16 @@
 import { randomFriendsList } from "./friends-list/RandomFriendsList";
+import { allFriendsList } from "./friends-list/FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
 
 export default function OnlinePage(props) {
-  const onlineFriendsList = randomFriendsList.filter(
-    (user) => user.online_status !== "offline"
+  const onlineFriendsList = allFriendsList.filter(
+    (user) => user.onlineStatus !== "offline"
   );
 
   let listToUse;
 
   props.inputValue
-    ? (listToUse = props.filteredList.filter(
-        (user) => user.online_status !== "offline"
-      ))
+    ? (listToUse = props.filteredList)
     : (listToUse = onlineFriendsList);
 
   return (
@@ -27,10 +26,10 @@ export default function OnlinePage(props) {
           listToUse.map((user) => (
             <OnlinePageUser
               username={user.username}
-              status={user.status}
-              ImgUrl={user.ImgUrl}
-              id_number={user.id_number}
-              online_status={user.online_status}
+              status={user.statusMessage}
+              ImgUrl={user.photoURL}
+              id_number={user.uid}
+              online_status={user.onlineStatus}
             />
           ))
         ) : (
