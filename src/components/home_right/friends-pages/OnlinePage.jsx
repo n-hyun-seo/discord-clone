@@ -1,4 +1,4 @@
-import { randomFriendsList } from "./friends-list/RandomFriendsList";
+
 import { allFriendsList } from "./friends-list/FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
 

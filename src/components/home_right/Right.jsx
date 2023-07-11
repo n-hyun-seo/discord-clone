@@ -7,8 +7,7 @@ import PendingPage from "./friends-pages/PendingPage";
 import BlockedPage from "./friends-pages/BlockedPage";
 import AddFriendPage from "./friends-pages/AddFriendPage";
 import { useState } from "react";
-import { pendingFriendsList } from "./friends-pages/friends-list/PendingFriendsList";
-import { blockedFriendsList } from "./friends-pages/friends-list/BlockedFriendsList";
+import { pendingList } from "./friends-pages/friends-list/PendingListFromDb";
 import { allFriendsList } from "./friends-pages/friends-list/FriendsListFromDB";
 import { blockedList } from "./friends-pages/friends-list/BlockedListFromDB";
 
@@ -22,7 +21,7 @@ export default function Right() {
   let filteredAllList = allFriendsList.filter((user) =>
     user.username.toLowerCase().includes(inputValue.toLowerCase())
   );
-  let filteredPendingList = pendingFriendsList.filter((user) =>
+  let filteredPendingList = pendingList.filter((user) =>
     user.username.toLowerCase().includes(inputValue.toLowerCase())
   );
   let filteredBlockedList = blockedList.filter((user) =>

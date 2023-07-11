@@ -13,15 +13,10 @@ import Offline from "../../home_left/direct_messages/status_icons/Offline";
 import Moon from "../../home_left/direct_messages/status_icons/Moon";
 import Dnd from "../../home_left/direct_messages/status_icons/Dnd";
 import {
-  incomingFRListLength,
-  pendingFriendsList,
   removeFR,
   getIncomingFRLength,
 } from "./friends-list/PendingFriendsList";
-import {
-  addUserToList as addUserToFriend,
-  randomFriendsList,
-} from "./friends-list/RandomFriendsList";
+import { addUserToList as addUserToFriend } from "./friends-list/RandomFriendsList";
 
 export default function PendingPageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(

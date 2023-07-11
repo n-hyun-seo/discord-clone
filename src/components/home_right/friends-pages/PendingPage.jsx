@@ -1,5 +1,4 @@
 import PendingPageUser from "./PendingPageUser";
-import { pendingFriendsList } from "./friends-list/PendingFriendsList";
 import { useState } from "react";
 import { pendingList } from "./friends-list/PendingListFromDb";
 
@@ -30,8 +29,8 @@ export default function PendingPage(props) {
               id_number={user.uid}
               online_status={user.onlineStatus}
               isIncoming={user.requestType}
-              // rerenderState={rerenderState}
-              // setRerenderState={setRerenderState}
+              rerenderState={rerenderState}
+              setRerenderState={setRerenderState}
             />
           ))
         ) : (
