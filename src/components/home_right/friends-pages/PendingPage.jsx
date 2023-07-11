@@ -1,6 +1,7 @@
 import PendingPageUser from "./PendingPageUser";
 import { pendingFriendsList } from "./friends-list/PendingFriendsList";
 import { useState } from "react";
+import { pendingList } from "./friends-list/PendingListFromDb";
 
 export default function PendingPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
@@ -9,7 +10,7 @@ export default function PendingPage(props) {
 
   props.inputValue
     ? (listToUse = props.filteredList)
-    : (listToUse = pendingFriendsList);
+    : (listToUse = pendingList);
 
   return (
     <section className="friends-type-container">
@@ -24,13 +25,13 @@ export default function PendingPage(props) {
           listToUse.map((user) => (
             <PendingPageUser
               username={user.username}
-              status={user.status}
-              ImgUrl={user.ImgUrl}
-              id_number={user.id_number}
-              online_status={user.online_status}
-              isIncoming={user.isIncoming}
-              rerenderState={rerenderState}
-              setRerenderState={setRerenderState}
+              status={user.statusMessages}
+              ImgUrl={user.photoURL}
+              id_number={user.uid}
+              online_status={user.onlineStatus}
+              isIncoming={user.requestType}
+              // rerenderState={rerenderState}
+              // setRerenderState={setRerenderState}
             />
           ))
         ) : (

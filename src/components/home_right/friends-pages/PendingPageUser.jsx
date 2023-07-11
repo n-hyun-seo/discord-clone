@@ -73,7 +73,7 @@ export default function PendingPageUser(props) {
       }}
       onMouseEnter={() => {
         setHoverState(true);
-        if (props.isIncoming) {
+        if (props.isIncoming === "incoming") {
           moreCircleRef.current.style.backgroundColor = "#1b1c1e";
           messageCircleRef.current.style.backgroundColor = "#1b1c1e";
         } else {
@@ -82,7 +82,7 @@ export default function PendingPageUser(props) {
       }}
       onMouseLeave={() => {
         setHoverState(false);
-        if (props.isIncoming) {
+        if (props.isIncoming === "incoming") {
           moreCircleRef.current.style.backgroundColor = "#2b2d31";
           messageCircleRef.current.style.backgroundColor = "#2b2d31";
         } else {
@@ -111,7 +111,7 @@ export default function PendingPageUser(props) {
         </p>
         <div className="user-status-dm-container">
           <p className="has-user-status-dm friend-request">
-            {props.isIncoming
+            {props.isIncoming === "incoming"
               ? "Incoming Friend Request"
               : "Outgoing Friend Request"}
           </p>
@@ -122,7 +122,7 @@ export default function PendingPageUser(props) {
           />
         </div>
       </section>
-      {props.isIncoming ? (
+      {props.isIncoming === "incoming" ? (
         <div className="text-more-box-container">
           <div
             className="pfp-circle text-box"
@@ -196,7 +196,7 @@ export default function PendingPageUser(props) {
             Ignore
           </div>
         </div>
-      ) : (
+      ) : props.isIncoming === "outgoing" ? (
         <div className="text-more-box-container">
           <div
             className="pfp-circle text-box"
@@ -230,6 +230,8 @@ export default function PendingPageUser(props) {
             Cancel
           </div>
         </div>
+      ) : (
+        "none"
       )}
     </Link>
   );

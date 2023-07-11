@@ -8,7 +8,6 @@ async function getBlockedList() {
   async function getListData() {
     const user = getAuth().currentUser;
     const docSnapshot = onSnapshot(doc(db, "users", user.uid), async (data) => {
-      console.log(data.data());
       let listData = await data.data().friends.blocked;
       let finalList = await Promise.all(
         listData.map(async (uid) => {
