@@ -13,6 +13,7 @@ import { blockedList } from "./friends-pages/friends-list/BlockedListFromDB";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
+
   let filteredOnlineList = allFriendsList
     .filter((user) => user.onlineStatus !== "offline")
     .filter((user) =>
