@@ -113,10 +113,10 @@ export function IndividualDM(props) {
             event.stopPropagation();
             removeDM(props.username);
             props.setRerenderState(!props.rerenderState);
-            if (currentDMId === props.id_number) {
-              setCurrentSectionLeft("friends");
-              navigate(`/friends/${currentSection}`);
-            }
+            // if (currentDMId === props.id_number) {
+            //   setCurrentSectionLeft("friends");
+            //   navigate(`/friends/${currentSection}`);
+            // }
           }}
           className="x-button"
         >
