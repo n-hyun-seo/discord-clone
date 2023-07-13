@@ -41,6 +41,8 @@ export default function RegisterBox(props) {
           photoURL: "",
           statusMessage: "",
           onlineStatus: "online",
+          aboutMe: "",
+          userTag: "placeholder#0000"
         },
       });
     } catch (err) {
