@@ -2,7 +2,7 @@ import { auth } from "../../../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
+import { CurrentUserUidContext } from "../../../context/CurrentUserUidContext";
 
 export default function LogInBox(props) {
   let navigate = useNavigate();

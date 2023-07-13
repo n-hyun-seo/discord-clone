@@ -1,21 +1,21 @@
 @font-face {
   font-family: "ggsans";
-  src: url(ggsansRegular.woff);
+  src: url(/src/fonts/ggsansRegular.woff);
 }
 
 @font-face {
   font-family: "ggsansM";
-  src: url(ggsansMedium.woff);
+  src: url(/src/fonts/ggsansMedium.woff);
 }
 
 @font-face {
   font-family: "ggsansB";
-  src: url(ggsansBold.woff);
+  src: url(/src/fonts/ggsansBold.woff);
 }
 
 @font-face {
   font-family: "ggsansSB";
-  src: url(ggsansSemibold.woff);
+  src: url(/src/fonts/ggsansSemibold.woff);
 }
 
 a {
@@ -1535,7 +1535,7 @@ body {
   padding-top: 300px;
   width: 90%;
   text-align: center;
-  background-image: url(wumpus.JPG);
+  background-image: url(./images/wumpus.JPG);
   height: 300px;
   background-repeat: no-repeat;
   background-position: center;

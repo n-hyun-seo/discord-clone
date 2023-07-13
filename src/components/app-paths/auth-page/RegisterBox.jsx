@@ -6,7 +6,7 @@ import {
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { doc, setDoc } from "firebase/firestore";
-import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
+import { CurrentUserUidContext } from "../../../context/CurrentUserUidContext";
 
 export default function RegisterBox(props) {
   let navigate = useNavigate();
