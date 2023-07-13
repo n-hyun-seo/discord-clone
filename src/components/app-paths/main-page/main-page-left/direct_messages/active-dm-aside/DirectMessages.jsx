@@ -68,7 +68,6 @@ export default function DirectMessages(props) {
           );
         })}
       </aside>
-      <button onClick={refetchDM}>refetch</button>
     </section>
   );
 }
