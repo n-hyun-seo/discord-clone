@@ -2055,6 +2055,11 @@ body {
   outline: 5px solid rgb(120, 120, 223);
 }
 
+.loading-page {
+  width: 100%;
+  height: 100%;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

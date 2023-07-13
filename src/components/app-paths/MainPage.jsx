@@ -36,7 +36,7 @@ export default function MainPage() {
         if (user) {
           return;
         } else {
-          navigate("/discord-clone");
+          navigate("/discord-clone/login");
         }
       });
     }

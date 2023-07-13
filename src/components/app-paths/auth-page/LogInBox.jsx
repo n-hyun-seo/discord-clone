@@ -17,7 +17,7 @@ export default function LogInBox(props) {
     e.preventDefault();
     try {
       if (signInFail) setSignInFail(false);
-      const data = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       setSignInFail(true);
     }
@@ -26,7 +26,7 @@ export default function LogInBox(props) {
   async function checkLoggedIn() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("main/friends/online");
+        navigate("/discord-clone/main/friends/online");
         console.log("you have logged in!");
       } else {
         console.log("user is not signed in");
@@ -44,7 +44,7 @@ export default function LogInBox(props) {
           signIn(e).then(() => checkLoggedIn());
         }}
       >
-        <label for="email" className="email-label">
+        <label htmlFor="email" className="email-label">
           EMAIL{" "}
           {signInFail ? (
             <span className="invalid-log-in">
@@ -62,7 +62,7 @@ export default function LogInBox(props) {
           }}
           required
         ></input>
-        <label for="password" className="password-label">
+        <label htmlFor="password" className="password-label">
           PASSWORD{" "}
           {signInFail ? (
             <span className="invalid-log-in">

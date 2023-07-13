@@ -48,7 +48,7 @@ export default function RegisterBox(props) {
   async function checkLoggedIn() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("main/friends/online");
+        navigate("/discord-clone/main/friends/online");
         console.log("you have logged in!");
       } else {
         console.log("user is not signed in");
@@ -65,7 +65,7 @@ export default function RegisterBox(props) {
           createAccount(e).then(() => checkLoggedIn());
         }}
       >
-        <label for="email" className="email-label">
+        <label htmlFor="email" className="email-label">
           EMAIL
           {signInFail ? (
             <span className="invalid-log-in">
@@ -83,7 +83,7 @@ export default function RegisterBox(props) {
           }}
           required
         ></input>
-        <label for="username" className="email-label">
+        <label htmlFor="username" className="email-label">
           USERNAME
           {signInFail ? (
             <span className="invalid-log-in">
@@ -101,7 +101,7 @@ export default function RegisterBox(props) {
           }}
           required
         ></input>
-        <label for="password" className="password-label">
+        <label htmlFor="password" className="password-label">
           PASSWORD
           {signInFail ? (
             <span className="invalid-log-in">

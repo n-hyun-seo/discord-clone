@@ -12,7 +12,12 @@ export default function DirectMessages(props) {
 
   const dm_text = useRef();
 
-  const { isLoading, isError, data, refetch: refetchDM } = useQuery(
+  const {
+    isLoading,
+    isError,
+    data,
+    refetch: refetchDM,
+  } = useQuery(
     ["dmList"],
     async () => {
       const snapshot = await getDoc(
