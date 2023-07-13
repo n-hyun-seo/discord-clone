@@ -22,8 +22,22 @@ export default function LoadingPage() {
 
   if (isLoading)
     return (
-      <div style={{ backgroundColor: "red", width: "100%", height: "100%" }}>
-        loading
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <img
+          src="https://www.clark.edu/guided-pathways/penguin-pathways-podcast/includes/loading2.gif"
+          alt="loading gif"
+          style={{ scale: "70%", height: "100px" }}
+        />
+        <p style={{ color: "white" }}>Loading...</p>
       </div>
     );
 
