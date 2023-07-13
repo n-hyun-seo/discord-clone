@@ -9,10 +9,9 @@ import LogInPage from "./components/app-paths/auth-page/LogInPage";
 import MainPage from "./components/app-paths/MainPage";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
-import { auth } from "./config/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+
 import { useNavigate } from "react-router";
-import LoadingPage from "./components/app-paths/LoadingPage";
+import LoadingPage from "./components/app-paths/loading/LoadingPage";
 
 const queryClient = new QueryClient({});
 
