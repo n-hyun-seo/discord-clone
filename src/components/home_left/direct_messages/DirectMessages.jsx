@@ -1,14 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { IndividualDM } from "./IndividualDM";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
-import { db, auth } from "../../../config/firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { dmUsersList } from "./dmUsersList";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../config/firebase";
 import { useQuery } from "@tanstack/react-query";
+import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 
 export default function DirectMessages(props) {
   const [rerenderState, setRerenderState] = useState(false);
   const [dmUsersList, setDmUsersList] = useState([]);
+
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   const dm_text = useRef();
 
@@ -16,12 +17,13 @@ export default function DirectMessages(props) {
     isLoading,
     isError,
     data,
+    error,
     refetch: refetchDM,
   } = useQuery(
     ["dmList"],
     async () => {
       const snapshot = await getDoc(
-        doc(db, "users", "IbpneiHIDSMGtfYbxrJ9aDz5l3z1")
+        doc(db, "users", currentUserUid)
       );
       const dmData = snapshot.data().directMessages;
       let finalList = await Promise.all(
@@ -37,7 +39,7 @@ export default function DirectMessages(props) {
   );
 
   if (isLoading) return <p>loading</p>;
-  if (isError) return console.log("error");
+  if (isError) return console.log(error);
 
   return (
     <section className="direct-messages-container">

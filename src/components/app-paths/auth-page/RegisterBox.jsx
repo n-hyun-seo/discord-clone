@@ -3,9 +3,10 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { doc, setDoc } from "firebase/firestore";
+import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 
 export default function RegisterBox(props) {
   let navigate = useNavigate();
@@ -14,6 +15,8 @@ export default function RegisterBox(props) {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [signInFail, setSignInFail] = useState(false);
+
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   const registerBoxRef = useRef();
 
@@ -48,10 +51,10 @@ export default function RegisterBox(props) {
   async function checkLoggedIn() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        setCurrentUserUid(user.uid);
         navigate("/discord-clone/main/friends/online");
-        console.log("you have logged in!");
       } else {
-        console.log("user is not signed in");
+        return;
       }
     });
   }

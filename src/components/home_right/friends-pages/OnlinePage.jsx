@@ -13,6 +13,8 @@ export default function OnlinePage(props) {
     ? (listToUse = props.filteredList)
     : (listToUse = onlineFriendsList);
 
+    
+
   return (
     <section className="friends-type-container">
       <section className="friends-type-list">

@@ -6,17 +6,20 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 import { useNavigate } from "react-router";
 import LoadingVisual from "./LoadingVisual";
+import { useState } from "react";
+import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 
 export default function LoadingPage() {
   let navigate = useNavigate();
+  const [currentUserUid, setCurrentUserUid] = useState("initial");
+
   const { isLoading } = useQuery(["loading"], () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        setCurrentUserUid(user.uid);
         navigate("/discord-clone/main/friends/online");
-        console.log("you have logged in!");
       } else {
-        console.log("user is not signed in");
-        navigate("discord-clone/login");
+        navigate("/discord-clone/login");
       }
     });
   });
@@ -25,10 +28,12 @@ export default function LoadingPage() {
 
   return (
     <div className="loading-page">
-      <Routes>
-        <Route path="discord-clone/login" element={<LogInPage />} />
-        <Route path="discord-clone/main/*" element={<MainPage />} />
-      </Routes>
+      <CurrentUserUidContext.Provider value={[currentUserUid, setCurrentUserUid]}>
+        <Routes>
+          <Route path="discord-clone/login" element={<LogInPage />} />
+          <Route path="discord-clone/main/*" element={<MainPage />} />
+        </Routes>
+      </CurrentUserUidContext.Provider>
     </div>
   );
 }
