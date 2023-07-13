@@ -1,8 +1,33 @@
+import { useContext } from "react";
 import { allFriendsList } from "./FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
+import { useQuery } from "@tanstack/react-query";
 
 export default function OnlinePage(props) {
-  const onlineFriendsList = allFriendsList.filter(
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+
+  const { isLoading, isError, data, error } = useQuery(
+    ["onlineList"],
+    async () => {
+      const snapshot = await getDoc(doc(db, "users", currentUserUid));
+      const listData = await snapshot.data().friends.all;
+      let finalList = await Promise.all(
+        listData.map(async (uid) => {
+          const docSnapshot = await getDoc(doc(db, "users", uid));
+          const userData = await docSnapshot.data().userInfo;
+          return userData;
+        })
+      );
+      return finalList;
+    }
+  );
+
+  if (isLoading) return <p>LOADING</p>;
+
+  const onlineFriendsList = data?.filter(
     (user) => user.onlineStatus !== "offline"
   );
 

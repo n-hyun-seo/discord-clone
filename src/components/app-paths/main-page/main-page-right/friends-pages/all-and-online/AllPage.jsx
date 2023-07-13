@@ -1,12 +1,32 @@
+import { useQuery } from "@tanstack/react-query";
 import { allFriendsList } from "./FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
+import { useContext } from "react";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 
 export default function AllPage(props) {
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+
+  const { isLoading, isError, data, error } = useQuery(["allList"], async () => {
+    const snapshot = await getDoc(doc(db, "users", currentUserUid));
+    const listData = await snapshot.data().friends.all;
+    let finalList = await Promise.all(
+      listData.map(async (uid) => {
+        const docSnapshot = await getDoc(doc(db, "users", uid));
+        const userData = await docSnapshot.data().userInfo;
+        return userData;
+      })
+    );
+    return finalList;
+  });
+
+  if (isLoading) return <p>LOADING</p>;
+
   let listToUse;
 
-  props.inputValue
-    ? (listToUse = props.filteredList)
-    : (listToUse = allFriendsList);
+  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
 
   return (
     <section className="friends-type-container">
