@@ -3,7 +3,6 @@ import { collection, addDoc } from "firebase/firestore";
 
 export let pendingFriendsList = [];
 
-
 export function addUserToList(
   username,
   status,
@@ -38,7 +37,6 @@ export function returnPendingInfo(id_number) {
   let returnedUser = pendingFriendsList.filter(
     (user) => user.id_number === id_number
   );
-  console.log(returnedUser);
   if (returnedUser.length !== 0) {
     return true;
   } else {
