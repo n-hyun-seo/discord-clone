@@ -34,28 +34,32 @@ export default function DiscordClone() {
 
   let navigate = useNavigate();
 
-  const { isLoading } = useQuery(["check-login"], async () => {
-    const snapshot = await getDoc(doc(db, "users", currentUserUid));
-    const listData = await snapshot.data().friends.pending;
-    let finalList = await Promise.all(
-      listData.map((user) => {
-        const requestType = user.requestType;
-        return { requestType };
-      })
-    );
-    const incomingFR = finalList.filter(
-      (user) => user.requestType === "incoming"
-    ).length;
-    setCurrentIncomingFR(incomingFR);
+  const { isLoading } = useQuery(
+    ["check-login"],
+    async () => {
+      const snapshot = await getDoc(doc(db, "users", currentUserUid));
+      const listData = await snapshot.data().friends.pending;
+      let finalList = await Promise.all(
+        listData.map((user) => {
+          const requestType = user.requestType;
+          return { requestType };
+        })
+      );
+      const incomingFR = finalList.filter(
+        (user) => user.requestType === "incoming"
+      ).length;
+      setCurrentIncomingFR(incomingFR);
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        return;
-      } else {
-        navigate("/discord-clone/login");
-      }
-    });
-  });
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          return;
+        } else {
+          navigate("/discord-clone/login");
+        }
+      });
+    },
+    { refetchOnWindowFocus: false }
+  );
 
   if (isLoading) return <LoadingVisual />;
 

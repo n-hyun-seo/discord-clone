@@ -25,9 +25,13 @@ import {
   addUserToList as addUserToBlocked,
   removeBlocked,
 } from "../../../main-page-right/friends-pages/blocked/BlockedFriendsList";
+import { useQuery } from "@tanstack/react-query";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
 
 export default function UserDM() {
   const now = new Date();
+
   const currentTime = date.format(now, "MMMM DD, YYYY");
 
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
@@ -37,9 +41,18 @@ export default function UserDM() {
   );
   const [rerender, setRerender] = useState(false);
 
-  const [currentNote, setCurrentNote] = useState("default");
+  const { isLoading, data, error } = useQuery(
+    [currentDMId],
+    async () => {
+      const docSnapshot = await getDoc(doc(db, "users", currentDMId));
+      const data = await docSnapshot.data().userInfo;
+      console.log(data);
+      return data;
+    },
+    { refetchOnWindowFocus: false }
+  );
 
-  let currentUser = returnUserInfo(currentDMId);
+  let currentUser = data;
   let isFriend = returnFriendInfo(currentUser?.id_number);
   let isPending = returnPendingInfo(currentUser?.id_number);
   let isBlocked = returnBlockedInfo(currentUser?.id_number);
@@ -54,14 +67,14 @@ export default function UserDM() {
             <div
               className="pfp-circle dm-header"
               style={{
-                backgroundImage: `url("${currentUser?.ImgUrl}")`,
+                backgroundImage: `url("${currentUser?.photoURL}")`,
               }}
             >
               <div className="online-status-outer">
-                {currentUser?.online_status === "online" && <Online />}
-                {currentUser?.online_status === "offline" && <Offline />}
-                {currentUser?.online_status === "moon" && <Moon />}
-                {currentUser?.online_status === "dnd" && <Dnd />}
+                {currentUser?.onlineStatus === "online" && <Online />}
+                {currentUser?.onlineStatus === "offline" && <Offline />}
+                {currentUser?.onlineStatus === "moon" && <Moon />}
+                {currentUser?.onlineStatus === "dnd" && <Dnd />}
               </div>
             </div>
           </div>
@@ -110,7 +123,7 @@ export default function UserDM() {
                 <div
                   className="pfp-circle user-dm-message-header"
                   style={{
-                    backgroundImage: `url("${currentUser?.ImgUrl}")`,
+                    backgroundImage: `url("${currentUser?.photoURL}")`,
                   }}
                 ></div>
               </div>
@@ -214,14 +227,14 @@ export default function UserDM() {
                 <div
                   className="pfp-circle user-profile-header"
                   style={{
-                    backgroundImage: `url("${currentUser?.ImgUrl}")`,
+                    backgroundImage: `url("${currentUser?.photoURL}")`,
                   }}
                 >
                   <div className="online-status-outer user-profile-header">
-                    {currentUser?.online_status === "online" && <Online />}
-                    {currentUser?.online_status === "offline" && <Offline />}
-                    {currentUser?.online_status === "moon" && <Moon />}
-                    {currentUser?.online_status === "dnd" && <Dnd />}
+                    {currentUser?.onlineStatus === "online" && <Online />}
+                    {currentUser?.onlineStatus === "offline" && <Offline />}
+                    {currentUser?.onlineStatus === "moon" && <Moon />}
+                    {currentUser?.onlineStatus === "dnd" && <Dnd />}
                   </div>
                 </div>
               </div>
@@ -231,15 +244,18 @@ export default function UserDM() {
                 <div className="user-info-username">
                   {currentUser?.username}
                 </div>
-                <div className="user-info-tag">{currentUser?.user_tag}</div>
-                {currentUser?.about_me !== "" && (
+                <div className="user-info-tag">{currentUser?.userTag}</div>
+                {currentUser?.aboutMe !== "" && (
                   <div>
                     <p className="about-me-header">ABOUT ME</p>
-                    <p className="about-me-text">{currentUser?.about_me}</p>
+                    <p className="about-me-text">{currentUser?.aboutMe}</p>
                   </div>
                 )}
                 <p className="member-since-header">DISCORD MEMBER SINCE</p>
-                <p className="member-since-text">{currentUser?.member_since}</p>
+                <p className="member-since-text">
+                  {currentUser?.creationTime.slice(0, 16)}
+                </p>
+                <p>{}</p>
                 <p className="note-header">NOTE</p>
                 <div
                   key={`note${currentUser?.id_number}`}
