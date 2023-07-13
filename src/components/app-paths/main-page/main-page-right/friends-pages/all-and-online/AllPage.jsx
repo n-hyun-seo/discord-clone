@@ -9,18 +9,22 @@ import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidC
 export default function AllPage(props) {
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
-  const { isLoading, isError, data, error } = useQuery(["allList"], async () => {
-    const snapshot = await getDoc(doc(db, "users", currentUserUid));
-    const listData = await snapshot.data().friends.all;
-    let finalList = await Promise.all(
-      listData.map(async (uid) => {
-        const docSnapshot = await getDoc(doc(db, "users", uid));
-        const userData = await docSnapshot.data().userInfo;
-        return userData;
-      })
-    );
-    return finalList;
-  });
+  const { isLoading, isError, data, error } = useQuery(
+    ["allList"],
+    async () => {
+      const snapshot = await getDoc(doc(db, "users", currentUserUid));
+      const listData = await snapshot.data().friends.all;
+      let finalList = await Promise.all(
+        listData.map(async (uid) => {
+          const docSnapshot = await getDoc(doc(db, "users", uid));
+          const userData = await docSnapshot.data().userInfo;
+          return userData;
+        })
+      );
+      return finalList;
+    },
+    { refetchOnWindowFocus: false }
+  );
 
   if (isLoading) return <p>LOADING</p>;
 

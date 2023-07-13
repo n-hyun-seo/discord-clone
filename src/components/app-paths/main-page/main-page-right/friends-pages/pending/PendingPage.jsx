@@ -1,15 +1,39 @@
 import PendingPageUser from "./PendingPageUser";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { pendingList } from "./PendingListFromDb";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import { useQuery } from "@tanstack/react-query";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
 
 export default function PendingPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
 
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+
+  const { isLoading, isError, data, error } = useQuery(
+    ["pendingList"],
+    async () => {
+      const snapshot = await getDoc(doc(db, "users", currentUserUid));
+      const listData = await snapshot.data().friends.pending;
+      let finalList = await Promise.all(
+        listData.map(async (user) => {
+          const docSnapshot = await getDoc(doc(db, "users", user.uid));
+          const userData = await docSnapshot.data().userInfo;
+          const requestType = user.requestType;
+          return { ...userData, requestType };
+        })
+      );
+      return finalList;
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  if (isLoading) return <p>LOADING</p>;
+
   let listToUse;
 
-  props.inputValue
-    ? (listToUse = props.filteredList)
-    : (listToUse = pendingList);
+  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
 
   return (
     <section className="friends-type-container">

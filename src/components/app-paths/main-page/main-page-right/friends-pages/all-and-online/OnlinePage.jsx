@@ -22,7 +22,7 @@ export default function OnlinePage(props) {
         })
       );
       return finalList;
-    }
+    }, { refetchOnWindowFocus: false }
   );
 
   if (isLoading) return <p>LOADING</p>;

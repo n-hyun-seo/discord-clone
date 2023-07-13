@@ -23,7 +23,7 @@ export default function DirectMessages(props) {
     ["dmList"],
     async () => {
       const snapshot = await getDoc(doc(db, "users", currentUserUid));
-      const dmData = snapshot.data().directMessages;
+      const dmData = await snapshot.data().directMessages;
       let finalList = await Promise.all(
         dmData.map(async (uid) => {
           const docSnapshot = await getDoc(doc(db, "users", uid));
