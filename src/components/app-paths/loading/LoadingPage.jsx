@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 import { useNavigate } from "react-router";
+import LoadingVisual from "./LoadingVisual";
 
 export default function LoadingPage() {
   let navigate = useNavigate();
@@ -20,26 +21,7 @@ export default function LoadingPage() {
     });
   });
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <img
-          src="https://www.istitutomarangoni.com/fe-web/img/marangoni/loader.gif"
-          alt="loading gif"
-          style={{ scale: "150%", height: "80px", marginTop: "-80px" }}
-        />
-        <p style={{ color: "white", fontSize: "12px", marginTop: "-15px" }}>Loading...</p>
-      </div>
-    );
+  if (isLoading) return <LoadingVisual />;
 
   return (
     <div className="loading-page">

@@ -17,6 +17,8 @@ import { CurrentShowProfileContext } from "../context/CurrentShowProfileContext"
 import { auth } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import LoadingVisual from "./loading/LoadingVisual";
 
 export default function MainPage() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -30,18 +32,17 @@ export default function MainPage() {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    async function checkLoggedIn() {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          return;
-        } else {
-          navigate("/discord-clone/login");
-        }
-      });
-    }
-    checkLoggedIn();
-  }, []);
+  const { isLoading } = useQuery(["check-login"], () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        return;
+      } else {
+        navigate("/discord-clone/login");
+      }
+    });
+  });
+
+  if (isLoading) return <LoadingVisual />;
 
   return (
     <div className="main-page">
