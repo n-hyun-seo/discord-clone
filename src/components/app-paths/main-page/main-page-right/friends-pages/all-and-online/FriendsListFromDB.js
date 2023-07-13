@@ -28,4 +28,4 @@ async function getAllFriendsList() {
   });
 }
 
-getAllFriendsList();
+

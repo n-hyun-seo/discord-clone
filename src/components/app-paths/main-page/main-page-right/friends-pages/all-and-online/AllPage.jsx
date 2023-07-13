@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import LoadingVisual from "../LoadingVisual";
 
+
 export default function AllPage(props) {
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
@@ -27,7 +28,8 @@ export default function AllPage(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <LoadingVisual />
+
+  if (isLoading) return <LoadingVisual />;
 
   let listToUse;
 
@@ -42,8 +44,8 @@ export default function AllPage(props) {
           </p>
         </div>
         <div className="test-test"></div>
-        {listToUse.length !== 0 ? (
-          listToUse.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <OnlinePageUser
               username={user.username}
               status={user.statusMessage}

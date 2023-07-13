@@ -38,7 +38,7 @@ export default function PendingPage(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <LoadingVisual />
+  if (isLoading) return <LoadingVisual />;
 
   let listToUse;
 

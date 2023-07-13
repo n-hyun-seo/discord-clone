@@ -12,7 +12,6 @@ import { CurrentIncomingFRContext } from "../../context/CurrentIncomingFRContext
 import RandomServerButton from "../main-nav/servers/ServerButton";
 import { serversList } from "../main-nav/servers/randomServersList";
 import AddServerButton from "../main-nav/server-functionality/AddServerButton";
-import { incomingFRListLength } from "../app-paths/main-page/main-page-right/friends-pages/pending/PendingFriendsList";
 import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -20,6 +19,7 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
 import { doc, getDoc } from "firebase/firestore";
 import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
+import { queryClient } from "../../App";
 
 export default function DiscordClone() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -34,21 +34,65 @@ export default function DiscordClone() {
 
   let navigate = useNavigate();
 
-  const { isLoading } = useQuery(
+  const { isLoading, isError, error } = useQuery(
     ["check-login"],
     async () => {
-      const snapshot = await getDoc(doc(db, "users", currentUserUid));
-      const listData = await snapshot.data().friends.pending;
-      let finalList = await Promise.all(
-        listData.map((user) => {
-          const requestType = user.requestType;
-          return { requestType };
-        })
-      );
-      const incomingFR = finalList.filter(
-        (user) => user.requestType === "incoming"
-      ).length;
-      setCurrentIncomingFR(incomingFR);
+      await queryClient.prefetchQuery(["dmList"], async () => {
+        const snapshot = await getDoc(doc(db, "users", currentUserUid));
+        const dmData = await snapshot.data().directMessages;
+        let finalList = await Promise.all(
+          dmData.map(async (uid) => {
+            const docSnapshot = await getDoc(doc(db, "users", uid));
+            const userData = await docSnapshot.data().userInfo;
+            return userData;
+          })
+        );
+        return finalList;
+      });
+
+      await queryClient.prefetchQuery(["allList"], async () => {
+        const snapshot = await getDoc(doc(db, "users", currentUserUid));
+        const listData = await snapshot.data().friends.all;
+        let finalList = await Promise.all(
+          listData.map(async (uid) => {
+            const docSnapshot = await getDoc(doc(db, "users", uid));
+            const userData = await docSnapshot.data().userInfo;
+            return userData;
+          })
+        );
+        return finalList;
+      });
+
+      await queryClient.prefetchQuery(["pendingList"], async () => {
+        const snapshot = await getDoc(doc(db, "users", currentUserUid));
+        const listData = await snapshot.data().friends.pending;
+        let finalList = await Promise.all(
+          listData.map(async (user) => {
+            const docSnapshot = await getDoc(doc(db, "users", user.uid));
+            const userData = await docSnapshot.data().userInfo;
+            const requestType = user.requestType;
+            return { ...userData, requestType };
+          })
+        );
+        const incomingFR = finalList.filter(
+          (user) => user.requestType === "incoming"
+        ).length;
+        setCurrentIncomingFR(incomingFR);
+        return finalList;
+      });
+
+      await queryClient.prefetchQuery(["blockedList"], async () => {
+        const snapshot = await getDoc(doc(db, "users", currentUserUid));
+        const listData = await snapshot.data().friends.blocked;
+        let finalList = await Promise.all(
+          listData.map(async (uid) => {
+            const docSnapshot = await getDoc(doc(db, "users", uid));
+            const userData = await docSnapshot.data().userInfo;
+            return userData;
+          })
+        );
+        return finalList;
+      });
 
       onAuthStateChanged(auth, (user) => {
         if (user) {

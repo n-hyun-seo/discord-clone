@@ -13,7 +13,7 @@ export default function LoadingPage() {
   let navigate = useNavigate();
   const [currentUserUid, setCurrentUserUid] = useState("initial");
 
-  const { isLoading } = useQuery(["loading"], () => {
+  const { isLoading } = useQuery(["loading"], async () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUserUid(user.uid);

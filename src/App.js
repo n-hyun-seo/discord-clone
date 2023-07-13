@@ -3,9 +3,9 @@ import "./App.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import LoadingPage from "./components/app-paths/loading-page/LoadingPage";
 
-const queryClient = new QueryClient({});
+export const queryClient = new QueryClient({});
 
-function App() {
+export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+
