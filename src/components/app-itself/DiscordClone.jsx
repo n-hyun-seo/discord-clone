@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DiscordHomeButton from "../main-nav/discord-home/DiscordHomeButton";
 import MainPage from "../app-paths/main-page/MainPage";
 import RandomServer from "../app-paths/server-page/ServerContent";
@@ -14,10 +14,12 @@ import { serversList } from "../main-nav/servers/randomServersList";
 import AddServerButton from "../main-nav/server-functionality/AddServerButton";
 import { incomingFRListLength } from "../app-paths/main-page/main-page-right/friends-pages/pending/PendingFriendsList";
 import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
-import { auth } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
+import { doc, getDoc } from "firebase/firestore";
+import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 
 export default function DiscordClone() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -25,13 +27,27 @@ export default function DiscordClone() {
   const [currentSection, setCurrentSection] = useState("online");
   const [currentDMId, setCurrentDMId] = useState("");
   const [dmButtonRef, setDmButtonRef] = useState({});
-  const [currentIncomingFR, setCurrentIncomingFR] =
-    useState(incomingFRListLength);
+  const [currentIncomingFR, setCurrentIncomingFR] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
+
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   let navigate = useNavigate();
 
-  const { isLoading } = useQuery(["check-login"], () => {
+  const { isLoading } = useQuery(["check-login"], async () => {
+    const snapshot = await getDoc(doc(db, "users", currentUserUid));
+    const listData = await snapshot.data().friends.pending;
+    let finalList = await Promise.all(
+      listData.map((user) => {
+        const requestType = user.requestType;
+        return { requestType };
+      })
+    );
+    const incomingFR = finalList.filter(
+      (user) => user.requestType === "incoming"
+    ).length;
+    setCurrentIncomingFR(incomingFR);
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
         return;

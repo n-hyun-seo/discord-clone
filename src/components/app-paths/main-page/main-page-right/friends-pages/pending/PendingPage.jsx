@@ -5,11 +5,15 @@ import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidC
 import { useQuery } from "@tanstack/react-query";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
+import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
 
 export default function PendingPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
+  );
 
   const { isLoading, isError, data, error } = useQuery(
     ["pendingList"],
@@ -24,6 +28,10 @@ export default function PendingPage(props) {
           return { ...userData, requestType };
         })
       );
+      const incomingFR = finalList.filter(
+        (user) => user.requestType === "incoming"
+      ).length;
+      setCurrentIncomingFR(incomingFR);
       return finalList;
     },
     { refetchOnWindowFocus: false }
