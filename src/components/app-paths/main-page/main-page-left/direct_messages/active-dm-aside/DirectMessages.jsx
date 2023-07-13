@@ -4,10 +4,11 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import LoadingVisual from "./LoadingVisual";
+
 
 export default function DirectMessages(props) {
   const [rerenderState, setRerenderState] = useState(false);
-  const [dmUsersList, setDmUsersList] = useState([]);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
@@ -36,8 +37,7 @@ export default function DirectMessages(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <p>loading</p>;
-  if (isError) return console.log(error);
+  if (isLoading) return <LoadingVisual />
 
   return (
     <section className="direct-messages-container">

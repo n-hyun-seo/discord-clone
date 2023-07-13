@@ -1080,6 +1080,14 @@ body {
   scrollbar-gutter: stable;
 }
 
+.dm-messages.loading {
+  scrollbar-gutter: unset;
+}
+
+.dm-messages.loading:hover {
+  overflow-y: unset;
+}
+
 .dm-messages:hover {
   overflow-y: auto;
 }
