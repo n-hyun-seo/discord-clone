@@ -1,24 +1,11 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-import { Routes, Route } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import LogInPage from "./components/app-paths/auth-page/LogInPage";
-import MainPage from "./components/app-paths/MainPage";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { useState } from "react";
-
-import { useNavigate } from "react-router";
 import LoadingPage from "./components/app-paths/loading/LoadingPage";
 
 const queryClient = new QueryClient({});
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
-  let navigate = useNavigate();
-
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
