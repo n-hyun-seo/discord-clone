@@ -5,6 +5,7 @@ import BlockedPageUser from "./BlockedPageUser";
 import { useContext, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
+import LoadingVisual from "../LoadingVisual";
 
 export default function BlockedPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
@@ -27,7 +28,7 @@ export default function BlockedPage(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <p>LOADING</p>;
+  if (isLoading) return <LoadingVisual />
 
   let listToUse;
 

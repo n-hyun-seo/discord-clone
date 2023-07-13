@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
+import LoadingVisual from "../LoadingVisual";
 
 export default function PendingPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
@@ -37,7 +38,7 @@ export default function PendingPage(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <p>LOADING</p>;
+  if (isLoading) return <LoadingVisual />
 
   let listToUse;
 

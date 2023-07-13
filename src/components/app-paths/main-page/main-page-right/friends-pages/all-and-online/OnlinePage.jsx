@@ -5,6 +5,7 @@ import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidC
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { useQuery } from "@tanstack/react-query";
+import LoadingVisual from "../LoadingVisual";
 
 export default function OnlinePage(props) {
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
@@ -25,7 +26,7 @@ export default function OnlinePage(props) {
     }, { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <p>LOADING</p>;
+  if (isLoading) return <LoadingVisual />
 
   const onlineFriendsList = data?.filter(
     (user) => user.onlineStatus !== "offline"

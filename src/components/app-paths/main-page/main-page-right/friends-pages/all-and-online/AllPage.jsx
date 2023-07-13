@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { useContext } from "react";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import LoadingVisual from "../LoadingVisual";
 
 export default function AllPage(props) {
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
@@ -26,7 +27,7 @@ export default function AllPage(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <p>LOADING</p>;
+  if (isLoading) return <LoadingVisual />
 
   let listToUse;
 
