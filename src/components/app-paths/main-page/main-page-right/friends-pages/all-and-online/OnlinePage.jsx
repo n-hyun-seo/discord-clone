@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { allFriendsList } from "./FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { doc, getDoc } from "firebase/firestore";

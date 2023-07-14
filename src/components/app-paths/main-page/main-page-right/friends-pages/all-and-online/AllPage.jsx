@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { allFriendsList } from "./FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
 import { doc, getDoc } from "firebase/firestore";
@@ -27,7 +27,6 @@ export default function AllPage(props) {
     },
     { refetchOnWindowFocus: false }
   );
-
 
   if (isLoading) return <LoadingVisual />;
 

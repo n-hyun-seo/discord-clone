@@ -31,7 +31,6 @@ import { db } from "../../../../../../config/firebase";
 
 export default function UserDM() {
   const now = new Date();
-
   const currentTime = date.format(now, "MMMM DD, YYYY");
 
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
@@ -46,7 +45,6 @@ export default function UserDM() {
     async () => {
       const docSnapshot = await getDoc(doc(db, "users", currentDMId));
       const data = await docSnapshot.data().userInfo;
-      console.log(data);
       return data;
     },
     { refetchOnWindowFocus: false }

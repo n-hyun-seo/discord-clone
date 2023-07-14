@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import LoadingVisual from "./LoadingVisual";
 
-
 export default function DirectMessages(props) {
   const [rerenderState, setRerenderState] = useState(false);
 
@@ -37,7 +36,7 @@ export default function DirectMessages(props) {
     { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <LoadingVisual />
+  if (isLoading) return <LoadingVisual />;
 
   return (
     <section className="direct-messages-container">

@@ -8,6 +8,11 @@ import { CurrentDMIdContext } from "../../../../../../context/CurrentDMIdContext
 import { CurrentSectionLeftContext } from "../../../../../../context/CurrentSectionLeftContext";
 import { DmButtonRefContext } from "../../../../../../context/DmButtonRef";
 import { removeBlocked } from "./BlockedFriendsList";
+import { useMutation } from "@tanstack/react-query";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import { queryClient } from "../../../../../../App";
 
 export default function PendingPageUser(props) {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
@@ -15,6 +20,8 @@ export default function PendingPageUser(props) {
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+
   const [listOfDMIds, setListOfDMIds] = useState([]);
   const [hoverState, setHoverState] = useState(false);
   const [moreHoverState, setMoreHoverState] = useState(false);
@@ -34,24 +41,28 @@ export default function PendingPageUser(props) {
     return "status-message-icon-unhovered";
   }
 
+  const { mutate } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      directMessages: arrayUnion(props.id_number),
+    });
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
+    queryClient.setQueryData(["dmList"], (old) => {
+      if (old.filter((user) => user.uid === props.id_number).length === 0)
+        return [...old, userInfoData];
+
+      return old;
+    });
+  });
+
   return (
     <Link
       to={`../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
-        for (let i in randomUsersList) {
-          setListOfDMIds(listOfDMIds.push(randomUsersList[i].id_number));
-        }
-        if (!listOfDMIds.includes(props.id_number)) {
-          addUserToList(
-            props.username,
-            props.status,
-            props.ImgUrl,
-            props.id_number,
-            props.online_status
-          );
-          dmButtonRef?.current?.focus();
-        }
+        mutate();
         setCurrentSectionLeft("dm");
         setCurrentDMId(props.id_number);
       }}
