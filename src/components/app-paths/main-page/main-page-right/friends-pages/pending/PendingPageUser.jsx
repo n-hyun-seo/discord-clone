@@ -70,6 +70,13 @@ export default function PendingPageUser(props) {
       }),
     }); // remove person from my pending list
 
+    await updateDoc(doc(db, "users", props.id_number), {
+      "friends.pending": arrayRemove({
+        uid: currentUserUid,
+        requestType: "outgoing",
+      }),
+    }); // remove myself from person's pending list
+
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.all": arrayUnion(props.id_number),
     }); // add person to my friends list

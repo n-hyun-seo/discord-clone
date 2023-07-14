@@ -62,7 +62,7 @@ export default function UserDM() {
 
   function decideBoolean(key) {
     const ListData = queryClient.getQueryData([key]);
-    if (ListData.filter((user) => user.uid === currentDMId).length !== 0)
+    if (ListData?.filter((user) => user.uid === currentDMId).length !== 0)
       return true;
     return false;
   }
