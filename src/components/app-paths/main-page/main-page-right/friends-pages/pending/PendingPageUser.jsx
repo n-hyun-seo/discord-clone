@@ -49,7 +49,7 @@ export default function PendingPageUser(props) {
   const { mutate: updateDmList } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
       directMessages: arrayUnion(props.id_number),
-    });
+    }); //add person to my DM list
 
     const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
     const userInfoData = await userInfoSnapshot.data().userInfo;
@@ -68,11 +68,15 @@ export default function PendingPageUser(props) {
         uid: props.id_number,
         requestType: props.isIncoming,
       }),
-    });
+    }); // remove person from my pending list
 
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.all": arrayUnion(props.id_number),
-    });
+    }); // add person to my friends list
+
+    await updateDoc(doc(db, "users", props.id_number), {
+      "friends.all": arrayUnion(currentUserUid),
+    }); // add myself to person's friends list
 
     const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
     const userInfoData = await userInfoSnapshot.data().userInfo;
@@ -102,7 +106,21 @@ export default function PendingPageUser(props) {
         uid: props.id_number,
         requestType: props.isIncoming,
       }),
-    });
+    }); //remove person from my pending list
+
+    await updateDoc(doc(db, "users", props.id_number), {
+      "friends.pending": arrayRemove({
+        uid: currentUserUid,
+        requestType: "outgoing",
+      }),
+    }); //remove myself from person's pending list (outgoing)
+
+    await updateDoc(doc(db, "users", props.id_number), {
+      "friends.pending": arrayRemove({
+        uid: currentUserUid,
+        requestType: "incoming",
+      }),
+    }); //remove myself from person's pending list (incoming)
 
     queryClient.setQueryData(["pendingList"], (old) => {
       let filteredList = old.filter((user) => user.uid !== props.id_number);

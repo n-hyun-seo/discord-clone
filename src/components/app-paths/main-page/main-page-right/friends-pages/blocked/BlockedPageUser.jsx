@@ -47,10 +47,10 @@ export default function PendingPageUser(props) {
     return "status-message-icon-unhovered";
   }
 
-  const { mutate } = useMutation(async () => {
+  const { mutate: updateDmList } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
       directMessages: arrayUnion(props.id_number),
-    });
+    }); //add person to my DM list
 
     const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
     const userInfoData = await userInfoSnapshot.data().userInfo;
@@ -66,7 +66,11 @@ export default function PendingPageUser(props) {
   const { mutate: unblockUser } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.blocked": arrayRemove(props.id_number),
-    });
+    }); //remove person from my blocked list
+
+    await updateDoc(doc(db, "users", props.id_number), {
+      "friends.isBlockedBy": arrayRemove(currentUserUid),
+    }); //remove myself from person's isBlockedBy list
 
     queryClient.setQueryData(["blockedList"], (old) => {
       let filteredList = old.filter((user) => user.uid !== props.id_number);
@@ -79,7 +83,7 @@ export default function PendingPageUser(props) {
       to={`../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
-        mutate();
+        updateDmList();
         setCurrentSectionLeft("dm");
         setCurrentDMId(props.id_number);
       }}

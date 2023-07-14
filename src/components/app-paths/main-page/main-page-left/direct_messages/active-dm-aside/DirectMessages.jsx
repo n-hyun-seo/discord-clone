@@ -37,6 +37,7 @@ export default function DirectMessages(props) {
   );
 
   if (isLoading) return <LoadingVisual />;
+  if (isError) console.log(error);
 
   return (
     <section className="direct-messages-container">

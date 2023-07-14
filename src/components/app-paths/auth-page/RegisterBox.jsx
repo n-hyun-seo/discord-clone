@@ -31,6 +31,7 @@ export default function RegisterBox(props) {
           pending: [],
           blocked: [],
           all: [],
+          isBlockedBy: [],
         },
         directMessages: [],
         userInfo: {
@@ -42,7 +43,7 @@ export default function RegisterBox(props) {
           statusMessage: "",
           onlineStatus: "online",
           aboutMe: "",
-          userTag: "placeholder#0000"
+          userTag: "placeholder#0000",
         },
       });
     } catch (err) {
