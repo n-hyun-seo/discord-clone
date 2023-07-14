@@ -10,17 +10,25 @@ import Moon from "../status_icons/Moon";
 import Dnd from "../status_icons/Dnd";
 import { randomUsersList, removeDM } from "../users-list-data/randomUsersList";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { arrayRemove, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
+import { queryClient } from "../../../../../../App";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 
 export function IndividualDM(props) {
   let navigate = useNavigate();
 
   const [hoverState, setHoverState] = useState(false);
+
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
   const [currentSection, setCurrentSection] = useContext(CurrentSectionContext);
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+
   const delete_button = useRef();
   const dm_button = useRef();
 
@@ -57,6 +65,17 @@ export function IndividualDM(props) {
     }
     return "personal-dm";
   }
+
+  const { mutate: closeDm } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      directMessages: arrayRemove(props.id_number),
+    });
+
+    queryClient.setQueryData(["dmList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== props.id_number);
+      return filteredList;
+    });
+  });
 
   return (
     <Link
@@ -111,12 +130,11 @@ export function IndividualDM(props) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            removeDM(props.username);
-            props.setRerenderState(!props.rerenderState);
-            // if (currentDMId === props.id_number) {
-            //   setCurrentSectionLeft("friends");
-            //   navigate(`/friends/${currentSection}`);
-            // }
+            closeDm();
+            if (currentDMId === props.id_number) {
+              setCurrentSectionLeft("friends");
+              navigate(`/discord-clone/main/friends/${currentSection}`);
+            }
           }}
           className="x-button"
         >
