@@ -9,7 +9,13 @@ import { CurrentSectionLeftContext } from "../../../../../../context/CurrentSect
 import { DmButtonRefContext } from "../../../../../../context/DmButtonRef";
 import { removeBlocked } from "./BlockedFriendsList";
 import { useMutation } from "@tanstack/react-query";
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { queryClient } from "../../../../../../App";
@@ -54,6 +60,17 @@ export default function PendingPageUser(props) {
         return [...old, userInfoData];
 
       return old;
+    });
+  });
+
+  const { mutate: unblockUser } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.blocked": arrayRemove(props.id_number),
+    });
+
+    queryClient.setQueryData(["blockedList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== props.id_number);
+      return filteredList;
     });
   });
 
@@ -113,8 +130,7 @@ export default function PendingPageUser(props) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            removeBlocked(props.username);
-            props.setRerenderState(!props.rerenderState);
+            unblockUser();
           }}
         >
           <div alt="chat" className="more-box-dm cancel">
