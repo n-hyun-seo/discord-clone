@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import LoadingVisual from "../LoadingVisual";
 
-
 export default function AllPage(props) {
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
@@ -29,22 +28,19 @@ export default function AllPage(props) {
   );
 
   if (isLoading) return <LoadingVisual />;
-
-  let listToUse;
-
-  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
+  if (isError) console.log(error);
 
   return (
     <section className="friends-type-container">
       <div className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {listToUse.length}
+            {props.header} — {data.length}
           </p>
         </div>
         <div className="test-test"></div>
-        {listToUse?.length !== 0 ? (
-          listToUse?.map((user) => (
+        {data?.length !== 0 ? (
+          data?.map((user) => (
             <OnlinePageUser
               username={user.username}
               status={user.statusMessage}

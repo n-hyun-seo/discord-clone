@@ -1,6 +1,5 @@
 import PendingPageUser from "./PendingPageUser";
 import { useContext, useState } from "react";
-import { pendingList } from "./PendingListFromDb";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { useQuery } from "@tanstack/react-query";
 import { doc, getDoc } from "firebase/firestore";
@@ -16,7 +15,7 @@ export default function PendingPage(props) {
     CurrentIncomingFRContext
   );
 
-  const { isLoading, isError, data, error } = useQuery(
+  const { isLoading, isError, data, error, refetch } = useQuery(
     ["pendingList"],
     async () => {
       const snapshot = await getDoc(doc(db, "users", currentUserUid));
@@ -53,8 +52,8 @@ export default function PendingPage(props) {
           </p>
         </div>
         <div className="test-test"></div>
-        {listToUse.length !== 0 ? (
-          listToUse.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <PendingPageUser
               username={user.username}
               status={user.statusMessages}
@@ -64,6 +63,7 @@ export default function PendingPage(props) {
               isIncoming={user.requestType}
               rerenderState={rerenderState}
               setRerenderState={setRerenderState}
+              refetch={refetch}
             />
           ))
         ) : (

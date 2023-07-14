@@ -30,6 +30,7 @@ export default function OnlinePage(props) {
   );
 
   if (isLoading) return <LoadingVisual />;
+  if (isError) console.log(error);
 
   let listToUse;
 

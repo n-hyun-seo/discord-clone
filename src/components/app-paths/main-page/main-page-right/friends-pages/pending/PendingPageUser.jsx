@@ -1,21 +1,21 @@
-import {
-  randomUsersList,
-  addUserToList,
-} from "../../../main-page-left/direct_messages/users-list-data/randomUsersList";
 import { Link } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../../../../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../../../../../context/CurrentSectionLeftContext";
-import { DmButtonRefContext } from "../../../../../../context/DmButtonRef";
 import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
 import Online from "../../../main-page-left/direct_messages/status_icons/Online";
 import Offline from "../../../main-page-left/direct_messages/status_icons/Offline";
 import Moon from "../../../main-page-left/direct_messages/status_icons/Moon";
 import Dnd from "../../../main-page-left/direct_messages/status_icons/Dnd";
 import { removeFR, getIncomingFRLength } from "./PendingFriendsList";
-import { addUserToList as addUserToFriend } from "../all-and-online/RandomFriendsList";
 import { useMutation } from "@tanstack/react-query";
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { queryClient } from "../../../../../../App";
@@ -25,13 +25,11 @@ export default function PendingPageUser(props) {
     CurrentSectionLeftContext
   );
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
-  const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [currentIncomingFR, setCurrentIncomingFR] = useContext(
     CurrentIncomingFRContext
   );
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
-  const [listOfDMIds, setListOfDMIds] = useState([]);
   const [hoverState, setHoverState] = useState(false);
   const [moreHoverState, setMoreHoverState] = useState(false);
   const [messageHoverState, setMessageHoverState] = useState(false);
@@ -48,7 +46,7 @@ export default function PendingPageUser(props) {
     if (!hoverState) return "user-name-dm-unhovered nolimit";
   }
 
-  const { mutate } = useMutation(async () => {
+  const { mutate: updateDmList } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
       directMessages: arrayUnion(props.id_number),
     });
@@ -64,12 +62,64 @@ export default function PendingPageUser(props) {
     });
   });
 
+  const { mutate: acceptRequest } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.pending": arrayRemove({
+        uid: props.id_number,
+        requestType: props.isIncoming,
+      }),
+    });
+
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.all": arrayUnion(props.id_number),
+    });
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
+    queryClient.setQueryData(["allList"], (old) => [...old, userInfoData]);
+
+    queryClient.setQueryData(["onlineList"], (old) => {
+      if (userInfoData.onlineStatus !== "offline")
+        return [...old, userInfoData];
+
+      return;
+    });
+
+    queryClient.setQueryData(["pendingList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== props.id_number);
+      let incomingFR = filteredList.filter(
+        (user) => user.requestType === "incoming"
+      );
+      setCurrentIncomingFR(incomingFR.length);
+      return filteredList;
+    });
+  });
+
+  const { mutate: cancelIgnoreRequest } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.pending": arrayRemove({
+        uid: props.id_number,
+        requestType: props.isIncoming,
+      }),
+    });
+
+    queryClient.setQueryData(["pendingList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== props.id_number);
+      let incomingFR = filteredList.filter(
+        (user) => user.requestType === "incoming"
+      );
+      setCurrentIncomingFR(incomingFR.length);
+      return filteredList;
+    });
+  });
+
   return (
     <Link
       to={`../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
-        mutate();
+        updateDmList();
         setCurrentSectionLeft("dm");
         setCurrentDMId(props.id_number);
       }}
@@ -143,16 +193,7 @@ export default function PendingPageUser(props) {
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              addUserToFriend(
-                props.username,
-                props.status,
-                props.ImgUrl,
-                props.id_number,
-                props.online_status
-              );
-              removeFR(props.username);
-              props.setRerenderState(!props.rerenderState);
-              setCurrentIncomingFR(getIncomingFRLength());
+              acceptRequest();
             }}
           >
             <div alt="chat" className="text-box-dm accept">
@@ -182,8 +223,7 @@ export default function PendingPageUser(props) {
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              removeFR(props.username);
-              setCurrentIncomingFR(getIncomingFRLength());
+              cancelIgnoreRequest();
             }}
           >
             <div alt="chat" className="more-box-dm ignore">
@@ -216,8 +256,7 @@ export default function PendingPageUser(props) {
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              removeFR(props.username);
-              props.setRerenderState(!props.rerenderState);
+              cancelIgnoreRequest();
             }}
           >
             <div alt="chat" className="more-box-dm cancel">
