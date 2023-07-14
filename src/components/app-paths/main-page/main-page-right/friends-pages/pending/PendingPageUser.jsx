@@ -272,7 +272,7 @@ export default function PendingPageUser(props) {
           </div>
         </div>
       ) : (
-        "none"
+        ""
       )}
     </Link>
   );

@@ -25,9 +25,17 @@ import {
   addUserToList as addUserToBlocked,
   removeBlocked,
 } from "../../../main-page-right/friends-pages/blocked/BlockedFriendsList";
-import { useQuery } from "@tanstack/react-query";
-import { doc, getDoc } from "firebase/firestore";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
+import { queryClient } from "../../../../../../App";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 
 export default function UserDM() {
   const now = new Date();
@@ -38,24 +46,117 @@ export default function UserDM() {
   const [currentSectionLeft, setCurrentSectionLeft] = useContext(
     CurrentSectionLeftContext
   );
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+
   const [rerender, setRerender] = useState(false);
+
+  const userProfileRef = useRef();
+
+  let isFriend = decideBoolean("allList");
+  let isPending = decideBoolean("pendingList");
+  let isBlocked = decideBoolean("blockedList");
+
+  function decideBoolean(key) {
+    const ListData = queryClient.getQueryData([key]);
+    if (ListData.filter((user) => user.uid === currentDMId).length !== 0)
+      return true;
+    return false;
+  }
 
   const { isLoading, data, error } = useQuery(
     [currentDMId],
     async () => {
-      const docSnapshot = await getDoc(doc(db, "users", currentDMId));
-      const data = await docSnapshot.data().userInfo;
-      return data;
+      const dmPersonSnapshot = await getDoc(doc(db, "users", currentDMId));
+      const dmPersonUserInfo = await dmPersonSnapshot.data().userInfo;
+
+      return dmPersonUserInfo;
     },
     { refetchOnWindowFocus: false }
   );
 
-  let currentUser = data;
-  let isFriend = returnFriendInfo(currentUser?.id_number);
-  let isPending = returnPendingInfo(currentUser?.id_number);
-  let isBlocked = returnBlockedInfo(currentUser?.id_number);
+  const { mutate: removeFriend } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.all": arrayRemove(currentDMId),
+    });
 
-  const userProfileRef = useRef();
+    queryClient.setQueryData(["allList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== currentDMId);
+      return filteredList;
+    });
+
+    queryClient.setQueryData(["onlineList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== currentDMId);
+      return filteredList;
+    });
+  });
+
+  const { mutate: sendFriendRequest } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.pending": arrayUnion({
+        uid: currentDMId,
+        requestType: "outgoing",
+      }),
+    });
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
+    queryClient.setQueryData(["pendingList"], (old) => {
+      return [...old, { ...userInfoData, requestType: "outgoing" }];
+    });
+  });
+
+  const { mutate: blockUser } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.blocked": arrayUnion(currentDMId),
+    });
+
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.pending": arrayRemove({
+        uid: currentDMId,
+        requestType: "outgoing",
+      }),
+    });
+
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.pending": arrayRemove({
+        uid: currentDMId,
+        requestType: "incoming",
+      }),
+    });
+
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.all": arrayRemove(currentDMId),
+    });
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
+    queryClient.setQueryData(["blockedList"], (old) => {
+      return [...old, userInfoData];
+    });
+
+    queryClient.setQueryData(["allList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== currentDMId);
+      return filteredList;
+    });
+
+    queryClient.setQueryData(["pendingList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== currentDMId);
+      return filteredList;
+    });
+  });
+
+  const { mutate: unblockUser } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.blocked": arrayRemove(currentDMId),
+    });
+
+    queryClient.setQueryData(["blockedList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== currentDMId);
+      return filteredList;
+    });
+  });
 
   return (
     <div className="right">
@@ -65,18 +166,18 @@ export default function UserDM() {
             <div
               className="pfp-circle dm-header"
               style={{
-                backgroundImage: `url("${currentUser?.photoURL}")`,
+                backgroundImage: `url("${data?.photoURL}")`,
               }}
             >
               <div className="online-status-outer">
-                {currentUser?.onlineStatus === "online" && <Online />}
-                {currentUser?.onlineStatus === "offline" && <Offline />}
-                {currentUser?.onlineStatus === "moon" && <Moon />}
-                {currentUser?.onlineStatus === "dnd" && <Dnd />}
+                {data?.onlineStatus === "online" && <Online />}
+                {data?.onlineStatus === "offline" && <Offline />}
+                {data?.onlineStatus === "moon" && <Moon />}
+                {data?.onlineStatus === "dnd" && <Dnd />}
               </div>
             </div>
           </div>
-          <p className="dm-header-user-name">{currentUser?.username}</p>
+          <p className="dm-header-user-name">{data?.username}</p>
         </div>
         <div className="friends-right-side">
           <FriendsNavRightButton
@@ -121,19 +222,17 @@ export default function UserDM() {
                 <div
                   className="pfp-circle user-dm-message-header"
                   style={{
-                    backgroundImage: `url("${currentUser?.photoURL}")`,
+                    backgroundImage: `url("${data?.photoURL}")`,
                   }}
                 ></div>
               </div>
               <p className="user-dm-message-header-username">
-                {currentUser?.username}
+                {data?.username}
               </p>
-              <p className="user-dm-message-header-usertag">
-                {currentUser?.user_tag}
-              </p>
+              <p className="user-dm-message-header-usertag">{data?.user_tag}</p>
               <p className="begining-of-dm-text">
                 This is the beginning of your direct message history with{" "}
-                {currentUser?.username}.
+                {data?.username}.
               </p>
               <div className="dm-friend-button-container">
                 {isBlocked ? (
@@ -142,7 +241,7 @@ export default function UserDM() {
                   <button
                     className="dm-remove-friend-button"
                     onClick={() => {
-                      removeFromFriendsList(currentUser?.id_number);
+                      removeFriend();
                       setRerender(!rerender);
                     }}
                   >
@@ -154,18 +253,7 @@ export default function UserDM() {
                   <button
                     className="dm-add-friend-button"
                     onClick={() => {
-                      addUserToList(
-                        currentUser?.username,
-                        currentUser?.status,
-                        currentUser?.ImgUrl,
-                        currentUser?.id_number,
-                        currentUser?.online_status,
-                        false,
-                        currentUser?.user_tag,
-                        currentUser?.about_me,
-                        currentUser?.member_since,
-                        currentUser?.note
-                      );
+                      sendFriendRequest();
                       setRerender(!rerender);
                       console.log(isFriend);
                     }}
@@ -177,19 +265,7 @@ export default function UserDM() {
                   <button
                     className="dm-block-friend-button"
                     onClick={() => {
-                      removeFromFriendsList(currentUser?.id_number);
-                      addUserToBlocked(
-                        currentUser?.username,
-                        currentUser?.status,
-                        currentUser?.ImgUrl,
-                        currentUser?.id_number,
-                        currentUser?.online_status,
-                        currentUser?.user_tag,
-                        currentUser?.about_me,
-                        currentUser?.member_since,
-                        currentUser?.note
-                      );
-                      removePending(currentUser?.username);
+                      blockUser();
                       setRerender(!rerender);
                     }}
                   >
@@ -199,7 +275,7 @@ export default function UserDM() {
                   <button
                     className="dm-block-friend-button"
                     onClick={() => {
-                      removeBlocked(currentUser?.username);
+                      unblockUser();
                       setRerender(!rerender);
                     }}
                   >
@@ -225,38 +301,36 @@ export default function UserDM() {
                 <div
                   className="pfp-circle user-profile-header"
                   style={{
-                    backgroundImage: `url("${currentUser?.photoURL}")`,
+                    backgroundImage: `url("${data?.photoURL}")`,
                   }}
                 >
                   <div className="online-status-outer user-profile-header">
-                    {currentUser?.onlineStatus === "online" && <Online />}
-                    {currentUser?.onlineStatus === "offline" && <Offline />}
-                    {currentUser?.onlineStatus === "moon" && <Moon />}
-                    {currentUser?.onlineStatus === "dnd" && <Dnd />}
+                    {data?.onlineStatus === "online" && <Online />}
+                    {data?.onlineStatus === "offline" && <Offline />}
+                    {data?.onlineStatus === "moon" && <Moon />}
+                    {data?.onlineStatus === "dnd" && <Dnd />}
                   </div>
                 </div>
               </div>
             </div>
             <div className="right-section-uncolored">
               <div className="user-info-box">
-                <div className="user-info-username">
-                  {currentUser?.username}
-                </div>
-                <div className="user-info-tag">{currentUser?.userTag}</div>
-                {currentUser?.aboutMe !== "" && (
+                <div className="user-info-username">{data?.username}</div>
+                <div className="user-info-tag">{data?.userTag}</div>
+                {data?.aboutMe !== "" && (
                   <div>
                     <p className="about-me-header">ABOUT ME</p>
-                    <p className="about-me-text">{currentUser?.aboutMe}</p>
+                    <p className="about-me-text">{data?.aboutMe}</p>
                   </div>
                 )}
                 <p className="member-since-header">DISCORD MEMBER SINCE</p>
                 <p className="member-since-text">
-                  {currentUser?.creationTime.slice(0, 16)}
+                  {data?.creationTime.slice(0, 16)}
                 </p>
                 <p>{}</p>
                 <p className="note-header">NOTE</p>
                 <div
-                  key={`note${currentUser?.id_number}`}
+                  key={`note${data?.id_number}`}
                   className="note-text"
                   contentEditable
                 ></div>
