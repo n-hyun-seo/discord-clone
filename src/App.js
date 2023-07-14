@@ -3,7 +3,13 @@ import "./App.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import LoadingPage from "./components/app-paths/loading-page/LoadingPage";
 
-export const queryClient = new QueryClient({});
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: Infinity,
+    },
+  },
+});
 
 export function App() {
   return (
@@ -15,5 +21,3 @@ export function App() {
     </QueryClientProvider>
   );
 }
-
-
