@@ -63,6 +63,22 @@ export default function DiscordClone() {
         return finalList;
       });
 
+      await queryClient.prefetchQuery(["onlineList"], async () => {
+        const snapshot = await getDoc(doc(db, "users", currentUserUid));
+        const listData = await snapshot.data().friends.all;
+        let finalList = await Promise.all(
+          listData.map(async (uid) => {
+            const docSnapshot = await getDoc(doc(db, "users", uid));
+            const userData = await docSnapshot.data().userInfo;
+            return userData;
+          })
+        );
+        let filteredList = finalList.filter(
+          (user) => user.onlineStatus !== "offline"
+        );
+        return filteredList;
+      });
+
       await queryClient.prefetchQuery(["pendingList"], async () => {
         const snapshot = await getDoc(doc(db, "users", currentUserUid));
         const listData = await snapshot.data().friends.pending;

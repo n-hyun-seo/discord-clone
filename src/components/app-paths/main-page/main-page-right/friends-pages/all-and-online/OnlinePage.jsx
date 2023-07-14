@@ -21,21 +21,19 @@ export default function OnlinePage(props) {
           return userData;
         })
       );
-      return finalList;
-    }, { refetchOnWindowFocus: false }
+      let filteredList = finalList.filter(
+        (user) => user.onlineStatus !== "offline"
+      );
+      return filteredList;
+    },
+    { refetchOnWindowFocus: false }
   );
 
-  if (isLoading) return <LoadingVisual />
-
-  const onlineFriendsList = data?.filter(
-    (user) => user.onlineStatus !== "offline"
-  );
+  if (isLoading) return <LoadingVisual />;
 
   let listToUse;
 
-  props.inputValue
-    ? (listToUse = props.filteredList)
-    : (listToUse = onlineFriendsList);
+  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
 
   return (
     <section className="friends-type-container">
