@@ -17,7 +17,7 @@ import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 import { queryClient } from "../../App";
 
@@ -115,6 +115,22 @@ export default function DiscordClone() {
         const listData = await snapshot.data().friends.blocked;
         let finalList = await Promise.all(
           listData.map(async (uid) => {
+            const docSnapshot = await getDoc(doc(db, "users", uid));
+            const userData = await docSnapshot.data().userInfo;
+            return userData;
+          })
+        );
+        return finalList;
+      });
+
+      await queryClient.prefetchQuery(["everyUserList"], async () => {
+        let _array = [];
+        const snapshot = await getDocs(collection(db, "users"));
+        snapshot.forEach((doc) => {
+          return _array.push(String(doc.id));
+        });
+        let finalList = await Promise.all(
+          _array.map(async (uid) => {
             const docSnapshot = await getDoc(doc(db, "users", uid));
             const userData = await docSnapshot.data().userInfo;
             return userData;

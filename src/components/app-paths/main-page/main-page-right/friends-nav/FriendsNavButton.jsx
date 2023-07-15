@@ -10,7 +10,7 @@ export default function FriendsNavButton(props) {
   );
 
   function changeButtonClass() {
-    if (currentSection === "addfriend" && props.text === "Add Friend")
+    if (currentSection === "allusers" && props.text === "All Users")
       return "friends-nav-button pressed-add-friend";
     if (currentSection === props.text.toLowerCase().replace(/\s+/g, ""))
       return "friends-nav-button pressed";

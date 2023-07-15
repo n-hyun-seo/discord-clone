@@ -472,7 +472,7 @@ body {
   color: #bbc2cb;
   pointer-events: none;
   bottom: 35px;
-  right: 15px;
+  right: 17px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1593,6 +1593,11 @@ body {
   filter: brightness(100%) grayscale(100%);
 }
 
+.text-box-dm.accepted {
+  width: 60%;
+  filter: brightness(150%);
+}
+
 .text-box-dm.accept {
   display: flex;
   justify-content: center;
@@ -2106,6 +2111,10 @@ body {
 
 .remove-friend-option {
   color: rgb(237, 80, 80);
+}
+
+.message-hover-box.all-users {
+  right: -22px;
 }
 
 ::-webkit-scrollbar {

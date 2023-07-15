@@ -10,21 +10,6 @@ import Dnd from "../status_icons/Dnd";
 import { CurrentShowProfileContext } from "../../../../../../context/CurrentShowProfileContext";
 import FriendsNavSearchBar from "../../../main-page-right/friends-nav/FriendsNavSearchBar";
 import date from "date-and-time";
-import {
-  randomFriendsList,
-  removeFromFriendsList,
-  returnFriendInfo,
-} from "../../../main-page-right/friends-pages/all-and-online/RandomFriendsList";
-import {
-  addUserToList,
-  removePending,
-  returnPendingInfo,
-} from "../../../main-page-right/friends-pages/pending/PendingFriendsList";
-import {
-  returnBlockedInfo,
-  addUserToList as addUserToBlocked,
-  removeBlocked,
-} from "../../../main-page-right/friends-pages/blocked/BlockedFriendsList";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   arrayRemove,
@@ -44,9 +29,6 @@ export default function UserDM() {
 
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
-  const [currentSectionLeft, setCurrentSectionLeft] = useContext(
-    CurrentSectionLeftContext
-  );
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
   const [currentIncomingFR, setCurrentIncomingFR] = useContext(
     CurrentIncomingFRContext

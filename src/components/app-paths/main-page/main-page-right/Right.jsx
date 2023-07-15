@@ -5,9 +5,10 @@ import OnlinePage from "./friends-pages/all-and-online/OnlinePage";
 import AllPage from "./friends-pages/all-and-online/AllPage";
 import PendingPage from "./friends-pages/pending/PendingPage";
 import BlockedPage from "./friends-pages/blocked/BlockedPage";
-import AddFriendPage from "./friends-pages/add-friends/AddFriendPage";
+import AddFriendPage from "./friends-pages/all-users/AllUsersPage";
 import { useState } from "react";
 import { queryClient } from "../../../../App";
+import AllUsersPage from "./friends-pages/all-users/AllUsersPage";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
@@ -33,6 +34,12 @@ export default function Right() {
       user.username.toLowerCase().includes(inputValue.toLowerCase())
     );
 
+  let filteredEveryUserList = queryClient
+    .getQueryData(["everyUserList"])
+    ?.filter((user) =>
+      user.username.toLowerCase().includes(inputValue.toLowerCase())
+    );
+
   return (
     <div className="right">
       <div className="friends-nav">
@@ -51,7 +58,7 @@ export default function Right() {
             <FriendsNavButton to="all" text="All" />
             <FriendsNavButton to="pending" text="Pending" />
             <FriendsNavButton to="blocked" text="Blocked" />
-            <FriendsNavButton to="addfriend" text="Add Friend" />
+            <FriendsNavButton to="allusers" text="All Users" />
           </nav>
         </div>
         <div className="friends-right-side">
@@ -144,7 +151,16 @@ export default function Right() {
                   />
                 }
               />
-              <Route path="addfriend" element={<AddFriendPage />} />
+              <Route
+                path="allusers"
+                element={
+                  <AllUsersPage
+                    header="ALL USERS"
+                    inputValue={inputValue}
+                    filteredList={filteredEveryUserList}
+                  />
+                }
+              />
             </Routes>
           </section>
           <section className="friends-active-now">
