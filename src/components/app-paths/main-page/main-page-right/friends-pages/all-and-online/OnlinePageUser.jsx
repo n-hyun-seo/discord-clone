@@ -10,7 +10,13 @@ import Moon from "../../../main-page-left/direct_messages/status_icons/Moon";
 import Dnd from "../../../main-page-left/direct_messages/status_icons/Dnd";
 import { randomFriendsList } from "./RandomFriendsList";
 import { useMutation } from "@tanstack/react-query";
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 
@@ -22,10 +28,11 @@ export default function OnlinePageUser(props) {
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
-  const [listOfDMIds, setListOfDMIds] = useState([]);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
   const [hoverState, setHoverState] = useState(false);
   const [moreHoverState, setMoreHoverState] = useState(false);
   const [messageHoverState, setMessageHoverState] = useState(false);
+  const [removeFriendHoverState, setRemoveFriendHoverState] = useState(false);
 
   const moreHoverRef = useRef();
   const moreImageRef = useRef();
@@ -33,6 +40,7 @@ export default function OnlinePageUser(props) {
   const messageHoverRef = useRef();
   const messageImageRef = useRef();
   const messageCircleRef = useRef();
+  const removeFriendTextRef = useRef();
 
   function changeNameClass() {
     if (hoverState) return "user-name-dm-hovered nolimit";
@@ -68,6 +76,26 @@ export default function OnlinePageUser(props) {
     });
   });
 
+  const { mutate: removeFriend } = useMutation(async () => {
+    await updateDoc(doc(db, "users", currentUserUid), {
+      "friends.all": arrayRemove(props.id_number),
+    }); //remove person from my friends list
+
+    await updateDoc(doc(db, "users", props.id_number), {
+      "friends.all": arrayRemove(currentUserUid),
+    }); //remove myself from person's friends list
+
+    queryClient.setQueryData(["allList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== props.id_number);
+      return filteredList;
+    });
+
+    queryClient.setQueryData(["onlineList"], (old) => {
+      let filteredList = old.filter((user) => user.uid !== props.id_number);
+      return filteredList;
+    });
+  });
+
   return (
     <Link
       to={`../../dm/${props.id_number}`}
@@ -86,6 +114,7 @@ export default function OnlinePageUser(props) {
         setHoverState(false);
         messageCircleRef.current.style.backgroundColor = "#2b2d31";
         moreCircleRef.current.style.backgroundColor = "#2b2d31";
+        setShowMoreOptions(false);
       }}
     >
       <div className="pfp-container">
@@ -169,6 +198,8 @@ export default function OnlinePageUser(props) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
+            setShowMoreOptions(true);
+            console.log(showMoreOptions);
           }}
         >
           <img
@@ -178,6 +209,30 @@ export default function OnlinePageUser(props) {
             ref={moreImageRef}
           />
         </div>
+        {showMoreOptions && (
+          <ul className="more-options-menu">
+            <div
+              className="remove-friend-option-container"
+              onMouseEnter={() => {
+                setRemoveFriendHoverState(true);
+                removeFriendTextRef.current.style.color = "white";
+              }}
+              onMouseLeave={() => {
+                setRemoveFriendHoverState(false);
+                removeFriendTextRef.current.style.color = "rgb(237, 80, 80)";
+              }}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                removeFriend();
+              }}
+            >
+              <li className="remove-friend-option" ref={removeFriendTextRef}>
+                Remove Friend
+              </li>
+            </div>
+          </ul>
+        )}
         <div ref={moreHoverRef} className="more-hover-box">
           More
         </div>

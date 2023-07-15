@@ -17,22 +17,22 @@ export default function Right() {
 
   let filteredOnlineList = queryClient
     .getQueryData(["onlineList"])
-    .filter((user) =>
+    ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
     );
   let filteredAllList = queryClient
     .getQueryData(["allList"])
-    .filter((user) =>
+    ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
     );
   let filteredPendingList = queryClient
     .getQueryData(["pendingList"])
-    .filter((user) =>
+    ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
     );
   let filteredBlockedList = queryClient
     .getQueryData(["blockedList"])
-    .filter((user) =>
+    ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
     );
 
