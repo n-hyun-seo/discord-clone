@@ -59,6 +59,7 @@ export default function UserDM() {
   let isFriend = decideBoolean("allList");
   let isPending = decideBoolean("pendingList");
   let isBlocked = decideBoolean("blockedList");
+  let isBlockedBy = decideBoolean("isBlockedByList");
 
   function decideBoolean(key) {
     const ListData = queryClient.getQueryData([key]);
@@ -298,6 +299,7 @@ export default function UserDM() {
                   <button
                     className="dm-add-friend-button"
                     onClick={() => {
+                      if (isBlockedBy) return;
                       sendFriendRequest();
                       setRerender(!rerender);
                       console.log(isFriend);
