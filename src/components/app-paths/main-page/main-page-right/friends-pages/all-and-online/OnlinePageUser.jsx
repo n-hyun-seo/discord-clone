@@ -52,7 +52,7 @@ export default function OnlinePageUser(props) {
     return "status-message-icon-unhovered";
   }
 
-  const { mutate } = useMutation(async () => {
+  const { mutate: updateDmList } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
       directMessages: arrayUnion(props.id_number),
     });
@@ -73,7 +73,7 @@ export default function OnlinePageUser(props) {
       to={`../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
-        mutate();
+        updateDmList();
         setCurrentSectionLeft("dm");
         setCurrentDMId(props.id_number);
       }}
@@ -169,8 +169,6 @@ export default function OnlinePageUser(props) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log("works");
-            console.log(randomFriendsList);
           }}
         >
           <img
