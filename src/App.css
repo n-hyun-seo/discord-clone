@@ -1433,7 +1433,7 @@ body {
   color: #b2b1b1;
   font-size: 12px;
   grid-area: fth;
-  height: 50px;
+  height: 55px;
   width: 96%;
   background-color: rgb(49 51 56);
   position: sticky;
@@ -1448,7 +1448,7 @@ body {
   font-family: ggsansSB;
   padding-left: 10px;
   padding-bottom: 15px;
-  padding-top: 20px;
+  padding-top: 23px;
 }
 
 .test-test {
