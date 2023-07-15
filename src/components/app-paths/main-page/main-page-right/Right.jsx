@@ -7,9 +7,6 @@ import PendingPage from "./friends-pages/pending/PendingPage";
 import BlockedPage from "./friends-pages/blocked/BlockedPage";
 import AddFriendPage from "./friends-pages/add-friends/AddFriendPage";
 import { useState } from "react";
-import { pendingList } from "./friends-pages/pending/PendingListFromDb";
-import { allFriendsList } from "./friends-pages/all-and-online/FriendsListFromDB";
-import { blockedList } from "./friends-pages/blocked/BlockedListFromDB";
 import { queryClient } from "../../../../App";
 
 export default function Right() {
