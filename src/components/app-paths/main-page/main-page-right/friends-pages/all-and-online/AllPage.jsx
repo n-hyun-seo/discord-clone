@@ -42,7 +42,6 @@ export default function AllPage(props) {
             {props.header} — {data.length}
           </p>
         </div>
-        <div className="test-test"></div>
         {listToUse?.length !== 0 ? (
           listToUse?.map((user) => (
             <OnlinePageUser

@@ -51,7 +51,6 @@ export default function PendingPage(props) {
             {props.header} — {listToUse.length}
           </p>
         </div>
-        <div className="test-test"></div>
         {listToUse?.length !== 0 ? (
           listToUse?.map((user) => (
             <PendingPageUser
