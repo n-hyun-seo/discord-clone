@@ -30,6 +30,10 @@ export default function AllPage(props) {
   if (isLoading) return <LoadingVisual />;
   if (isError) console.log(error);
 
+  let listToUse;
+
+  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
+
   return (
     <section className="friends-type-container">
       <div className="friends-type-list">
@@ -39,8 +43,8 @@ export default function AllPage(props) {
           </p>
         </div>
         <div className="test-test"></div>
-        {data?.length !== 0 ? (
-          data?.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <OnlinePageUser
               username={user.username}
               status={user.statusMessage}

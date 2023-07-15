@@ -10,24 +10,31 @@ import { useState } from "react";
 import { pendingList } from "./friends-pages/pending/PendingListFromDb";
 import { allFriendsList } from "./friends-pages/all-and-online/FriendsListFromDB";
 import { blockedList } from "./friends-pages/blocked/BlockedListFromDB";
+import { queryClient } from "../../../../App";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
 
-  let filteredOnlineList = allFriendsList
-    .filter((user) => user.onlineStatus !== "offline")
+  let filteredOnlineList = queryClient
+    .getQueryData(["onlineList"])
     .filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
     );
-  let filteredAllList = allFriendsList.filter((user) =>
-    user.username.toLowerCase().includes(inputValue.toLowerCase())
-  );
-  let filteredPendingList = pendingList.filter((user) =>
-    user.username.toLowerCase().includes(inputValue.toLowerCase())
-  );
-  let filteredBlockedList = blockedList.filter((user) =>
-    user.username.toLowerCase().includes(inputValue.toLowerCase())
-  );
+  let filteredAllList = queryClient
+    .getQueryData(["allList"])
+    .filter((user) =>
+      user.username.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  let filteredPendingList = queryClient
+    .getQueryData(["pendingList"])
+    .filter((user) =>
+      user.username.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  let filteredBlockedList = queryClient
+    .getQueryData(["blockedList"])
+    .filter((user) =>
+      user.username.toLowerCase().includes(inputValue.toLowerCase())
+    );
 
   return (
     <div className="right">
