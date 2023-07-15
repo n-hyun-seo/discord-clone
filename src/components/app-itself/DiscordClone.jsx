@@ -63,6 +63,19 @@ export default function DiscordClone() {
         return finalList;
       });
 
+      await queryClient.prefetchQuery(["isBlockedByList"], async () => {
+        const snapshot = await getDoc(doc(db, "users", currentUserUid));
+        const listData = await snapshot.data().friends.isBlockedBy;
+        let finalList = await Promise.all(
+          listData.map(async (uid) => {
+            const docSnapshot = await getDoc(doc(db, "users", uid));
+            const userData = await docSnapshot.data().userInfo;
+            return userData;
+          })
+        );
+        return finalList;
+      });
+
       await queryClient.prefetchQuery(["onlineList"], async () => {
         const snapshot = await getDoc(doc(db, "users", currentUserUid));
         const listData = await snapshot.data().friends.all;
