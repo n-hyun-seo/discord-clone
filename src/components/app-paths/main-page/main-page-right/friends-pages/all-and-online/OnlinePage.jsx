@@ -34,7 +34,11 @@ export default function OnlinePage(props) {
 
   let listToUse;
 
-  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
+  props.inputValue
+    ? (listToUse = props.filteredList)
+    : (listToUse = data?.sort((a, b) =>
+        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+      ));
 
   return (
     <section className="friends-type-container">
@@ -44,7 +48,6 @@ export default function OnlinePage(props) {
             {props.header} — {listToUse.length}
           </p>
         </div>
-        <div className="test-test"></div>
         {listToUse.length !== 0 ? (
           listToUse.map((user) => (
             <OnlinePageUser

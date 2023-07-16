@@ -32,7 +32,11 @@ export default function AllPage(props) {
 
   let listToUse;
 
-  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
+  props.inputValue
+    ? (listToUse = props.filteredList)
+    : (listToUse = data?.sort((a, b) =>
+        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+      ));
 
   return (
     <section className="friends-type-container">

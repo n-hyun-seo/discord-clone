@@ -17,27 +17,42 @@ export default function Right() {
     .getQueryData(["onlineList"])
     ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
+    )
+    .sort((a, b) =>
+      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
     );
   let filteredAllList = queryClient
     .getQueryData(["allList"])
     ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
+    )
+    .sort((a, b) =>
+      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
     );
   let filteredPendingList = queryClient
     .getQueryData(["pendingList"])
     ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
+    )
+    .sort((a, b) =>
+      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
     );
   let filteredBlockedList = queryClient
     .getQueryData(["blockedList"])
     ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
+    )
+    .sort((a, b) =>
+      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
     );
 
   let filteredEveryUserList = queryClient
     .getQueryData(["everyUserList"])
     ?.filter((user) =>
       user.username.toLowerCase().includes(inputValue.toLowerCase())
+    )
+    .sort((a, b) =>
+      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
     );
 
   return (
