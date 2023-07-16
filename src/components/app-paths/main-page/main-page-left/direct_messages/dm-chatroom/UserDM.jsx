@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../../../../../context/CurrentDMIdContext";
 import FriendsNavRightButton from "../../../main-page-right/friends-nav/FriendsNavRightButton";
 import Online from "../status_icons/Online";
@@ -12,10 +12,9 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   arrayRemove,
   arrayUnion,
-  collection,
   doc,
   getDoc,
-  serverTimestamp,
+  onSnapshot,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -34,6 +33,7 @@ export default function UserDM() {
   );
 
   const [rerender, setRerender] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   const userProfileRef = useRef();
 
@@ -68,6 +68,17 @@ export default function UserDM() {
     const docSnapshot = await getDoc(
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId)
     );
+
+    // onSnapshot(
+    //   doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
+    //   (doc) => {
+    //     setMessages(doc.data().messageHistory);
+    //     queryClient.setQueryData([currentDMId, "messagesHistory"], (old) => {
+    //       return doc.data().messageHistory;
+    //     });
+    //   }
+    // );
+
     const snapshotData = docSnapshot.data().messageHistory;
     return snapshotData;
   });
@@ -199,22 +210,32 @@ export default function UserDM() {
 
   async function addFirstMessage() {
     const now = new Date();
-    const ref = doc(
-      db,
-      "users",
-      currentUserUid,
-      "dmMessageHistory",
-      currentDMId
-    );
-    await setDoc(ref, {
-      messageHistory: [
-        {
-          messageContent: "first message",
-          sentBy: currentUserUid,
-          timestamp: String(now),
-        },
-      ],
-    });
+
+    await setDoc(
+      doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
+      {
+        messageHistory: [
+          {
+            messageContent: "first message",
+            sentBy: currentUserUid,
+            timestamp: String(now),
+          },
+        ],
+      }
+    ); //add dm message between us to MY database of dmMessageHistory
+
+    await setDoc(
+      doc(db, "users", currentDMId, "dmMessageHistory", currentUserUid),
+      {
+        messageHistory: [
+          {
+            messageContent: "first message",
+            sentBy: currentUserUid,
+            timestamp: String(now),
+          },
+        ],
+      }
+    ); //add dm message between us to USER'S database of dmMessageHistory
   }
 
   async function addMessage() {
@@ -228,7 +249,18 @@ export default function UserDM() {
           timestamp: String(now),
         }),
       }
-    );
+    ); //add dm message between us to MY database of dmMessageHistory
+
+    await updateDoc(
+      doc(db, "users", currentDMId, "dmMessageHistory", currentUserUid),
+      {
+        messageHistory: arrayUnion({
+          messageContent: "new message",
+          sentBy: currentUserUid,
+          timestamp: String(now),
+        }),
+      }
+    ); //add dm message between us to USER'S database of dmMessageHistory
   }
 
   return (
@@ -358,7 +390,7 @@ export default function UserDM() {
               </div>
               <TimeDivider />
 
-              {dmData?.map((message) => {
+              {dmData.map((message) => {
                 return (
                   <div>
                     <p>{message.messageContent}</p>
@@ -371,6 +403,7 @@ export default function UserDM() {
             <div className="user-dm-message-bottom">
               <div className="message-input-container">
                 <input placeholder="Message"></input>
+                <button onClick={addMessage}>send</button>
               </div>
             </div>
           </section>
