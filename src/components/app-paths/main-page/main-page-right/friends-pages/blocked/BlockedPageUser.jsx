@@ -1,13 +1,8 @@
-import {
-  randomUsersList,
-  addUserToList,
-} from "../../../main-page-left/direct_messages/users-list-data/randomUsersList";
 import { Link } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../../../../../context/CurrentDMIdContext";
 import { CurrentSectionLeftContext } from "../../../../../../context/CurrentSectionLeftContext";
 import { DmButtonRefContext } from "../../../../../../context/DmButtonRef";
-import { removeBlocked } from "./BlockedFriendsList";
 import { useMutation } from "@tanstack/react-query";
 import {
   arrayRemove,

@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
-import { blockedList } from "./BlockedListFromDB";
 import BlockedPageUser from "./BlockedPageUser";
 import { useContext, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";

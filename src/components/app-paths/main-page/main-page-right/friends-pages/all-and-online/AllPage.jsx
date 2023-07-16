@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { allFriendsList } from "./FriendsListFromDB";
 import OnlinePageUser from "./OnlinePageUser";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";

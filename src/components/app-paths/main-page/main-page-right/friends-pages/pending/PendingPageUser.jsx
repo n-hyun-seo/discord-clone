@@ -7,7 +7,6 @@ import Online from "../../../main-page-left/direct_messages/status_icons/Online"
 import Offline from "../../../main-page-left/direct_messages/status_icons/Offline";
 import Moon from "../../../main-page-left/direct_messages/status_icons/Moon";
 import Dnd from "../../../main-page-left/direct_messages/status_icons/Dnd";
-import { removeFR, getIncomingFRLength } from "./PendingFriendsList";
 import { useMutation } from "@tanstack/react-query";
 import {
   arrayRemove,
