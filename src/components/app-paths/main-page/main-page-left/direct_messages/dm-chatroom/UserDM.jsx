@@ -1,7 +1,5 @@
 import { useContext, useRef, useState } from "react";
 import { CurrentDMIdContext } from "../../../../../../context/CurrentDMIdContext";
-import { CurrentSectionLeftContext } from "../../../../../../context/CurrentSectionLeftContext";
-import { returnUserInfo } from "../users-list-data/randomUsersList";
 import FriendsNavRightButton from "../../../main-page-right/friends-nav/FriendsNavRightButton";
 import Online from "../status_icons/Online";
 import Offline from "../status_icons/Offline";
@@ -14,19 +12,20 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   arrayRemove,
   arrayUnion,
+  collection,
   doc,
   getDoc,
+  serverTimestamp,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { queryClient } from "../../../../../../App";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
+import TimeDivider from "./TimeDivider";
 
 export default function UserDM() {
-  const now = new Date();
-  const currentTime = date.format(now, "MMMM DD, YYYY");
-
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
@@ -60,6 +59,18 @@ export default function UserDM() {
     },
     { refetchOnWindowFocus: false }
   );
+
+  const {
+    isLoading: dmDataIsLoading,
+    data: dmData,
+    error: dmError,
+  } = useQuery([currentDMId, "messagesHistory"], async () => {
+    const docSnapshot = await getDoc(
+      doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId)
+    );
+    const snapshotData = docSnapshot.data().messageHistory;
+    return snapshotData;
+  });
 
   const { mutate: removeFriend } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
@@ -186,6 +197,40 @@ export default function UserDM() {
     });
   });
 
+  async function addFirstMessage() {
+    const now = new Date();
+    const ref = doc(
+      db,
+      "users",
+      currentUserUid,
+      "dmMessageHistory",
+      currentDMId
+    );
+    await setDoc(ref, {
+      messageHistory: [
+        {
+          messageContent: "first message",
+          sentBy: currentUserUid,
+          timestamp: String(now),
+        },
+      ],
+    });
+  }
+
+  async function addMessage() {
+    const now = new Date();
+    await updateDoc(
+      doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
+      {
+        messageHistory: arrayUnion({
+          messageContent: "new message",
+          sentBy: currentUserUid,
+          timestamp: String(now),
+        }),
+      }
+    );
+  }
+
   return (
     <div className="right">
       <div className="friends-nav">
@@ -311,11 +356,17 @@ export default function UserDM() {
                   </button>
                 )}
               </div>
-              <div className="time-container">
-                <div className="time-divider"></div>
-                <p className="dm-time">{currentTime}</p>
-                <div className="time-divider"></div>
-              </div>
+              <TimeDivider />
+
+              {dmData?.map((message) => {
+                return (
+                  <div>
+                    <p>{message.messageContent}</p>
+                    <p>{message.sentBy}</p>
+                    <p>{message.timestamp}</p>
+                  </div>
+                );
+              })}
             </div>
             <div className="user-dm-message-bottom">
               <div className="message-input-container">
