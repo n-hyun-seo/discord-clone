@@ -13,47 +13,22 @@ import AllUsersPage from "./friends-pages/all-users/AllUsersPage";
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
 
-  let filteredOnlineList = queryClient
-    .getQueryData(["onlineList"])
-    ?.filter((user) =>
-      user.username.toLowerCase().includes(inputValue.toLowerCase())
-    )
-    .sort((a, b) =>
-      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-    );
-  let filteredAllList = queryClient
-    .getQueryData(["allList"])
-    ?.filter((user) =>
-      user.username.toLowerCase().includes(inputValue.toLowerCase())
-    )
-    .sort((a, b) =>
-      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-    );
-  let filteredPendingList = queryClient
-    .getQueryData(["pendingList"])
-    ?.filter((user) =>
-      user.username.toLowerCase().includes(inputValue.toLowerCase())
-    )
-    .sort((a, b) =>
-      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-    );
-  let filteredBlockedList = queryClient
-    .getQueryData(["blockedList"])
-    ?.filter((user) =>
-      user.username.toLowerCase().includes(inputValue.toLowerCase())
-    )
-    .sort((a, b) =>
-      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-    );
+  function getListData(key) {
+    return queryClient
+      .getQueryData([key])
+      ?.filter((user) =>
+        user.username.toLowerCase().includes(inputValue.toLowerCase())
+      )
+      .sort((a, b) =>
+        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+      );
+  }
 
-  let filteredEveryUserList = queryClient
-    .getQueryData(["everyUserList"])
-    ?.filter((user) =>
-      user.username.toLowerCase().includes(inputValue.toLowerCase())
-    )
-    .sort((a, b) =>
-      a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-    );
+  let filteredOnlineList = getListData("onlineList");
+  let filteredAllList = getListData("allList");
+  let filteredPendingList = getListData("pendingList");
+  let filteredBlockedList = getListData("blockedList");
+  let filteredEveryUserList = getListData("everyUserList");
 
   return (
     <div className="right">
