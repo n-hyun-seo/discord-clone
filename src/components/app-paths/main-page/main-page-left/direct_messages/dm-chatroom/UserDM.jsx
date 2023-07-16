@@ -284,7 +284,6 @@ export default function UserDM() {
                       if (isBlockedBy) return;
                       sendFriendRequest();
                       setRerender(!rerender);
-                      console.log(isFriend);
                     }}
                   >
                     Add Friend
