@@ -49,6 +49,15 @@ export default function UserDM() {
     return false;
   }
 
+  useEffect(() => {
+    const unsub = onSnapshot(
+      doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
+      (doc) => {
+        setMessages(doc?.data()?.messageHistory);
+      }
+    );
+  }, [currentDMId]);
+
   const { isLoading, data, error } = useQuery(
     [currentDMId],
     async () => {
@@ -59,29 +68,6 @@ export default function UserDM() {
     },
     { refetchOnWindowFocus: false }
   );
-
-  const {
-    isLoading: dmDataIsLoading,
-    data: dmData,
-    error: dmError,
-  } = useQuery([currentDMId, "messagesHistory"], async () => {
-    const docSnapshot = await getDoc(
-      doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId)
-    );
-
-    // onSnapshot(
-    //   doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
-    //   (doc) => {
-    //     setMessages(doc.data().messageHistory);
-    //     queryClient.setQueryData([currentDMId, "messagesHistory"], (old) => {
-    //       return doc.data().messageHistory;
-    //     });
-    //   }
-    // );
-
-    const snapshotData = docSnapshot.data().messageHistory;
-    return snapshotData;
-  });
 
   const { mutate: removeFriend } = useMutation(async () => {
     await updateDoc(doc(db, "users", currentUserUid), {
@@ -390,7 +376,7 @@ export default function UserDM() {
               </div>
               <TimeDivider />
 
-              {dmData.map((message) => {
+              {messages?.map((message) => {
                 return (
                   <div>
                     <p>{message.messageContent}</p>
@@ -403,7 +389,16 @@ export default function UserDM() {
             <div className="user-dm-message-bottom">
               <div className="message-input-container">
                 <input placeholder="Message"></input>
-                <button onClick={addMessage}>send</button>
+                <button
+                  onClick={() => {
+                    if (messages === undefined) addFirstMessage();
+                    else {
+                      addMessage();
+                    }
+                  }}
+                >
+                  send
+                </button>
               </div>
             </div>
           </section>
