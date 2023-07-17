@@ -19,15 +19,21 @@ export default function AllUsersPage(props) {
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", "allUsersList"), async (docu) => {
       const listData = docu.data().everyUserList;
+
+      const currentUser = listData.filter(
+        (user) => user.uid === currentUserUid
+      );
+
+      currentUser[0].username = "You";
+      currentUser[0].isCurrentUser = true;
+
       const filteredData = listData
-        .map((user) => {
-          if (user.uid === currentUserUid)
-            return { ...user, username: "!!! You" };
-          return user;
-        })
+        .filter((user) => user.uid !== currentUserUid)
         .sort((a, b) =>
           a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
         );
+
+      filteredData.unshift(currentUser[0]);
       setAllUsersList(filteredData);
     });
   }, []);
@@ -58,6 +64,7 @@ export default function AllUsersPage(props) {
               id_number={user.uid}
               online_status={user.onlineStatus}
               isIncoming={user.requestType}
+              isCurrentUser={user.isCurrentUser}
             />
           ))
         ) : (

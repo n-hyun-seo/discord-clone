@@ -55,27 +55,26 @@ export default function AddFriendPageUser(props) {
     await updateDoc(doc(db, "users", currentUserUid), {
       directMessages: arrayUnion({ ...personInfoData }),
     });
-
-    // await updateDoc(doc(db, "users", "allUsersList"), {
-    //   everyUserList: arrayUnion({ ...personInfoData }),
-    // });
   });
 
   return (
     <Link
-      to={`../../dm/${props.id_number}`}
+      to={!props.isCurrentUser && `../../dm/${props.id_number}`}
       className="test-test"
       onClick={(e) => {
+        if (props.isCurrentUser) return;
         updateDmList();
         setCurrentSectionLeft("dm");
         setCurrentDMId(props.id_number);
       }}
       onMouseEnter={() => {
         setHoverState(true);
+        if (props.isCurrentUser) return;
         messageCircleRef.current.style.backgroundColor = "#1b1c1e";
       }}
       onMouseLeave={() => {
         setHoverState(false);
+        if (props.isCurrentUser) return;
         messageCircleRef.current.style.backgroundColor = "#2b2d31";
       }}
     >
@@ -119,32 +118,34 @@ export default function AddFriendPageUser(props) {
           />
         </div>
       </section>
-      <div className="text-more-box-container">
-        <div
-          className="pfp-circle text-box"
-          ref={messageCircleRef}
-          onMouseEnter={() => {
-            setMessageHoverState(true);
-            messageHoverRef.current.classList.add("hovered");
-            messageImageRef.current.style.filter = "brightness(300%)";
-          }}
-          onMouseLeave={() => {
-            setMessageHoverState(false);
-            messageHoverRef.current.classList.remove("hovered");
-            messageImageRef.current.style.filter = "brightness(250%)";
-          }}
-        >
-          <img
-            src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
-            alt="chat"
-            className="text-box-dm"
-            ref={messageImageRef}
-          />
+      {!props.isCurrentUser && (
+        <div className="text-more-box-container">
+          <div
+            className="pfp-circle text-box"
+            ref={messageCircleRef}
+            onMouseEnter={() => {
+              setMessageHoverState(true);
+              messageHoverRef.current.classList.add("hovered");
+              messageImageRef.current.style.filter = "brightness(300%)";
+            }}
+            onMouseLeave={() => {
+              setMessageHoverState(false);
+              messageHoverRef.current.classList.remove("hovered");
+              messageImageRef.current.style.filter = "brightness(250%)";
+            }}
+          >
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/interface-solid-8/2050/interface_2_glyph-23-512.png"
+              alt="chat"
+              className="text-box-dm"
+              ref={messageImageRef}
+            />
+          </div>
+          <div ref={messageHoverRef} className="message-hover-box all-users">
+            Message
+          </div>
         </div>
-        <div ref={messageHoverRef} className="message-hover-box all-users">
-          Message
-        </div>
-      </div>
+      )}
     </Link>
   );
 }
