@@ -11,7 +11,7 @@ import Dnd from "../status_icons/Dnd";
 import { randomUsersList, removeDM } from "../users-list-data/randomUsersList";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { arrayRemove, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { queryClient } from "../../../../../../App";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
@@ -67,13 +67,10 @@ export function IndividualDM(props) {
   }
 
   const { mutate: closeDm } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
     await updateDoc(doc(db, "users", currentUserUid), {
-      directMessages: arrayRemove(props.id_number),
-    });
-
-    queryClient.setQueryData(["dmList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== props.id_number);
-      return filteredList;
+      directMessages: arrayRemove({ ...personInfoData }),
     });
   });
 
