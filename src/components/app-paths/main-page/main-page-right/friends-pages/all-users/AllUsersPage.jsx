@@ -9,46 +9,36 @@ import {
 import { db } from "../../../../../../config/firebase";
 import LoadingVisual from "../LoadingVisual";
 import AllUsersPageUser from "./AllUsersPageUser";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 
 export default function AllUsersPage(props) {
-  // const [allUsersList, setAllUsersList] = useState([]);
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+  const [allUsersList, setAllUsersList] = useState([]);
 
-  // useEffect(() => {
-  //   const unsub = onSnapshot(collection(db, "users"), async (docu) => {
-  //     console.log(docu);
-  //   });
-  // }, []);
-
-  const { isLoading, data, isError, error } = useQuery(
-    ["everyUserList"],
-    async () => {
-      let _array = [];
-      const snapshot = await getDocs(collection(db, "users"));
-      snapshot.forEach((doc) => {
-        return _array.push(String(doc.id));
-      });
-      let finalList = await Promise.all(
-        _array.map(async (uid) => {
-          const docSnapshot = await getDoc(doc(db, "users", uid));
-          const userData = await docSnapshot.data().userInfo;
-          return userData;
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", "allUsersList"), async (docu) => {
+      const listData = docu.data().everyUserList;
+      const filteredData = listData
+        .map((user) => {
+          if (user.uid === currentUserUid)
+            return { ...user, username: "!!! You" };
+          return user;
         })
-      );
-      return finalList;
-    }
-  );
-
-  if (isLoading) return <LoadingVisual />;
-  if (isError) console.log(error);
+        .sort((a, b) =>
+          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+        );
+      setAllUsersList(filteredData);
+    });
+  }, []);
 
   let listToUse;
 
   props.inputValue
-    ? (listToUse = props.filteredList)
-    : (listToUse = data?.sort((a, b) =>
-        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-      ));
+    ? (listToUse = allUsersList?.filter((user) =>
+        user.username.toLowerCase().includes(props.inputValue.toLowerCase())
+      ))
+    : (listToUse = allUsersList);
 
   return (
     <section className="friends-type-container">

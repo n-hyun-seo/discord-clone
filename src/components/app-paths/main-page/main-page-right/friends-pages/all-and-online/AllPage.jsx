@@ -13,29 +13,33 @@ export default function AllPage(props) {
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
-      const listData = docu.data().friends.all;
+      const listData = docu
+        .data()
+        .friends.all.sort((a, b) =>
+          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+        );
       setAllList(listData);
     });
   }, []);
 
-  // let listToUse;
+  let listToUse;
 
-  // props.inputValue
-  //   ? (listToUse = props.filteredList)
-  //   : (listToUse = data?.sort((a, b) =>
-  //       a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-  //     ));
+  props.inputValue
+    ? (listToUse = allList?.filter((user) =>
+        user.username.toLowerCase().includes(props.inputValue.toLowerCase())
+      ))
+    : (listToUse = allList);
 
   return (
     <section className="friends-type-container">
       <div className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {allList?.length}
+            {props.header} — {listToUse?.length}
           </p>
         </div>
-        {allList?.length !== 0 ? (
-          allList?.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <OnlinePageUser
               username={user.username}
               status={user.statusMessage}

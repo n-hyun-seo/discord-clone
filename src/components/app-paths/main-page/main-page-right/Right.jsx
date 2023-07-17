@@ -5,31 +5,12 @@ import OnlinePage from "./friends-pages/all-and-online/OnlinePage";
 import AllPage from "./friends-pages/all-and-online/AllPage";
 import PendingPage from "./friends-pages/pending/PendingPage";
 import BlockedPage from "./friends-pages/blocked/BlockedPage";
-import AddFriendPage from "./friends-pages/all-users/AllUsersPage";
 import { useState } from "react";
 import { queryClient } from "../../../../App";
 import AllUsersPage from "./friends-pages/all-users/AllUsersPage";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
-  const [usersList, setUsersList] = useState([]);
-
-  function getListData(key) {
-    return queryClient
-      .getQueryData([key])
-      ?.filter((user) =>
-        user.username.toLowerCase().includes(inputValue.toLowerCase())
-      )
-      .sort((a, b) =>
-        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-      );
-  }
-
-  let filteredOnlineList = getListData("onlineList");
-  let filteredAllList = getListData("allList");
-  let filteredPendingList = getListData("pendingList");
-  let filteredBlockedList = getListData("blockedList");
-  let filteredEveryUserList = getListData("everyUserList");
 
   return (
     <div className="right">
@@ -94,62 +75,34 @@ export default function Right() {
             <Routes>
               <Route
                 path="*"
-                element={
-                  <OnlinePage
-                    header="ONLINE"
-                    inputValue={inputValue}
-                    filteredList={filteredOnlineList}
-                  />
-                }
+                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
               />
               <Route
                 path="online"
-                element={
-                  <OnlinePage
-                    header="ONLINE"
-                    inputValue={inputValue}
-                    filteredList={filteredOnlineList}
-                  />
-                }
+                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
               />
               <Route
                 path="all"
                 element={
-                  <AllPage
-                    header="ALL FRIENDS"
-                    inputValue={inputValue}
-                    filteredList={filteredAllList}
-                  />
+                  <AllPage header="ALL FRIENDS" inputValue={inputValue} />
                 }
               />
               <Route
                 path="pending"
                 element={
-                  <PendingPage
-                    header="PENDING"
-                    inputValue={inputValue}
-                    filteredList={filteredPendingList}
-                  />
+                  <PendingPage header="PENDING" inputValue={inputValue} />
                 }
               />
               <Route
                 path="blocked"
                 element={
-                  <BlockedPage
-                    header="BLOCKED"
-                    inputValue={inputValue}
-                    filteredList={filteredBlockedList}
-                  />
+                  <BlockedPage header="BLOCKED" inputValue={inputValue} />
                 }
               />
               <Route
                 path="allusers"
                 element={
-                  <AllUsersPage
-                    header="ALL USERS"
-                    inputValue={inputValue}
-                    filteredList={filteredEveryUserList}
-                  />
+                  <AllUsersPage header="ALL USERS" inputValue={inputValue} />
                 }
               />
             </Routes>

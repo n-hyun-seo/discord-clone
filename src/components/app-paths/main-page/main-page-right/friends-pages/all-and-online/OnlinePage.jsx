@@ -14,31 +14,33 @@ export default function OnlinePage(props) {
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
       const listData = docu.data().friends.all;
-      let filteredList = listData.filter(
-        (user) => user.onlineStatus !== "offline"
-      );
+      let filteredList = listData
+        .filter((user) => user.onlineStatus !== "offline")
+        .sort((a, b) =>
+          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+        );
       setOnlineList(filteredList);
     });
   }, []);
 
-  // let listToUse;
+  let listToUse;
 
-  // props.inputValue
-  //   ? (listToUse = props.filteredList)
-  //   : (listToUse = data?.sort((a, b) =>
-  //       a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-  //     ));
+  props.inputValue
+    ? (listToUse = onlineList?.filter((user) =>
+        user.username.toLowerCase().includes(props.inputValue.toLowerCase())
+      ))
+    : (listToUse = onlineList);
 
   return (
     <section className="friends-type-container">
       <section className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {onlineList?.length}
+            {props.header} — {listToUse?.length}
           </p>
         </div>
-        {onlineList?.length !== 0 ? (
-          onlineList?.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <OnlinePageUser
               username={user.username}
               status={user.statusMessage}

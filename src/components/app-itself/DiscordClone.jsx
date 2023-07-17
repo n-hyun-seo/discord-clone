@@ -37,22 +37,6 @@ export default function DiscordClone() {
   const { isLoading, isError, error } = useQuery(
     ["check-login"],
     async () => {
-      await queryClient.prefetchQuery(["everyUserList"], async () => {
-        let _array = [];
-        const snapshot = await getDocs(collection(db, "users"));
-        snapshot.forEach((doc) => {
-          return _array.push(String(doc.id));
-        });
-        let finalList = await Promise.all(
-          _array.map(async (uid) => {
-            const docSnapshot = await getDoc(doc(db, "users", uid));
-            const userData = await docSnapshot.data().userInfo;
-            return userData;
-          })
-        );
-        return finalList;
-      });
-
       onAuthStateChanged(auth, (user) => {
         if (user) {
           return;

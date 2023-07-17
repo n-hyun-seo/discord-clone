@@ -53,9 +53,12 @@ export default function AddFriendPageUser(props) {
     const personInfoData = await personInfoSnapshot.data().userInfo;
 
     await updateDoc(doc(db, "users", currentUserUid), {
-      directMessages: arrayUnion({...personInfoData}),
+      directMessages: arrayUnion({ ...personInfoData }),
     });
 
+    // await updateDoc(doc(db, "users", "allUsersList"), {
+    //   everyUserList: arrayUnion({ ...personInfoData }),
+    // });
   });
 
   return (

@@ -18,7 +18,11 @@ export default function PendingPage(props) {
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
-      const listData = docu.data().friends.pending;
+      const listData = docu
+        .data()
+        .friends.pending.sort((a, b) =>
+          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+        );
       setPendingList(listData);
 
       const incomingFR = listData.filter(
@@ -28,24 +32,24 @@ export default function PendingPage(props) {
     });
   }, []);
 
-  // let listToUse;
+  let listToUse;
 
-  // props.inputValue
-  //   ? (listToUse = props.filteredList)
-  //   : (listToUse = data?.sort((a, b) =>
-  //       a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-  //     ));
+  props.inputValue
+    ? (listToUse = pendingList?.filter((user) =>
+        user.username.toLowerCase().includes(props.inputValue.toLowerCase())
+      ))
+    : (listToUse = pendingList);
 
   return (
     <section className="friends-type-container">
       <section className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {pendingList?.length}
+            {props.header} — {listToUse?.length}
           </p>
         </div>
-        {pendingList?.length !== 0 ? (
-          pendingList?.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <PendingPageUser
               username={user.username}
               status={user.statusMessages}

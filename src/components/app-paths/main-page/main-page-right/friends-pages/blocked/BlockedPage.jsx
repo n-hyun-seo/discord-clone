@@ -8,33 +8,39 @@ import LoadingVisual from "../LoadingVisual";
 
 export default function BlockedPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
- const [blockedList, setBlockedList] = useState([]);
+  const [blockedList, setBlockedList] = useState([]);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
-      const listData = docu.data().friends.blocked;
+      const listData = docu
+        .data()
+        .friends.blocked.sort((a, b) =>
+          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+        );
       setBlockedList(listData);
     });
   }, []);
 
- 
+  let listToUse;
 
-  // let listToUse;
-
-  // props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
+  props.inputValue
+    ? (listToUse = blockedList?.filter((user) =>
+        user.username.toLowerCase().includes(props.inputValue.toLowerCase())
+      ))
+    : (listToUse = blockedList);
 
   return (
     <section className="friends-type-container">
       <section className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {blockedList?.length}
+            {props.header} — {listToUse?.length}
           </p>
         </div>
-        {blockedList?.length !== 0 ? (
-          blockedList?.map((user) => (
+        {listToUse?.length !== 0 ? (
+          listToUse?.map((user) => (
             <BlockedPageUser
               username={user.username}
               status={user.statusMessage}

@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { doc, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { CurrentUserUidContext } from "../../../context/CurrentUserUidContext";
 
 export default function RegisterBox(props) {
@@ -26,7 +26,7 @@ export default function RegisterBox(props) {
     e.preventDefault();
     try {
       const data = await createUserWithEmailAndPassword(auth, email, password);
-      setDoc(doc(db, "users", data.user.uid), {
+      let userInfo = {
         friends: {
           pending: [],
           blocked: [],
@@ -45,6 +45,20 @@ export default function RegisterBox(props) {
           aboutMe: "",
           userTag: "placeholder#0000",
         },
+      };
+      setDoc(doc(db, "users", data.user.uid), userInfo);
+      updateDoc(doc(db, "users", "allUsersList"), {
+        everyUserList: arrayUnion({
+          ...data.user.metadata,
+          email: data.user.email,
+          username: username,
+          uid: data.user.uid,
+          photoURL: "",
+          statusMessage: "",
+          onlineStatus: "online",
+          aboutMe: "",
+          userTag: "placeholder#0000",
+        }),
       });
     } catch (err) {
       console.log(err);

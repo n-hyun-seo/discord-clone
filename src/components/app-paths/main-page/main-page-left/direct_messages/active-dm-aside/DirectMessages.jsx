@@ -1,6 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { IndividualDM } from "./IndividualDM";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
