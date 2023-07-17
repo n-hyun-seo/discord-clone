@@ -23,6 +23,8 @@ import { queryClient } from "../../../../../../App";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
 import TimeDivider from "./TimeDivider";
+import MyMessage from "./MyMessage";
+import OpponentMessage from "./OpponentMessage";
 
 export default function UserDM() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
@@ -38,6 +40,7 @@ export default function UserDM() {
   const [isPending, setIsPending] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
   const [isBlockedBy, setIsBlockedBy] = useState(false);
+  const [messageInput, setMessageInput] = useState("");
 
   const userProfileRef = useRef();
 
@@ -93,13 +96,32 @@ export default function UserDM() {
     );
   }, [currentDMId]);
 
-  const { isLoading, data, error } = useQuery(
+  const {
+    isLoading,
+    data: opponentData,
+    error,
+  } = useQuery(
     [currentDMId],
     async () => {
       const dmPersonSnapshot = await getDoc(doc(db, "users", currentDMId));
       const dmPersonUserInfo = await dmPersonSnapshot.data().userInfo;
 
       return dmPersonUserInfo;
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  const {
+    isLoading: currentIsLoading,
+    data: currentUserData,
+    error: currentUserError,
+  } = useQuery(
+    [currentUserUid],
+    async () => {
+      const userSnapshot = await getDoc(doc(db, "users", currentUserUid));
+      const userInfo = await userSnapshot.data().userInfo;
+
+      return userInfo;
     },
     { refetchOnWindowFocus: false }
   );
@@ -112,105 +134,87 @@ export default function UserDM() {
     const userInfoData = await userInfoSnapshot.data().userInfo;
 
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.all": arrayRemove({ ...personInfoData }),
+      "friends.all": arrayRemove({ ...opponentData }),
     }); //remove person from my friends list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.all": arrayRemove({ ...userInfoData }),
+      "friends.all": arrayRemove({ ...currentUserData }),
     }); //remove myself from person's friends list
   });
 
   const { mutate: sendFriendRequest } = useMutation(async () => {
-    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
-    const personInfoData = await personInfoSnapshot.data().userInfo;
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayUnion({
-        ...personInfoData,
+        ...opponentData,
         requestType: "outgoing",
       }),
     }); //add person to my pending list
 
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.pending": arrayUnion({
-        ...userInfoData,
+        ...currentUserData,
         requestType: "incoming",
       }),
     }); //add myself to person's pending list
   });
 
   const { mutate: blockUser } = useMutation(async () => {
-    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
-    const personInfoData = await personInfoSnapshot.data().userInfo;
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.blocked": arrayUnion({ ...personInfoData }),
+      "friends.blocked": arrayUnion({ ...opponentData }),
     }); //add person to my blocked list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.isBlockedBy": arrayUnion({ ...userInfoData }),
+      "friends.isBlockedBy": arrayUnion({ ...currentUserData }),
     }); //add myself to person's isBlockedBy list
 
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayRemove({
-        ...personInfoData,
+        ...opponentData,
         requestType: "outgoing",
       }),
     }); //remove person from my pending list (outgoing)
 
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayRemove({
-        ...personInfoData,
+        ...opponentData,
         requestType: "incoming",
       }),
     }); //remove person from my pending list (incoming)
 
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.pending": arrayRemove({
-        ...userInfoData,
+        ...currentUserData,
         requestType: "outgoing",
       }),
     }); //remove myself from person's pending list (outgoing)
 
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.pending": arrayRemove({
-        ...userInfoData,
+        ...currentUserData,
         requestType: "incoming",
       }),
     }); //remove myself from person's pending list (incoming)
 
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.all": arrayRemove({ ...personInfoData }),
+      "friends.all": arrayRemove({ ...opponentData }),
     }); //remove person from my friends list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.all": arrayRemove({ ...userInfoData }),
+      "friends.all": arrayRemove({ ...currentUserData }),
     }); //remove myself from person's friends list
   });
 
   const { mutate: unblockUser } = useMutation(async () => {
-    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
-    const personInfoData = await personInfoSnapshot.data().userInfo;
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.blocked": arrayRemove({ ...personInfoData }),
+      "friends.blocked": arrayRemove({ ...opponentData }),
     }); // remove person from my blocked list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.isBlockedBy": arrayRemove(...userInfoData),
+      "friends.isBlockedBy": arrayRemove({ ...currentUserData }),
     }); // remove myself from person's isBlockedBy list
   });
 
-  async function addFirstMessage() {
+  async function addFirstMessage(content) {
     const now = new Date();
 
     await setDoc(
@@ -218,7 +222,7 @@ export default function UserDM() {
       {
         messageHistory: [
           {
-            messageContent: "first message",
+            messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
           },
@@ -231,22 +235,27 @@ export default function UserDM() {
       {
         messageHistory: [
           {
-            messageContent: "first message",
+            messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
           },
         ],
       }
     ); //add dm message between us to USER'S database of dmMessageHistory
+
+    await updateDoc(doc(db, "users", currentDMId), {
+      directMessages: arrayUnion({ ...currentUserData }),
+    }); //add myself to person's dm list
   }
 
-  async function addMessage() {
+  async function addMessage(content) {
     const now = new Date();
+
     await updateDoc(
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
       {
         messageHistory: arrayUnion({
-          messageContent: "new message",
+          messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
         }),
@@ -257,12 +266,16 @@ export default function UserDM() {
       doc(db, "users", currentDMId, "dmMessageHistory", currentUserUid),
       {
         messageHistory: arrayUnion({
-          messageContent: "new message",
+          messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
         }),
       }
     ); //add dm message between us to USER'S database of dmMessageHistory
+
+    await updateDoc(doc(db, "users", currentDMId), {
+      directMessages: arrayUnion({ ...currentUserData }),
+    }); //add myself to person's dm list
   }
 
   return (
@@ -273,18 +286,18 @@ export default function UserDM() {
             <div
               className="pfp-circle dm-header"
               style={{
-                backgroundImage: `url("${data?.photoURL}")`,
+                backgroundImage: `url("${opponentData?.photoURL}")`,
               }}
             >
               <div className="online-status-outer">
-                {data?.onlineStatus === "online" && <Online />}
-                {data?.onlineStatus === "offline" && <Offline />}
-                {data?.onlineStatus === "moon" && <Moon />}
-                {data?.onlineStatus === "dnd" && <Dnd />}
+                {opponentData?.onlineStatus === "online" && <Online />}
+                {opponentData?.onlineStatus === "offline" && <Offline />}
+                {opponentData?.onlineStatus === "moon" && <Moon />}
+                {opponentData?.onlineStatus === "dnd" && <Dnd />}
               </div>
             </div>
           </div>
-          <p className="dm-header-user-name">{data?.username}</p>
+          <p className="dm-header-user-name">{opponentData?.username}</p>
         </div>
         <div className="friends-right-side">
           <FriendsNavRightButton
@@ -329,17 +342,19 @@ export default function UserDM() {
                 <div
                   className="pfp-circle user-dm-message-header"
                   style={{
-                    backgroundImage: `url("${data?.photoURL}")`,
+                    backgroundImage: `url("${opponentData?.photoURL}")`,
                   }}
                 ></div>
               </div>
               <p className="user-dm-message-header-username">
-                {data?.username}
+                {opponentData?.username}
               </p>
-              <p className="user-dm-message-header-usertag">{data?.user_tag}</p>
+              <p className="user-dm-message-header-usertag">
+                {opponentData?.user_tag}
+              </p>
               <p className="begining-of-dm-text">
                 This is the beginning of your direct message history with{" "}
-                {data?.username}.
+                {opponentData?.username}.
               </p>
               <div className="dm-friend-button-container">
                 {isBlocked ? (
@@ -393,24 +408,36 @@ export default function UserDM() {
               <TimeDivider />
 
               {messages?.map((message) => {
+                if (message.sentBy === currentUserUid)
+                  return (
+                    <MyMessage
+                      messageContent={message.messageContent}
+                      sentBy={message.sentBy}
+                      timestamp={message.timestamp}
+                    />
+                  );
                 return (
-                  <div>
-                    <p>{message.messageContent}</p>
-                    <p>{message.sentBy}</p>
-                    <p>{message.timestamp}</p>
-                  </div>
+                  <OpponentMessage
+                    messageContent={message.messageContent}
+                    sentBy={message.sentBy}
+                    timestamp={message.timestamp}
+                  />
                 );
               })}
             </div>
             <div className="user-dm-message-bottom">
               <div className="message-input-container">
-                <input placeholder="Message"></input>
+                <input
+                  placeholder="Message"
+                  onChange={(e) => setMessageInput(e.target.value)}
+                ></input>
                 <button
                   onClick={() => {
-                    if (messages === undefined) addFirstMessage();
+                    if (messages === undefined) addFirstMessage(messageInput);
                     else {
-                      addMessage();
+                      addMessage(messageInput);
                     }
+                    setMessageInput("");
                   }}
                 >
                   send
@@ -424,36 +451,38 @@ export default function UserDM() {
                 <div
                   className="pfp-circle user-profile-header"
                   style={{
-                    backgroundImage: `url("${data?.photoURL}")`,
+                    backgroundImage: `url("${opponentData?.photoURL}")`,
                   }}
                 >
                   <div className="online-status-outer user-profile-header">
-                    {data?.onlineStatus === "online" && <Online />}
-                    {data?.onlineStatus === "offline" && <Offline />}
-                    {data?.onlineStatus === "moon" && <Moon />}
-                    {data?.onlineStatus === "dnd" && <Dnd />}
+                    {opponentData?.onlineStatus === "online" && <Online />}
+                    {opponentData?.onlineStatus === "offline" && <Offline />}
+                    {opponentData?.onlineStatus === "moon" && <Moon />}
+                    {opponentData?.onlineStatus === "dnd" && <Dnd />}
                   </div>
                 </div>
               </div>
             </div>
             <div className="right-section-uncolored">
               <div className="user-info-box">
-                <div className="user-info-username">{data?.username}</div>
-                <div className="user-info-tag">{data?.userTag}</div>
-                {data?.aboutMe !== "" && (
+                <div className="user-info-username">
+                  {opponentData?.username}
+                </div>
+                <div className="user-info-tag">{opponentData?.userTag}</div>
+                {opponentData?.aboutMe !== "" && (
                   <div>
                     <p className="about-me-header">ABOUT ME</p>
-                    <p className="about-me-text">{data?.aboutMe}</p>
+                    <p className="about-me-text">{opponentData?.aboutMe}</p>
                   </div>
                 )}
                 <p className="member-since-header">DISCORD MEMBER SINCE</p>
                 <p className="member-since-text">
-                  {data?.creationTime.slice(0, 16)}
+                  {opponentData?.creationTime.slice(0, 16)}
                 </p>
                 <p>{}</p>
                 <p className="note-header">NOTE</p>
                 <div
-                  key={`note${data?.id_number}`}
+                  key={`note${opponentData?.id_number}`}
                   className="note-text"
                   contentEditable
                 ></div>
