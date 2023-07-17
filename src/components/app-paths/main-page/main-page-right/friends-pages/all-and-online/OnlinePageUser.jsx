@@ -60,39 +60,28 @@ export default function OnlinePageUser(props) {
   }
 
   const { mutate: updateDmList } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      directMessages: arrayUnion(props.id_number),
-    });
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
-    queryClient.setQueryData(["dmList"], (old) => {
-      if (old.filter((user) => user.uid === props.id_number).length === 0)
-        return [...old, userInfoData];
-
-      return old;
+      directMessages: arrayUnion({ ...personInfoData }),
     });
   });
 
   const { mutate: removeFriend } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.all": arrayRemove(props.id_number),
+      "friends.all": arrayRemove({ ...personInfoData }),
     }); //remove person from my friends list
 
     await updateDoc(doc(db, "users", props.id_number), {
-      "friends.all": arrayRemove(currentUserUid),
+      "friends.all": arrayRemove(...userInfoData),
     }); //remove myself from person's friends list
-
-    queryClient.setQueryData(["allList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== props.id_number);
-      return filteredList;
-    });
-
-    queryClient.setQueryData(["onlineList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== props.id_number);
-      return filteredList;
-    });
   });
 
   return (

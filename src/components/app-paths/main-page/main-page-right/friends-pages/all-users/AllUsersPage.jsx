@@ -1,10 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import LoadingVisual from "../LoadingVisual";
 import AllUsersPageUser from "./AllUsersPageUser";
+import { useEffect, useState } from "react";
 
 export default function AllUsersPage(props) {
+  // const [allUsersList, setAllUsersList] = useState([]);
+
+  // useEffect(() => {
+  //   const unsub = onSnapshot(collection(db, "users"), async (docu) => {
+  //     console.log(docu);
+  //   });
+  // }, []);
+
   const { isLoading, data, isError, error } = useQuery(
     ["everyUserList"],
     async () => {

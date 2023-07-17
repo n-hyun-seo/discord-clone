@@ -1,52 +1,41 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import OnlinePageUser from "./OnlinePageUser";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import LoadingVisual from "../LoadingVisual";
 
 export default function AllPage(props) {
+  const [allList, setAllList] = useState([]);
+
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
-  const { isLoading, isError, data, error } = useQuery(
-    ["allList"],
-    async () => {
-      const snapshot = await getDoc(doc(db, "users", currentUserUid));
-      const listData = await snapshot.data().friends.all;
-      let finalList = await Promise.all(
-        listData.map(async (uid) => {
-          const docSnapshot = await getDoc(doc(db, "users", uid));
-          const userData = await docSnapshot.data().userInfo;
-          return userData;
-        })
-      );
-      return finalList;
-    },
-    { refetchOnWindowFocus: false }
-  );
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
+      const listData = docu.data().friends.all;
+      setAllList(listData);
+    });
+  }, []);
 
-  if (isLoading) return <LoadingVisual />;
-  if (isError) console.log(error);
+  // let listToUse;
 
-  let listToUse;
-
-  props.inputValue
-    ? (listToUse = props.filteredList)
-    : (listToUse = data?.sort((a, b) =>
-        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-      ));
+  // props.inputValue
+  //   ? (listToUse = props.filteredList)
+  //   : (listToUse = data?.sort((a, b) =>
+  //       a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+  //     ));
 
   return (
     <section className="friends-type-container">
       <div className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {data.length}
+            {props.header} — {allList?.length}
           </p>
         </div>
-        {listToUse?.length !== 0 ? (
-          listToUse?.map((user) => (
+        {allList?.length !== 0 ? (
+          allList?.map((user) => (
             <OnlinePageUser
               username={user.username}
               status={user.statusMessage}

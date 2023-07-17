@@ -12,6 +12,7 @@ import AllUsersPage from "./friends-pages/all-users/AllUsersPage";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
+  const [usersList, setUsersList] = useState([]);
 
   function getListData(key) {
     return queryClient

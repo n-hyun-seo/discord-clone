@@ -1,48 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import BlockedPageUser from "./BlockedPageUser";
-import { useContext, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import LoadingVisual from "../LoadingVisual";
 
 export default function BlockedPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
+ const [blockedList, setBlockedList] = useState([]);
+
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
-  const { isLoading, isError, data, error } = useQuery(
-    ["blockedList"],
-    async () => {
-      const snapshot = await getDoc(doc(db, "users", currentUserUid));
-      const listData = await snapshot.data().friends.blocked;
-      let finalList = await Promise.all(
-        listData.map(async (uid) => {
-          const docSnapshot = await getDoc(doc(db, "users", uid));
-          const userData = await docSnapshot.data().userInfo;
-          return userData;
-        })
-      );
-      return finalList;
-    },
-    { refetchOnWindowFocus: false }
-  );
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
+      const listData = docu.data().friends.blocked;
+      setBlockedList(listData);
+    });
+  }, []);
 
-  if (isLoading) return <LoadingVisual />;
+ 
 
-  let listToUse;
+  // let listToUse;
 
-  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
+  // props.inputValue ? (listToUse = props.filteredList) : (listToUse = data);
 
   return (
     <section className="friends-type-container">
       <section className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {listToUse.length}
+            {props.header} — {blockedList?.length}
           </p>
         </div>
-        {listToUse.length !== 0 ? (
-          listToUse.map((user) => (
+        {blockedList?.length !== 0 ? (
+          blockedList?.map((user) => (
             <BlockedPageUser
               username={user.username}
               status={user.statusMessage}

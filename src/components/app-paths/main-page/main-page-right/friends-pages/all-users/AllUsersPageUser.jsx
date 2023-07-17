@@ -49,19 +49,13 @@ export default function AddFriendPageUser(props) {
   }
 
   const { mutate: updateDmList } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      directMessages: arrayUnion(props.id_number),
+      directMessages: arrayUnion({...personInfoData}),
     });
 
-    const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
-    queryClient.setQueryData(["dmList"], (old) => {
-      if (old.filter((user) => user.uid === props.id_number).length === 0)
-        return [...old, userInfoData];
-
-      return old;
-    });
   });
 
   return (

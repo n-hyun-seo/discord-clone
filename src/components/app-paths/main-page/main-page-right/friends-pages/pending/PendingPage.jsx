@@ -1,60 +1,51 @@
 import PendingPageUser from "./PendingPageUser";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import { useQuery } from "@tanstack/react-query";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
 import LoadingVisual from "../LoadingVisual";
 
 export default function PendingPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
+  const [pendingList, setPendingList] = useState([]);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
   const [currentIncomingFR, setCurrentIncomingFR] = useContext(
     CurrentIncomingFRContext
   );
 
-  const { isLoading, isError, data, error, refetch } = useQuery(
-    ["pendingList"],
-    async () => {
-      const snapshot = await getDoc(doc(db, "users", currentUserUid));
-      const listData = await snapshot.data().friends.pending;
-      let finalList = await Promise.all(
-        listData.map(async (user) => {
-          const docSnapshot = await getDoc(doc(db, "users", user.uid));
-          const userData = await docSnapshot.data().userInfo;
-          const requestType = user.requestType;
-          return { ...userData, requestType };
-        })
-      );
-      const incomingFR = finalList.filter(
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
+      const listData = docu.data().friends.pending;
+      setPendingList(listData);
+
+      const incomingFR = listData.filter(
         (user) => user.requestType === "incoming"
       ).length;
       setCurrentIncomingFR(incomingFR);
-      return finalList;
-    },
-    { refetchOnWindowFocus: false }
-  );
+    });
+  }, []);
 
-  if (isLoading) return <LoadingVisual />;
+  // let listToUse;
 
-  let listToUse;
-
-  props.inputValue ? (listToUse = props.filteredList) : (listToUse = data?.sort((a, b) =>
-  a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-));
+  // props.inputValue
+  //   ? (listToUse = props.filteredList)
+  //   : (listToUse = data?.sort((a, b) =>
+  //       a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+  //     ));
 
   return (
     <section className="friends-type-container">
       <section className="friends-type-list">
         <div className="friends-type-header">
           <p>
-            {props.header} — {listToUse.length}
+            {props.header} — {pendingList?.length}
           </p>
         </div>
-        {listToUse?.length !== 0 ? (
-          listToUse?.map((user) => (
+        {pendingList?.length !== 0 ? (
+          pendingList?.map((user) => (
             <PendingPageUser
               username={user.username}
               status={user.statusMessages}
@@ -64,7 +55,7 @@ export default function PendingPage(props) {
               isIncoming={user.requestType}
               rerenderState={rerenderState}
               setRerenderState={setRerenderState}
-              refetch={refetch}
+              // refetch={refetch}
             />
           ))
         ) : (

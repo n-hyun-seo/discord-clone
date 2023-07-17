@@ -11,7 +11,7 @@ import { CurrentUserUidContext } from "../../../context/CurrentUserUidContext";
 
 export default function LoadingPage() {
   let navigate = useNavigate();
-  const [currentUserUid, setCurrentUserUid] = useState("initial");
+  const [currentUserUid, setCurrentUserUid] = useState("");
 
   const { isLoading } = useQuery(["loading"], async () => {
     onAuthStateChanged(auth, (user) => {

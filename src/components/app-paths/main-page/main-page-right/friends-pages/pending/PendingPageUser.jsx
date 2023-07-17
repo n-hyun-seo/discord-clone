@@ -46,96 +46,70 @@ export default function PendingPageUser(props) {
   }
 
   const { mutate: updateDmList } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      directMessages: arrayUnion(props.id_number),
-    }); //add person to my DM list
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
-    queryClient.setQueryData(["dmList"], (old) => {
-      if (old.filter((user) => user.uid === props.id_number).length === 0)
-        return [...old, userInfoData];
-
-      return old;
+      directMessages: arrayUnion({ ...personInfoData }),
     });
   });
 
   const { mutate: acceptRequest } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayRemove({
-        uid: props.id_number,
+        ...personInfoData,
         requestType: props.isIncoming,
       }),
     }); // remove person from my pending list
 
     await updateDoc(doc(db, "users", props.id_number), {
       "friends.pending": arrayRemove({
-        uid: currentUserUid,
+        ...userInfoData,
         requestType: "outgoing",
       }),
     }); // remove myself from person's pending list
 
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.all": arrayUnion(props.id_number),
+      "friends.all": arrayUnion({ ...personInfoData }),
     }); // add person to my friends list
 
     await updateDoc(doc(db, "users", props.id_number), {
-      "friends.all": arrayUnion(currentUserUid),
+      "friends.all": arrayUnion({ ...userInfoData }),
     }); // add myself to person's friends list
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
-    queryClient.setQueryData(["allList"], (old) => [...old, userInfoData]);
-
-    queryClient.setQueryData(["onlineList"], (old) => {
-      if (userInfoData.onlineStatus !== "offline")
-        return [...old, userInfoData];
-
-      return;
-    });
-
-    queryClient.setQueryData(["pendingList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== props.id_number);
-      let incomingFR = filteredList.filter(
-        (user) => user.requestType === "incoming"
-      );
-      setCurrentIncomingFR(incomingFR.length);
-      return filteredList;
-    });
   });
 
   const { mutate: cancelIgnoreRequest } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", props.id_number));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayRemove({
-        uid: props.id_number,
+        ...personInfoData,
         requestType: props.isIncoming,
       }),
     }); //remove person from my pending list
 
     await updateDoc(doc(db, "users", props.id_number), {
       "friends.pending": arrayRemove({
-        uid: currentUserUid,
+        ...userInfoData,
         requestType: "outgoing",
       }),
     }); //remove myself from person's pending list (outgoing)
 
     await updateDoc(doc(db, "users", props.id_number), {
       "friends.pending": arrayRemove({
-        uid: currentUserUid,
+        ...userInfoData,
         requestType: "incoming",
       }),
     }); //remove myself from person's pending list (incoming)
-
-    queryClient.setQueryData(["pendingList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== props.id_number);
-      let incomingFR = filteredList.filter(
-        (user) => user.requestType === "incoming"
-      );
-      setCurrentIncomingFR(incomingFR.length);
-      return filteredList;
-    });
   });
 
   return (

@@ -34,26 +34,61 @@ export default function UserDM() {
 
   const [rerender, setRerender] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [isFriend, setIsFriend] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [isBlockedBy, setIsBlockedBy] = useState(false);
 
   const userProfileRef = useRef();
-
-  let isFriend = decideBoolean("allList");
-  let isPending = decideBoolean("pendingList");
-  let isBlocked = decideBoolean("blockedList");
-  let isBlockedBy = decideBoolean("isBlockedByList");
-
-  function decideBoolean(key) {
-    const ListData = queryClient.getQueryData([key]);
-    if (ListData?.filter((user) => user.uid === currentDMId).length !== 0)
-      return true;
-    return false;
-  }
 
   useEffect(() => {
     const unsub = onSnapshot(
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
       (doc) => {
         setMessages(doc?.data()?.messageHistory);
+      }
+    );
+
+    const unsubTwo = onSnapshot(
+      doc(db, "users", currentUserUid),
+      async (docu) => {
+        const friendData = docu.data().friends.all;
+        const pendingData = docu.data().friends.pending;
+        const blockedData = docu.data().friends.blocked;
+        const isBlockedByData = docu.data().friends.isBlockedBy;
+
+        if (
+          friendData?.filter((user) => user.uid === currentDMId).length !== 0
+        ) {
+          setIsFriend(true);
+        } else {
+          setIsFriend(false);
+        }
+
+        if (
+          pendingData?.filter((user) => user.uid === currentDMId).length !== 0
+        ) {
+          setIsPending(true);
+        } else {
+          setIsPending(false);
+        }
+
+        if (
+          blockedData?.filter((user) => user.uid === currentDMId).length !== 0
+        ) {
+          setIsBlocked(true);
+        } else {
+          setIsBlocked(false);
+        }
+
+        if (
+          isBlockedByData?.filter((user) => user.uid === currentDMId).length !==
+          0
+        ) {
+          setIsBlockedBy(true);
+        } else {
+          setIsBlockedBy(false);
+        }
       }
     );
   }, [currentDMId]);
@@ -70,128 +105,109 @@ export default function UserDM() {
   );
 
   const { mutate: removeFriend } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.all": arrayRemove(currentDMId),
+      "friends.all": arrayRemove({ ...personInfoData }),
     }); //remove person from my friends list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.all": arrayRemove(currentUserUid),
+      "friends.all": arrayRemove({ ...userInfoData }),
     }); //remove myself from person's friends list
-
-    queryClient.setQueryData(["allList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== currentDMId);
-      return filteredList;
-    });
-
-    queryClient.setQueryData(["onlineList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== currentDMId);
-      return filteredList;
-    });
   });
 
   const { mutate: sendFriendRequest } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayUnion({
-        uid: currentDMId,
+        ...personInfoData,
         requestType: "outgoing",
       }),
     }); //add person to my pending list
 
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.pending": arrayUnion({
-        uid: currentUserUid,
+        ...userInfoData,
         requestType: "incoming",
       }),
     }); //add myself to person's pending list
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
-    queryClient.setQueryData(["pendingList"], (old) => {
-      return [...old, { ...userInfoData, requestType: "outgoing" }];
-    });
   });
 
   const { mutate: blockUser } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.blocked": arrayUnion(currentDMId),
+      "friends.blocked": arrayUnion({ ...personInfoData }),
     }); //add person to my blocked list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.isBlockedBy": arrayUnion(currentUserUid),
+      "friends.isBlockedBy": arrayUnion({ ...userInfoData }),
     }); //add myself to person's isBlockedBy list
 
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayRemove({
-        uid: currentDMId,
+        ...personInfoData,
         requestType: "outgoing",
       }),
     }); //remove person from my pending list (outgoing)
 
     await updateDoc(doc(db, "users", currentUserUid), {
       "friends.pending": arrayRemove({
-        uid: currentDMId,
+        ...personInfoData,
         requestType: "incoming",
       }),
     }); //remove person from my pending list (incoming)
 
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.pending": arrayRemove({
-        uid: currentUserUid,
+        ...userInfoData,
         requestType: "outgoing",
       }),
     }); //remove myself from person's pending list (outgoing)
 
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.pending": arrayRemove({
-        uid: currentUserUid,
+        ...userInfoData,
         requestType: "incoming",
       }),
     }); //remove myself from person's pending list (incoming)
 
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.all": arrayRemove(currentDMId),
+      "friends.all": arrayRemove({ ...personInfoData }),
     }); //remove person from my friends list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.all": arrayRemove(currentUserUid),
+      "friends.all": arrayRemove({ ...userInfoData }),
     }); //remove myself from person's friends list
-
-    const userInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
-    const userInfoData = await userInfoSnapshot.data().userInfo;
-
-    queryClient.setQueryData(["blockedList"], (old) => {
-      return [...old, userInfoData];
-    });
-
-    queryClient.setQueryData(["allList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== currentDMId);
-      return filteredList;
-    });
-
-    queryClient.setQueryData(["pendingList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== currentDMId);
-      let incomingFR = filteredList.filter(
-        (user) => user.requestType === "incoming"
-      );
-      setCurrentIncomingFR(incomingFR.length);
-      return filteredList;
-    });
   });
 
   const { mutate: unblockUser } = useMutation(async () => {
+    const personInfoSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const personInfoData = await personInfoSnapshot.data().userInfo;
+
+    const userInfoSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userInfoData = await userInfoSnapshot.data().userInfo;
+
     await updateDoc(doc(db, "users", currentUserUid), {
-      "friends.blocked": arrayRemove(currentDMId),
+      "friends.blocked": arrayRemove({ ...personInfoData }),
     }); // remove person from my blocked list
 
     await updateDoc(doc(db, "users", currentDMId), {
-      "friends.isBlockedBy": arrayRemove(currentUserUid),
+      "friends.isBlockedBy": arrayRemove(...userInfoData),
     }); // remove myself from person's isBlockedBy list
-
-    queryClient.setQueryData(["blockedList"], (old) => {
-      let filteredList = old.filter((user) => user.uid !== currentDMId);
-      return filteredList;
-    });
   });
 
   async function addFirstMessage() {

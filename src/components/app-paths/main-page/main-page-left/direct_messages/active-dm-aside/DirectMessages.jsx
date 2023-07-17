@@ -1,6 +1,6 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { IndividualDM } from "./IndividualDM";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
@@ -8,36 +8,18 @@ import LoadingVisual from "./LoadingVisual";
 
 export default function DirectMessages(props) {
   const [rerenderState, setRerenderState] = useState(false);
+  const [dmList, setDmList] = useState([]);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   const dm_text = useRef();
 
-  const {
-    isLoading,
-    isError,
-    data,
-    error,
-    refetch: refetchDM,
-  } = useQuery(
-    ["dmList"],
-    async () => {
-      const snapshot = await getDoc(doc(db, "users", currentUserUid));
-      const dmData = await snapshot.data().directMessages;
-      let finalList = await Promise.all(
-        dmData.map(async (uid) => {
-          const docSnapshot = await getDoc(doc(db, "users", uid));
-          const userData = await docSnapshot.data().userInfo;
-          return userData;
-        })
-      );
-      return finalList;
-    },
-    { refetchOnWindowFocus: false }
-  );
-
-  if (isLoading) return <LoadingVisual />;
-  if (isError) console.log(error);
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
+      const listData = docu.data().directMessages;
+      setDmList(listData);
+    });
+  }, []);
 
   return (
     <section className="direct-messages-container">
@@ -54,7 +36,7 @@ export default function DirectMessages(props) {
         <div className="add-sign">+</div>
       </div>
       <aside className="dm-messages">
-        {data?.map((user) => {
+        {dmList?.map((user) => {
           return (
             <IndividualDM
               username={user.username}
