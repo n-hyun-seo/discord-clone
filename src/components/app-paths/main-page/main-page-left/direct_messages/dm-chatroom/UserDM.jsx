@@ -48,10 +48,16 @@ export default function UserDM() {
   const chatroomRef = useRef();
 
   useEffect(() => {
+    function scroll() {
+      if (chatroomRef.current === null) return console.log("error");
+      chatroomRef.current.scrollTop = chatroomRef?.current?.scrollHeight;
+    }
+
     const unsub = onSnapshot(
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
       (doc) => {
         setMessages(doc?.data()?.messageHistory);
+        setTimeout(scroll, 0);
       }
     );
 
@@ -97,12 +103,7 @@ export default function UserDM() {
         }
       }
     );
-    return unsub;
   }, [currentDMId]);
-
-  function scroll() {
-    chatroomRef.current.scrollTop = chatroomRef.current.scrollHeight;
-  }
 
   const {
     isLoading,
@@ -466,7 +467,7 @@ export default function UserDM() {
                   } else {
                     addMessage(messageInput);
                   }
-                  scroll();
+                  // scroll();
                   setMessageInput("");
                 }}
               >
