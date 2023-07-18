@@ -40,7 +40,6 @@ export default function PendingPage(props) {
               isIncoming={user.requestType}
               rerenderState={rerenderState}
               setRerenderState={setRerenderState}
-              // refetch={refetch}
             />
           ))
         ) : (

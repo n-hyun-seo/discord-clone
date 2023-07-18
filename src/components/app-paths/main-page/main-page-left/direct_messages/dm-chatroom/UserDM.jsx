@@ -43,6 +43,8 @@ export default function UserDM() {
   const [isBlocked, setIsBlocked] = useState(false);
   const [isBlockedBy, setIsBlockedBy] = useState(false);
   const [messageInput, setMessageInput] = useState("");
+  const [currentScrollHeight, setCurrentScrollHeight] = useState(0);
+  const [currentScrollTop, setCurrentScrollTop] = useState(0);
 
   const userProfileRef = useRef();
   const chatroomRef = useRef();
@@ -50,7 +52,8 @@ export default function UserDM() {
   useEffect(() => {
     function scroll() {
       if (chatroomRef.current === null) return console.log("error");
-      chatroomRef.current.scrollTop = chatroomRef?.current?.scrollHeight;
+      if (currentScrollTop === currentScrollHeight)
+        chatroomRef.current.scrollTop = chatroomRef?.current?.scrollHeight;
     }
 
     const unsub = onSnapshot(
@@ -221,6 +224,26 @@ export default function UserDM() {
     await updateDoc(doc(db, "users", currentDMId), {
       "friends.isBlockedBy": arrayRemove({ ...currentUserData }),
     }); // remove myself from person's isBlockedBy list
+  });
+
+  const { mutate: updateDmList } = useMutation(async () => {
+    const userSnapshot = await getDoc(doc(db, "users", currentUserUid));
+    const userDmList = userSnapshot.data().directMessages;
+    let newList = userDmList.filter((user) => user.uid !== currentDMId);
+    newList.unshift(opponentData);
+    updateDoc(doc(db, "users", currentUserUid), {
+      directMessages: newList,
+    }); //update my dm list so the person I messaged is on top of the dm list
+
+    const personSnapshot = await getDoc(doc(db, "users", currentDMId));
+    const personDmList = personSnapshot.data().directMessages;
+    let newPersonList = personDmList.filter(
+      (user) => user.uid !== currentUserUid
+    );
+    newPersonList.unshift(currentUserData);
+    updateDoc(doc(db, "users", currentDMId), {
+      directMessages: newPersonList,
+    }); //update person's dm list so I'm at the top of their dm list
   });
 
   async function addFirstMessage(content) {
@@ -467,7 +490,7 @@ export default function UserDM() {
                   } else {
                     addMessage(messageInput);
                   }
-                  // scroll();
+                  updateDmList();
                   setMessageInput("");
                 }}
               >
