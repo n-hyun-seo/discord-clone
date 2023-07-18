@@ -5,12 +5,39 @@ import OnlinePage from "./friends-pages/all-and-online/OnlinePage";
 import AllPage from "./friends-pages/all-and-online/AllPage";
 import PendingPage from "./friends-pages/pending/PendingPage";
 import BlockedPage from "./friends-pages/blocked/BlockedPage";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { queryClient } from "../../../../App";
 import AllUsersPage from "./friends-pages/all-users/AllUsersPage";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../../../config/firebase";
+import { CurrentUserUidContext } from "../../../../context/CurrentUserUidContext";
+import { CurrentIncomingFRContext } from "../../../../context/CurrentIncomingFRContext";
+import { CurrentPendingListContext } from "../../../../context/CurrentPendingListContext";
 
 export default function Right() {
   const [inputValue, setInputValue] = useState("");
+  const [pendingList, setPendingList] = useState([]);
+
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
+    CurrentIncomingFRContext
+  );
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
+      const listData = docu
+        .data()
+        .friends.pending.sort((a, b) =>
+          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+        );
+      setPendingList(listData);
+
+      const incomingFR = listData.filter(
+        (user) => user.requestType === "incoming"
+      ).length;
+      setCurrentIncomingFR(incomingFR);
+    });
+  }, []);
 
   return (
     <div className="right">
@@ -72,40 +99,46 @@ export default function Right() {
                 ></input>
               </div>
             </div>
-            <Routes>
-              <Route
-                path="*"
-                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
-              />
-              <Route
-                path="online"
-                element={<OnlinePage header="ONLINE" inputValue={inputValue} />}
-              />
-              <Route
-                path="all"
-                element={
-                  <AllPage header="ALL FRIENDS" inputValue={inputValue} />
-                }
-              />
-              <Route
-                path="pending"
-                element={
-                  <PendingPage header="PENDING" inputValue={inputValue} />
-                }
-              />
-              <Route
-                path="blocked"
-                element={
-                  <BlockedPage header="BLOCKED" inputValue={inputValue} />
-                }
-              />
-              <Route
-                path="allusers"
-                element={
-                  <AllUsersPage header="ALL USERS" inputValue={inputValue} />
-                }
-              />
-            </Routes>
+            <CurrentPendingListContext.Provider value={pendingList}>
+              <Routes>
+                <Route
+                  path="*"
+                  element={
+                    <OnlinePage header="ONLINE" inputValue={inputValue} />
+                  }
+                />
+                <Route
+                  path="online"
+                  element={
+                    <OnlinePage header="ONLINE" inputValue={inputValue} />
+                  }
+                />
+                <Route
+                  path="all"
+                  element={
+                    <AllPage header="ALL FRIENDS" inputValue={inputValue} />
+                  }
+                />
+                <Route
+                  path="pending"
+                  element={
+                    <PendingPage header="PENDING" inputValue={inputValue} />
+                  }
+                />
+                <Route
+                  path="blocked"
+                  element={
+                    <BlockedPage header="BLOCKED" inputValue={inputValue} />
+                  }
+                />
+                <Route
+                  path="allusers"
+                  element={
+                    <AllUsersPage header="ALL USERS" inputValue={inputValue} />
+                  }
+                />
+              </Routes>
+            </CurrentPendingListContext.Provider>
           </section>
           <section className="friends-active-now">
             <p className="friends-active-now-header1">Active Now</p>

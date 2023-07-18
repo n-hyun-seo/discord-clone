@@ -6,31 +6,12 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
 import LoadingVisual from "../LoadingVisual";
+import { CurrentPendingListContext } from "../../../../../../context/CurrentPendingListContext";
 
 export default function PendingPage(props) {
   const [rerenderState, setRerenderState] = useState(true);
-  const [pendingList, setPendingList] = useState([]);
 
-  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
-  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
-    CurrentIncomingFRContext
-  );
-
-  useEffect(() => {
-    const unsub = onSnapshot(doc(db, "users", currentUserUid), async (docu) => {
-      const listData = docu
-        .data()
-        .friends.pending.sort((a, b) =>
-          a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-        );
-      setPendingList(listData);
-
-      const incomingFR = listData.filter(
-        (user) => user.requestType === "incoming"
-      ).length;
-      setCurrentIncomingFR(incomingFR);
-    });
-  }, []);
+  const pendingList = useContext(CurrentPendingListContext);
 
   let listToUse;
 
