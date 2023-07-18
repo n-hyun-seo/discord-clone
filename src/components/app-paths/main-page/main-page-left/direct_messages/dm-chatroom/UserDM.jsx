@@ -45,6 +45,7 @@ export default function UserDM() {
   const [messageInput, setMessageInput] = useState("");
 
   const userProfileRef = useRef();
+  const chatroomRef = useRef();
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -96,7 +97,12 @@ export default function UserDM() {
         }
       }
     );
+    return unsub;
   }, [currentDMId]);
+
+  function scroll() {
+    chatroomRef.current.scrollTop = chatroomRef.current.scrollHeight;
+  }
 
   const {
     isLoading,
@@ -339,7 +345,7 @@ export default function UserDM() {
       <section className="friends-content">
         <div className="friends-list-bottom-container">
           <section className="friends-list-section user-dm-message">
-            <div className="user-dm-message-top">
+            <div ref={chatroomRef} className="user-dm-message-top">
               <div className="pfp-container user-dm-message-header">
                 <div
                   className="pfp-circle user-dm-message-header"
@@ -412,13 +418,17 @@ export default function UserDM() {
               {messages?.map((message) => {
                 let currentMsgIndex = messages.indexOf(message);
                 let previousMsgIndex = currentMsgIndex - 1;
-                console.log();
                 if (
                   currentMsgIndex !== 0 &&
                   message.sentBy === messages[previousMsgIndex].sentBy
                 )
                   return (
-                    <p className="ongoing-message">{message.messageContent}</p>
+                    <div>
+                      <p className="ongoing-message">
+                        {message.messageContent}
+                      </p>
+                      <div className="for-scroll"></div>
+                    </div>
                   );
 
                 if (message.sentBy === currentUserUid) {
@@ -432,7 +442,6 @@ export default function UserDM() {
                     />
                   );
                 }
-
                 if (message.sentBy !== currentUserUid) {
                   return (
                     <OpponentMessage
@@ -448,24 +457,27 @@ export default function UserDM() {
               })}
             </div>
             <div className="user-dm-message-bottom">
-              <div className="message-input-container">
+              <form
+                className="message-input-container"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (messages === undefined) {
+                    addFirstMessage(messageInput);
+                  } else {
+                    addMessage(messageInput);
+                  }
+                  scroll();
+                  setMessageInput("");
+                }}
+              >
                 <input
                   placeholder="Message"
+                  value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
+                  className="message-input"
                 ></input>
-                <button
-                  onClick={() => {
-                    if (messages === undefined) {
-                      addFirstMessage(messageInput);
-                    } else {
-                      addMessage(messageInput);
-                    }
-                    setMessageInput("");
-                  }}
-                >
-                  send
-                </button>
-              </div>
+                <button type="submit"></button>
+              </form>
             </div>
           </section>
           <section ref={userProfileRef} className="user-dm-info-section">

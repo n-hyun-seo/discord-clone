@@ -905,7 +905,7 @@ body {
 .hover-text {
   height: 35px;
   position: fixed;
-  left: 85px;
+  left: 72px;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 5px;
@@ -1863,7 +1863,7 @@ body {
   overflow-y: scroll;
   color: rgb(232, 231, 231);
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 35px;
 }
 
 .user-dm-message-bottom {
@@ -2157,6 +2157,7 @@ body {
   width: 100%;
   padding-left: 75px;
   padding-top: 3.5px;
+  scroll-margin-top: 200px;
 }
 
 .after-first-row p,
@@ -2173,6 +2174,18 @@ body {
   padding-left: 5px;
   font-size: 13px;
   padding-top: 2.5px;
+}
+
+.message-input {
+}
+
+.for-scroll-filler {
+  height: 15px;
+}
+
+.ongoing-message,
+.first-message {
+  white-space: pre-line;
 }
 
 ::-webkit-scrollbar {
