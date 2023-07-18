@@ -34,6 +34,7 @@ export default function RegisterBox(props) {
           isBlockedBy: [],
         },
         directMessages: [],
+        unreadMessages: [],
         userInfo: {
           ...data.user.metadata,
           email: data.user.email,
