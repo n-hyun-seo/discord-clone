@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DiscordHomeButton from "../main-nav/discord-home/DiscordHomeButton";
 import MainPage from "../app-paths/main-page/MainPage";
 import RandomServer from "../app-paths/server-page/ServerContent";
@@ -20,6 +20,7 @@ import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 import { queryClient } from "../../App";
+import { StaleUnreadListContext } from "../../context/StaleUnreadListContext";
 
 export default function DiscordClone() {
   const [currentPage, setCurrentPage] = useState("home");

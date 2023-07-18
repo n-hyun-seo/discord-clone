@@ -25,16 +25,15 @@ import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncom
 import TimeDivider from "./TimeDivider";
 import MyMessage from "./MyMessage";
 import OpponentMessage from "./OpponentMessage";
+import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
 
 export default function UserDM() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
-  const [currentIncomingFR, setCurrentIncomingFR] = useContext(
-    CurrentIncomingFRContext
+  const [staleUnreadList, setStaleUnreadList] = useContext(
+    StaleUnreadListContext
   );
-  const [userCounter, setUserCounter] = useState(0);
-  const [opponentCounter, setOpponentCounter] = useState(0);
 
   const [rerender, setRerender] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -43,69 +42,86 @@ export default function UserDM() {
   const [isBlocked, setIsBlocked] = useState(false);
   const [isBlockedBy, setIsBlockedBy] = useState(false);
   const [messageInput, setMessageInput] = useState("");
-  const [currentScrollHeight, setCurrentScrollHeight] = useState(0);
-  const [currentScrollTop, setCurrentScrollTop] = useState(0);
 
   const userProfileRef = useRef();
   const chatroomRef = useRef();
 
   useEffect(() => {
+    let run = true;
+
+    const updatedList = staleUnreadList.map((user) => {
+      if (user.uid === currentDMId) {
+        return { ...user, unreadAmount: 0 };
+      } else {
+        return user;
+      }
+    });
+
+    setStaleUnreadList(updatedList);
+
     function scroll() {
-      if (chatroomRef.current === null) return console.log("error");
-      if (currentScrollTop === currentScrollHeight)
-        chatroomRef.current.scrollTop = chatroomRef?.current?.scrollHeight;
+      if (chatroomRef.current === null) return;
+      chatroomRef.current.scrollTop = chatroomRef?.current?.scrollHeight;
     }
 
     const unsub = onSnapshot(
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
-      (doc) => {
-        setMessages(doc?.data()?.messageHistory);
-        setTimeout(scroll, 0);
+      async (docu) => {
+        if (run) {
+          setMessages(docu?.data()?.messageHistory);
+          setTimeout(scroll, 1);
+        }
       }
     );
 
     const unsubTwo = onSnapshot(
       doc(db, "users", currentUserUid),
       async (docu) => {
-        const friendData = docu.data().friends.all;
-        const pendingData = docu.data().friends.pending;
-        const blockedData = docu.data().friends.blocked;
-        const isBlockedByData = docu.data().friends.isBlockedBy;
+        if (run) {
+          const friendData = docu.data().friends.all;
+          const pendingData = docu.data().friends.pending;
+          const blockedData = docu.data().friends.blocked;
+          const isBlockedByData = docu.data().friends.isBlockedBy;
 
-        if (
-          friendData?.filter((user) => user.uid === currentDMId).length !== 0
-        ) {
-          setIsFriend(true);
-        } else {
-          setIsFriend(false);
-        }
+          if (
+            friendData?.filter((user) => user.uid === currentDMId).length !== 0
+          ) {
+            setIsFriend(true);
+          } else {
+            setIsFriend(false);
+          }
 
-        if (
-          pendingData?.filter((user) => user.uid === currentDMId).length !== 0
-        ) {
-          setIsPending(true);
-        } else {
-          setIsPending(false);
-        }
+          if (
+            pendingData?.filter((user) => user.uid === currentDMId).length !== 0
+          ) {
+            setIsPending(true);
+          } else {
+            setIsPending(false);
+          }
 
-        if (
-          blockedData?.filter((user) => user.uid === currentDMId).length !== 0
-        ) {
-          setIsBlocked(true);
-        } else {
-          setIsBlocked(false);
-        }
+          if (
+            blockedData?.filter((user) => user.uid === currentDMId).length !== 0
+          ) {
+            setIsBlocked(true);
+          } else {
+            setIsBlocked(false);
+          }
 
-        if (
-          isBlockedByData?.filter((user) => user.uid === currentDMId).length !==
-          0
-        ) {
-          setIsBlockedBy(true);
-        } else {
-          setIsBlockedBy(false);
+          if (
+            isBlockedByData?.filter((user) => user.uid === currentDMId)
+              .length !== 0
+          ) {
+            setIsBlockedBy(true);
+          } else {
+            setIsBlockedBy(false);
+          }
         }
       }
     );
+
+    return () => {
+      run = false;
+    };
   }, [currentDMId]);
 
   const {
@@ -257,6 +273,7 @@ export default function UserDM() {
             messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
+            unread: true,
           },
         ],
       }
@@ -270,6 +287,7 @@ export default function UserDM() {
             messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
+            unread: true,
           },
         ],
       }
@@ -290,6 +308,7 @@ export default function UserDM() {
           messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
+          unread: true,
         }),
       }
     ); //add dm message between us to MY database of dmMessageHistory
@@ -301,6 +320,7 @@ export default function UserDM() {
           messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
+          unread: true,
         }),
       }
     ); //add dm message between us to USER'S database of dmMessageHistory
@@ -550,6 +570,13 @@ export default function UserDM() {
           </section>
         </div>
       </section>
+      <button
+        onClick={() => {
+          console.log(staleUnreadList);
+        }}
+      >
+        check stale
+      </button>
     </div>
   );
 }

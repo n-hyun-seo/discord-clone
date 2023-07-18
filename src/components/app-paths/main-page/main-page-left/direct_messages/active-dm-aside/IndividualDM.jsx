@@ -15,6 +15,7 @@ import { arrayRemove, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 import { queryClient } from "../../../../../../App";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
 
 export function IndividualDM(props) {
   let navigate = useNavigate();
@@ -28,6 +29,9 @@ export function IndividualDM(props) {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+  const [staleUnreadList, setStaleUnreadList] = useContext(
+    StaleUnreadListContext
+  );
 
   const delete_button = useRef();
   const dm_button = useRef();

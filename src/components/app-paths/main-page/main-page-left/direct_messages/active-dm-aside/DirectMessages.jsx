@@ -11,12 +11,16 @@ import { db } from "../../../../../../config/firebase";
 import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import LoadingVisual from "./LoadingVisual";
+import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
 
 export default function DirectMessages(props) {
   const [rerenderState, setRerenderState] = useState(false);
   const [dmList, setDmList] = useState([]);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
+  const [staleUnreadList, setStaleUnreadList] = useContext(
+    StaleUnreadListContext
+  );
 
   const dm_text = useRef();
 
@@ -56,6 +60,13 @@ export default function DirectMessages(props) {
           );
         })}
       </aside>
+      <button
+        onClick={() => {
+          console.log(staleUnreadList);
+        }}
+      >
+        check stale
+      </button>
     </section>
   );
 }
