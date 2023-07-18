@@ -33,6 +33,8 @@ export default function UserDM() {
   const [currentIncomingFR, setCurrentIncomingFR] = useContext(
     CurrentIncomingFRContext
   );
+  const [userCounter, setUserCounter] = useState(0);
+  const [opponentCounter, setOpponentCounter] = useState(0);
 
   const [rerender, setRerender] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -408,21 +410,41 @@ export default function UserDM() {
               <TimeDivider />
 
               {messages?.map((message) => {
-                if (message.sentBy === currentUserUid)
+                let currentMsgIndex = messages.indexOf(message);
+                let previousMsgIndex = currentMsgIndex - 1;
+                console.log();
+                if (
+                  currentMsgIndex !== 0 &&
+                  message.sentBy === messages[previousMsgIndex].sentBy
+                )
+                  return (
+                    <p className="ongoing-message">{message.messageContent}</p>
+                  );
+
+                if (message.sentBy === currentUserUid) {
                   return (
                     <MyMessage
                       messageContent={message.messageContent}
                       sentBy={message.sentBy}
+                      username={currentUserData?.username}
+                      photoURL={currentUserData?.photoURL}
                       timestamp={message.timestamp}
                     />
                   );
-                return (
-                  <OpponentMessage
-                    messageContent={message.messageContent}
-                    sentBy={message.sentBy}
-                    timestamp={message.timestamp}
-                  />
-                );
+                }
+
+                if (message.sentBy !== currentUserUid) {
+                  return (
+                    <OpponentMessage
+                      messageContent={message.messageContent}
+                      sentBy={message.sentBy}
+                      timestamp={message.timestamp}
+                      username={opponentData?.username}
+                      photoURL={opponentData?.photoURL}
+                    />
+                  );
+                }
+                return <p>error</p>;
               })}
             </div>
             <div className="user-dm-message-bottom">
@@ -433,8 +455,9 @@ export default function UserDM() {
                 ></input>
                 <button
                   onClick={() => {
-                    if (messages === undefined) addFirstMessage(messageInput);
-                    else {
+                    if (messages === undefined) {
+                      addFirstMessage(messageInput);
+                    } else {
                       addMessage(messageInput);
                     }
                     setMessageInput("");

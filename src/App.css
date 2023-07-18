@@ -2119,6 +2119,62 @@ body {
   right: -22px;
 }
 
+.my-message {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+
+  margin: auto;
+  margin-top: 20px;
+}
+
+.pfp-container.my-left {
+  flex-basis: 0%;
+
+  margin-left: 20px;
+}
+
+.pfp-container.my-left .pfp-circle {
+  width: 40px;
+  height: 40px;
+}
+
+.first-row {
+  display: flex;
+}
+
+.first-message-container {
+  display: flex;
+  margin-top: -3px;
+  flex-direction: column;
+}
+
+.first-message {
+  padding-left: 15px;
+}
+
+.ongoing-message {
+  width: 100%;
+  padding-left: 75px;
+  padding-top: 3.5px;
+}
+
+.after-first-row p,
+.first-message {
+  padding-top: 3.5px;
+}
+
+.my-username {
+  font-family: ggsansSB;
+  padding-left: 15px;
+}
+
+.my-timestamp {
+  padding-left: 5px;
+  font-size: 13px;
+  padding-top: 2.5px;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
