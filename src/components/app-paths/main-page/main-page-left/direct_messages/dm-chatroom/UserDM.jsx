@@ -296,6 +296,16 @@ export default function UserDM() {
     await updateDoc(doc(db, "users", currentDMId), {
       directMessages: arrayUnion({ ...currentUserData }),
     }); //add myself to person's dm list
+
+    await updateDoc(doc(db, "users", currentDMId), {
+      unreadMessages: arrayUnion({
+        sentBy: currentUserUid,
+        photoURL: currentUserData.photoURL,
+        timestamp: String(now),
+        messageContent: content,
+        username: currentUserData.username,
+      }),
+    }); //add myself to other person's unread dm's (for notifications)
   }
 
   async function addMessage(content) {
@@ -328,6 +338,16 @@ export default function UserDM() {
     await updateDoc(doc(db, "users", currentDMId), {
       directMessages: arrayUnion({ ...currentUserData }),
     }); //add myself to person's dm list
+
+    await updateDoc(doc(db, "users", currentDMId), {
+      unreadMessages: arrayUnion({
+        sentBy: currentUserUid,
+        photoURL: currentUserData.photoURL,
+        timestamp: String(now),
+        messageContent: content,
+        username: currentUserData.username,
+      }),
+    }); //add myself to other person's unread dm's (for notifications)
   }
 
   return (

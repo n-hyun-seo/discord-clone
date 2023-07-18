@@ -17,7 +17,13 @@ import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 import { queryClient } from "../../App";
 import { StaleUnreadListContext } from "../../context/StaleUnreadListContext";
@@ -30,6 +36,9 @@ export default function DiscordClone() {
   const [dmButtonRef, setDmButtonRef] = useState({});
   const [currentIncomingFR, setCurrentIncomingFR] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
+  const [staleUnreadList, setStaleUnreadList] = useContext(
+    StaleUnreadListContext
+  );
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
