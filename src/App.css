@@ -2188,6 +2188,18 @@ body {
   white-space: pre-line;
 }
 
+.incoming-unread-circle {
+  width: 23px;
+  height: 23px;
+  border-radius: 15px;
+  background-color: #1c1d1e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

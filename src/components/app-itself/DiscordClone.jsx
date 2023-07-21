@@ -114,7 +114,13 @@ export default function DiscordClone() {
                               style={{
                                 backgroundImage: `url(${user.photoURL})`,
                               }}
-                            ></Link>
+                            >
+                              <div className="incoming-unread-circle">
+                                <div className="incoming-FR-home">
+                                  <p>{user.numberOfUnread}</p>
+                                </div>
+                              </div>
+                            </Link>
                           </div>
                         );
                       })}
