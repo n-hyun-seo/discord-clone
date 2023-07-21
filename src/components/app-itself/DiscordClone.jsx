@@ -27,6 +27,7 @@ import {
 import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 import { queryClient } from "../../App";
 import { StaleUnreadListContext } from "../../context/StaleUnreadListContext";
+import { Link } from "react-router-dom";
 
 export default function DiscordClone() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -36,25 +37,33 @@ export default function DiscordClone() {
   const [dmButtonRef, setDmButtonRef] = useState({});
   const [currentIncomingFR, setCurrentIncomingFR] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
+  const [unreadList, setUnreadList] = useState([]);
+  const [hoverState, setHoverstate] = useState(false);
+
   const [staleUnreadList, setStaleUnreadList] = useContext(
     StaleUnreadListContext
   );
-
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   let navigate = useNavigate();
 
   useEffect(() => {
-    async function getUnreadData() {
-      const userSnapshot = await getDoc(doc(db, "users", currentUserUid));
-      const unreadMsgsData = userSnapshot?.data().unreadMessages;
-      const arrayOfUsers = unreadMsgsData?.map((message) => message.sentBy);
-      console.log(arrayOfUsers);
-
-
-    }
-
-    getUnreadData();
+    let array = [];
+    onSnapshot(
+      collection(db, "users", currentUserUid, "unreadMessagesHistory"),
+      (collection) => {
+        collection.forEach((doc) => {
+          let data = doc.data().unreadHistory;
+          array.push({
+            numberOfUnread: data.length,
+            uid: data[0].sentBy,
+            photoURL: data[0].photoURL,
+          });
+        });
+        setUnreadList(array);
+        console.log(unreadList);
+      }
+    );
   }, []);
 
   const { isLoading, isError, error } = useQuery(
@@ -92,7 +101,23 @@ export default function DiscordClone() {
                   >
                     <nav className="servers">
                       <DiscordHomeButton />
-                      <p>test</p>
+                      {unreadList.map((user) => {
+                        return (
+                          <div className="logo-container-2 unread-dm">
+                            <Link
+                              to={`/discord-clone/main/dm/${user.uid}`}
+                              className="logo-button-unhovered-2"
+                              onClick={() => {
+                                setCurrentSectionLeft("dm");
+                                setCurrentDMId(user.uid);
+                              }}
+                              style={{
+                                backgroundImage: `url(${user.photoURL})`,
+                              }}
+                            ></Link>
+                          </div>
+                        );
+                      })}
                       <div className="other-servers">
                         {serversList.map((server) => {
                           return (
