@@ -49,10 +49,10 @@ export default function DiscordClone() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    let array = [];
     onSnapshot(
       collection(db, "users", currentUserUid, "unreadMessagesHistory"),
       (collection) => {
+        let array = [];
         collection.forEach((doc) => {
           let data = doc?.data()?.unreadHistory;
 
@@ -62,8 +62,10 @@ export default function DiscordClone() {
             photoURL: data[0]?.photoURL,
             username: data[0]?.username,
           });
+          console.log(array);
         });
         setUnreadList(array);
+        console.log(array);
       }
     );
   }, [currentDMId, currentSectionLeft, currentSection]);
