@@ -116,13 +116,7 @@ export default function DiscordClone() {
                             />
                           );
                       })}
-                      <button
-                        onClick={() => {
-                          console.log(unreadList);
-                        }}
-                      >
-                        check list
-                      </button>
+
                       <div className="other-servers">
                         {serversList.map((server) => {
                           return (
