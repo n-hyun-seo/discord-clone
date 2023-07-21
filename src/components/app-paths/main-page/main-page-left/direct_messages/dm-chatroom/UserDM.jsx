@@ -111,15 +111,12 @@ export default function UserDM() {
     );
 
     async function getUnreadDoc() {
-      const unreadMessageSnapshot = doc(
-        db,
-        "users",
-        currentUserUid,
-        "unreadMessagesHistory",
-        currentDMId
+      await setDoc(
+        doc(db, "users", currentUserUid, "unreadMessagesHistory", currentDMId),
+        {
+          unreadHistory: [],
+        }
       );
-
-      deleteDoc(unreadMessageSnapshot);
     }
 
     getUnreadDoc();

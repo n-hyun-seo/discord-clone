@@ -54,12 +54,13 @@ export default function DiscordClone() {
       collection(db, "users", currentUserUid, "unreadMessagesHistory"),
       (collection) => {
         collection.forEach((doc) => {
-          let data = doc.data().unreadHistory;
+          let data = doc?.data()?.unreadHistory;
+
           array.push({
             numberOfUnread: data.length,
-            uid: data[0].sentBy,
-            photoURL: data[0].photoURL,
-            username: data[0].username,
+            uid: data[0]?.sentBy,
+            photoURL: data[0]?.photoURL,
+            username: data[0]?.username,
           });
         });
         setUnreadList(array);
@@ -104,14 +105,15 @@ export default function DiscordClone() {
                     <nav className="servers">
                       <DiscordHomeButton />
                       {unreadList.map((user) => {
-                        return (
-                          <UnreadDm
-                            username={user.username}
-                            photoURL={user.photoURL}
-                            numberOfUnread={user.numberOfUnread}
-                            uid={user.uid}
-                          />
-                        );
+                        if (user.uid !== undefined)
+                          return (
+                            <UnreadDm
+                              username={user.username}
+                              photoURL={user.photoURL}
+                              numberOfUnread={user.numberOfUnread}
+                              uid={user.uid}
+                            />
+                          );
                       })}
                       <div className="other-servers">
                         {serversList.map((server) => {
