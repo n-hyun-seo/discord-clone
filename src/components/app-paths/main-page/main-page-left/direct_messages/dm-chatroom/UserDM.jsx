@@ -305,6 +305,7 @@ export default function UserDM() {
             sentBy: currentUserUid,
             photoURL: currentUserData.photoURL,
             timestamp: String(now),
+            username: currentUserData.username,
           },
         ],
       }
@@ -349,6 +350,7 @@ export default function UserDM() {
           sentBy: currentUserUid,
           photoURL: currentUserData.photoURL,
           timestamp: String(now),
+          username: currentUserData.username,
         }),
       }
     ); //add myself to other person's unread dm's (for notifications)
