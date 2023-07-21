@@ -62,10 +62,8 @@ export default function DiscordClone() {
             photoURL: data[0]?.photoURL,
             username: data[0]?.username,
           });
-          console.log(array);
         });
         setUnreadList(array);
-        console.log(array);
       }
     );
   }, [currentDMId, currentSectionLeft, currentSection]);

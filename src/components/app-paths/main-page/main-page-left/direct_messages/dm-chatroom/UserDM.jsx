@@ -27,6 +27,7 @@ import TimeDivider from "./TimeDivider";
 import MyMessage from "./MyMessage";
 import OpponentMessage from "./OpponentMessage";
 import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
+import OngoingMessage from "./OngoingMessage";
 
 export default function UserDM() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
@@ -495,12 +496,10 @@ export default function UserDM() {
                   message.sentBy === messages[previousMsgIndex].sentBy
                 )
                   return (
-                    <div>
-                      <p className="ongoing-message">
-                        {message.messageContent}
-                      </p>
-                      <div className="for-scroll"></div>
-                    </div>
+                    <OngoingMessage
+                      message={message.messageContent}
+                      timestamp={message.timestamp}
+                    />
                   );
 
                 if (message.sentBy === currentUserUid) {
@@ -598,13 +597,6 @@ export default function UserDM() {
           </section>
         </div>
       </section>
-      <button
-        onClick={() => {
-          console.log(staleUnreadList);
-        }}
-      >
-        check stale
-      </button>
     </div>
   );
 }

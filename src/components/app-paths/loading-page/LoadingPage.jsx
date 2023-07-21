@@ -21,31 +21,6 @@ export default function LoadingPage() {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setCurrentUserUid(user.uid);
-
-        const dmUidsSnapshot = await getDoc(doc(db, "users", user.uid));
-        const dmUidsData = await dmUidsSnapshot.data().directMessages;
-        const dmUidsList = await dmUidsData.map((user) => user.uid);
-        const unreadList = await Promise.all(
-          dmUidsList.map(async (id) => {
-            const _dmUidsSnapshot = await getDoc(
-              doc(db, "users", user.uid, "dmMessageHistory", id)
-            );
-            const _dmUidsDataArray = _dmUidsSnapshot.data()?.messageHistory;
-            const numberOfUnread = _dmUidsDataArray?.filter(
-              (message) => message.unread === true && message.sentBy !== user.id
-            ).length;
-
-            const personSnapshot = await getDoc(doc(db, "users", id));
-            const personInfo = personSnapshot.data().userInfo;
-
-            return {
-              username: personInfo.username,
-              unreadAmount: numberOfUnread,
-              photoURL: personInfo.photoURL,
-              uid: id,
-            };
-          })
-        ).then((data) => setStaleUnreadList(data));
         navigate("/discord-clone/main/friends/online");
       } else {
         navigate("/discord-clone/login");

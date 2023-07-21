@@ -2155,10 +2155,11 @@ body {
 
 .ongoing-message {
   width: 100%;
-  padding-left: 75px;
-  padding-top: 3.5px;
+  padding-left: 25px;
   scroll-margin-top: 200px;
 }
+
+
 
 .after-first-row p,
 .first-message {
@@ -2171,12 +2172,11 @@ body {
 }
 
 .my-timestamp {
-  padding-left: 5px;
+  padding-left: 10px;
   font-size: 13px;
   padding-top: 2.5px;
-}
-
-.message-input {
+  color: rgb(161, 160, 160);
+  
 }
 
 .for-scroll-filler {
@@ -2206,6 +2206,21 @@ body {
 
 .logo-button-unhovered-2.unread-dm:hover {
   border-radius: 15px;
+}
+
+.ongoing-message-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
+}
+
+.ongoing-message-time {
+  width: 50px;
+  padding-left: 23px;
+  font-size: 13px;
+  color: rgb(161, 160, 160);
+  visibility:hidden;
 }
 
 ::-webkit-scrollbar {
