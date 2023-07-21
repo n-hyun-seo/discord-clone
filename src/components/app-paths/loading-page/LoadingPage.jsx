@@ -17,7 +17,7 @@ export default function LoadingPage() {
   const [staleUnreadList, setStaleUnreadList] = useState([]);
 
   const { isLoading } = useQuery(["loading"], async () => {
-    console.log("this ran again")
+
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setCurrentUserUid(user.uid);

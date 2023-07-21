@@ -64,7 +64,6 @@ export default function DiscordClone() {
           });
         });
         setUnreadList(array);
-        console.log(unreadList);
       }
     );
   }, [currentDMId, currentSectionLeft, currentSection]);
