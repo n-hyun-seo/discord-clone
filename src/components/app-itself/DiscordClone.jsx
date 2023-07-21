@@ -66,7 +66,7 @@ export default function DiscordClone() {
         console.log(unreadList);
       }
     );
-  }, []);
+  }, [currentDMId]);
 
   const { isLoading, isError, error } = useQuery(
     ["check-login"],

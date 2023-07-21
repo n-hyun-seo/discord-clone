@@ -12,6 +12,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   arrayRemove,
   arrayUnion,
+  deleteDoc,
   doc,
   getDoc,
   onSnapshot,
@@ -108,6 +109,20 @@ export default function UserDM() {
         }
       }
     );
+
+    async function getUnreadDoc() {
+      const unreadMessageSnapshot = doc(
+        db,
+        "users",
+        currentUserUid,
+        "unreadMessagesHistory",
+        currentDMId
+      );
+
+      deleteDoc(unreadMessageSnapshot);
+    }
+
+    getUnreadDoc();
 
     return () => {
       run = false;
