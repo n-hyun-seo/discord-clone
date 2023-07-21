@@ -49,16 +49,6 @@ export default function UserDM() {
   useEffect(() => {
     let run = true;
 
-    const updatedList = staleUnreadList.map((user) => {
-      if (user.uid === currentDMId) {
-        return { ...user, unreadAmount: 0 };
-      } else {
-        return user;
-      }
-    });
-
-    setStaleUnreadList(updatedList);
-
     function scroll() {
       if (chatroomRef.current === null) return;
       chatroomRef.current.scrollTop = chatroomRef?.current?.scrollHeight;

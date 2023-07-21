@@ -46,8 +46,6 @@ export default function DiscordClone() {
   );
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
-  let unreadHoverText = useRef();
-
   let navigate = useNavigate();
 
   useEffect(() => {

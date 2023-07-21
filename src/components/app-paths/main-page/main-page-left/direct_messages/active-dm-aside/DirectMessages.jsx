@@ -18,9 +18,6 @@ export default function DirectMessages(props) {
   const [dmList, setDmList] = useState([]);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
-  const [staleUnreadList, setStaleUnreadList] = useContext(
-    StaleUnreadListContext
-  );
 
   const dm_text = useRef();
 
@@ -60,13 +57,6 @@ export default function DirectMessages(props) {
           );
         })}
       </aside>
-      <button
-        onClick={() => {
-          console.log(staleUnreadList);
-        }}
-      >
-        check stale
-      </button>
     </section>
   );
 }
