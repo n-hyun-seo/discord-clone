@@ -44,6 +44,19 @@ export default function DiscordClone() {
 
   let navigate = useNavigate();
 
+  useEffect(() => {
+    async function getUnreadData() {
+      const userSnapshot = await getDoc(doc(db, "users", currentUserUid));
+      const unreadMsgsData = userSnapshot?.data().unreadMessages;
+      const arrayOfUsers = unreadMsgsData?.map((message) => message.sentBy);
+      console.log(arrayOfUsers);
+
+
+    }
+
+    getUnreadData();
+  }, []);
+
   const { isLoading, isError, error } = useQuery(
     ["check-login"],
     async () => {
@@ -79,6 +92,7 @@ export default function DiscordClone() {
                   >
                     <nav className="servers">
                       <DiscordHomeButton />
+                      <p>test</p>
                       <div className="other-servers">
                         {serversList.map((server) => {
                           return (
