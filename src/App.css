@@ -2172,9 +2172,9 @@ body {
 }
 
 .my-timestamp {
-  padding-left: 10px;
+  padding-left: 7px;
   font-size: 13px;
-  padding-top: 2.5px;
+  padding-top: 1.5px;
   color: #a2a8b0;
 }
 
@@ -2211,7 +2211,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 30px;
+  height: 25px;
 }
 
 .ongoing-message-time {
