@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import DiscordHomeButton from "../main-nav/discord-home/DiscordHomeButton";
 import MainPage from "../app-paths/main-page/MainPage";
 import RandomServer from "../app-paths/server-page/ServerContent";
@@ -28,6 +28,7 @@ import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
 import { queryClient } from "../../App";
 import { StaleUnreadListContext } from "../../context/StaleUnreadListContext";
 import { Link } from "react-router-dom";
+import UnreadDm from "../main-nav/UnreadDm";
 
 export default function DiscordClone() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -45,6 +46,8 @@ export default function DiscordClone() {
   );
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
+  let unreadHoverText = useRef();
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -58,6 +61,7 @@ export default function DiscordClone() {
             numberOfUnread: data.length,
             uid: data[0].sentBy,
             photoURL: data[0].photoURL,
+            username: data[0].username,
           });
         });
         setUnreadList(array);
@@ -103,25 +107,12 @@ export default function DiscordClone() {
                       <DiscordHomeButton />
                       {unreadList.map((user) => {
                         return (
-                          <div className="logo-container-2 unread-dm">
-                            <Link
-                              to={`/discord-clone/main/dm/${user.uid}`}
-                              className="logo-button-unhovered-2 unread-dm"
-                              onClick={() => {
-                                setCurrentSectionLeft("dm");
-                                setCurrentDMId(user.uid);
-                              }}
-                              style={{
-                                backgroundImage: `url(${user.photoURL})`,
-                              }}
-                            >
-                              <div className="incoming-unread-circle">
-                                <div className="incoming-FR-home">
-                                  <p>{user.numberOfUnread}</p>
-                                </div>
-                              </div>
-                            </Link>
-                          </div>
+                          <UnreadDm
+                            username={user.username}
+                            photoURL={user.photoURL}
+                            numberOfUnread={user.numberOfUnread}
+                            uid={user.uid}
+                          />
                         );
                       })}
                       <div className="other-servers">
