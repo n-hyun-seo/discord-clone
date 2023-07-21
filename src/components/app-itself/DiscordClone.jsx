@@ -106,7 +106,7 @@ export default function DiscordClone() {
                           <div className="logo-container-2 unread-dm">
                             <Link
                               to={`/discord-clone/main/dm/${user.uid}`}
-                              className="logo-button-unhovered-2"
+                              className="logo-button-unhovered-2 unread-dm"
                               onClick={() => {
                                 setCurrentSectionLeft("dm");
                                 setCurrentDMId(user.uid);

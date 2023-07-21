@@ -2200,6 +2200,14 @@ body {
   margin-top: 30px;
 }
 
+.logo-button-unhovered-2.unread-dm {
+  transition: border-radius 0.2s;
+}
+
+.logo-button-unhovered-2.unread-dm:hover {
+  border-radius: 15px;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
