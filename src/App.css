@@ -2123,7 +2123,8 @@ body {
   display: flex;
   justify-content: flex-start;
   width: 100%;
-
+  padding-bottom: 3px;
+  padding-top: 3px;
   margin: auto;
   margin-top: 20px;
 }
@@ -2137,6 +2138,7 @@ body {
 .pfp-container.my-left .pfp-circle {
   width: 40px;
   height: 40px;
+  border-radius: 30px;
 }
 
 .first-row {
@@ -2155,11 +2157,9 @@ body {
 
 .ongoing-message {
   width: 100%;
-  padding-left: 25px;
+  padding-left: 10px;
   scroll-margin-top: 200px;
 }
-
-
 
 .after-first-row p,
 .first-message {
@@ -2175,8 +2175,7 @@ body {
   padding-left: 10px;
   font-size: 13px;
   padding-top: 2.5px;
-  color: rgb(161, 160, 160);
-  
+  color: #a2a8b0;
 }
 
 .for-scroll-filler {
@@ -2217,10 +2216,10 @@ body {
 
 .ongoing-message-time {
   width: 50px;
-  padding-left: 23px;
-  font-size: 13px;
-  color: rgb(161, 160, 160);
-  visibility:hidden;
+  font-size: 11px;
+  color: #a2a8b0;
+  visibility: hidden;
+  margin-left: 18px;
 }
 
 ::-webkit-scrollbar {
