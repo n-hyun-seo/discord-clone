@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import date from "date-and-time";
 
 export default function OngoingMessage(props) {
   const [hoverState, setHoverState] = useState(false);
@@ -21,7 +22,7 @@ export default function OngoingMessage(props) {
       }}
     >
       <p className="ongoing-message-time" ref={timeRef}>
-        {props.timestamp.slice(16, 21)}
+        {date.transform(props.timestamp.slice(16, 21), "HH:mm", "hh:mm A")}
       </p>
       <p className="ongoing-message">{props.message}</p>
     </div>

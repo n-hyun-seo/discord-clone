@@ -276,7 +276,6 @@ export default function UserDM() {
             messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
-            unread: true,
           },
         ],
       }
@@ -290,7 +289,6 @@ export default function UserDM() {
             messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
-            unread: true,
           },
         ],
       }
@@ -325,7 +323,6 @@ export default function UserDM() {
           messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
-          unread: true,
         }),
       }
     ); //add dm message between us to MY database of dmMessageHistory
@@ -337,7 +334,6 @@ export default function UserDM() {
           messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
-          unread: true,
         }),
       }
     ); //add dm message between us to USER'S database of dmMessageHistory
@@ -486,11 +482,51 @@ export default function UserDM() {
                   </button>
                 )}
               </div>
-              <TimeDivider />
 
               {messages?.map((message) => {
                 let currentMsgIndex = messages.indexOf(message);
                 let previousMsgIndex = currentMsgIndex - 1;
+
+                function getMonthNumberFromName(monthName) {
+                  return new Date(`${monthName} 1, 2022`).getMonth();
+                }
+
+                let month = getMonthNumberFromName(
+                  message.timestamp.slice(4, 7)
+                );
+                let day = Number(message.timestamp.slice(8, 10));
+                let year = Number(message.timestamp.slice(11, 15));
+                let date1 = new Date(year, month, day);
+
+                let previousMonth = getMonthNumberFromName(
+                  messages[previousMsgIndex]?.timestamp.slice(4, 7)
+                );
+                let previousDay = Number(
+                  messages[previousMsgIndex]?.timestamp.slice(8, 10)
+                );
+                let previousYear = Number(
+                  messages[previousMsgIndex]?.timestamp.slice(11, 15)
+                );
+                let date2 = new Date(previousYear, previousMonth, previousDay);
+
+                if (
+                  currentMsgIndex !== 0 &&
+                  date.isSameDay(date1, date2) === false
+                )
+             
+                  return (
+                    <TimeDivider
+                      time={date1}
+                      messageContent={message.messageContent}
+                      sentBy={message.sentBy}
+                      userUsername={currentUserData?.username}
+                      userPhotoURL={currentUserData?.photoURL}
+                      opponentUsername={opponentData?.username}
+                      opponentPhotoURL={opponentData?.photoURL}
+                      timestamp={message.timestamp}
+                    />
+                  );
+
                 if (
                   currentMsgIndex !== 0 &&
                   message.sentBy === messages[previousMsgIndex].sentBy

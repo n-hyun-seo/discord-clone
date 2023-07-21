@@ -1,13 +1,35 @@
 import date from "date-and-time";
+import { useContext } from "react";
+import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
+import MyMessage from "./MyMessage";
+import OpponentMessage from "./OpponentMessage";
 
 export default function TimeDivider(props) {
-  const now = new Date();
-  const currentTime = date.format(now, "MMMM DD, YYYY");
+  const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
   return (
-    <div className="time-container">
-      <div className="time-divider"></div>
-      <p className="dm-time">{currentTime}</p>
-      <div className="time-divider"></div>
+    <div>
+      <div className="time-container">
+        <div className="time-divider"></div>
+        <p className="dm-time">{props.time.toString().slice(4, 15)}</p>
+        <div className="time-divider"></div>
+      </div>
+      {props.sentBy === currentUserUid ? (
+        <MyMessage
+          messageContent={props.messageContent}
+          sentBy={props.sentBy}
+          username={props.userUsername}
+          photoURL={props.userPhotoURL}
+          timestamp={props.timestamp}
+        />
+      ) : (
+        <OpponentMessage
+          messageContent={props.messageContent}
+          sentBy={props.sentBy}
+          timestamp={props.timestamp}
+          username={props.opponentUsername}
+          photoURL={props.opponentPhotoURL}
+        />
+      )}
     </div>
   );
 }
