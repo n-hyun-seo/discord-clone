@@ -509,11 +509,24 @@ export default function UserDM() {
                 );
                 let date2 = new Date(previousYear, previousMonth, previousDay);
 
+                if (currentMsgIndex === 0)
+                  return (
+                    <TimeDivider
+                      time={date1}
+                      messageContent={message.messageContent}
+                      sentBy={message.sentBy}
+                      userUsername={currentUserData?.username}
+                      userPhotoURL={currentUserData?.photoURL}
+                      opponentUsername={opponentData?.username}
+                      opponentPhotoURL={opponentData?.photoURL}
+                      timestamp={message.timestamp}
+                    />
+                  );
+
                 if (
                   currentMsgIndex !== 0 &&
                   date.isSameDay(date1, date2) === false
                 )
-             
                   return (
                     <TimeDivider
                       time={date1}
