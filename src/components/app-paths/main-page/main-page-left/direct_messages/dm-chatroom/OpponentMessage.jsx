@@ -3,6 +3,7 @@ import date from "date-and-time";
 
 export default function Opponentprops(props) {
   const [hoverState, setHoverState] = useState(false);
+  const now = new Date();
 
   const hoursMinutes = date.transform(
     props.timestamp.slice(16, 21),
@@ -38,7 +39,11 @@ export default function Opponentprops(props) {
         <div className="first-message-container">
           <div className="first-row">
             <p className="my-username">{props.username} </p>
-            <p className="my-timestamp">{dayMonthYear + hoursMinutes}</p>
+            <p className="my-timestamp">
+              {date.isSameDay(now, props.time)
+                ? "Today at " + hoursMinutes
+                : dayMonthYear + hoursMinutes}
+            </p>
           </div>
           <p className="first-message">{props.messageContent}</p>
         </div>

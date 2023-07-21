@@ -355,6 +355,10 @@ export default function UserDM() {
     ); //add myself to other person's unread dm's (for notifications)
   }
 
+  function getMonthNumberFromName(monthName) {
+    return new Date(`${monthName} 1, 2022`).getMonth();
+  }
+
   return (
     <div className="right">
       <div className="friends-nav">
@@ -487,10 +491,6 @@ export default function UserDM() {
                 let currentMsgIndex = messages.indexOf(message);
                 let previousMsgIndex = currentMsgIndex - 1;
 
-                function getMonthNumberFromName(monthName) {
-                  return new Date(`${monthName} 1, 2022`).getMonth();
-                }
-
                 let month = getMonthNumberFromName(
                   message.timestamp.slice(4, 7)
                 );
@@ -508,7 +508,7 @@ export default function UserDM() {
                   messages[previousMsgIndex]?.timestamp.slice(11, 15)
                 );
                 let date2 = new Date(previousYear, previousMonth, previousDay);
-
+                //  console.log(date1);
                 if (currentMsgIndex === 0)
                   return (
                     <TimeDivider
@@ -520,6 +520,9 @@ export default function UserDM() {
                       opponentUsername={opponentData?.username}
                       opponentPhotoURL={opponentData?.photoURL}
                       timestamp={message.timestamp}
+                      year={year}
+                      month={month}
+                      day={day}
                     />
                   );
 
@@ -537,6 +540,9 @@ export default function UserDM() {
                       opponentUsername={opponentData?.username}
                       opponentPhotoURL={opponentData?.photoURL}
                       timestamp={message.timestamp}
+                      year={year}
+                      month={month}
+                      day={day}
                     />
                   );
 
@@ -554,22 +560,32 @@ export default function UserDM() {
                 if (message.sentBy === currentUserUid) {
                   return (
                     <MyMessage
+                      getMonthNumberFromName={getMonthNumberFromName}
+                      time={date1}
                       messageContent={message.messageContent}
                       sentBy={message.sentBy}
                       username={currentUserData?.username}
                       photoURL={currentUserData?.photoURL}
                       timestamp={message.timestamp}
+                      year={year}
+                      month={month}
+                      day={day}
                     />
                   );
                 }
                 if (message.sentBy !== currentUserUid) {
                   return (
                     <OpponentMessage
+                      getMonthNumberFromName={getMonthNumberFromName}
+                      time={date1}
                       messageContent={message.messageContent}
                       sentBy={message.sentBy}
                       timestamp={message.timestamp}
                       username={opponentData?.username}
                       photoURL={opponentData?.photoURL}
+                      year={year}
+                      month={month}
+                      day={day}
                     />
                   );
                 }

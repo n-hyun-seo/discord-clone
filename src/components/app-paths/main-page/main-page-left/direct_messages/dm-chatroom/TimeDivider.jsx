@@ -15,19 +15,27 @@ export default function TimeDivider(props) {
       </div>
       {props.sentBy === currentUserUid ? (
         <MyMessage
+          time={props.time}
           messageContent={props.messageContent}
           sentBy={props.sentBy}
           username={props.userUsername}
           photoURL={props.userPhotoURL}
           timestamp={props.timestamp}
+          year={props.year}
+          month={props.month}
+          day={props.day}
         />
       ) : (
         <OpponentMessage
+          time={props.time}
           messageContent={props.messageContent}
           sentBy={props.sentBy}
           timestamp={props.timestamp}
           username={props.opponentUsername}
           photoURL={props.opponentPhotoURL}
+          year={props.year}
+          month={props.month}
+          day={props.day}
         />
       )}
     </div>
