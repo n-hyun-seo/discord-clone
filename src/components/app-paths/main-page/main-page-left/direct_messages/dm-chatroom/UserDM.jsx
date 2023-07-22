@@ -342,10 +342,6 @@ export default function UserDM() {
       }
     ); //add dm message between us to USER'S database of dmMessageHistory
 
-    await updateDoc(doc(db, "users", currentDMId), {
-      directMessages: arrayUnion({ ...currentUserData }),
-    }); //add myself to person's dm list
-
     await updateDoc(
       doc(db, "users", currentDMId, "unreadMessagesHistory", currentUserUid),
       {
@@ -357,6 +353,10 @@ export default function UserDM() {
         }),
       }
     ); //add myself to other person's unread dm's (for notifications)
+
+    await updateDoc(doc(db, "users", currentDMId), {
+      directMessages: arrayUnion({ ...currentUserData }),
+    }); //add myself to person's dm list
   }
 
   function getMonthNumberFromName(monthName) {
@@ -636,6 +636,7 @@ export default function UserDM() {
                 className="message-input-container"
                 onSubmit={(e) => {
                   e.preventDefault();
+                  if(messageInput === "") return;
                   if (messages === undefined) {
                     addFirstMessage(messageInput);
                   } else {
