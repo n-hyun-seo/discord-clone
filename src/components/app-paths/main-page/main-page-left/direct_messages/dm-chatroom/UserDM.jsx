@@ -44,6 +44,7 @@ export default function UserDM() {
   const [isBlocked, setIsBlocked] = useState(false);
   const [isBlockedBy, setIsBlockedBy] = useState(false);
   const [messageInput, setMessageInput] = useState("");
+  const [placeholder, setPlaceholder] = useState("");
 
   const userProfileRef = useRef();
   const chatroomRef = useRef();
@@ -111,16 +112,14 @@ export default function UserDM() {
       }
     );
 
-    async function getUnreadDoc() {
+    (async function getUnreadDoc() {
       await setDoc(
         doc(db, "users", currentUserUid, "unreadMessagesHistory", currentDMId),
         {
           unreadHistory: [],
         }
       );
-    }
-
-    getUnreadDoc();
+    })();
 
     return () => {
       run = false;
@@ -136,7 +135,7 @@ export default function UserDM() {
     async () => {
       const dmPersonSnapshot = await getDoc(doc(db, "users", currentDMId));
       const dmPersonUserInfo = await dmPersonSnapshot.data().userInfo;
-
+      setPlaceholder(`Message @${dmPersonUserInfo.username}`)
       return dmPersonUserInfo;
     },
     { refetchOnWindowFocus: false }
@@ -613,13 +612,13 @@ export default function UserDM() {
                 ></input>
                 <label htmlFor="message-image">
                   <img
-                  className="add-file-to-message"
-                    src="https://static.thenounproject.com/png/2729266-200.png"
+                    className="add-file-to-message"
+                    src="https://cdn-icons-png.flaticon.com/512/6520/6520100.png"
                     alt="add file"
                   />
                 </label>
                 <input
-                  placeholder="Message"
+                  placeholder={placeholder}
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
                   className="message-input"
