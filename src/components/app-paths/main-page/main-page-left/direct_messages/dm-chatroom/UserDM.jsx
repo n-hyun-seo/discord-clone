@@ -45,9 +45,14 @@ export default function UserDM() {
   const [isBlockedBy, setIsBlockedBy] = useState(false);
   const [messageInput, setMessageInput] = useState("");
   const [placeholder, setPlaceholder] = useState("");
+  const [hasFile, setHasFile] = useState(false);
+  const [file, setFile] = useState("");
+  const [filePath, setFilePath] = useState("");
 
   const userProfileRef = useRef();
   const chatroomRef = useRef();
+  const previewSectionRef = useRef();
+  const fileInputRef = useRef();
 
   useEffect(() => {
     let run = true;
@@ -135,7 +140,7 @@ export default function UserDM() {
     async () => {
       const dmPersonSnapshot = await getDoc(doc(db, "users", currentDMId));
       const dmPersonUserInfo = await dmPersonSnapshot.data().userInfo;
-      setPlaceholder(`Message @${dmPersonUserInfo.username}`)
+      setPlaceholder(`Message @${dmPersonUserInfo.username}`);
       return dmPersonUserInfo;
     },
     { refetchOnWindowFocus: false }
@@ -417,7 +422,11 @@ export default function UserDM() {
       <section className="friends-content">
         <div className="friends-list-bottom-container">
           <section className="friends-list-section user-dm-message">
-            <div ref={chatroomRef} className="user-dm-message-top">
+            <div
+              ref={chatroomRef}
+              className="user-dm-message-top"
+              style={{ flexBasis: file === "" ? "90%" : "60%" }}
+            >
               <div className="pfp-container user-dm-message-header">
                 <div
                   className="pfp-circle user-dm-message-header"
@@ -591,7 +600,38 @@ export default function UserDM() {
                 return <p>error</p>;
               })}
             </div>
-            <div className="user-dm-message-bottom">
+            <div
+              className="user-dm-message-bottom"
+              style={{ flexBasis: file === "" ? "10%" : "40%" }}
+            >
+              {file !== "" && (
+                <div className="preview-file" ref={previewSectionRef}>
+                  <div className="preview-container">
+                    <div
+                      className="remove-file"
+                      onClick={() => {
+                        fileInputRef.current.value = null;
+                        setFilePath("");
+                        setFile("");
+                      }}
+                    >
+                      <img
+                        src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/red-trash-can-icon.png"
+                        alt="remove file"
+                      />
+                    </div>
+                    <div className="preview-image-container">
+                      <img
+                        className="preview-image"
+                        alt="preview"
+                        src={filePath}
+                      />
+                    </div>
+
+                    <p className="file-name">{file !== "" && file}</p>
+                  </div>
+                </div>
+              )}
               <form
                 className="message-input-container"
                 onSubmit={(e) => {
@@ -606,9 +646,14 @@ export default function UserDM() {
                 }}
               >
                 <input
+                  ref={fileInputRef}
                   type="file"
                   id="message-image"
                   style={{ display: "none" }}
+                  onChange={(e) => {
+                    setFile(e.target.files[0].name);
+                    setFilePath(URL.createObjectURL(e.target.files[0]));
+                  }}
                 ></input>
                 <label htmlFor="message-image">
                   <img

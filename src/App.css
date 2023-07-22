@@ -1863,13 +1863,97 @@ body {
   overflow-y: scroll;
   color: rgb(232, 231, 231);
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
+  /* flex-basis: 60%*/
 }
 
 .user-dm-message-bottom {
   flex-basis: 10%;
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin-top: -27px;
+  /* flex-basis: 40%*/
+}
+
+.preview-file {
+  width: 94.9%;
+  height: 226px;
+  background-color: rgb(62, 64, 71);
+  position: absolute;
+  top: 31px;
+  border-radius: 5px 5px 0px 0px;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 15px;
+  align-items: center;
+  gap: 15px;
+}
+
+.remove-file {
+  position: absolute;
+  width: 33px;
+  height: 33px;
+  border-radius: 5px;
+  background-color: rgb(55, 56, 60);
+  right: -10px;
+  top: -5px;
+  display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.remove-file img {
+  width: 50%;
+  filter: brightness(90%);
+}
+
+.remove-file:hover {
+  background-color: rgb(58, 61, 64);
+  cursor: pointer;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 200px;
+  background-color: #2b2d31;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  gap: 5px;
+}
+
+.preview-image {
+  background-color: transparent;
+  border-radius: 5px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.preview-image-container {
+  width: 180px;
+  flex-basis: 88%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  overflow: hidden;
+}
+.file-name {
+  color: #d3d9e3;
+  text-align: left;
+  width: 100%;
+  flex-basis: 12%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-dm-message-bottom input {
@@ -1930,8 +2014,6 @@ body {
   border-radius: 5px;
   gap: 15px;
 }
-
-
 
 .time-container {
   display: flex;
@@ -2130,6 +2212,7 @@ body {
   padding-top: 3px;
   margin: auto;
   margin-top: 20px;
+  padding-left: 3px;
 }
 
 .pfp-container.my-left {
@@ -2160,7 +2243,7 @@ body {
 
 .ongoing-message {
   width: 100%;
-  padding-left: 10px;
+  padding-left: 13px;
   scroll-margin-top: 200px;
 }
 
@@ -2234,9 +2317,8 @@ body {
 
 .add-file-to-message:hover {
   cursor: pointer;
+  filter: brightness(200%) grayscale(100%);
 }
-
-
 
 ::-webkit-scrollbar {
   width: 4px;
