@@ -607,12 +607,24 @@ export default function UserDM() {
                 }}
               >
                 <input
+                  type="file"
+                  id="message-image"
+                  style={{ display: "none" }}
+                ></input>
+                <label htmlFor="message-image">
+                  <img
+                  className="add-file-to-message"
+                    src="https://static.thenounproject.com/png/2729266-200.png"
+                    alt="add file"
+                  />
+                </label>
+                <input
                   placeholder="Message"
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
                   className="message-input"
                 ></input>
-                <button type="submit"></button>
+                <button type="submit" style={{ display: "none" }}></button>
               </form>
             </div>
           </section>

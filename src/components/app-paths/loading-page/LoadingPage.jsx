@@ -16,17 +16,20 @@ export default function LoadingPage() {
   const [currentUserUid, setCurrentUserUid] = useState("");
   const [staleUnreadList, setStaleUnreadList] = useState([]);
 
-  const { isLoading } = useQuery(["loading"], async () => {
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setCurrentUserUid(user.uid);
-        navigate("/discord-clone/main/friends/online");
-      } else {
-        navigate("/discord-clone/login");
-      }
-    });
-  });
+  const { isLoading } = useQuery(
+    ["loading"],
+    async () => {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          setCurrentUserUid(user.uid);
+          navigate("/discord-clone/main/friends/online");
+        } else {
+          navigate("/discord-clone/login");
+        }
+      });
+    },
+    { refetchOnWindowFocus: false }
+  );
 
   if (isLoading) return <LoadingVisual />;
 

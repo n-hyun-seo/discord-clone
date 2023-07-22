@@ -1924,10 +1924,15 @@ body {
 .message-input-container {
   width: 95%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   background-color: rgb(62, 64, 71);
   height: 40px;
   border-radius: 5px;
+}
+
+.message-input::placeholder {
+  padding-left: 15px;
 }
 
 .time-container {
@@ -2220,6 +2225,11 @@ body {
   color: #a2a8b0;
   visibility: hidden;
   margin-left: 18px;
+}
+
+.add-file-to-message {
+  width: 30px;
+  filter: brightness(500%);
 }
 
 ::-webkit-scrollbar {
