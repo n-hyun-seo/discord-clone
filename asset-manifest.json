@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/discord-clone/static/css/main.1a09021b.css",
-    "main.js": "/discord-clone/static/js/main.7462f6b6.js",
+    "main.css": "/discord-clone/static/css/main.8c0e5892.css",
+    "main.js": "/discord-clone/static/js/main.20fd6c99.js",
     "static/media/ggsansSemibold.woff": "/discord-clone/static/media/ggsansSemibold.69f979b5e93ca9bc47bc.woff",
     "static/media/ggsansMedium.woff": "/discord-clone/static/media/ggsansMedium.83d13d754b226c8e4a46.woff",
     "static/media/ggsansBold.woff": "/discord-clone/static/media/ggsansBold.330ecc0e545f4da7362d.woff",
     "static/media/ggsansRegular.woff": "/discord-clone/static/media/ggsansRegular.c1560687fc8676bab59b.woff",
     "static/media/wumpus.JPG": "/discord-clone/static/media/wumpus.6d6c99020732f03ff0bb.JPG",
     "index.html": "/discord-clone/index.html",
-    "main.1a09021b.css.map": "/discord-clone/static/css/main.1a09021b.css.map",
-    "main.7462f6b6.js.map": "/discord-clone/static/js/main.7462f6b6.js.map"
+    "main.8c0e5892.css.map": "/discord-clone/static/css/main.8c0e5892.css.map",
+    "main.20fd6c99.js.map": "/discord-clone/static/js/main.20fd6c99.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a09021b.css",
-    "static/js/main.7462f6b6.js"
+    "static/css/main.8c0e5892.css",
+    "static/js/main.20fd6c99.js"
   ]
 }
