@@ -646,7 +646,11 @@ export default function UserDM() {
                       <img
                         className="preview-image"
                         alt="preview"
-                        src={filePath}
+                        src={
+                          file.includes("mp4")
+                            ? "https://icons.veryicon.com/png/128/file-type/doctype-1/mp4-14.png"
+                            : filePath
+                        }
                       />
                     </div>
 

@@ -1933,7 +1933,7 @@ body {
   background-color: transparent;
   border-radius: 5px;
   object-fit: cover;
-  width: 100%;
+  max-width: 100%;
 }
 
 .preview-image-container {
