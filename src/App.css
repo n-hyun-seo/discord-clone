@@ -2323,14 +2323,12 @@ body {
 }
 
 .dm-image {
-
   max-width: 90%;
   border-radius: 5px;
   object-fit: cover;
 }
 
 .dm-image-container {
-
   max-width: 300px;
   border-radius: 5px;
 }
@@ -2341,6 +2339,11 @@ body {
 
 .dm-image-text {
   padding-bottom: 5px;
+}
+
+.dm-video {
+  object-fit: contain;
+  max-width: 90%;
 }
 
 .message-content-container {

@@ -659,6 +659,7 @@ export default function UserDM() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   if (uploadFile !== null) {
+                    console.log(uploadFile);
                     if (messages === undefined) {
                       entireSectionRef.current.style.cursor = "wait";
                       messageInputRef.current.setAttribute("disabled", true);

@@ -31,7 +31,14 @@ export default function OngoingMessage(props) {
           <p className="dm-image-text">{props.message}</p>
 
           <div className="dm-image-container">
-            <img className="dm-image" src={props.file} alt="show" />
+            {props.file.includes("mp4") ? (
+              <video className="dm-video" controls>
+                <source src={props.file} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img className="dm-image" src={props.file} alt="show" />
+            )}
           </div>
         </div>
       )}
