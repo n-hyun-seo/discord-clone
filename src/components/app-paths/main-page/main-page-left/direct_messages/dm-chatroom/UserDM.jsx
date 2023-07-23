@@ -67,7 +67,7 @@ export default function UserDM() {
   useEffect(() => {
     let run = true;
 
-    setTimeout(() => messageInputRef?.current.focus(), 1000);
+    setTimeout(() => messageInputRef?.current.focus(), 1500);
 
     function scroll() {
       if (chatroomRef.current === null) return;
