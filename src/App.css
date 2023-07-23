@@ -2297,7 +2297,8 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 25px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .ongoing-message-time {
@@ -2306,6 +2307,7 @@ body {
   color: #a2a8b0;
   visibility: hidden;
   margin-left: 18px;
+  padding-top: 1px;
 }
 
 .add-file-to-message {
@@ -2318,6 +2320,39 @@ body {
 .add-file-to-message:hover {
   cursor: pointer;
   filter: brightness(200%) grayscale(100%);
+}
+
+.dm-image {
+
+  max-width: 90%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.dm-image-container {
+
+  max-width: 300px;
+  border-radius: 5px;
+}
+
+.dm-image-container.first {
+  margin-top: 3px;
+}
+
+.dm-image-text {
+  padding-bottom: 5px;
+}
+
+.message-content-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
+.message-content-container.first {
+  margin-left: 15px;
+  margin-top: 3px;
 }
 
 ::-webkit-scrollbar {

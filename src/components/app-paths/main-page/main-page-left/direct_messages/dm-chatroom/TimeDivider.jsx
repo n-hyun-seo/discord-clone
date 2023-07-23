@@ -24,6 +24,7 @@ export default function TimeDivider(props) {
           year={props.year}
           month={props.month}
           day={props.day}
+          file={props.file}
         />
       ) : (
         <OpponentMessage
@@ -36,6 +37,7 @@ export default function TimeDivider(props) {
           year={props.year}
           month={props.month}
           day={props.day}
+          file={props.file}
         />
       )}
     </div>

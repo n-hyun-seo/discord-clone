@@ -28,6 +28,13 @@ import MyMessage from "./MyMessage";
 import OpponentMessage from "./OpponentMessage";
 import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
 import OngoingMessage from "./OngoingMessage";
+import { storage } from "../../../../../../config/firebase";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  list,
+} from "firebase/storage";
 
 export default function UserDM() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
@@ -48,14 +55,19 @@ export default function UserDM() {
   const [hasFile, setHasFile] = useState(false);
   const [file, setFile] = useState("");
   const [filePath, setFilePath] = useState("");
+  const [uploadFile, setUploadFile] = useState(null);
 
   const userProfileRef = useRef();
   const chatroomRef = useRef();
   const previewSectionRef = useRef();
   const fileInputRef = useRef();
+  const entireSectionRef = useRef();
+  const messageInputRef = useRef();
 
   useEffect(() => {
     let run = true;
+
+    setTimeout(() => messageInputRef?.current.focus(), 1000);
 
     function scroll() {
       if (chatroomRef.current === null) return;
@@ -67,7 +79,7 @@ export default function UserDM() {
       async (docu) => {
         if (run) {
           setMessages(docu?.data()?.messageHistory);
-          setTimeout(scroll, 1);
+          setTimeout(scroll, 600);
         }
       }
     );
@@ -269,7 +281,7 @@ export default function UserDM() {
     }); //update person's dm list so I'm at the top of their dm list
   });
 
-  async function addFirstMessage(content) {
+  async function addFirstMessage(content, url = null) {
     const now = new Date();
 
     await setDoc(
@@ -280,6 +292,7 @@ export default function UserDM() {
             messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
+            file: url,
           },
         ],
       }
@@ -293,6 +306,7 @@ export default function UserDM() {
             messageContent: content,
             sentBy: currentUserUid,
             timestamp: String(now),
+            file: url,
           },
         ],
       }
@@ -317,7 +331,7 @@ export default function UserDM() {
     ); //add myself to other person's unread dm's (for notifications)
   }
 
-  async function addMessage(content) {
+  async function addMessage(content, url = null) {
     const now = new Date();
 
     await updateDoc(
@@ -327,6 +341,7 @@ export default function UserDM() {
           messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
+          file: url,
         }),
       }
     ); //add dm message between us to MY database of dmMessageHistory
@@ -338,6 +353,7 @@ export default function UserDM() {
           messageContent: content,
           sentBy: currentUserUid,
           timestamp: String(now),
+          file: url,
         }),
       }
     ); //add dm message between us to USER'S database of dmMessageHistory
@@ -364,7 +380,7 @@ export default function UserDM() {
   }
 
   return (
-    <div className="right">
+    <div className="right" ref={entireSectionRef}>
       <div className="friends-nav">
         <div className="friends-left-side">
           <div className="pfp-container dm-header">
@@ -516,7 +532,7 @@ export default function UserDM() {
                   messages[previousMsgIndex]?.timestamp.slice(11, 15)
                 );
                 let date2 = new Date(previousYear, previousMonth, previousDay);
-                //  console.log(date1);
+
                 if (currentMsgIndex === 0)
                   return (
                     <TimeDivider
@@ -531,6 +547,7 @@ export default function UserDM() {
                       year={year}
                       month={month}
                       day={day}
+                      file={message.file}
                     />
                   );
 
@@ -551,6 +568,7 @@ export default function UserDM() {
                       year={year}
                       month={month}
                       day={day}
+                      file={message.file}
                     />
                   );
 
@@ -562,6 +580,7 @@ export default function UserDM() {
                     <OngoingMessage
                       message={message.messageContent}
                       timestamp={message.timestamp}
+                      file={message.file}
                     />
                   );
 
@@ -578,6 +597,7 @@ export default function UserDM() {
                       year={year}
                       month={month}
                       day={day}
+                      file={message.file}
                     />
                   );
                 }
@@ -594,6 +614,7 @@ export default function UserDM() {
                       year={year}
                       month={month}
                       day={day}
+                      file={message.file}
                     />
                   );
                 }
@@ -613,6 +634,7 @@ export default function UserDM() {
                         fileInputRef.current.value = null;
                         setFilePath("");
                         setFile("");
+                        setUploadFile(null);
                       }}
                     >
                       <img
@@ -636,14 +658,55 @@ export default function UserDM() {
                 className="message-input-container"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if(messageInput === "") return;
-                  if (messages === undefined) {
-                    addFirstMessage(messageInput);
-                  } else {
-                    addMessage(messageInput);
+                  if (uploadFile !== null) {
+                    if (messages === undefined) {
+                      entireSectionRef.current.style.cursor = "wait";
+                      messageInputRef.current.setAttribute("disabled", true);
+                      uploadBytesResumable(
+                        ref(storage, `images/${currentDMId + file}`),
+                        uploadFile
+                      )
+                        .then(() =>
+                          getDownloadURL(
+                            ref(storage, `images/${currentDMId + file}`)
+                          )
+                        )
+                        .then((data) => addFirstMessage(messageInput, data))
+                        .then(() => {
+                          messageInputRef.current.removeAttribute("disabled");
+                          entireSectionRef.current.style.cursor = "auto";
+                        });
+                    } else {
+                      entireSectionRef.current.style.cursor = "wait";
+                      messageInputRef.current.setAttribute("disabled", true);
+                      uploadBytesResumable(
+                        ref(storage, `images/${currentDMId + file}`),
+                        uploadFile
+                      )
+                        .then(() =>
+                          getDownloadURL(
+                            ref(storage, `images/${currentDMId + file}`)
+                          )
+                        )
+                        .then((data) => addMessage(messageInput, data))
+                        .then(() => {
+                          messageInputRef.current.removeAttribute("disabled");
+                          entireSectionRef.current.style.cursor = "auto";
+                        });
+                    }
+                  }
+                  if (uploadFile === null) {
+                    if (messages === undefined) {
+                      addFirstMessage(messageInput);
+                    } else {
+                      addMessage(messageInput);
+                    }
                   }
                   updateDmList();
                   setMessageInput("");
+                  setFilePath("");
+                  setFile("");
+                  setUploadFile(null);
                 }}
               >
                 <input
@@ -654,6 +717,7 @@ export default function UserDM() {
                   onChange={(e) => {
                     setFile(e.target.files[0].name);
                     setFilePath(URL.createObjectURL(e.target.files[0]));
+                    setUploadFile(e.target.files[0]);
                   }}
                 ></input>
                 <label htmlFor="message-image">
@@ -668,6 +732,7 @@ export default function UserDM() {
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
                   className="message-input"
+                  ref={messageInputRef}
                 ></input>
                 <button type="submit" style={{ display: "none" }}></button>
               </form>
@@ -707,7 +772,7 @@ export default function UserDM() {
                 <p className="member-since-text">
                   {opponentData?.creationTime.slice(0, 16)}
                 </p>
-                <p>{}</p>
+
                 <p className="note-header">NOTE</p>
                 <div
                   key={`note${opponentData?.id_number}`}

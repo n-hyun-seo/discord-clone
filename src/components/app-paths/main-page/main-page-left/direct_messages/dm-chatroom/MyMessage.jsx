@@ -45,7 +45,16 @@ export default function MyMessage(props) {
                 : dayMonthYear + hoursMinutes}
             </p>
           </div>
-          <p className="first-message">{props.messageContent}</p>
+          {props.file === null ? (
+            <p className="first-message">{props.messageContent}</p>
+          ) : (
+            <div className="message-content-container first">
+              <p>{props.messageContent}</p>
+              <div className="dm-image-container first">
+                <img className="dm-image" src={props.file} alt="show" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

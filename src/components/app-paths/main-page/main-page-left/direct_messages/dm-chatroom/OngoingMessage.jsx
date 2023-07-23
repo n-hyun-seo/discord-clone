@@ -24,7 +24,17 @@ export default function OngoingMessage(props) {
       <p className="ongoing-message-time" ref={timeRef}>
         {date.transform(props.timestamp.slice(16, 21), "HH:mm", "hh:mm A")}
       </p>
-      <p className="ongoing-message">{props.message}</p>
+      {props.file === null ? (
+        <p className="ongoing-message">{props.message}</p>
+      ) : (
+        <div className="message-content-container">
+          <p className="dm-image-text">{props.message}</p>
+
+          <div className="dm-image-container">
+            <img className="dm-image" src={props.file} alt="show" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
