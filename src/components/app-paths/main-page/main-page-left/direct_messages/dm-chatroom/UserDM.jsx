@@ -35,6 +35,7 @@ import {
   getDownloadURL,
   list,
 } from "firebase/storage";
+import BlockedMessage from "./BlockedMessage";
 
 export default function UserDM() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
@@ -67,7 +68,7 @@ export default function UserDM() {
   useEffect(() => {
     let run = true;
 
-    setTimeout(() => messageInputRef?.current.focus(), 1500);
+    setTimeout(() => messageInputRef?.current?.focus(), 1500);
 
     function scroll() {
       if (chatroomRef.current === null) return;
@@ -538,6 +539,7 @@ export default function UserDM() {
                     <TimeDivider
                       time={date1}
                       messageContent={message.messageContent}
+                      isBlocked={isBlocked}
                       sentBy={message.sentBy}
                       userUsername={currentUserData?.username}
                       userPhotoURL={currentUserData?.photoURL}
@@ -560,6 +562,7 @@ export default function UserDM() {
                       time={date1}
                       messageContent={message.messageContent}
                       sentBy={message.sentBy}
+                      isBlocked={isBlocked}
                       userUsername={currentUserData?.username}
                       userPhotoURL={currentUserData?.photoURL}
                       opponentUsername={opponentData?.username}
@@ -568,6 +571,22 @@ export default function UserDM() {
                       year={year}
                       month={month}
                       day={day}
+                      file={message.file}
+                    />
+                  );
+
+                if (isBlocked === true && message.sentBy !== currentUserUid)
+                  return (
+                    <BlockedMessage
+                      time={message.time}
+                      messageContent={message.messageContent}
+                      sentBy={message.sentBy}
+                      timestamp={message.timestamp}
+                      username={message.opponentUsername}
+                      photoURL={message.opponentPhotoURL}
+                      year={message.year}
+                      month={message.month}
+                      day={message.day}
                       file={message.file}
                     />
                   );
@@ -658,89 +677,107 @@ export default function UserDM() {
                   </div>
                 </div>
               )}
-              <form
-                className="message-input-container"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (uploadFile !== null) {
-                    console.log(uploadFile);
-                    if (messages === undefined) {
-                      entireSectionRef.current.style.cursor = "wait";
-                      messageInputRef.current.setAttribute("disabled", true);
-                      uploadBytesResumable(
-                        ref(storage, `images/${currentDMId + file}`),
-                        uploadFile
-                      )
-                        .then(() =>
-                          getDownloadURL(
-                            ref(storage, `images/${currentDMId + file}`)
-                          )
+
+              {isBlocked ? (
+                <div className="message-input-container blocked">
+                  <p className="blocked-warning">
+                    You cannot send or see messages from a user you have
+                    blocked.
+                  </p>
+                  <button
+                    className="dm-block-friend-button"
+                    onClick={() => {
+                      unblockUser();
+                      setRerender(!rerender);
+                    }}
+                  >
+                    Unblock
+                  </button>
+                </div>
+              ) : (
+                <form
+                  className="message-input-container"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (uploadFile !== null) {
+                      if (messages === undefined) {
+                        entireSectionRef.current.style.cursor = "wait";
+                        messageInputRef.current.setAttribute("disabled", true);
+                        uploadBytesResumable(
+                          ref(storage, `images/${currentDMId + file}`),
+                          uploadFile
                         )
-                        .then((data) => addFirstMessage(messageInput, data))
-                        .then(() => {
-                          messageInputRef.current.removeAttribute("disabled");
-                          entireSectionRef.current.style.cursor = "auto";
-                        });
-                    } else {
-                      entireSectionRef.current.style.cursor = "wait";
-                      messageInputRef.current.setAttribute("disabled", true);
-                      uploadBytesResumable(
-                        ref(storage, `images/${currentDMId + file}`),
-                        uploadFile
-                      )
-                        .then(() =>
-                          getDownloadURL(
-                            ref(storage, `images/${currentDMId + file}`)
+                          .then(() =>
+                            getDownloadURL(
+                              ref(storage, `images/${currentDMId + file}`)
+                            )
                           )
+                          .then((data) => addFirstMessage(messageInput, data))
+                          .then(() => {
+                            messageInputRef.current.removeAttribute("disabled");
+                            entireSectionRef.current.style.cursor = "auto";
+                          });
+                      } else {
+                        entireSectionRef.current.style.cursor = "wait";
+                        messageInputRef.current.setAttribute("disabled", true);
+                        uploadBytesResumable(
+                          ref(storage, `images/${currentDMId + file}`),
+                          uploadFile
                         )
-                        .then((data) => addMessage(messageInput, data))
-                        .then(() => {
-                          messageInputRef.current.removeAttribute("disabled");
-                          entireSectionRef.current.style.cursor = "auto";
-                        });
+                          .then(() =>
+                            getDownloadURL(
+                              ref(storage, `images/${currentDMId + file}`)
+                            )
+                          )
+                          .then((data) => addMessage(messageInput, data))
+                          .then(() => {
+                            messageInputRef.current.removeAttribute("disabled");
+                            entireSectionRef.current.style.cursor = "auto";
+                          });
+                      }
                     }
-                  }
-                  if (uploadFile === null) {
-                    if (messages === undefined) {
-                      addFirstMessage(messageInput);
-                    } else {
-                      addMessage(messageInput);
+                    if (uploadFile === null) {
+                      if (messages === undefined) {
+                        addFirstMessage(messageInput);
+                      } else {
+                        addMessage(messageInput);
+                      }
                     }
-                  }
-                  updateDmList();
-                  setMessageInput("");
-                  setFilePath("");
-                  setFile("");
-                  setUploadFile(null);
-                }}
-              >
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  id="message-image"
-                  style={{ display: "none" }}
-                  onChange={(e) => {
-                    setFile(e.target.files[0].name);
-                    setFilePath(URL.createObjectURL(e.target.files[0]));
-                    setUploadFile(e.target.files[0]);
+                    updateDmList();
+                    setMessageInput("");
+                    setFilePath("");
+                    setFile("");
+                    setUploadFile(null);
                   }}
-                ></input>
-                <label htmlFor="message-image">
-                  <img
-                    className="add-file-to-message"
-                    src="https://cdn-icons-png.flaticon.com/512/6520/6520100.png"
-                    alt="add file"
-                  />
-                </label>
-                <input
-                  placeholder={placeholder}
-                  value={messageInput}
-                  onChange={(e) => setMessageInput(e.target.value)}
-                  className="message-input"
-                  ref={messageInputRef}
-                ></input>
-                <button type="submit" style={{ display: "none" }}></button>
-              </form>
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    id="message-image"
+                    style={{ display: "none" }}
+                    onChange={(e) => {
+                      setFile(e.target.files[0].name);
+                      setFilePath(URL.createObjectURL(e.target.files[0]));
+                      setUploadFile(e.target.files[0]);
+                    }}
+                  ></input>
+                  <label htmlFor="message-image">
+                    <img
+                      className="add-file-to-message"
+                      src="https://cdn-icons-png.flaticon.com/512/6520/6520100.png"
+                      alt="add file"
+                    />
+                  </label>
+                  <input
+                    placeholder={placeholder}
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                    className="message-input"
+                    ref={messageInputRef}
+                  ></input>
+                  <button type="submit" style={{ display: "none" }}></button>
+                </form>
+              )}
             </div>
           </section>
           <section ref={userProfileRef} className="user-dm-info-section">

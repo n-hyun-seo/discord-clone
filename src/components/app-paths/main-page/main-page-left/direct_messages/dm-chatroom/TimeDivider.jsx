@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
 import MyMessage from "./MyMessage";
 import OpponentMessage from "./OpponentMessage";
+import BlockedMessage from "./BlockedMessage";
 
 export default function TimeDivider(props) {
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
@@ -21,6 +22,19 @@ export default function TimeDivider(props) {
           username={props.userUsername}
           photoURL={props.userPhotoURL}
           timestamp={props.timestamp}
+          year={props.year}
+          month={props.month}
+          day={props.day}
+          file={props.file}
+        />
+      ) : props.sentBy !== currentUserUid && props.isBlocked === true ? (
+        <BlockedMessage
+          time={props.time}
+          messageContent={props.messageContent}
+          sentBy={props.sentBy}
+          timestamp={props.timestamp}
+          username={props.opponentUsername}
+          photoURL={props.opponentPhotoURL}
           year={props.year}
           month={props.month}
           day={props.day}

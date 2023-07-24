@@ -2430,6 +2430,38 @@ body {
   align-items: center;
 }
 
+.block-x {
+  width: 12px;
+  height: 12px;
+  filter: brightness(90%);
+  margin-left: 15px;
+}
+
+.blocked-messages {
+  margin-left: 28px;
+  color: #a2a8b0;
+}
+
+.message-input-container.blocked {
+  background-color: rgb(31, 31, 31);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 50px;
+}
+
+.message-input-container.blocked button {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.blocked-warning {
+  font-family: ggsansSB;
+  color: white;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
