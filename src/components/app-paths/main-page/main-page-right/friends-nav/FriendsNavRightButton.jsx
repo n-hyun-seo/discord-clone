@@ -31,10 +31,8 @@ export default function FriendsNavRightButton(props) {
           if (props.reference !== "") {
             if (showProfile) {
               props.reference.current.style.width = "330px";
-            
             } else if (!showProfile) {
               props.reference.current.style.width = "0px";
-             
             }
           }
         }}

@@ -80,7 +80,7 @@ export default function UserDM() {
       async (docu) => {
         if (run) {
           setMessages(docu?.data()?.messageHistory);
-          setTimeout(scroll, 800);
+          setTimeout(scroll, 500);
         }
       }
     );
@@ -402,7 +402,7 @@ export default function UserDM() {
           <p className="dm-header-user-name">{opponentData?.username}</p>
         </div>
         <div className="friends-right-side">
-          <FriendsNavRightButton
+          {/* <FriendsNavRightButton
             containerClass="help-container"
             childClass="pin"
             ImgUrl="https://images.vexels.com/media/users/3/131686/isolated/preview/95d310073411ab523262be9cb43023fa-paper-pin-icon.png"
@@ -433,7 +433,7 @@ export default function UserDM() {
             ImgUrl="https://www.freeiconspng.com/thumbs/help-icon/help-icon-12.png"
             alt="Help"
             reference=""
-          />
+          /> */}
         </div>
       </div>
       <section className="friends-content">

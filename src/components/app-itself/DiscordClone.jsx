@@ -130,7 +130,7 @@ export default function DiscordClone() {
                           serverTitle="Add A Server"
                         />
                       </div>
-                      <button
+                      {/* <button
                         className="sign-out"
                         onClick={() => {
                           signOut(auth);
@@ -140,7 +140,7 @@ export default function DiscordClone() {
                           src="https://icones.pro/wp-content/uploads/2021/06/icone-deconnexion-deconnexion-rouge.png"
                           alt="sign out"
                         ></img>
-                      </button>
+                      </button> */}
                     </nav>
 
                     <Routes>
