@@ -505,7 +505,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 100%;
+  height: 50px;
 }
 
 .friends {
@@ -670,12 +670,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
 .logo-container {
   width: 100%;
-  height: 9%;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2033,6 +2032,8 @@ a {
   height: 100%;
   background-image: url("https://images.alphacoders.com/129/1291249.png");
   background-size: cover;
+
+  overflow: hidden;
 }
 
 .log-in-box {
@@ -2481,9 +2482,9 @@ a {
   cursor: pointer;
 }
 
-@media screen and (max-width: 480px) {
-  .log-in-page {
-    overflow: hidden;
+@media (max-width: 480px) {
+  body::-webkit-scrollbar {
+    display: none;
   }
 }
 
