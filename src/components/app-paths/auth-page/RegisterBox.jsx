@@ -87,6 +87,12 @@ export default function RegisterBox(props) {
         className="log-in-form"
         onSubmit={(e) => {
           e.preventDefault();
+          if (uploadFile === null) {
+            createAccount(
+              "https://firebasestorage.googleapis.com/v0/b/discord-clone-bd531.appspot.com/o/discordgrey.png?alt=media&token=827d2860-6b19-4789-948f-25e77d1c11f4"
+            ).then(() => checkLoggedIn());
+            return;
+          }
           uploadBytesResumable(ref(storage, `pfp/${file}`), uploadFile)
             .then(() => getDownloadURL(ref(storage, `pfp/${file}`)))
             .then((data) => {
