@@ -1,4 +1,4 @@
-import { auth, db } from "../../../config/firebase";
+import { auth, db, storage } from "../../../config/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -7,6 +7,7 @@ import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { CurrentUserUidContext } from "../../../context/CurrentUserUidContext";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export default function RegisterBox(props) {
   let navigate = useNavigate();
@@ -15,6 +16,9 @@ export default function RegisterBox(props) {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [signInFail, setSignInFail] = useState(false);
+  const [file, setFile] = useState("");
+  const [filePath, setFilePath] = useState("");
+  const [uploadFile, setUploadFile] = useState(null);
 
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
@@ -22,8 +26,7 @@ export default function RegisterBox(props) {
 
   props.setRegisterRef(registerBoxRef);
 
-  async function createAccount(e) {
-    e.preventDefault();
+  async function createAccount(url = "") {
     try {
       const data = await createUserWithEmailAndPassword(auth, email, password);
       let userInfo = {
@@ -40,7 +43,7 @@ export default function RegisterBox(props) {
           email: data.user.email,
           username: username,
           uid: data.user.uid,
-          photoURL: "",
+          photoURL: url,
           statusMessage: "",
           onlineStatus: "online",
           aboutMe: "",
@@ -54,7 +57,7 @@ export default function RegisterBox(props) {
           email: data.user.email,
           username: username,
           uid: data.user.uid,
-          photoURL: "",
+          photoURL: url,
           statusMessage: "",
           onlineStatus: "online",
           aboutMe: "",
@@ -83,7 +86,13 @@ export default function RegisterBox(props) {
       <form
         className="log-in-form"
         onSubmit={(e) => {
-          createAccount(e).then(() => checkLoggedIn());
+          e.preventDefault();
+          uploadBytesResumable(ref(storage, `pfp/${file}`), uploadFile)
+            .then(() => getDownloadURL(ref(storage, `pfp/${file}`)))
+            .then((data) => {
+              createAccount(data);
+            })
+            .then(() => checkLoggedIn());
         }}
       >
         <label htmlFor="email" className="email-label">
@@ -140,6 +149,44 @@ export default function RegisterBox(props) {
           }}
           required
         ></input>
+        <p className="pfp-label">PROFILE PICTURE</p>
+        <div className="register-box-pfp-container">
+          <input
+            type="file"
+            id="register-file"
+            accept="image/png, image/jpeg, image/gif"
+            onChange={(e) => {
+              setFile(e.target.files[0].name);
+              setFilePath(URL.createObjectURL(e.target.files[0]));
+              setUploadFile(e.target.files[0]);
+            }}
+          />
+          <label htmlFor="register-file" className="register-pfp">
+            <img
+              src="https://cdn4.iconfinder.com/data/icons/documents-36/25/add-picture-512.png"
+              alt="Add pfp"
+            />
+          </label>
+          <p className="filename-pfp">{file}</p>
+        </div>
+        {uploadFile && (
+          <div className="preview-pic-box">
+            <p className="pfp-label">PREVIEW</p>
+            <div className="pfp-container preview">
+              <div
+                className="pfp-circle"
+                style={{
+                  backgroundImage: `url("${filePath}")`,
+                }}
+              >
+                <div className="online-status-outer preview">
+                  <div className="online-status"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <button type="submit" className="log-in-button">
           Continue
         </button>

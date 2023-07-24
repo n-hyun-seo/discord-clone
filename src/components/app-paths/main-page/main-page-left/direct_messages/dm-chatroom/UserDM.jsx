@@ -79,7 +79,7 @@ export default function UserDM() {
       async (docu) => {
         if (run) {
           setMessages(docu?.data()?.messageHistory);
-          setTimeout(scroll, 600);
+          setTimeout(scroll, 800);
         }
       }
     );
