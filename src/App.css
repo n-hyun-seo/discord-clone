@@ -2022,7 +2022,7 @@ a {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url("https://images.alphacoders.com/129/1291249.png");
   background-size: cover;
 
@@ -2496,10 +2496,11 @@ a {
   }
 
   .left {
-    grid-template-rows: repeat(24, 1fr);
+    grid-template-rows: repeat(25, 1fr);
     grid-template-areas:
       "sbc"
       "fc"
+      "dmc"
       "dmc"
       "dmc"
       "dmc"
@@ -2525,10 +2526,11 @@ a {
   }
 
   .right {
-    grid-template-rows: repeat(24, 1fr);
+    grid-template-rows: repeat(25, 1fr);
 
     grid-template-areas:
       "fn"
+      "fc"
       "fc"
       "fc"
       "fc"
@@ -2555,7 +2557,7 @@ a {
   }
 
   .friends-list-section {
-    grid-template-rows: repeat(24, 1fr);
+    grid-template-rows: repeat(25, 1fr);
 
     grid-template-areas:
       "fsc"
@@ -2581,8 +2583,22 @@ a {
       "ftc"
       "ftc"
       "ftc"
+      "ftc"
       "ftc";
   }
+
+  .log-in-box {
+    transform: scale(150%);
+    margin-right: 50px;
+  }
+
+  .register-box {
+    transform: scale(150%);
+    margin-right: 50px;
+    margin-left: -30px;
+  }
+
+  
 }
 
 ::-webkit-scrollbar {
