@@ -2462,6 +2462,27 @@ body {
   color: white;
 }
 
+.sign-out img {
+  width: 25px;
+  filter: brightness(120%);
+}
+
+.sign-out {
+  background-color: transparent;
+  border: none;
+  position: fixed;
+  bottom: 10px;
+  left: 12px;
+  border-radius: 3px;
+  padding-top: 5px;
+  padding-right: 10px;
+}
+
+.sign-out:hover {
+  filter: brightness(300%);
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

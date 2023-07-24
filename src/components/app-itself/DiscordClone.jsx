@@ -14,7 +14,7 @@ import { serversList } from "../main-nav/servers/randomServersList";
 import AddServerButton from "../main-nav/server-functionality/AddServerButton";
 import { CurrentShowProfileContext } from "../../context/CurrentShowProfileContext";
 import { auth, db } from "../../config/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
 import {
@@ -130,6 +130,17 @@ export default function DiscordClone() {
                           serverTitle="Add A Server"
                         />
                       </div>
+                      <button
+                        className="sign-out"
+                        onClick={() => {
+                          signOut(auth);
+                        }}
+                      >
+                        <img
+                          src="https://icones.pro/wp-content/uploads/2021/06/icone-deconnexion-deconnexion-rouge.png"
+                          alt="sign out"
+                        ></img>
+                      </button>
                     </nav>
 
                     <Routes>

@@ -17,7 +17,7 @@ export function App() {
       <div className="App">
         <LoadingPage />
       </div>
-      <ReactQueryDevtools initialIsOpen={true} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
