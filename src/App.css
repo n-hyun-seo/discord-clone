@@ -2475,12 +2475,16 @@ a {
   cursor: pointer;
 }
 
-@media (max-width: 600px) {
-  body::-webkit-scrollbar {
-    display: none;
-  }
-  .friends-active-now {
-    display: none;
+@media (max-width: 330px) {
+}
+
+@media (max-width: 376px) {
+}
+
+@media (max-width: 768px) {
+  .user-name-dm-unhovered,
+  .user-name-dm-hovered {
+    margin-left: -5%;
   }
 
   .friends-list-bottom-container {
@@ -2491,64 +2495,71 @@ a {
     width: 100%;
   }
 
-  .friends-right-side {
+  .friends-right-side,
+  .hover-text,
+  .friends-active-now,
+  body::-webkit-scrollbar,
+  .linkToFriends,
+  .user-dm-info-section,
+  .user-info-container,
+  .friends-left-side,
+  .friends-right-side, .add-sign, .dm-delete-button{
     display: none;
+  }
+
+  .other-servers {
+    height: 100%;
   }
 
   .servers {
-    width: 18vw;
-  }
-
-  .logo-container,
-  .logo-container-2,
-  .logo-container-2.add-a-server {
-    height: 10vh;
-  }
-
-  .logo-button-highlighted,
-  .logo-button-highlighted-2,
-  .logo-button-hovered,
-  .logo-button-unhovered,
-  .logo-button-unhovered-2,
-  .logo-button-hovered-2,
-  .logo-button-unhovered-aas {
-    width: 80%;
-  }
-
-  .hover-text {
-    display: none;
+    width: 65px;
   }
 
   .white-blob-highlighted {
-    height: 6%;
+    height: 6.5%;
     animation: white-blob-touched;
     animation-duration: 0.2s;
+    margin-left: -0.4%;
   }
 
-  .white-blob-hovered, .white-blob-unhovered, .white-blob-unhovered-2, .white-blob-gone {
+  .personal-dm .pfp-container {
+    margin-left: -20.5%;
+  }
+
+  .white-blob-hovered,
+  .white-blob-unhovered,
+  .white-blob-unhovered-2,
+  .white-blob-gone {
     animation: none;
   }
-  .logo-container img {
-    width: 50%;
+
+ 
+
+  .dm-header {
+    color: white;
+    width: 90%;
+    margin-bottom: 2%;
   }
 
   .left {
-    grid-template-rows: repeat(9, 1fr);
+    grid-template-rows: repeat(11, 1fr);
     grid-template-areas:
       "sbc"
-      "fc"
-      "dmc"
-         "dmc"
-            "dmc"
       "dmc"
       "dmc"
       "dmc"
-      "uic";
-    width: 90vw;
+      "dmc"
+      "dmc"
+      "dmc"
+      "dmc"
+      "dmc"
+      "dmc"
+      "dmc";
+    width: 85vw;
   }
 
   .right {
-    grid-template-rows: repeat(25, 1fr);
+    grid-template-rows: repeat(11, 1fr);
 
     grid-template-areas:
       "fn"
@@ -2561,21 +2572,8 @@ a {
       "fc"
       "fc"
       "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
-      "fc"
       "fc";
+    width: 100vw;
   }
 
   .friends-list-section {
@@ -2619,9 +2617,6 @@ a {
     margin-right: 50px;
     margin-left: -30px;
   }
-
-  .App {
-  }
 }
 
 ::-webkit-scrollbar {
@@ -2640,9 +2635,10 @@ a {
 
 @keyframes mobile-white-blob-highlight {
   from {
-    height: 0%
-  } to {
-    height: 6%
+    height: 0%;
+  }
+  to {
+    height: 6%;
   }
 }
 
