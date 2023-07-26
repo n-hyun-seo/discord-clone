@@ -2475,7 +2475,7 @@ a {
   cursor: pointer;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 600px) {
   body::-webkit-scrollbar {
     display: none;
   }
@@ -2496,7 +2496,7 @@ a {
   }
 
   .servers {
-    width: 14vw;
+    width: 18vw;
   }
 
   .logo-container,
@@ -2512,7 +2512,7 @@ a {
   .logo-button-unhovered-2,
   .logo-button-hovered-2,
   .logo-button-unhovered-aas {
-    width: 10vw;
+    width: 80%;
   }
 
   .hover-text {
@@ -2533,16 +2533,18 @@ a {
   }
 
   .left {
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(9, 1fr);
     grid-template-areas:
       "sbc"
       "fc"
       "dmc"
+         "dmc"
+            "dmc"
       "dmc"
       "dmc"
       "dmc"
       "uic";
-    width: 100vw;
+    width: 90vw;
   }
 
   .right {
