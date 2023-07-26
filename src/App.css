@@ -2495,8 +2495,45 @@ a {
     display: none;
   }
 
+  .servers {
+    width: 14vw;
+  }
+
+  .logo-container,
+  .logo-container-2,
+  .logo-container-2.add-a-server {
+    height: 10vh;
+  }
+
+  .logo-button-highlighted,
+  .logo-button-highlighted-2,
+  .logo-button-hovered,
+  .logo-button-unhovered,
+  .logo-button-unhovered-2,
+  .logo-button-hovered-2,
+  .logo-button-unhovered-aas {
+    width: 10vw;
+  }
+
+  .hover-text {
+    display: none;
+  }
+
+  .white-blob-highlighted {
+    height: 6%;
+    animation: white-blob-touched;
+    animation-duration: 0.2s;
+  }
+
+  .white-blob-hovered, .white-blob-unhovered, .white-blob-unhovered-2, .white-blob-gone {
+    animation: none;
+  }
+  .logo-container img {
+    width: 50%;
+  }
+
   .left {
-    grid-template-rows: repeat(25, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-template-areas:
       "sbc"
       "fc"
@@ -2504,25 +2541,8 @@ a {
       "dmc"
       "dmc"
       "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
-      "dmc"
       "uic";
+    width: 100vw;
   }
 
   .right {
@@ -2598,7 +2618,8 @@ a {
     margin-left: -30px;
   }
 
-  
+  .App {
+  }
 }
 
 ::-webkit-scrollbar {
@@ -2613,6 +2634,14 @@ a {
 
 .hidden {
   visibility: hidden;
+}
+
+@keyframes mobile-white-blob-highlight {
+  from {
+    height: 0%
+  } to {
+    height: 6%
+  }
 }
 
 @keyframes discord-button-hovered-text {
@@ -2672,6 +2701,15 @@ a {
   }
   to {
     height: 40px;
+  }
+}
+
+@keyframes white-blob-touched {
+  from {
+    height: 0;
+  }
+  to {
+    height: 6%;
   }
 }
 
