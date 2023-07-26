@@ -2512,14 +2512,13 @@ a {
   }
 
   .servers {
-    width: 65px;
+    width: 70px;
   }
 
   .white-blob-highlighted {
     height: 6.5%;
     animation: white-blob-touched;
     animation-duration: 0.2s;
-    margin-left: -0.4%;
   }
 
   .personal-dm .pfp-container {
@@ -2541,8 +2540,14 @@ a {
     margin-bottom: 2%;
   }
 
+  .dm-header p {
+    padding-top: 10px;
+  }
+
+  
+
   .left {
-    grid-template-rows: repeat(11, 1fr);
+    grid-template-rows: repeat(13, 1fr);
     grid-template-areas:
       "sbc"
       "dmc"
@@ -2554,8 +2559,10 @@ a {
       "dmc"
       "dmc"
       "dmc"
+      "dmc"
+      "dmc"
       "dmc";
-    width: 85vw;
+    width: 70vw;
   }
 
   .right {
@@ -2616,6 +2623,10 @@ a {
     transform: scale(150%);
     margin-right: 50px;
     margin-left: -30px;
+  }
+
+  .dm-messages::-webkit-scrollbar {
+   width: 8px;
   }
 }
 
