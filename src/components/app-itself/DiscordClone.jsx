@@ -116,7 +116,7 @@ export default function DiscordClone() {
                       })}
 
                       <div className="other-servers">
-                        {serversList.map((server) => {
+                        {/* {serversList.map((server) => {
                           return (
                             <RandomServerButton
                               serverName={server.serverName}
@@ -124,7 +124,7 @@ export default function DiscordClone() {
                               serverTitle={server.serverTitle}
                             />
                           );
-                        })}
+                        })} */}
                         <AddServerButton
                           serverName="addaserver"
                           serverTitle="Add A Server"
