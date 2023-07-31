@@ -79,8 +79,9 @@ export default function UserDM() {
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
       async (docu) => {
         if (run) {
-          setMessages(docu?.data()?.messageHistory);
-          setTimeout(scroll, 300);
+          setMessages(docu?.data()?.messageHistory)
+          setTimeout(scroll, 0); //scroll for text
+          setTimeout(scroll, 700); //scroll for image
         }
       }
     );
