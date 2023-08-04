@@ -34,12 +34,20 @@ export default function MyMessage(props) {
     setMessages(
       (messages[props.messageIndex].messageContent = editMessageValue)
     );
+
     await updateDoc(
       doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
       {
         messageHistory: messages,
       }
-    );
+    ); //update my message history
+
+    await updateDoc(
+      doc(db, "users", props.opponentUid, "dmMessageHistory", props.currentUid),
+      {
+        messageHistory: messages,
+      }
+    ); //update opponent's message history
   }
 
   useEffect(() => {
@@ -50,7 +58,7 @@ export default function MyMessage(props) {
       }
     );
   }, []);
-  
+
   return (
     <div
       className="my-message"
