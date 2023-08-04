@@ -24,7 +24,14 @@ export default function OngoingMessage(props) {
       {
         messageHistory: messages,
       }
-    );
+    ); //update my message history
+
+    await updateDoc(
+      doc(db, "users", props.opponentUid, "dmMessageHistory", props.currentUid),
+      {
+        messageHistory: messages,
+      }
+    ); //update opponent's message history
   }
 
   useEffect(() => {
