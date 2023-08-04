@@ -57,10 +57,12 @@ export default function MyMessage(props) {
           )}
         </div>
       </div>
-      <div className="edit-delete-container">
-        <button>edit</button>
-        <button>delete</button>
-      </div>
+      {hoverState && (
+        <div className="edit-delete-container">
+          <button>edit</button>
+          <button>delete</button>
+        </div>
+      )}
     </div>
   );
 }
