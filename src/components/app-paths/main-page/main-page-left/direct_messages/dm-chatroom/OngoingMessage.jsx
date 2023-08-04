@@ -1,11 +1,15 @@
 import { useRef, useState } from "react";
 import date from "date-and-time";
+import { doc, getDocs } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
 
 export default function OngoingMessage(props) {
   const [hoverState, setHoverState] = useState(false);
 
   const messageRef = useRef();
   const timeRef = useRef();
+
+  
   return (
     <div
       className="ongoing-message-container"
@@ -42,9 +46,9 @@ export default function OngoingMessage(props) {
           </div>
         </div>
       )}
-      {hoverState && (
+      {hoverState === true && props.sentBy === props.currentUid && (
         <div className="edit-delete-container">
-          <button>edit</button>
+          <button >edit</button>
           <button>delete</button>
         </div>
       )}

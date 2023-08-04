@@ -1,8 +1,11 @@
 import { useRef, useState } from "react";
 import date from "date-and-time";
+import { doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "../../../../../../config/firebase";
 
 export default function MyMessage(props) {
   const [hoverState, setHoverState] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const now = new Date();
 
   const hoursMinutes = date.transform(
@@ -13,6 +16,20 @@ export default function MyMessage(props) {
   const dayMonthYear = props.timestamp.slice(0, 16);
 
   const messageRef = useRef();
+
+  async function editMessage() {
+    setIsEditing(false);
+    const snapshot = await getDoc(
+      doc(
+        db,
+        "users",
+        props?.currentUid,
+        "dmMessageHistory",
+        props?.opponentUid
+      )
+    );
+    console.log(snapshot.data().messageHistory[props.messageIndex]);
+  }
   return (
     <div
       className="my-message"
@@ -45,7 +62,12 @@ export default function MyMessage(props) {
                 : dayMonthYear + hoursMinutes}
             </p>
           </div>
-          {props.file === null ? (
+          {isEditing ? (
+            <form onSubmit={editMessage}>
+              <input type="text" value={props.messageContent} />
+              <button type="submit" style={{ display: "none" }}></button>
+            </form>
+          ) : props.file === null ? (
             <p className="first-message">{props.messageContent}</p>
           ) : (
             <div className="message-content-container first">
@@ -59,7 +81,7 @@ export default function MyMessage(props) {
       </div>
       {hoverState && (
         <div className="edit-delete-container">
-          <button>edit</button>
+          <button onClick={() => setIsEditing(true)}>edit</button>
           <button>delete</button>
         </div>
       )}

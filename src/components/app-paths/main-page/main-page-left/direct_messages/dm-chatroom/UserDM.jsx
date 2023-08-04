@@ -79,7 +79,7 @@ export default function UserDM() {
       doc(db, "users", currentUserUid, "dmMessageHistory", currentDMId),
       async (docu) => {
         if (run) {
-          setMessages(docu?.data()?.messageHistory)
+          setMessages(docu?.data()?.messageHistory);
           setTimeout(scroll, 0); //scroll for text
           setTimeout(scroll, 700); //scroll for image
         }
@@ -551,6 +551,9 @@ export default function UserDM() {
                       month={month}
                       day={day}
                       file={message.file}
+                      messageIndex={currentMsgIndex}
+                      opponentUid={currentDMId}
+                      currentUid={currentUserUid}
                     />
                   );
 
@@ -573,6 +576,9 @@ export default function UserDM() {
                       month={month}
                       day={day}
                       file={message.file}
+                      messageIndex={currentMsgIndex}
+                      opponentUid={currentDMId}
+                      currentUid={currentUserUid}
                     />
                   );
 
@@ -601,6 +607,8 @@ export default function UserDM() {
                       message={message.messageContent}
                       timestamp={message.timestamp}
                       file={message.file}
+                      sentBy={message.sentBy}
+                      currentUid={currentUserUid}
                     />
                   );
 
@@ -618,6 +626,9 @@ export default function UserDM() {
                       month={month}
                       day={day}
                       file={message.file}
+                      messageIndex={currentMsgIndex}
+                      opponentUid={currentDMId}
+                      currentUid={currentUserUid}
                     />
                   );
                 }
