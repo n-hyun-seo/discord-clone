@@ -42,6 +42,12 @@ export default function OngoingMessage(props) {
           </div>
         </div>
       )}
+      {hoverState && (
+        <div className="edit-delete-container">
+          <button>edit</button>
+          <button>delete</button>
+        </div>
+      )}
     </div>
   );
 }

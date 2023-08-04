@@ -2245,6 +2245,8 @@ a {
   scroll-margin-top: 200px;
 }
 
+
+
 .after-first-row p,
 .first-message {
   padding-top: 3.5px;
@@ -2297,6 +2299,7 @@ a {
   align-items: center;
   padding-top: 2px;
   padding-bottom: 2px;
+  position: relative;
 }
 
 .ongoing-message-time {
