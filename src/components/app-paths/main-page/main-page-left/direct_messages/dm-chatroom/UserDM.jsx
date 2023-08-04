@@ -554,6 +554,7 @@ export default function UserDM() {
                       messageIndex={currentMsgIndex}
                       opponentUid={currentDMId}
                       currentUid={currentUserUid}
+                      messages={messages}
                     />
                   );
 
@@ -579,6 +580,7 @@ export default function UserDM() {
                       messageIndex={currentMsgIndex}
                       opponentUid={currentDMId}
                       currentUid={currentUserUid}
+                      messages={messages}
                     />
                   );
 
@@ -609,6 +611,9 @@ export default function UserDM() {
                       file={message.file}
                       sentBy={message.sentBy}
                       currentUid={currentUserUid}
+                      messageIndex={currentMsgIndex}
+                      opponentUid={currentDMId}
+                      messages={messages}
                     />
                   );
 
@@ -646,6 +651,7 @@ export default function UserDM() {
                       month={month}
                       day={day}
                       file={message.file}
+                      messages={messages}
                     />
                   );
                 }

@@ -1,11 +1,23 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import date from "date-and-time";
-import { doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  where,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 
 export default function MyMessage(props) {
   const [hoverState, setHoverState] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [editMessageValue, setEditMessageValue] = useState(
+    props.messageContent
+  );
+  const [messages, setMessages] = useState();
   const now = new Date();
 
   const hoursMinutes = date.transform(
@@ -19,17 +31,26 @@ export default function MyMessage(props) {
 
   async function editMessage() {
     setIsEditing(false);
-    const snapshot = await getDoc(
-      doc(
-        db,
-        "users",
-        props?.currentUid,
-        "dmMessageHistory",
-        props?.opponentUid
-      )
+    setMessages(
+      (messages[props.messageIndex].messageContent = editMessageValue)
     );
-    console.log(snapshot.data().messageHistory[props.messageIndex]);
+    await updateDoc(
+      doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
+      {
+        messageHistory: messages,
+      }
+    );
   }
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
+      async (docu) => {
+        setMessages(docu?.data()?.messageHistory);
+      }
+    );
+  }, []);
+  
   return (
     <div
       className="my-message"
@@ -64,7 +85,11 @@ export default function MyMessage(props) {
           </div>
           {isEditing ? (
             <form onSubmit={editMessage}>
-              <input type="text" value={props.messageContent} />
+              <input
+                type="text"
+                value={editMessageValue}
+                onChange={(e) => setEditMessageValue(e.target.value)}
+              />
               <button type="submit" style={{ display: "none" }}></button>
             </form>
           ) : props.file === null ? (

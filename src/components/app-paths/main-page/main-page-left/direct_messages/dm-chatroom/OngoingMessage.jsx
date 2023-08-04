@@ -1,15 +1,41 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import date from "date-and-time";
-import { doc, getDocs } from "firebase/firestore";
+import { doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
 
 export default function OngoingMessage(props) {
   const [hoverState, setHoverState] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editMessageValue, setEditMessageValue] = useState(
+    props.message
+  );
+  const [messages, setMessages] = useState();
 
   const messageRef = useRef();
   const timeRef = useRef();
 
-  
+  async function editMessage() {
+    setIsEditing(false);
+    setMessages(
+      (messages[props.messageIndex].messageContent = editMessageValue)
+    );
+    await updateDoc(
+      doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
+      {
+        messageHistory: messages,
+      }
+    );
+  }
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
+      async (docu) => {
+        setMessages(docu?.data()?.messageHistory);
+      }
+    );
+  }, []);
+
   return (
     <div
       className="ongoing-message-container"
@@ -28,7 +54,16 @@ export default function OngoingMessage(props) {
       <p className="ongoing-message-time" ref={timeRef}>
         {date.transform(props.timestamp.slice(16, 21), "HH:mm", "hh:mm A")}
       </p>
-      {props.file === null ? (
+      {isEditing && props.sentBy === props.currentUid ? (
+        <form onSubmit={editMessage}>
+          <input
+            type="text"
+            value={editMessageValue}
+            onChange={(e) => setEditMessageValue(e.target.value)}
+          />
+          <button type="submit" style={{ display: "none" }}></button>
+        </form>
+      ) : props.file === null ? (
         <p className="ongoing-message">{props.message}</p>
       ) : (
         <div className="message-content-container">
@@ -48,7 +83,7 @@ export default function OngoingMessage(props) {
       )}
       {hoverState === true && props.sentBy === props.currentUid && (
         <div className="edit-delete-container">
-          <button >edit</button>
+          <button onClick={() => setIsEditing(true)}>edit</button>
           <button>delete</button>
         </div>
       )}
