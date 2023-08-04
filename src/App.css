@@ -2205,6 +2205,12 @@ a {
   margin: auto;
   margin-top: 20px;
   padding-left: 3px;
+  position: relative;
+}
+
+.edit-delete-container {
+  position: absolute;
+  right: 0px;
 }
 
 .pfp-container.my-left {
