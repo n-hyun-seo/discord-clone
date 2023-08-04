@@ -6,9 +6,7 @@ import { db } from "../../../../../../config/firebase";
 export default function OngoingMessage(props) {
   const [hoverState, setHoverState] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editMessageValue, setEditMessageValue] = useState(
-    props.message
-  );
+  const [editMessageValue, setEditMessageValue] = useState(props.message);
   const [messages, setMessages] = useState();
 
   const messageRef = useRef();
@@ -19,7 +17,8 @@ export default function OngoingMessage(props) {
     setMessages(
       (messages[props.messageIndex].messageContent = editMessageValue)
     );
-    
+    setMessages((messages[props.messageIndex].edited = true));
+
     await updateDoc(
       doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
       {
@@ -71,6 +70,10 @@ export default function OngoingMessage(props) {
           />
           <button type="submit" style={{ display: "none" }}></button>
         </form>
+      ) : props.edited === true && props.file === null ? (
+        <p className="first-message">
+          {props.messageContent} <span className="edited-text">(edited)</span>
+        </p>
       ) : props.file === null ? (
         <p className="ongoing-message">{props.message}</p>
       ) : (

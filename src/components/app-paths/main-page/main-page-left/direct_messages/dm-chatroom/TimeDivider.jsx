@@ -30,6 +30,7 @@ export default function TimeDivider(props) {
           opponentUid={props.opponentUid}
           currentUid={props.currentUid}
           messages={props.messages}
+          edited={props.edited}
         />
       ) : props.sentBy !== currentUserUid && props.isBlocked === true ? (
         <BlockedMessage
@@ -56,6 +57,7 @@ export default function TimeDivider(props) {
           month={props.month}
           day={props.day}
           file={props.file}
+          edited={props.edited}
         />
       )}
     </div>

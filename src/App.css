@@ -2479,6 +2479,11 @@ a {
   padding-right: 10px;
 }
 
+.edited-text {
+  font-size: 10px;
+  color: var(--font-color)
+}
+
 .sign-out:hover {
   filter: brightness(300%);
   cursor: pointer;

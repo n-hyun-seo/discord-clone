@@ -514,6 +514,7 @@ export default function UserDM() {
               </div>
 
               {messages?.map((message) => {
+                
                 let currentMsgIndex = messages.indexOf(message);
                 let previousMsgIndex = currentMsgIndex - 1;
 
@@ -555,6 +556,7 @@ export default function UserDM() {
                       opponentUid={currentDMId}
                       currentUid={currentUserUid}
                       messages={messages}
+                      edited={message.edited}
                     />
                   );
 
@@ -581,6 +583,7 @@ export default function UserDM() {
                       opponentUid={currentDMId}
                       currentUid={currentUserUid}
                       messages={messages}
+                      edited={message.edited}
                     />
                   );
 
@@ -614,6 +617,7 @@ export default function UserDM() {
                       messageIndex={currentMsgIndex}
                       opponentUid={currentDMId}
                       messages={messages}
+                      edited={message.edited}
                     />
                   );
 
@@ -634,6 +638,7 @@ export default function UserDM() {
                       messageIndex={currentMsgIndex}
                       opponentUid={currentDMId}
                       currentUid={currentUserUid}
+                      edited={message.edited}
                     />
                   );
                 }
@@ -652,6 +657,7 @@ export default function UserDM() {
                       day={day}
                       file={message.file}
                       messages={messages}
+                      edited={message.edited}
                     />
                   );
                 }

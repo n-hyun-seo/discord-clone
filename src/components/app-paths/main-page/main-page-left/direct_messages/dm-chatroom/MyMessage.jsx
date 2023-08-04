@@ -34,6 +34,8 @@ export default function MyMessage(props) {
     setMessages(
       (messages[props.messageIndex].messageContent = editMessageValue)
     );
+    setMessages((messages[props.messageIndex].edited = true));
+    console.log(messages);
 
     await updateDoc(
       doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
@@ -100,6 +102,8 @@ export default function MyMessage(props) {
               />
               <button type="submit" style={{ display: "none" }}></button>
             </form>
+          ) : props.edited === true && props.file === null ? (
+            <p className="first-message">{props.messageContent} <span className="edited-text">(edited)</span></p>
           ) : props.file === null ? (
             <p className="first-message">{props.messageContent}</p>
           ) : (
