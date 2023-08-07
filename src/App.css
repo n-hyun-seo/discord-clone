@@ -2491,10 +2491,10 @@ a {
 
 .delete-message-prompt {
   z-index: 100;
-  width: 500px;
-  left: 35%;
+
+  left: 40%;
+  top: 35%;
   position: fixed;
-  margin: auto;
   background-color: red;
   display: flex;
   flex-direction: column;

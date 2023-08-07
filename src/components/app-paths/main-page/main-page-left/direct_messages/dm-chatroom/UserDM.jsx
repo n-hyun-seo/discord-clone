@@ -611,6 +611,7 @@ export default function UserDM() {
                     <OngoingMessage
                       message={message.messageContent}
                       timestamp={message.timestamp}
+                      time={date1}
                       file={message.file}
                       sentBy={message.sentBy}
                       currentUid={currentUserUid}
@@ -618,6 +619,8 @@ export default function UserDM() {
                       opponentUid={currentDMId}
                       messages={messages}
                       edited={message.edited}
+                      photoURL={currentUserData?.photoURL}
+                      username={currentUserData?.username}
                     />
                   );
 
