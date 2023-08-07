@@ -2250,6 +2250,11 @@ a {
   display: flex;
   margin-top: -3px;
   flex-direction: column;
+  width: 100%;
+}
+
+.my-right-container {
+  width: 93%;
 }
 
 .first-message {
@@ -2257,7 +2262,7 @@ a {
 }
 
 .ongoing-message {
-  width: 100%;
+  max-width: 100%;
   padding-left: 13px;
   scroll-margin-top: 200px;
 }
@@ -2317,6 +2322,7 @@ a {
   padding-top: 2px;
   padding-bottom: 2px;
   position: relative;
+  max-width: 40%;
 }
 
 .ongoing-message-time {
@@ -2515,6 +2521,28 @@ a {
   background-color: red;
   display: flex;
   flex-direction: column;
+}
+
+.edit-text-input {
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin-left: 15px;
+  margin-top: 5px;
+  height: 40px;
+  padding-left: 15px;
+  /* background-color: transparent; */
+  background-color: #2b2d31;
+  color: white;
+  font-size: 16px;
+}
+
+.edit-text-input:focus {
+  outline: none;
+}
+
+.edit-text-form {
+  width: 100%;
 }
 
 @media (max-width: 330px) {

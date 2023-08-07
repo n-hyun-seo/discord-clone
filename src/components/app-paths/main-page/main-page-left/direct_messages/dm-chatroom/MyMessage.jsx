@@ -88,10 +88,12 @@ export default function MyMessage(props) {
       className="my-message"
       ref={messageRef}
       onMouseEnter={(e) => {
+        if (isEditing) return;
         if (!isDeleting) {
           setHoverState(true);
           messageRef.current.style.backgroundColor = "#292b2f";
         }
+       
       }}
       onMouseLeave={(e) => {
         setHoverState(false);
@@ -118,9 +120,10 @@ export default function MyMessage(props) {
             </p>
           </div>
           {isEditing && props.file !== null ? (
-            <form onSubmit={editMessage}>
+            <form onSubmit={editMessage} className="edit-text-form">
               <input
                 type="text"
+                className="edit-text-input"
                 value={editMessageValue}
                 onChange={(e) => setEditMessageValue(e.target.value)}
                 onKeyDown={(e) => {
@@ -141,9 +144,10 @@ export default function MyMessage(props) {
               <button type="submit" style={{ display: "none" }}></button>
             </form>
           ) : isEditing ? (
-            <form onSubmit={editMessage}>
+            <form onSubmit={editMessage} className="edit-text-form">
               <input
                 type="text"
+                className="edit-text-input"
                 value={editMessageValue}
                 onChange={(e) => setEditMessageValue(e.target.value)}
                 onKeyDown={(e) => {
@@ -196,7 +200,13 @@ export default function MyMessage(props) {
       </div>
       {hoverState && (
         <div className="edit-delete-container">
-          <button onClick={() => setIsEditing(true)}>edit</button>
+          <button
+            onClick={() => {
+              setIsEditing(true);
+            }}
+          >
+            edit
+          </button>
           <button onClick={() => setIsDeleting(true)}>delete</button>
         </div>
       )}
