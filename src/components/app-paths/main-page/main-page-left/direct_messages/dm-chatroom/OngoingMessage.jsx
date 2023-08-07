@@ -95,7 +95,19 @@ export default function OngoingMessage(props) {
       <p className="ongoing-message-time" ref={timeRef}>
         {date.transform(props.timestamp.slice(16, 21), "HH:mm", "hh:mm A")}
       </p>
-      {isEditing && props.sentBy === props.currentUid ? (
+      {isEditing && props.file !== null && props.sentBy === props.currentUid ? (
+        <form onSubmit={editMessage}>
+          <input
+            type="text"
+            value={editMessageValue}
+            onChange={(e) => setEditMessageValue(e.target.value)}
+          />
+          <div className="dm-image-container first">
+            <img className="dm-image" src={props.file} alt="show" />
+          </div>
+          <button type="submit" style={{ display: "none" }}></button>
+        </form>
+      ) : isEditing && props.sentBy === props.currentUid ? (
         <form onSubmit={editMessage}>
           <input
             type="text"
@@ -110,6 +122,25 @@ export default function OngoingMessage(props) {
         </p>
       ) : props.file === null ? (
         <p className="ongoing-message">{props.message}</p>
+      ) : props.file !== null &&
+        props.edited === true &&
+        props.sentBy === props.currentUid ? (
+        <div className="message-content-container first">
+          <p>
+            {props.message}
+            <span className="edited-text">(edited)</span>
+          </p>
+          <div className="dm-image-container first">
+            {props?.file?.includes("mp4") ? (
+              <video className="dm-video" controls>
+                <source src={props.file} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img className="dm-image" src={props.file} alt="show" />
+            )}
+          </div>
+        </div>
       ) : (
         <div className="message-content-container">
           <p className="dm-image-text">{props.message}</p>
@@ -168,7 +199,18 @@ export default function OngoingMessage(props) {
                     <div className="message-content-container first">
                       <p>{props.message}</p>
                       <div className="dm-image-container first">
-                        <img className="dm-image" src={props.file} alt="show" />
+                        {props?.file?.includes("mp4") ? (
+                          <video className="dm-video" controls>
+                            <source src={props.file} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                        ) : (
+                          <img
+                            className="dm-image"
+                            src={props.file}
+                            alt="show"
+                          />
+                        )}
                       </div>
                     </div>
                   )}
