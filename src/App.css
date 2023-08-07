@@ -2123,6 +2123,13 @@ a {
   font-size: 14px;
 }
 
+.disclaimer-text {
+  margin-top: 10px;
+  color: #e7867d;
+  font-size: 12px;
+  font-family: ggsansSB;
+}
+
 .register-button {
   background-color: transparent;
   border: none;

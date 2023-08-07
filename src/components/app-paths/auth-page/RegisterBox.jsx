@@ -210,6 +210,7 @@ export default function RegisterBox(props) {
             Already have an account?
           </button>
         </div>
+        <p className="disclaimer-text">DISCLAIMER: This personal project that has nothing to do with actual Discord.</p>
       </form>
     </div>
   );
