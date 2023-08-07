@@ -51,8 +51,8 @@ export default function BlockedPage(props) {
             />
           ))
         ) : listToUse?.length === 0 && props.inputValue === "" ? (
-          <p className="no-friends-found none-added">
-            No blocked user found. Here's Wumpus for now.
+          <p className="no-friends-found none-blocked">
+            You can't unblock the Wumpus.
           </p>
         ) : (
           <p className="no-friends-found">

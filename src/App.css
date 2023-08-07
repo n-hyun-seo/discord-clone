@@ -1550,6 +1550,11 @@ a {
   background-image: url(./images/hereswumpus.JPG);
 }
 
+.no-friends-found.none-blocked {
+  background-image: url(./images/unblockwumpus.JPG);
+  margin-top: 135px;
+}
+
 .text-box-dm {
   width: 85%;
   background-size: contain;
