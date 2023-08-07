@@ -2489,6 +2489,17 @@ a {
   cursor: pointer;
 }
 
+.delete-message-prompt {
+  z-index: 100;
+  width: 500px;
+  left: 35%;
+  position: fixed;
+  margin: auto;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 330px) {
 }
 

@@ -14,6 +14,7 @@ import { db } from "../../../../../../config/firebase";
 export default function MyMessage(props) {
   const [hoverState, setHoverState] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [editMessageValue, setEditMessageValue] = useState(
     props.messageContent
   );
@@ -103,7 +104,10 @@ export default function MyMessage(props) {
               <button type="submit" style={{ display: "none" }}></button>
             </form>
           ) : props.edited === true && props.file === null ? (
-            <p className="first-message">{props.messageContent} <span className="edited-text">(edited)</span></p>
+            <p className="first-message">
+              {props.messageContent}{" "}
+              <span className="edited-text">(edited)</span>
+            </p>
           ) : props.file === null ? (
             <p className="first-message">{props.messageContent}</p>
           ) : (
@@ -119,7 +123,62 @@ export default function MyMessage(props) {
       {hoverState && (
         <div className="edit-delete-container">
           <button onClick={() => setIsEditing(true)}>edit</button>
-          <button>delete</button>
+          <button onClick={() => setIsDeleting(true)}>delete</button>
+        </div>
+      )}
+      {isDeleting && (
+        <div className="delete-message-prompt">
+          <h2>Delete Message</h2>
+          <p>Are you sure you want to delete this message?</p>
+          <div className="msg-to-delete">
+            <div className="my-message">
+              <div className="pfp-container my-left">
+                <div
+                  className="pfp-circle"
+                  style={{
+                    backgroundImage: `url("${props.photoURL}")`,
+                  }}
+                ></div>
+              </div>
+
+              <div className="my-right-container">
+                <div className="first-message-container">
+                  <div className="first-row">
+                    <p className="my-username">{props.username} </p>
+                    <p className="my-timestamp">
+                      {date.isSameDay(now, props.time)
+                        ? "Today at " + hoursMinutes
+                        : dayMonthYear + hoursMinutes}
+                    </p>
+                  </div>
+                  {props.edited === true && props.file === null ? (
+                    <p className="first-message">
+                      {props.messageContent}{" "}
+                      <span className="edited-text">(edited)</span>
+                    </p>
+                  ) : props.file === null ? (
+                    <p className="first-message">{props.messageContent}</p>
+                  ) : (
+                    <div className="message-content-container first">
+                      <p>{props.messageContent}</p>
+                      <div className="dm-image-container first">
+                        <img className="dm-image" src={props.file} alt="show" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="cancel-or-delete">
+            <button
+              className="cancel-deletion"
+              onClick={() => setIsDeleting(false)}
+            >
+              Cancel
+            </button>
+            <button className="confirm-deletion">Delete</button>
+          </div>
         </div>
       )}
     </div>
