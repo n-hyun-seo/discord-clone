@@ -101,6 +101,10 @@ export default function OngoingMessage(props) {
             type="text"
             value={editMessageValue}
             onChange={(e) => setEditMessageValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setIsEditing(false);
+            }}
+            autoFocus
           />
           <div className="dm-image-container first">
             <img className="dm-image" src={props.file} alt="show" />
@@ -113,6 +117,10 @@ export default function OngoingMessage(props) {
             type="text"
             value={editMessageValue}
             onChange={(e) => setEditMessageValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setIsEditing(false);
+            }}
+            autoFocus
           />
           <button type="submit" style={{ display: "none" }}></button>
         </form>

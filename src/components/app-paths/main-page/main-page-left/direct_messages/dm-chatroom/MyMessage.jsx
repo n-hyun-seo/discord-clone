@@ -123,6 +123,10 @@ export default function MyMessage(props) {
                 type="text"
                 value={editMessageValue}
                 onChange={(e) => setEditMessageValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setIsEditing(false);
+                }}
+                autoFocus
               />
               <div className="dm-image-container first">
                 {props?.file?.includes("mp4") ? (
@@ -142,6 +146,10 @@ export default function MyMessage(props) {
                 type="text"
                 value={editMessageValue}
                 onChange={(e) => setEditMessageValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setIsEditing(false);
+                }}
+                autoFocus
               />
               <button type="submit" style={{ display: "none" }}></button>
             </form>
