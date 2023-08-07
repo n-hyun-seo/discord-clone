@@ -1546,6 +1546,10 @@ a {
   background-size: 500px;
 }
 
+.no-friends-found.none-added {
+  background-image: url(./images/hereswumpus.JPG);
+}
+
 .text-box-dm {
   width: 85%;
   background-size: contain;

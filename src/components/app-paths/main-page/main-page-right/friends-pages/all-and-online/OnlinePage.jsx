@@ -49,6 +49,10 @@ export default function OnlinePage(props) {
               online_status={user.onlineStatus}
             />
           ))
+        ) : listToUse?.length === 0 && props.inputValue === "" ? (
+          <p className="no-friends-found none-added">
+            No friends are online. Here's Wumpus for now.
+          </p>
         ) : (
           <p className="no-friends-found">
             Wumpus looked, but couldn't find anyone with that name.
