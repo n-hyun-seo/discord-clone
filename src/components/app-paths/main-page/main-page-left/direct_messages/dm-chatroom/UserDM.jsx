@@ -20,13 +20,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
-import { queryClient } from "../../../../../../App";
+
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
-import { CurrentIncomingFRContext } from "../../../../../../context/CurrentIncomingFRContext";
+
 import TimeDivider from "./TimeDivider";
 import MyMessage from "./MyMessage";
 import OpponentMessage from "./OpponentMessage";
-import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
+
 import OngoingMessage from "./OngoingMessage";
 import { storage } from "../../../../../../config/firebase";
 import {
@@ -39,11 +39,7 @@ import BlockedMessage from "./BlockedMessage";
 
 export default function UserDM() {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
-  const [showProfile, setShowProfile] = useContext(CurrentShowProfileContext);
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
-  const [staleUnreadList, setStaleUnreadList] = useContext(
-    StaleUnreadListContext
-  );
 
   const [rerender, setRerender] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -53,7 +49,6 @@ export default function UserDM() {
   const [isBlockedBy, setIsBlockedBy] = useState(false);
   const [messageInput, setMessageInput] = useState("");
   const [placeholder, setPlaceholder] = useState("");
-  const [hasFile, setHasFile] = useState(false);
   const [file, setFile] = useState("");
   const [filePath, setFilePath] = useState("");
   const [uploadFile, setUploadFile] = useState(null);
@@ -514,7 +509,6 @@ export default function UserDM() {
               </div>
 
               {messages?.map((message) => {
-                
                 let currentMsgIndex = messages.indexOf(message);
                 let previousMsgIndex = currentMsgIndex - 1;
 
