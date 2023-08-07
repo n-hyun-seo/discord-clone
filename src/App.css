@@ -2224,7 +2224,6 @@ a {
   position: relative;
 }
 
-
 .edit-delete-container {
   position: absolute;
   right: 0px;
@@ -2266,8 +2265,6 @@ a {
   padding-left: 13px;
   scroll-margin-top: 200px;
 }
-
-
 
 .after-first-row p,
 .first-message {
@@ -2323,7 +2320,6 @@ a {
   padding-bottom: 2px;
   position: relative;
   width: 100%;
- 
 }
 
 .ongoing-message-time {
@@ -2505,7 +2501,7 @@ a {
 
 .edited-text {
   font-size: 10.5px;
-  color: var(--font-color)
+  color: var(--font-color);
 }
 
 .sign-out:hover {
@@ -2515,15 +2511,71 @@ a {
 
 .delete-message-prompt {
   z-index: 100;
-
   left: 40%;
-  top: 35%;
+  top: 30%;
   position: fixed;
-  background-color: red;
+  background-color: #2b2d31;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 0px 0px 5000px rgba(0, 0, 0, 0.754);
+
+  border-radius: 5px;
 }
 
+.msg-to-delete {
+  box-shadow: 0px 0px 3px black;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  padding-top: 10px;
+  border-radius: 3px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.msg-to-delete .my-message {
+  margin-top: 0px;
+  padding-left: 0px;
+ 
+}
+
+.delete-message-prompt h2 {
+  padding-bottom: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 20px;
+}
+
+.delete-for-sure {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.cancel-or-delete {
+  width: 100%;
+  height: 70px;
+  background-color: #25262a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.confirm-deletion {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.dm-image-container.first.editing {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.dm-image-container.first.editing-my {
+  margin-left: 15px;
+  margin-top: 10px;
+}
 .edit-text-input {
   border: none;
   border-radius: 5px;
@@ -2596,7 +2648,9 @@ a {
   .user-dm-info-section,
   .user-info-container,
   .friends-left-side,
-  .friends-right-side, .add-sign, .dm-delete-button{
+  .friends-right-side,
+  .add-sign,
+  .dm-delete-button {
     display: none;
   }
 
@@ -2625,8 +2679,6 @@ a {
     animation: none;
   }
 
- 
-
   .dm-header {
     color: white;
     width: 90%;
@@ -2636,8 +2688,6 @@ a {
   .dm-header p {
     padding-top: 10px;
   }
-
-  
 
   .left {
     grid-template-rows: repeat(13, 1fr);
@@ -2719,7 +2769,7 @@ a {
   }
 
   .dm-messages::-webkit-scrollbar {
-   width: 8px;
+    width: 8px;
   }
 }
 

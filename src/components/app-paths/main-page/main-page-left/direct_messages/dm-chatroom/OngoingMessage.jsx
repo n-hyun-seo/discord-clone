@@ -108,8 +108,15 @@ export default function OngoingMessage(props) {
             }}
             autoFocus
           />
-          <div className="dm-image-container first">
-            <img className="dm-image" src={props.file} alt="show" />
+          <div className="dm-image-container first editing">
+            {props?.file?.includes("mp4") ? (
+              <video className="dm-video" controls>
+                <source src={props.file} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img className="dm-image" src={props.file} alt="show" />
+            )}
           </div>
           <button type="submit" style={{ display: "none" }}></button>
           <p className="edit-instruction ongoing">
@@ -203,7 +210,9 @@ export default function OngoingMessage(props) {
       {isDeleting && (
         <div className="delete-message-prompt">
           <h2>Delete Message</h2>
-          <p>Are you sure you want to delete this message?</p>
+          <p className="delete-for-sure">
+            Are you sure you want to delete this message?
+          </p>
           <div className="msg-to-delete">
             <div className="my-message">
               <div className="pfp-container my-left">

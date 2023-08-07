@@ -130,7 +130,7 @@ export default function MyMessage(props) {
                 }}
                 autoFocus
               />
-              <div className="dm-image-container first">
+              <div className="dm-image-container first editing-my">
                 {props?.file?.includes("mp4") ? (
                   <video className="dm-video" controls>
                     <source src={props.file} type="video/mp4" />
@@ -234,7 +234,7 @@ export default function MyMessage(props) {
       {isDeleting && (
         <div className="delete-message-prompt">
           <h2>Delete Message</h2>
-          <p>Are you sure you want to delete this message?</p>
+          <p className="delete-for-sure">Are you sure you want to delete this message?</p>
           <div className="msg-to-delete">
             <div className="my-message">
               <div className="pfp-container my-left">
