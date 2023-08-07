@@ -30,13 +30,34 @@ export default function MyMessage(props) {
 
   const messageRef = useRef();
 
+  async function deleteMessage() {
+    setIsDeleting(false);
+    let newList = messages.filter(
+      (message) => message !== messages[props.messageIndex]
+    );
+    setMessages(newList);
+
+    await updateDoc(
+      doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
+      {
+        messageHistory: newList,
+      }
+    ); //update my message history
+
+    await updateDoc(
+      doc(db, "users", props.opponentUid, "dmMessageHistory", props.currentUid),
+      {
+        messageHistory: newList,
+      }
+    ); //update opponent's message history
+  }
+
   async function editMessage() {
     setIsEditing(false);
     setMessages(
       (messages[props.messageIndex].messageContent = editMessageValue)
     );
     setMessages((messages[props.messageIndex].edited = true));
-    console.log(messages);
 
     await updateDoc(
       doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
@@ -67,8 +88,10 @@ export default function MyMessage(props) {
       className="my-message"
       ref={messageRef}
       onMouseEnter={(e) => {
-        setHoverState(true);
-        messageRef.current.style.backgroundColor = "#292b2f";
+        if (!isDeleting) {
+          setHoverState(true);
+          messageRef.current.style.backgroundColor = "#292b2f";
+        }
       }}
       onMouseLeave={(e) => {
         setHoverState(false);
@@ -177,7 +200,9 @@ export default function MyMessage(props) {
             >
               Cancel
             </button>
-            <button className="confirm-deletion">Delete</button>
+            <button className="confirm-deletion" onClick={deleteMessage}>
+              Delete
+            </button>
           </div>
         </div>
       )}

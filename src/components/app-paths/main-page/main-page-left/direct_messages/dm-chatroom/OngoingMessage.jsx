@@ -22,6 +22,28 @@ export default function OngoingMessage(props) {
   );
   const dayMonthYear = props.timestamp.slice(0, 16);
 
+  async function deleteMessage() {
+    setIsDeleting(false);
+    let newList = messages.filter(
+      (message) => message !== messages[props.messageIndex]
+    );
+    setMessages(newList);
+
+    await updateDoc(
+      doc(db, "users", props.currentUid, "dmMessageHistory", props.opponentUid),
+      {
+        messageHistory: newList,
+      }
+    ); //update my message history
+
+    await updateDoc(
+      doc(db, "users", props.opponentUid, "dmMessageHistory", props.currentUid),
+      {
+        messageHistory: newList,
+      }
+    ); //update opponent's message history
+  }
+
   async function editMessage() {
     setIsEditing(false);
     setMessages(
@@ -58,9 +80,11 @@ export default function OngoingMessage(props) {
       className="ongoing-message-container"
       ref={messageRef}
       onMouseEnter={(e) => {
-        setHoverState(true);
-        messageRef.current.style.backgroundColor = "#292b2f";
-        timeRef.current.style.visibility = "visible";
+        if (!isDeleting) {
+          setHoverState(true);
+          messageRef.current.style.backgroundColor = "#292b2f";
+          timeRef.current.style.visibility = "visible";
+        }
       }}
       onMouseLeave={(e) => {
         setHoverState(false);
@@ -159,7 +183,9 @@ export default function OngoingMessage(props) {
             >
               Cancel
             </button>
-            <button className="confirm-deletion">Delete</button>
+            <button className="confirm-deletion" onClick={deleteMessage}>
+              Delete
+            </button>
           </div>
         </div>
       )}
