@@ -131,8 +131,7 @@ export default function OngoingMessage(props) {
       ) : props.file === null ? (
         <p className="ongoing-message">{props.message}</p>
       ) : props.file !== null &&
-        props.edited === true &&
-        props.sentBy === props.currentUid ? (
+        props.edited === true ? (
         <div className="message-content-container first">
           <p>
             {props.message}
