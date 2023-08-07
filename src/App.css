@@ -1853,7 +1853,7 @@ a {
   overflow-y: scroll;
   color: rgb(232, 231, 231);
   padding-top: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   /* flex-basis: 60%*/
 }
 
@@ -1864,7 +1864,7 @@ a {
   align-items: center;
   flex-direction: column;
   position: relative;
-  margin-top: -27px;
+  margin-top: -22px;
   /* flex-basis: 40%*/
 }
 
