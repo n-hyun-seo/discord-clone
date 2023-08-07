@@ -1,17 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { IndividualDM } from "./IndividualDM";
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
-import { useQuery } from "@tanstack/react-query";
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
-import LoadingVisual from "./LoadingVisual";
-import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
 
 export default function DirectMessages(props) {
   const [rerenderState, setRerenderState] = useState(false);

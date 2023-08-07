@@ -5,14 +5,12 @@ import Online from "../status_icons/Online";
 import Offline from "../status_icons/Offline";
 import Moon from "../status_icons/Moon";
 import Dnd from "../status_icons/Dnd";
-import { CurrentShowProfileContext } from "../../../../../../context/CurrentShowProfileContext";
 import FriendsNavSearchBar from "../../../main-page-right/friends-nav/FriendsNavSearchBar";
 import date from "date-and-time";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   arrayRemove,
   arrayUnion,
-  deleteDoc,
   doc,
   getDoc,
   onSnapshot,
@@ -20,21 +18,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
-
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
-
 import TimeDivider from "./TimeDivider";
 import MyMessage from "./MyMessage";
 import OpponentMessage from "./OpponentMessage";
-
 import OngoingMessage from "./OngoingMessage";
 import { storage } from "../../../../../../config/firebase";
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-  list,
-} from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import BlockedMessage from "./BlockedMessage";
 
 export default function UserDM() {
@@ -59,6 +49,15 @@ export default function UserDM() {
   const fileInputRef = useRef();
   const entireSectionRef = useRef();
   const messageInputRef = useRef();
+
+  async function getUnreadDoc() {
+    await setDoc(
+      doc(db, "users", currentUserUid, "unreadMessagesHistory", currentDMId),
+      {
+        unreadHistory: [],
+      }
+    );
+  }
 
   useEffect(() => {
     let run = true;
@@ -126,14 +125,7 @@ export default function UserDM() {
       }
     );
 
-    (async function getUnreadDoc() {
-      await setDoc(
-        doc(db, "users", currentUserUid, "unreadMessagesHistory", currentDMId),
-        {
-          unreadHistory: [],
-        }
-      );
-    })();
+    getUnreadDoc();
 
     return () => {
       run = false;
@@ -769,6 +761,7 @@ export default function UserDM() {
                     setFilePath("");
                     setFile("");
                     setUploadFile(null);
+                    getUnreadDoc();
                   }}
                 >
                   <input

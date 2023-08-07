@@ -8,14 +8,13 @@ import Online from "../status_icons/Online";
 import Offline from "../status_icons/Offline";
 import Moon from "../status_icons/Moon";
 import Dnd from "../status_icons/Dnd";
-import { randomUsersList, removeDM } from "../users-list-data/randomUsersList";
+
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { arrayRemove, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../../../config/firebase";
-import { queryClient } from "../../../../../../App";
+
 import { CurrentUserUidContext } from "../../../../../../context/CurrentUserUidContext";
-import { StaleUnreadListContext } from "../../../../../../context/StaleUnreadListContext";
 
 export function IndividualDM(props) {
   let navigate = useNavigate();
@@ -29,9 +28,6 @@ export function IndividualDM(props) {
   const [currentDMId, setCurrentDMId] = useContext(CurrentDMIdContext);
   const [dmButtonRef, setDmButtonRef] = useContext(DmButtonRefContext);
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
-  const [staleUnreadList, setStaleUnreadList] = useContext(
-    StaleUnreadListContext
-  );
 
   const delete_button = useRef();
   const dm_button = useRef();

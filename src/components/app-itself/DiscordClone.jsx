@@ -19,15 +19,10 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingVisual from "../app-paths/loading-page/LoadingVisual";
 import {
   collection,
-  doc,
-  getDoc,
-  getDocs,
   onSnapshot,
 } from "firebase/firestore";
 import { CurrentUserUidContext } from "../../context/CurrentUserUidContext";
-import { queryClient } from "../../App";
-import { StaleUnreadListContext } from "../../context/StaleUnreadListContext";
-import { Link } from "react-router-dom";
+
 import UnreadDm from "../main-nav/UnreadDm";
 
 export default function DiscordClone() {
@@ -39,11 +34,6 @@ export default function DiscordClone() {
   const [currentIncomingFR, setCurrentIncomingFR] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
   const [unreadList, setUnreadList] = useState([]);
-  const [hoverState, setHoverstate] = useState(false);
-
-  const [staleUnreadList, setStaleUnreadList] = useContext(
-    StaleUnreadListContext
-  );
   const [currentUserUid, setCurrentUserUid] = useContext(CurrentUserUidContext);
 
   let navigate = useNavigate();
