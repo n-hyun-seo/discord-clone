@@ -44,7 +44,7 @@ export default function PendingPage(props) {
           ))
         ) : listToUse?.length === 0 && props.inputValue === "" ? (
           <p className="no-friends-found none-added">
-            No pending friend requests found. Here's Wumpus for now.
+            There are no pending friend requests. Here's Wumpus for now.
           </p>
         ) : (
           <p className="no-friends-found">
