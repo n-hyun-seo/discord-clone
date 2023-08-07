@@ -2220,7 +2220,7 @@ a {
   padding-top: 3px;
   margin: auto;
   margin-top: 20px;
-  padding-left: 3px;
+  padding-left: 6px;
   position: relative;
 }
 
@@ -2254,7 +2254,7 @@ a {
 }
 
 .my-right-container {
-  width: 93%;
+  width: 91%;
 }
 
 .first-message {
@@ -2262,7 +2262,7 @@ a {
 }
 
 .ongoing-message {
-  max-width: 100%;
+  width: 100%;
   padding-left: 13px;
   scroll-margin-top: 200px;
 }
@@ -2322,11 +2322,12 @@ a {
   padding-top: 2px;
   padding-bottom: 2px;
   position: relative;
-  max-width: 40%;
+  width: 100%;
+ 
 }
 
 .ongoing-message-time {
-  width: 50px;
+  min-width: 50px;
   font-size: 11px;
   color: #a2a8b0;
   visibility: hidden;
@@ -2526,15 +2527,28 @@ a {
 .edit-text-input {
   border: none;
   border-radius: 5px;
-  width: 100%;
   margin-left: 15px;
-  margin-top: 5px;
+  margin-top: 10px;
   height: 40px;
   padding-left: 15px;
-  /* background-color: transparent; */
   background-color: #2b2d31;
   color: white;
   font-size: 16px;
+  width: 100%;
+}
+
+.edit-text-input.ongoing {
+  margin-left: 11px;
+}
+
+.edit-instruction.ongoing {
+  margin-left: 11px;
+}
+
+.edit-instruction {
+  font-size: 12px;
+  margin-left: 15px;
+  margin-top: 3px;
 }
 
 .edit-text-input:focus {
@@ -2542,7 +2556,16 @@ a {
 }
 
 .edit-text-form {
-  width: 100%;
+  width: 92.5%;
+}
+
+.edit-text-form.ongoing {
+  width: 84%;
+}
+
+.blue-text {
+  color: rgb(0, 187, 255);
+  cursor: pointer;
 }
 
 @media (max-width: 330px) {

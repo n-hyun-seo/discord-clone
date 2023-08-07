@@ -93,7 +93,6 @@ export default function MyMessage(props) {
           setHoverState(true);
           messageRef.current.style.backgroundColor = "#292b2f";
         }
-       
       }}
       onMouseLeave={(e) => {
         setHoverState(false);
@@ -142,6 +141,16 @@ export default function MyMessage(props) {
                 )}
               </div>
               <button type="submit" style={{ display: "none" }}></button>
+              <p className="edit-instruction">
+                escape to{" "}
+                <span className="blue-text" onClick={() => setIsEditing(false)}>
+                  cancel
+                </span>
+                , enter to{" "}
+                <span className="blue-text" onClick={editMessage}>
+                  save
+                </span>
+              </p>
             </form>
           ) : isEditing ? (
             <form onSubmit={editMessage} className="edit-text-form">
@@ -156,6 +165,16 @@ export default function MyMessage(props) {
                 autoFocus
               />
               <button type="submit" style={{ display: "none" }}></button>
+              <p className="edit-instruction">
+                escape to{" "}
+                <span className="blue-text" onClick={() => setIsEditing(false)}>
+                  cancel
+                </span>
+                , enter to{" "}
+                <span className="blue-text" onClick={editMessage}>
+                  save
+                </span>
+              </p>
             </form>
           ) : props.edited === true && props.file === null ? (
             <p className="first-message">
@@ -203,6 +222,8 @@ export default function MyMessage(props) {
           <button
             onClick={() => {
               setIsEditing(true);
+              setHoverState(false);
+              messageRef.current.style.backgroundColor = "transparent";
             }}
           >
             edit

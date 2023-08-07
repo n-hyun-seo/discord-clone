@@ -80,6 +80,7 @@ export default function OngoingMessage(props) {
       className="ongoing-message-container"
       ref={messageRef}
       onMouseEnter={(e) => {
+        if (isEditing) return;
         if (!isDeleting) {
           setHoverState(true);
           messageRef.current.style.backgroundColor = "#292b2f";
@@ -96,10 +97,11 @@ export default function OngoingMessage(props) {
         {date.transform(props.timestamp.slice(16, 21), "HH:mm", "hh:mm A")}
       </p>
       {isEditing && props.file !== null && props.sentBy === props.currentUid ? (
-        <form onSubmit={editMessage}>
+        <form onSubmit={editMessage} className="edit-text-form ongoing">
           <input
             type="text"
             value={editMessageValue}
+            className="edit-text-input ongoing"
             onChange={(e) => setEditMessageValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Escape") setIsEditing(false);
@@ -110,12 +112,23 @@ export default function OngoingMessage(props) {
             <img className="dm-image" src={props.file} alt="show" />
           </div>
           <button type="submit" style={{ display: "none" }}></button>
+          <p className="edit-instruction ongoing">
+            escape to{" "}
+            <span className="blue-text" onClick={() => setIsEditing(false)}>
+              cancel
+            </span>
+            , enter to{" "}
+            <span className="blue-text" onClick={editMessage}>
+              save
+            </span>
+          </p>
         </form>
       ) : isEditing && props.sentBy === props.currentUid ? (
-        <form onSubmit={editMessage}>
+        <form onSubmit={editMessage} className="edit-text-form ongoing">
           <input
             type="text"
             value={editMessageValue}
+            className="edit-text-input ongoing"
             onChange={(e) => setEditMessageValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Escape") setIsEditing(false);
@@ -123,6 +136,16 @@ export default function OngoingMessage(props) {
             autoFocus
           />
           <button type="submit" style={{ display: "none" }}></button>
+          <p className="edit-instruction ongoing">
+            escape to{" "}
+            <span className="blue-text" onClick={() => setIsEditing(false)}>
+              cancel
+            </span>
+            , enter to{" "}
+            <span className="blue-text" onClick={editMessage}>
+              save
+            </span>
+          </p>
         </form>
       ) : props.edited === true && props.file === null ? (
         <p className="ongoing-message">
@@ -165,7 +188,15 @@ export default function OngoingMessage(props) {
       )}
       {hoverState === true && props.sentBy === props.currentUid && (
         <div className="edit-delete-container">
-          <button onClick={() => setIsEditing(true)}>edit</button>
+          <button
+            onClick={() => {
+              setIsEditing(true);
+              setHoverState(false);
+              messageRef.current.style.backgroundColor = "transparent";
+            }}
+          >
+            edit
+          </button>
           <button onClick={() => setIsDeleting(true)}>delete</button>
         </div>
       )}
