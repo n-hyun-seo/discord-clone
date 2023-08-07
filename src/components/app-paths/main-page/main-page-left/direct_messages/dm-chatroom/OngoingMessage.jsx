@@ -130,9 +130,8 @@ export default function OngoingMessage(props) {
         </p>
       ) : props.file === null ? (
         <p className="ongoing-message">{props.message}</p>
-      ) : props.file !== null &&
-        props.edited === true ? (
-        <div className="message-content-container first">
+      ) : props.file !== null && props.edited === true ? (
+        <div className="message-content-container">
           <p>
             {props.message}
             <span className="edited-text">(edited)</span>
