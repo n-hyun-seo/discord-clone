@@ -29,6 +29,7 @@ export default function MyMessage(props) {
   const dayMonthYear = props.timestamp.slice(0, 16);
 
   const messageRef = useRef();
+  const deleteRef = useRef();
 
   async function deleteMessage() {
     setIsDeleting(false);
@@ -226,15 +227,25 @@ export default function MyMessage(props) {
               messageRef.current.style.backgroundColor = "transparent";
             }}
           >
-            edit
+            <p className="edit-nav">Edit</p>
           </button>
-          <button onClick={() => setIsDeleting(true)}>delete</button>
+          <button onClick={() => setIsDeleting(true)}>
+            <p className="delete-nav">Delete</p>
+          </button>
         </div>
       )}
       {isDeleting && (
-        <div className="delete-message-prompt">
+        <div
+          className={
+            props.file !== null
+              ? "delete-message-prompt img"
+              : "delete-message-prompt"
+          }
+        >
           <h2>Delete Message</h2>
-          <p className="delete-for-sure">Are you sure you want to delete this message?</p>
+          <p className="delete-for-sure">
+            Are you sure you want to delete this message?
+          </p>
           <div className="msg-to-delete">
             <div className="my-message">
               <div className="pfp-container my-left">
@@ -293,7 +304,17 @@ export default function MyMessage(props) {
             >
               Cancel
             </button>
-            <button className="confirm-deletion" onClick={deleteMessage}>
+            <button
+              ref={deleteRef}
+              className="confirm-deletion"
+              onClick={deleteMessage}
+              onMouseEnter={() =>
+                (deleteRef.current.style.backgroundColor = "rgb(150, 29, 29)")
+              }
+              onMouseLeave={() =>
+                (deleteRef.current.style.backgroundColor = "rgb(219, 40, 40)")
+              }
+            >
               Delete
             </button>
           </div>
