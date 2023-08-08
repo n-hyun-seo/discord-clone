@@ -165,7 +165,7 @@ export default function OngoingMessage(props) {
         <div className="message-content-container">
           <p>
             {props.message}
-            <span className="edited-text">(edited)</span>
+            <span className="edited-text"> (edited)</span>
           </p>
           <div className="dm-image-container first">
             {props?.file?.includes("mp4") ? (

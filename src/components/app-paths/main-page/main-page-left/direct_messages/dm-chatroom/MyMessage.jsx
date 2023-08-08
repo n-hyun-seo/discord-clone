@@ -188,7 +188,7 @@ export default function MyMessage(props) {
             <div className="message-content-container first">
               <p>
                 {props.messageContent}
-                <span className="edited-text">(edited)</span>
+                <span className="edited-text"> (edited)</span>
               </p>
               <div className="dm-image-container first">
                 {props?.file?.includes("mp4") ? (
