@@ -180,7 +180,7 @@ export default function MyMessage(props) {
           ) : props.edited === true && props.file === null ? (
             <p className="first-message">
               {props.messageContent}
-              <span className="edited-text">(edited)</span>
+              <span className="edited-text"> (edited)</span>
             </p>
           ) : props.file === null ? (
             <p className="first-message">{props.messageContent}</p>
